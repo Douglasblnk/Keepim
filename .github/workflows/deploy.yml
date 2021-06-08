@@ -1,0 +1,40 @@
+name: website-deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set node version
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Authenticate npm with the GPR
+        uses: jgierer12/npm-auth-gpr@v1.0.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Env
+        run: npm install
+
+      - name: Vite Build
+        run: npm run build
+
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete --exclude '.git/*'
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'sa-east-1'
+          SOURCE_DIR: 'dist'
