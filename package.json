@@ -6,15 +6,19 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "vite-plugin-components": "^0.10.4",
     "vite": "^2.3.7",
-    "vue": "^3.0.5"
+    "vite-plugin-components": "^0.10.4",
+    "vue": "^3.1.0",
+    "vue-router": "^4.0.8"
   },
   "devDependencies": {
+    "@douglasblnk/eslint-config": "^1.0.1",
     "@vitejs/plugin-vue": "^1.2.3",
     "@vue/compiler-sfc": "^3.0.5",
     "eslint": "^7.28.0",
-    "@douglasblnk/eslint-config": "^1.0.1",
-    "eslint-define-config": "^1.0.8"
+    "eslint-define-config": "^1.0.8",
+    "postcss": "^8.3.0",
+    "vite-plugin-windicss": "^1.0.3",
+    "windicss": "^3.1.3"
   }
 }
