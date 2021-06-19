@@ -1,17 +1,17 @@
 {
   "name": "@douglasblnk/photokeep",
   "repository": "douglasblnk/photokeep",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
-    "vite": "^2.3.7",
-    "vite-plugin-components": "^0.10.4",
     "vue": "^3.1.0",
-    "vue-router": "^4.0.8"
+    "vue-router": "^4.0.8",
+    "vite": "^2.3.3",
+    "vite-plugin-components": "^0.10.4"
   },
   "devDependencies": {
     "@douglasblnk/eslint-config": "^1.0.1",
