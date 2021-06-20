@@ -25,6 +25,7 @@ jobs:
 
       - name: Setup Env
         run: npm install
+        working-directory: ./app
 
       - name: Vite Build
         run: npm run build
