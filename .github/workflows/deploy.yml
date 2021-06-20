@@ -1,4 +1,4 @@
-name: website-deploy
+name: deploy
 
 on:
   push:
@@ -29,6 +29,8 @@ jobs:
       - name: Vite Build
         run: npm run build
         working-directory: ./app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: jakejarvis/s3-sync-action@master
         with:
