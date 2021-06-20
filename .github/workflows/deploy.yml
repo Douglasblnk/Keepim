@@ -28,6 +28,7 @@ jobs:
 
       - name: Vite Build
         run: npm run build
+        working-directory: ./app
 
       - uses: jakejarvis/s3-sync-action@master
         with:
