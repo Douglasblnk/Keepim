@@ -26,6 +26,8 @@ jobs:
       - name: Setup Env
         run: npm install
         working-directory: ./app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Vite Build
         run: npm run build
