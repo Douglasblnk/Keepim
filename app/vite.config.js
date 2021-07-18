@@ -12,13 +12,10 @@ export default defineConfig({
     WindiCSS(),
     VitePWA({
       manifest: {
-        name: 'pwa',
-        short_name: 'pwa',
+        name: 'PhotoKeep',
         icons: [],
         start_url: '/index.html',
         display: 'standalone',
-        background_color: '#000000',
-        theme_color: '#4DBA87',
       },
     }),
     ViteComponents({
