@@ -9,9 +9,7 @@
   },
   "dependencies": {
     "vue": "^3.1.0",
-    "vue-router": "^4.0.8",
-    "vite": "^2.3.3",
-    "vite-plugin-components": "^0.10.4"
+    "vue-router": "^4.0.8"
   },
   "devDependencies": {
     "@douglasblnk/eslint-config": "^1.0.1",
@@ -20,6 +18,8 @@
     "eslint": "^7.28.0",
     "eslint-define-config": "^1.0.8",
     "postcss": "^8.3.0",
+    "vite": "^2.3.3",
+    "vite-plugin-components": "^0.10.4",
     "vite-plugin-pages": "^0.13.1",
     "vite-plugin-pwa": "^0.8.1",
     "vite-plugin-windicss": "^1.0.3",
