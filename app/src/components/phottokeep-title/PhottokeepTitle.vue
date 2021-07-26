@@ -13,15 +13,13 @@ export default {
 </script>
 
 <style lang="postcss">
-@layer components {
-  .phottokeep-title {
-    @apply
-      !font-black
-      text-3xl;
+.phottokeep-title {
+  @apply
+    !font-black
+    text-3xl;
 
-    background: linear-gradient(90deg, #6F95AA -1.12%, #A4C1E4 100%) !important;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+  background: linear-gradient(90deg, #6F95AA -1.12%, #A4C1E4 100%) !important;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 </style>

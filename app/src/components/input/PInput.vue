@@ -31,17 +31,15 @@ export default defineComponent({
 </template>
 
 <style lang="postcss">
-@layer components {
-  .p-input {
-    @apply
-      flex
-      w-full
-      border-none
-      rounded-full
-      px-5
-      py-3
-      outline-none
-      !bg-gray-100;
-  }
+.p-input {
+  @apply
+    flex
+    w-full
+    border-none
+    rounded-full
+    px-5
+    py-3
+    outline-none
+    !bg-gray-100;
 }
 </style>

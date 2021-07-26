@@ -11,11 +11,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="login">
-    <div class="login__header">
+  <div class="login-page">
+    <div class="login-page__header">
       <PhottokeepTitle />
 
-      <div class="login__input">
+      <div class="login-page__input">
         <PInput
           placeholder="Senha:"
           class="mt-xl"
@@ -23,7 +23,7 @@ export default defineComponent({
       </div>
     </div>
 
-    <div class="login__action">
+    <div class="login-page__action">
       <PButton
         class="p-8"
         icon="arrow-right"
@@ -36,28 +36,27 @@ export default defineComponent({
 </template>
 
 <style lang="postcss">
-@layer components {
-  .login {
+.login-page {
+  @apply
+    w-screen
+    h-screen
+    flex
+    flex-col
+    justify-around
+    items-center;
+
+  &__header {
     @apply
-      w-screen
-      h-screen
       flex
       flex-col
-      justify-around
-      items-center;
+      justify-center
+      flex-[4];
+  }
 
-    &__header {
-      @apply
-        flex
-        flex-col
-        justify-center
-        flex-[4];
-    }
-
-    &__action {
-      @apply
-        flex-1;
-    }
+  &__action {
+    @apply
+      flex-1;
   }
 }
+
 </style>

@@ -72,54 +72,51 @@ export default defineComponent({
 </template>
 
 <style lang="postcss">
-@layer components {
-  .p-button {
+.p-button {
+  @apply
+    flex
+    items-center
+    justify-center
+    px-5
+    py-2
+    rounded-full
+    shadow-2
+    transition-shadow
+    active:shadow-8
+    !outline-none
+    bg-gray-200;
+
+  &__icon {
     @apply
-      flex
-      items-center
-      justify-center
-      px-5
-      py-2
-      rounded-full
-      shadow-2
-      transition-shadow
-      active:shadow-8
-      !outline-none
-      bg-gray-200;
+      text-white;
+  }
 
-    &__icon {
-      @apply
-        text-white;
-    }
+  &--primary {
+    @apply
+      bg-primary;
+  }
 
-    &--primary {
-      @apply
-        bg-primary;
-    }
+  &--secondary {
+    @apply
+      bg-secondary;
+  }
 
-    &--secondary {
-      @apply
-        bg-secondary;
-    }
+  &--disabled {
+    @apply
+      opacity-30
+  }
 
-    &--disabled {
-      @apply
-        opacity-30
-    }
+  &--circle {
+    @apply
+      w-12
+      h-12;
+  }
 
-    &--circle {
-      @apply
-        w-12
-        h-12;
-    }
-
-    span {
-      @apply
-        text-white
-        font-semibold
-        tracking-wide;
-    }
-
+  span {
+    @apply
+      text-white
+      font-semibold
+      tracking-wide;
   }
 }
 </style>
