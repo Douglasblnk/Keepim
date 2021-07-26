@@ -22,6 +22,6 @@ app.use(router);
 
 router.isReady().then(async() => {
   app
-    .component('Fa', FontAwesomeIcon)
+    .component('FIcon', FontAwesomeIcon)
     .mount('#app');
 });
