@@ -1,3 +1,7 @@
 <template>
-  <router-view />
+  <RouterView />
 </template>
+
+<style>
+@import './styles/styles.css';
+</style>
