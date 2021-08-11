@@ -3,6 +3,7 @@
   "repository": "douglasblnk/photokeep",
   "version": "0.0.1",
   "scripts": {
-    "app": "npm run dev --prefix app"
+    "app": "npm run dev --prefix app",
+    "api": "npm run api --prefix api"
   }
 }

@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api": "nodemon ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "api": "set NODE_ENV=development&&nodemon ./src/app.js"
   },
-  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-lambda-fastify": "^1.7.1",
+    "aws-sdk": "^2.965.0",
     "fastify": "^3.19.2",
     "fastify-autoload": "^3.8.0",
-    "nodemon": "^2.0.12"
+    "serverless-dynamodb-local": "^0.2.40"
+  },
+  "devDependencies": {
+    "serverless-prune-plugin": "^1.5.1"
   }
 }
