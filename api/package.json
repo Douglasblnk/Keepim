@@ -4,18 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api": "set NODE_ENV=development&&nodemon ./src/app.js"
+    "api": "sls offline start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-lambda-fastify": "^1.7.1",
-    "aws-sdk": "^2.965.0",
-    "fastify": "^3.19.2",
-    "fastify-autoload": "^3.8.0",
-    "serverless-dynamodb-local": "^0.2.40"
+    "aws-sdk": "^2.965.0"
   },
   "devDependencies": {
-    "serverless-prune-plugin": "^1.5.1"
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "babel-loader": "^8.2.2",
+    "serverless": "^2.55.0",
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-offline": "^8.0.0",
+    "serverless-prune-plugin": "^1.5.1",
+    "serverless-webpack": "^5.5.1",
+    "webpack": "^5.51.1"
   }
 }
