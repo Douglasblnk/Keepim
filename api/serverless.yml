@@ -1,4 +1,4 @@
-service: fastify-app-photo-keep
+service: photo-keep
 
 frameworkVersion: "2"
 
@@ -9,17 +9,32 @@ provider:
 
 functions:
   auth:
-    handler: src/lambda.handler
+    handler: src/routes/auth/index.run
     memorySize: 128
     events:
       - http:
           path: /auth
-          method: POST
+          method: GET
 
 custom:
+  serverless-offline:
+    httpPort: 4000
+
   prune:
     automatic: true
     number: 3
 
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+    migration:
+      dir: offline/migrations
+
 plugins:
+  - serverless-webpack
+  - serverless-offline
   - serverless-prune-plugin
