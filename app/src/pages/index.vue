@@ -1,11 +1,50 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+import useRequest from '@composables/use-request';
 
 export default defineComponent({
   name: 'LoginPage',
 
   setup() {
+    const password = ref();
+    const errorMsg = ref();
+    const errorState = ref();
+    const loading = ref(false);
 
+    const { useAxios } = useRequest();
+
+    const resetErrorState = () => {
+      clearTimeout(errorState.value);
+
+      errorState.value = setTimeout(() => {
+        errorMsg.value = '';
+      }, 4000);
+    };
+
+    const missingPassword = () => {
+      errorMsg.value = 'Por favor, verifique sua senha!';
+
+      resetErrorState();
+    };
+
+    const makeLogin = async() => {
+      if (!password.value) return missingPassword();
+
+      try {
+        loading.value = true;
+        const { data } = useAxios('auth');
+        console.log('data :>> ', data);
+      }
+      catch (error) {
+
+      }
+    };
+
+    return {
+      makeLogin,
+      password,
+      errorMsg,
+    };
   },
 });
 </script>
@@ -17,8 +56,13 @@ export default defineComponent({
 
       <div class="login-page__input">
         <PInput
+          v-model="password"
+          type="password"
           placeholder="Senha:"
           class="mt-xl"
+          :error="errorMsg"
+          @keydown.enter="makeLogin"
+          @keypress="errorMsg && (errorMsg = '')"
         />
       </div>
     </div>
@@ -30,6 +74,7 @@ export default defineComponent({
         icon-size="lg"
         primary
         circle
+        @click="makeLogin"
       />
     </div>
   </div>

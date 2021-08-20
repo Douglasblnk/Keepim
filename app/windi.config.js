@@ -3,6 +3,9 @@ import defaultTheme from 'windicss/defaultTheme';
 
 const config = defineConfig({
   darkMode: false,
+  attributify: {
+    prefix: 'w:',
+  },
   extract: {
     include: [
       'index.html',
@@ -42,6 +45,7 @@ const config = defineConfig({
 
       primary: '#6F95AA',
       secondary: '#A4C2E4',
+      danger: '#F56C6C',
     },
 
     spacing: {
@@ -117,9 +121,7 @@ const config = defineConfig({
       xxl: '48px',
     },
 
-    borderColor: theme => ({
-      DEFAULT: theme('rgba(0, 0, 0, 0.12)', 'currentColor'),
-    }),
+    borderColor: theme => theme('colors'),
     borderOpacity: theme => theme('opacity'),
     borderRadius: {
       DEFAULT: '4px',

@@ -1,0 +1,25 @@
+service: fastify-app-photo-keep
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: sa-east-1
+
+functions:
+  auth:
+    handler: src/lambda.handler
+    memorySize: 128
+    events:
+      - http:
+          path: /auth
+          method: POST
+
+custom:
+  prune:
+    automatic: true
+    number: 3
+
+plugins:
+  - serverless-prune-plugin
