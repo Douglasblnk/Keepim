@@ -4,6 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "app": "npm run dev --prefix app",
-    "api": "npm run api --prefix api"
+    "api": "npm run api --prefix api",
+    "db": "npm run start --prefix database",
+    "seed": "npm run seed --prefix database"
   }
 }

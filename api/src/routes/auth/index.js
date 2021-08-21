@@ -1,3 +1,3 @@
-export function run (lambda) {
+export async function run (lambda) {
 
 }
