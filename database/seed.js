@@ -16,31 +16,29 @@ async function saveFile(table, data) {
   }
 }
 
-async function checkFilesExistence(table) {
-  try {
-    const exist = await fs.readFile(`${PATH}/${table}.json`)
-
-    return !!exist && Array.isArray(JSON.parse(exist))
-  } catch (err) {
-    return false
-  }
+async function resetFile (table) {
+  await fs.writeFile(`${PATH}/${table}.json`, JSON.stringify([]))
 } 
 
 async function getUserTable(id) {
   try {
-    const exist = await checkFilesExistence(TABLE_USER)
+    await resetFile(TABLE_USER)
     
-    if (!exist) {
-      const { Items } = await db.query({
-        TableName: TABLE_USER,
-        KeyConditionExpression: 'id = :id',
-        ExpressionAttributeValues: {
-          ':id': id
-        }
-      }).promise();
+    const { Items } = await db.query({
+      TableName: TABLE_USER,
+      KeyConditionExpression: 'id = :id',
+      ExpressionAttributeValues: {
+        ':id': id
+      }
+    }).promise();
 
-      await saveFile(TABLE_USER, Items)
-    }
+    const mappedItems = Items.map(item => ({
+      id: 'local',
+      name: item.name,
+      password: '123'
+    }))
+
+    await saveFile(TABLE_USER, mappedItems)
   } catch (err) {
     console.log('err getUserTable :>> ', err);
   }

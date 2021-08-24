@@ -8,13 +8,13 @@ provider:
   region: sa-east-1
 
 functions:
-  auth:
-    handler: src/routes/auth/index.run
+  authLogin:
+    handler: src/routes/auth/post.run
     memorySize: 128
     events:
       - http:
           path: /auth
-          method: GET
+          method: POST
 
 custom:
   serverless-offline:
