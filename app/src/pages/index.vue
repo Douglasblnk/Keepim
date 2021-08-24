@@ -32,11 +32,15 @@ export default defineComponent({
 
       try {
         loading.value = true;
-        const { data } = useAxios('auth');
+        const { data } = useAxios('auth')
+          .headers({ token: '1234567890' })
+          .data({ password: password.value })
+          .post();
+
         console.log('data :>> ', data);
       }
       catch (error) {
-
+        console.log('error makeLogin :>> ', error);
       }
     };
 
