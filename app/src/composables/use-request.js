@@ -8,24 +8,77 @@ export default function() {
     return VITE_BASE_API_URL;
   };
 
-  const useAxios = async(path, options = {}) => {
-    const axiosResponse = {};
+  const request = async(...args) => {
+    console.log('args :>> ', args);
+    // const axiosResponse = {};
 
-    try {
-      const response = await Axios(
-        `${baseUrl()}/${path}`,
-        { ...options },
-      );
-      console.log('response :>> ', response);
-      axiosResponse.response = response;
-      axiosResponse.data = response.data;
-    }
-    catch (error) {
-      axiosResponse.error = error;
-    }
+    // try {
+    //   const response = await Axios(
+    //     `${baseUrl()}/${path}`,
+    //     { ...options },
+    //   );
+    //   console.log('response :>> ', response);
+    //   axiosResponse.response = response;
+    //   axiosResponse.data = response.data;
+    // }
+    // catch (error) {
+    //   axiosResponse.error = error;
+    // }
 
-    return { ...axiosResponse };
+    // return { ...axiosResponse };
+    return {};
   };
+
+  const methods = (...args) => ({
+    get: () => {
+      console.log('args :>> ', args);
+    },
+
+    post: () => {
+      console.log('args :>> ', args);
+    },
+
+    put: () => {
+      console.log('args :>> ', args);
+    },
+
+    delete: () => {
+      console.log('args :>> ', args);
+    },
+  });
+
+  const useAxios = path => ({
+    ...methods(path),
+
+    headers: (...args) => {
+      const headers = {
+        headers: {
+          ...args,
+        },
+      };
+      console.log('headers :>> ', headers);
+
+      return {
+        ...methods(path, headers),
+        data: data => useAxios(path).data(data, headers),
+      };
+    },
+
+    data: (...args) => {
+      const data = {
+        data: {
+          ...args,
+        },
+      };
+
+      console.log('data :>> ', data);
+
+      return {
+        ...methods(path, data),
+        headers: headers => useAxios(path).headers(headers, data),
+      };
+    },
+  });
 
   return {
     useAxios,
