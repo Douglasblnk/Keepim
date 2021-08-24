@@ -13,6 +13,9 @@ export default defineConfig({
       '@composables': [resolve(__dirname, './src/composables')],
     },
   },
+  server: {
+    open: true,
+  },
   plugins: [
     vue(),
     Pages(),
