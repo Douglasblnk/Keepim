@@ -60,7 +60,15 @@ export default defineComponent({
       v-if="icon"
     >
       <FIcon
+        v-if="!loading"
         :icon="icon"
+        :size="iconSize"
+      />
+
+      <FIcon
+        v-else
+        icon="spinner"
+        class="fa-spin"
         :size="iconSize"
       />
     </div>
