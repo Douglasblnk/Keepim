@@ -7,7 +7,7 @@ module.exports = {
   entry: slsw.lib.entries,
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   output: {
