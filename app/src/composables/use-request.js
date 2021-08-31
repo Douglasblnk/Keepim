@@ -8,76 +8,34 @@ export default function() {
     return VITE_BASE_API_URL;
   };
 
-  const request = async(...args) => {
-    console.log('args :>> ', args);
-    // const axiosResponse = {};
+  const request = async(args) => {
+    const { path, ...options } = args;
+    const axiosResponse = {};
 
-    // try {
-    //   const response = await Axios(
-    //     `${baseUrl()}/${path}`,
-    //     { ...options },
-    //   );
-    //   console.log('response :>> ', response);
-    //   axiosResponse.response = response;
-    //   axiosResponse.data = response.data;
-    // }
-    // catch (error) {
-    //   axiosResponse.error = error;
-    // }
+    try {
+      const response = await Axios(
+        `${baseUrl()}/${path}`,
+        { ...options },
+      );
 
-    // return { ...axiosResponse };
-    return {};
+      axiosResponse.response = response;
+      axiosResponse.data = response.data;
+    }
+    catch (error) {
+      axiosResponse.error = error;
+    }
+
+    return { ...axiosResponse };
   };
 
-  const methods = (...args) => ({
-    get: () => {
-      console.log('args :>> ', args);
-    },
-
-    post: () => {
-      console.log('args :>> ', args);
-    },
-
-    put: () => {
-      console.log('args :>> ', args);
-    },
-
-    delete: () => {
-      console.log('args :>> ', args);
-    },
-  });
-
   const useAxios = path => ({
-    ...methods(path),
+    get: options => request({ method: 'GET', ...options, path }),
 
-    headers: (...args) => {
-      const headers = {
-        headers: {
-          ...args,
-        },
-      };
-      console.log('headers :>> ', headers);
+    post: options => request({ method: 'POST', ...options, path }),
 
-      return {
-        ...methods(path, headers),
-        data: data => useAxios(path).data(data, headers),
-      };
-    },
+    put: options => request({ method: 'PUT', ...options, path }),
 
-    data: (...args) => {
-      const data = {
-        data: {
-          ...args,
-        },
-      };
-
-      console.log('data :>> ', data);
-
-      return {
-        ...methods(path, data),
-        headers: headers => useAxios(path).headers(headers, data),
-      };
-    },
+    delete: options => request({ method: 'DELETE', ...options, path }),
   });
 
   return {

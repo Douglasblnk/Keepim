@@ -32,15 +32,18 @@ export default defineComponent({
 
       try {
         loading.value = true;
-        const { data } = useAxios('auth')
-          .headers({ token: '1234567890' })
-          .data({ password: password.value })
-          .post();
 
-        console.log('data :>> ', data);
+        const { data } = await useAxios('auth')
+          .post({
+            headers: { token: '1234567890' },
+            data: { password: password.value },
+          });
       }
       catch (error) {
         console.log('error makeLogin :>> ', error);
+      }
+      finally {
+        loading.value = false;
       }
     };
 
@@ -48,6 +51,7 @@ export default defineComponent({
       makeLogin,
       password,
       errorMsg,
+      loading,
     };
   },
 });
@@ -78,6 +82,7 @@ export default defineComponent({
         icon-size="lg"
         primary
         circle
+        :loading="loading"
         @click="makeLogin"
       />
     </div>
