@@ -1,10 +1,10 @@
-const isString = arg => typeof arg === 'string';
+export const isString = arg => typeof arg === 'string';
 
-const objToStr = arg => ((isString(arg)) ? arg : JSON.stringify(arg));
+export const objToStr = arg => ((isString(arg)) ? arg : JSON.stringify(arg));
 
-const lambdaResp = (statusCode, body, headers = {}) => ({ statusCode, ...(body ? { body: objToStr(body) } : ''), headers });
+export const lambdaResp = (statusCode, body, headers = {}) => ({ statusCode, ...(body ? { body: objToStr(body) } : ''), headers });
 
-const lambdaRespErr = ({
+export const lambdaRespErr = ({
   status, statusCode, stack, error, message,
 } = {}) => {
   const body = { error: { message: 'Internal Server Error' } };
