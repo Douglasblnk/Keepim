@@ -16,6 +16,14 @@ functions:
           path: /auth
           method: POST
 
+  registerUser:
+    handler: src/routes/user/post.run
+    memorySize: 128
+    events:
+      - http:
+          path: /register
+          method: POST
+
 custom:
   serverless-offline:
     httpPort: 4000
