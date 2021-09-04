@@ -1,11 +1,9 @@
-import { lambdaResp, lambdaRespErr } from '@/utils/lambda-utils'
+import { lambdaResp, lambdaRespErr, getBody } from '@/utils/lambda-utils'
 
 function getParameters (event) {
-  console.log('event :>> ', event);
-  // return {
-  //   userId: event.pathParameters.userId,
-  //   postId: event.pathParameters.postId
-  // }
+  return {
+    ...getBody(event)
+  }
 }
 
 export async function run (event) {
