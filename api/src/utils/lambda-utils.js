@@ -2,39 +2,13 @@ export const isString = arg => typeof arg === 'string';
 
 export const objToStr = arg => ((isString(arg)) ? arg : JSON.stringify(arg));
 
-const { isObject } = require('deep-object-js');
+export const isObject = (obj) => typeof obj === 'object' && obj === Object(obj) && !Array.isArray(obj)
 
-const _validateParams = (event) => {
-  if (!isObject(event)) throw new Error('Event is not an object');
+export const getBody = (event, defaultValue = null) => {
+  if (!isObject(event || event.body)) return defaultValue;
+  if (typeof event.body === 'string') return JSON.parse(event.body);
+  return event.body;
 }
-
-/**
- * Faz o parse do Body de uma requisição se existir no event, caso seja necessário.
- * 
- * @requires {object} event Lambda event
- * 
- * @example
- * const myLambda = (event, context, callback) => {
- *  / event = undefined;
- *  / let body = getBody(event, {}); // -> {}  
- *  / body = getBody(event); // -> null
- * }
- * 
- */
-
-const getBody = (event, defaultValue = null) => {
-  try {
-    _validateParams(event);
-    if (typeof event.body === 'string') return JSON.parse(event.body);
-    
-    if (!isObject(event.body)) return defaultValue;
-
-    return event.body;
-  } catch (err) {
-    return defaultValue;
-  }
-}
-
 
 export const lambdaResp = (statusCode, body, headers = {}) => ({ statusCode, ...(body ? { body: objToStr(body) } : ''), headers });
 
