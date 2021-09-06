@@ -1,14 +1,14 @@
-export const isString = arg => typeof arg === 'string';
+export const isString = (arg) => typeof arg === 'string';
 
-export const objToStr = arg => ((isString(arg)) ? arg : JSON.stringify(arg));
+export const objToStr = (arg) => ((isString(arg)) ? arg : JSON.stringify(arg));
 
-export const isObject = (obj) => typeof obj === 'object' && obj === Object(obj) && !Array.isArray(obj)
+export const isObject = (obj) => typeof obj === 'object' && obj === Object(obj) && !Array.isArray(obj);
 
 export const getBody = (event, defaultValue = null) => {
   if (!isObject(event || event.body)) return defaultValue;
   if (typeof event.body === 'string') return JSON.parse(event.body);
   return event.body;
-}
+};
 
 export const lambdaResp = (statusCode, body, headers = {}) => ({ statusCode, ...(body ? { body: objToStr(body) } : ''), headers });
 
