@@ -92,10 +92,10 @@ export default defineComponent({
 <style lang="postcss">
 .login-page {
   @apply
-    w-screen
-    h-screen
     flex
     flex-col
+    h-screen
+    w-screen
     justify-around
     items-center;
 
@@ -103,8 +103,8 @@ export default defineComponent({
     @apply
       flex
       flex-col
-      justify-center
-      flex-[4];
+      flex-[4]
+      justify-center;
   }
 
   &__action {
