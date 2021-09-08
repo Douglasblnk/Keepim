@@ -1,20 +1,29 @@
-import { lambdaResp, lambdaRespErr, getBody } from '@/utils/lambda-utils';
+import {
+  lambdaResp,
+  lambdaRespErr,
+  getBody,
+  isObjectEmpty,
+} from '@/utils/utils';
+
+import registerUser from '@/lib/services/user/register-user';
 
 function getParameters(event) {
-  return {
-    ...getBody(event),
-  };
+  const body = getBody(event);
+
+  if (isObjectEmpty(body)) throw new Error('Missing parameters');
+
+  return body;
 }
 
 export async function run(event) {
   try {
-    const parameters = getParameters(event);
+    const params = getParameters(event);
 
-    console.log('parameters :>> ', parameters);
+    const response = await registerUser(params);
 
-    return lambdaResp(200, { result: 'success' });
+    return lambdaResp(200, response);
   } catch (error) {
-    console.log('err authValidate:>> ', error);
+    console.log('err run post user:>> ', error);
 
     return lambdaRespErr(error);
   }

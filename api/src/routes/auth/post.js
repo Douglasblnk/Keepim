@@ -1,4 +1,4 @@
-import { lambdaResp, lambdaRespErr } from '@/utils/lambda-utils';
+import { lambdaResp, lambdaRespErr } from '@/utils/utils';
 
 export async function run(lambda) {
   try {
