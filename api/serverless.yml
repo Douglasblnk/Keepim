@@ -27,6 +27,8 @@ functions:
 custom:
   serverless-offline:
     httpPort: 4000
+    websocketPort: 4001
+    lambdaPort: 4002
 
   prune:
     automatic: true
@@ -46,3 +48,4 @@ plugins:
   - serverless-webpack
   - serverless-offline
   - serverless-prune-plugin
+  - serverless-dotenv-plugin
