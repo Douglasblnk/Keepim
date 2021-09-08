@@ -1,5 +1,5 @@
 const { defineConfig } = require('eslint-define-config');
-const path = require('path');
+const { resolve } = require('path');
 
 module.exports = defineConfig({
   extends: [
@@ -9,8 +9,11 @@ module.exports = defineConfig({
   settings: {
     'import/resolver': {
       webpack: {
-        config: path.resolve(__dirname, './webpack.config.js'),
+        config: resolve(__dirname, './webpack.config.js'),
       },
     },
+  },
+  rules: {
+    'linebreak-style': ['error', 'windows'],
   },
 });
