@@ -60,7 +60,7 @@ export default defineComponent({
 <template>
   <div class="login-page">
     <div class="login-page__header">
-      <PhottokeepTitle />
+      <PhotoKeepTitle />
 
       <div class="login-page__input">
         <PInput
