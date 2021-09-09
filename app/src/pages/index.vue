@@ -81,29 +81,26 @@ export default defineComponent({
 </template>
 
 <style lang="postcss">
-@layer components {
-  .login-page {
+.login-page {
+  @apply
+    flex
+    flex-col
+    h-screen
+    w-screen
+    justify-around
+    items-center;
+
+  &__header {
     @apply
       flex
       flex-col
-      h-screen
-      w-screen
-      justify-around
-      items-center;
+      flex-[4]
+      justify-center;
+  }
 
-    &__header {
-      @apply
-        flex
-        flex-col
-        flex-[4]
-        justify-center;
-    }
-
-    &__action {
-      @apply
-        flex-1;
-    }
+  &__action {
+    @apply
+      flex-1;
   }
 }
-
 </style>
