@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { formatISO } from 'date-fns';
 import dynamodbFactory from '@/composables/use-dynamodb-factory';
 
 export default function userModel(user) {
@@ -13,14 +14,14 @@ export default function userModel(user) {
         email: user.email,
         name: user.name,
         password: user.password,
-        createdAt: new Date().getDate(),
-        updatedAt: new Date().getDate(),
+        createdAt: formatISO(new Date()),
+        updatedAt: formatISO(new Date()),
       },
     };
 
-    const response = await db.put(params).promise();
+    await db.put(params).promise();
 
-    return response;
+    return { status: 201, msg: 'User created' };
   };
 
   return {
