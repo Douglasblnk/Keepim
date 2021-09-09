@@ -22,6 +22,6 @@ export default async function registerUser({ email, password, name }) {
   const { hashedPassword } = await getPasswordHash(password);
 
   const response = await register({ email, password: hashedPassword, name });
-  console.log('response :>> ', response);
-  return { mgs: 'ok' };
+
+  return response;
 }
