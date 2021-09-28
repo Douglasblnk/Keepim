@@ -2,9 +2,9 @@ import useCryptography from '@/composables/use-cryptography';
 import userModel from '@/lib/models/user';
 
 async function register({ ...user }) {
-  const { createUser } = userModel(user);
+  const { putUser } = userModel(user);
 
-  return createUser();
+  return putUser();
 }
 
 async function getPasswordHash(password) {

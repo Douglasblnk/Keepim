@@ -1,14 +1,15 @@
 import { v4 as uuidv4 } from 'uuid';
 import { formatISO } from 'date-fns';
 import dynamodbFactory from '@/composables/use-dynamodb-factory';
+import tables from '@/utils/tables';
 
 export default function userModel(user) {
   const { doc } = dynamodbFactory();
   const db = doc();
 
-  const createUser = async () => {
+  const putUser = async () => {
     const params = {
-      TableName: 'Auth.User',
+      TableName: tables.USER,
       Item: {
         id: uuidv4(),
         email: user.email,
@@ -24,7 +25,15 @@ export default function userModel(user) {
     return { status: 201, msg: 'User created' };
   };
 
+  const queryUser = async () => {
+    const params = {
+      TableName: tables.USER,
+
+    };
+  };
+
   return {
-    createUser,
+    putUser,
+    queryUser,
   };
 }
