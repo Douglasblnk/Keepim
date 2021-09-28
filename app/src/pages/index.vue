@@ -1,83 +1,94 @@
-<script>
-import { defineComponent, ref } from 'vue';
+<script setup>
+import { ref } from 'vue';
 import useRequest from '@composables/use-request';
 
-export default defineComponent({
-  name: 'LoginPage',
+const password = ref();
+const user = ref();
+const error = ref('');
+const errorState = ref();
+const loading = ref(false);
 
-  setup() {
-    const password = ref();
-    const errorMsg = ref();
-    const errorState = ref();
-    const loading = ref(false);
+const { useAxios } = useRequest();
 
-    const { useAxios } = useRequest();
+const resetErrorState = () => {
+  clearTimeout(errorState.value);
 
-    const resetErrorState = () => {
-      clearTimeout(errorState.value);
+  errorState.value = setTimeout(() => {
+    error.value = '';
+  }, 4000);
+};
 
-      errorState.value = setTimeout(() => {
-        errorMsg.value = '';
-      }, 4000);
-    };
+const missingPassword = () => {
+  error.value = 'Incorrect credentials, please, try again.';
 
-    const missingPassword = () => {
-      errorMsg.value = 'Por favor, verifique sua senha!';
+  resetErrorState();
+};
 
-      resetErrorState();
-    };
+const makeLogin = async() => {
+  if (!password.value) return missingPassword();
 
-    const makeLogin = async() => {
-      if (!password.value) return missingPassword();
+  try {
+    loading.value = true;
 
-      try {
-        loading.value = true;
-
-        const { data } = await useAxios('auth')
-          .post({
-            headers: { token: '1234567890' },
-            data: { password: password.value },
-          });
-      }
-      catch (error) {
-        console.log('error makeLogin :>> ', error);
-      }
-      finally {
-        loading.value = false;
-      }
-    };
-
-    return {
-      makeLogin,
-      password,
-      errorMsg,
-      loading,
-    };
-  },
-});
+    const { data } = await useAxios('auth')
+      .post({
+        headers: { token: '1234567890' },
+        data: { user: user.value, password: password.value },
+      });
+  }
+  catch (error) {
+    console.log('error makeLogin :>> ', error);
+  }
+  finally {
+    loading.value = false;
+  }
+};
 </script>
 
 <template>
-  <div class="login-page">
-    <div class="login-page__header">
+  <div
+    w:flex="~ col"
+    w:h="screen"
+    w:w="screen"
+    w:justify="around"
+    w:align="items-center"
+  >
+    <div
+      w:flex="~ col [4]"
+      w:justify="center"
+    >
       <PhotoKeepTitle />
 
       <div class="login-page__input">
         <PInput
+          v-model="user"
+          type="text"
+          placeholder="Usuário:"
+          w:m="t-xl"
+          @keydown.enter="makeLogin"
+          @keypress="error && (error = '')"
+        />
+
+        <PInput
           v-model="password"
           type="password"
           placeholder="Senha:"
-          class="mt-xl"
-          :error="errorMsg"
+          w:m="t-md"
           @keydown.enter="makeLogin"
-          @keypress="errorMsg && (errorMsg = '')"
+          @keypress="error && (error = '')"
         />
+      </div>
+
+      <div
+        v-show="error"
+      >
+        {{ error }}
       </div>
     </div>
 
-    <div class="login-page__action">
+    <div w:flex="1">
       <PButton
-        class="p-8"
+        w:p="8"
         icon="arrow-right"
         icon-size="lg"
         primary
