@@ -934,21 +934,6 @@ const config = defineConfig({
       ...theme('colors'),
     }),
   },
-
-  shortcuts: {
-    // To be used by Quasar Components
-    wrap: 'flex-wrap',
-    'no-wrap': 'flex-nowrap',
-    'reverse-wrap': 'wrap-reverse',
-
-    row: 'flex wrap',
-    column: 'flex wrap flex-column',
-
-    'no-shadow': 'shadow-0',
-
-    'absolute-full': 'absolute inset-0',
-    'flex-center': 'justify-center',
-  },
 });
 
 export default defineConfig(config);
