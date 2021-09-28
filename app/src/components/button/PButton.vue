@@ -73,7 +73,10 @@ export default defineComponent({
       />
     </div>
 
-    <span>
+    <span
+      w:text="white"
+      w:font="semibold tracking-wide"
+    >
       {{ label }}
     </span>
   </button>
@@ -82,17 +85,17 @@ export default defineComponent({
 <style lang="postcss">
 .p-button {
   @apply
+    rounded-full
     flex
+    bg-gray-200
+    py-2
+    px-5
+    transition-shadow
+    shadow-2
     items-center
     justify-center
-    px-5
-    py-2
-    rounded-full
-    shadow-2
-    transition-shadow
-    active:shadow-8
     !outline-none
-    bg-gray-200;
+    active:shadow-8;
 
   &__icon {
     @apply
@@ -111,20 +114,13 @@ export default defineComponent({
 
   &--disabled {
     @apply
-      opacity-30
+      opacity-30;
   }
 
   &--circle {
     @apply
-      w-12
-      h-12;
-  }
-
-  span {
-    @apply
-      text-white
-      font-semibold
-      tracking-wide;
+      h-12
+      w-12;
   }
 }
 </style>
