@@ -17,6 +17,7 @@ const config = defineConfig({
       'public/**/*',
     ],
   },
+  safelist: 'bg-warning bg-info bg-negative bg-positive',
   theme: {
     screens: {
       sm: '600px',
@@ -43,9 +44,13 @@ const config = defineConfig({
         900: '#000000',
       },
 
+      positive: '#21BA45',
+      negative: '#F56C6C',
+      info: '#31CCEC',
+      warning: '#F2C037',
+
       primary: '#6F95AA',
       secondary: '#A4C2E4',
-      danger: '#F56C6C',
     },
 
     spacing: {
@@ -126,6 +131,9 @@ const config = defineConfig({
     borderRadius: {
       DEFAULT: '4px',
       none: '0px',
+      sm: '4px',
+      md: '8px',
+      lg: '16px',
       1: '100%',
       full: '9999px',
     },
@@ -279,6 +287,7 @@ const config = defineConfig({
     },
 
     fontFamily: {
+      base: ['Nunito'],
       sans: [
         'ui-sans-serif',
         'system-ui',
