@@ -78,12 +78,6 @@ const makeLogin = async() => {
           @keypress="error && (error = '')"
         />
       </div>
-
-      <div
-        v-show="error"
-      >
-        {{ error }}
-      </div>
     </div>
 
     <div w:flex="1">
@@ -97,6 +91,12 @@ const makeLogin = async() => {
         @click="makeLogin"
       />
     </div>
+
+    <PAlert
+      type="negative"
+      :is-showing="!!error"
+      :text="error"
+    />
   </div>
 </template>
 
