@@ -3,30 +3,31 @@
   "repository": "douglasblnk/photokeep",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite",
+    "dev": "pnpm install && vite --port 3000 --host --force",
     "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^3.0.0-4",
-    "axios": "^0.21.1",
-    "vue": "^3.1.0",
+    "axios": "^0.21.4",
+    "vue": "^3.2.10",
     "vue-router": "^4.0.8"
   },
   "devDependencies": {
     "@douglasblnk/eslint-config": "^1.0.1",
-    "@vitejs/plugin-vue": "^1.2.3",
-    "@vue/compiler-sfc": "^3.0.5",
-    "eslint": "^7.28.0",
-    "eslint-define-config": "^1.0.8",
-    "postcss": "^8.3.0",
-    "vite": "^2.3.3",
-    "vite-plugin-components": "^0.12.2",
-    "vite-plugin-pages": "^0.14.9",
-    "vite-plugin-windicss": "^1.2.4",
-    "vite-plugin-pwa": "^0.8.1",
-    "windicss": "^3.1.3"
+    "@vitejs/plugin-vue": "^1.9.2",
+    "@vue/compiler-sfc": "^3.2.18",
+    "eslint": "^7.32.0",
+    "eslint-define-config": "^1.0.9",
+    "postcss": "^8.3.7",
+    "unplugin-auto-import": "^0.4.8",
+    "unplugin-vue-components": "^0.15.3",
+    "vite": "^2.5.10",
+    "vite-plugin-pages": "^0.18.1",
+    "vite-plugin-pwa": "^0.11.2",
+    "vite-plugin-windicss": "^1.4.7",
+    "windicss": "^3.1.7"
   }
 }

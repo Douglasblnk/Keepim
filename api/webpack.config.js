@@ -1,5 +1,5 @@
 const slsw = require('serverless-webpack');
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
@@ -7,7 +7,7 @@ module.exports = {
   entry: slsw.lib.entries,
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   output: {
@@ -18,7 +18,7 @@ module.exports = {
   optimization: {
     minimize: false,
   },
-  externals: ['aws-sdk'],
+  externals: ['aws-sdk', 'bcrypt'],
   module: {
     rules: [
       {

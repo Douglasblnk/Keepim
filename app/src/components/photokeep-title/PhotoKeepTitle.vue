@@ -1,23 +1,15 @@
 <template>
-  <h1 class="phottokeep-title">
+  <h1 class="photokeep-title">
     PhotoKeep
   </h1>
 </template>
 
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
-</script>
-
 <style lang="postcss">
-.phottokeep-title {
+.photokeep-title {
   @apply
-    !font-black
+    text-3xl
     select-none
-    text-3xl;
+    !font-black;
 
     background: linear-gradient(90deg, #6F95AA -1.12%, #A4C1E4 100%) !important;
     -webkit-background-clip: text;

@@ -1,8 +1,11 @@
 import {
-  getBody, isObjectEmpty, lambdaResp,
+  lambdaResp,
+  lambdaRespErr,
+  getBody,
+  isObjectEmpty,
 } from '@/utils/utils';
 
-import validateUser from '@/lib/services/auth/validate-user';
+import registerUser from '@/lib/services/user/register-user';
 
 function getParameters(event) {
   const body = getBody(event);
@@ -16,11 +19,13 @@ export async function run(event) {
   try {
     const params = getParameters(event);
 
-    const response = await validateUser(params);
+    const response = await registerUser(params);
 
     return lambdaResp(200, response);
-  } catch ({ status, error }) {
-    return lambdaResp(status, error);
+  } catch (error) {
+    console.log('err run post user:>> ', error);
+
+    return lambdaRespErr(error);
   }
 }
 

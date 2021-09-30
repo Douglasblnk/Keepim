@@ -1,106 +1,94 @@
-<script>
-import { defineComponent, ref } from 'vue';
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import useRequest from '@composables/use-request';
+import useAlert from '@composables/use-alert';
+import { setToken } from '@/utils/token';
 
-export default defineComponent({
-  name: 'LoginPage',
+const password = ref();
+const user = ref();
+const loading = ref(false);
 
-  setup() {
-    const password = ref();
-    const errorMsg = ref();
-    const errorState = ref();
-    const loading = ref(false);
+const { useAxios } = useRequest();
+const { setAlert } = useAlert();
+const { replace } = useRouter();
 
-    const { useAxios } = useRequest();
+const setErrorState = (error) => {
+  setAlert({
+    type: 'negative',
+    text: error,
+  });
+};
 
-    const resetErrorState = () => {
-      clearTimeout(errorState.value);
+const makeLogin = async() => {
+  if (!password.value) return setErrorState('Por favor, digite suas credenciais.');
 
-      errorState.value = setTimeout(() => {
-        errorMsg.value = '';
-      }, 4000);
-    };
+  loading.value = true;
 
-    const missingPassword = () => {
-      errorMsg.value = 'Por favor, verifique sua senha!';
+  const { data, error } = await useAxios('auth')
+    .post({
+      data: { id: user.value, password: password.value },
+    });
 
-      resetErrorState();
-    };
+  loading.value = false;
 
-    const makeLogin = async() => {
-      if (!password.value) return missingPassword();
+  if (!data && error) return setErrorState(error.data);
 
-      try {
-        loading.value = true;
-        const { data } = useAxios('auth');
-        console.log('data :>> ', data);
-      }
-      catch (error) {
+  setAlert({
+    type: 'positive',
+    text: 'Login efetuado com sucesso!',
+    timeout: 1000,
+  });
 
-      }
-    };
+  setToken(data);
 
-    return {
-      makeLogin,
-      password,
-      errorMsg,
-    };
-  },
-});
+  setTimeout(() => replace('/home'), 1000);
+};
 </script>
 
 <template>
-  <div class="login-page">
-    <div class="login-page__header">
-      <PhottokeepTitle />
+  <div
+    w:flex="~ col"
+    w:h="screen"
+    w:w="screen"
+    w:justify="around"
+    w:align="items-center"
+  >
+    <div
+      w:flex="~ col [4]"
+      w:justify="center"
+    >
+      <PhotoKeepTitle />
 
       <div class="login-page__input">
+        <PInput
+          v-model="user"
+          type="text"
+          placeholder="Usuário:"
+          w:m="t-xl"
+          @keydown.enter="makeLogin"
+        />
+
         <PInput
           v-model="password"
           type="password"
           placeholder="Senha:"
-          class="mt-xl"
-          :error="errorMsg"
+          w:m="t-md"
           @keydown.enter="makeLogin"
-          @keypress="errorMsg && (errorMsg = '')"
         />
       </div>
     </div>
 
-    <div class="login-page__action">
+    <div w:flex="1">
       <PButton
-        class="p-8"
+        w:p="8"
         icon="arrow-right"
         icon-size="lg"
         primary
         circle
+        :loading="loading"
         @click="makeLogin"
       />
     </div>
   </div>
 </template>
-
-<style lang="postcss">
-.login-page {
-  @apply
-    flex
-    flex-col
-    h-screen
-    w-screen
-    justify-around
-    items-center;
-
-  &__header {
-    @apply
-      flex
-      flex-col
-      flex-[4]
-      justify-center;
-  }
-
-  &__action {
-    @apply
-      flex-1;
-  }
-}
-</style>

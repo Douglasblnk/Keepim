@@ -1,7 +1,8 @@
 import { resolve } from 'path';
 import vue from '@vitejs/plugin-vue';
 import WindiCSS from 'vite-plugin-windicss';
-import ViteComponents from 'vite-plugin-components';
+import Components from 'unplugin-vue-components/vite';
+import AutoImport from 'unplugin-auto-import/vite';
 import Pages from 'vite-plugin-pages';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -13,10 +14,33 @@ export default defineConfig({
       '@composables': [resolve(__dirname, './src/composables')],
     },
   },
+  server: {
+    open: true,
+  },
   plugins: [
     vue(),
-    Pages(),
+    Pages({
+      extendRoute(route) {
+        const { path } = route;
+
+        if (path === '/') return route;
+
+        return {
+          ...route,
+          meta: { auth: true },
+        };
+      },
+    }),
     WindiCSS(),
+    AutoImport({
+      include: [
+        /\.vue\??/, // .vue
+      ],
+      imports: [
+        'vue',
+        'vue-router',
+      ],
+    }),
     VitePWA({
       manifest: {
         name: 'PhotoKeep',
@@ -25,7 +49,7 @@ export default defineConfig({
         display: 'standalone',
       },
     }),
-    ViteComponents({
+    Components({
       dirs: [
         'src/components',
         'src/pages',
