@@ -1,11 +1,22 @@
 import Axios from 'axios';
+import { computed } from 'vue';
 
 export default function() {
-  const baseUrl = () => {
+  const baseUrl = computed(() => {
     const { MODE, VITE_BASE_API_URL } = import.meta.env;
 
     if (MODE === 'development') return 'http://localhost:4000/dev';
     return VITE_BASE_API_URL;
+  });
+
+  const handleError = (error) => {
+    const { response } = error;
+
+    if (!response) return error;
+
+    const { data, status } = response;
+
+    if (data && status !== 200) return { data, status };
   };
 
   const request = async(args) => {
@@ -14,7 +25,7 @@ export default function() {
 
     try {
       const response = await Axios(
-        `${baseUrl()}/${path}`,
+        `${baseUrl.value}/${path}`,
         { ...options },
       );
 
@@ -22,7 +33,7 @@ export default function() {
       axiosResponse.data = response.data;
     }
     catch (error) {
-      axiosResponse.error = error;
+      axiosResponse.error = handleError(error);
     }
 
     return { ...axiosResponse };
