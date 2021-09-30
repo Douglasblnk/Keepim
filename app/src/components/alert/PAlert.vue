@@ -18,30 +18,35 @@ defineProps({
 </script>
 
 <template>
-  <transition
-    name="alert"
-    mode="in-out"
-  >
-    <div
-      v-if="isShowing"
-      w:pos="absolute top-lg"
+  <teleport to="body">
+    <transition
+      name="alert"
+      mode="in-out"
     >
       <div
-        :class="`bg-${type}`"
-        w:h="xl"
+        v-if="isShowing"
+        w:w="full"
         w:flex="~"
-        w:text="white base"
         w:justify="center"
-        w:align="items-center"
-        w:p="x-lg"
-        w:rounded="full"
-        w:font="base"
-        w:shadow="10 gray-600"
+        w:pos="absolute top-lg"
       >
-        {{ text }}
+        <div
+          :class="`bg-${type}`"
+          w:h="xl"
+          w:flex="~"
+          w:text="white base"
+          w:justify="center"
+          w:align="items-center"
+          w:p="x-lg"
+          w:rounded="full"
+          w:font="base"
+          w:shadow="10 gray-600"
+        >
+          {{ text }}
+        </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </teleport>
 </template>
 
 <style>
