@@ -1,47 +1,48 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import useRequest from '@composables/use-request';
+import useAlert from '@composables/use-alert';
+import { setToken } from '@/utils/token';
 
 const password = ref();
 const user = ref();
-const error = ref('');
-const errorState = ref();
 const loading = ref(false);
 
 const { useAxios } = useRequest();
+const { setAlert } = useAlert();
+const { replace } = useRouter();
 
-const resetErrorState = () => {
-  clearTimeout(errorState.value);
-
-  errorState.value = setTimeout(() => {
-    error.value = '';
-  }, 4000);
-};
-
-const missingPassword = () => {
-  error.value = 'Incorrect credentials, please, try again.';
-
-  resetErrorState();
+const setErrorState = (error) => {
+  setAlert({
+    type: 'negative',
+    text: error,
+  });
 };
 
 const makeLogin = async() => {
-  if (!password.value) return missingPassword();
+  if (!password.value) return setErrorState('Por favor, digite suas credenciais.');
 
-  try {
-    loading.value = true;
+  loading.value = true;
 
-    const { data } = await useAxios('auth')
-      .post({
-        headers: { token: '1234567890' },
-        data: { user: user.value, password: password.value },
-      });
-  }
-  catch (error) {
-    console.log('error makeLogin :>> ', error);
-  }
-  finally {
-    loading.value = false;
-  }
+  const { data, error } = await useAxios('auth')
+    .post({
+      data: { id: user.value, password: password.value },
+    });
+
+  loading.value = false;
+
+  if (!data && error) return setErrorState(error.data);
+
+  setAlert({
+    type: 'positive',
+    text: 'Login efetuado com sucesso!',
+    timeout: 1000,
+  });
+
+  setToken(data);
+
+  setTimeout(() => replace('/home'), 1000);
 };
 </script>
 
@@ -66,7 +67,7 @@ const makeLogin = async() => {
           placeholder="Usuário:"
           w:m="t-xl"
           @keydown.enter="makeLogin"
-          @keypress="error && (error = '')"
+          @keypress="errorMsg && (errorMsg = '')"
         />
 
         <PInput
@@ -75,7 +76,7 @@ const makeLogin = async() => {
           placeholder="Senha:"
           w:m="t-md"
           @keydown.enter="makeLogin"
-          @keypress="error && (error = '')"
+          @keypress="errorMsg && (errorMsg = '')"
         />
       </div>
     </div>
@@ -91,12 +92,6 @@ const makeLogin = async() => {
         @click="makeLogin"
       />
     </div>
-
-    <PAlert
-      type="negative"
-      :is-showing="!!error"
-      :text="error"
-    />
   </div>
 </template>
 
