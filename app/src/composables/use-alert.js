@@ -1,10 +1,11 @@
 import { ref } from 'vue';
 
 const defaultType = 'warning';
+const defaultText = 'Internal Server Error';
 
 const isShowing = ref(false);
-const alertType = ref(defaultType);
-const alertText = ref('');
+const alertType = ref();
+const alertText = ref();
 
 const alertState = ref();
 
@@ -17,7 +18,7 @@ export default function useAlert() {
     }, timeout);
   };
 
-  function setAlert({ type, text, timeout }) {
+  function setAlert({ type = defaultText, text = defaultText, timeout }) {
     isShowing.value = true;
     alertText.value = text;
     alertType.value = type;
