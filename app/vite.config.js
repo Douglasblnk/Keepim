@@ -19,7 +19,18 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    Pages(),
+    Pages({
+      extendRoute(route) {
+        const { path } = route;
+
+        if (path === '/') return route;
+
+        return {
+          ...route,
+          meta: { auth: true },
+        };
+      },
+    }),
     WindiCSS(),
     AutoImport({
       include: [
