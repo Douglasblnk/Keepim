@@ -1,27 +1,24 @@
 import useCryptography from '@/composables/use-cryptography';
 import userModel from '@/lib/models/user';
 
-async function register({ ...user }) {
+async function register(user) {
   const { putUser } = userModel(user);
 
   return putUser();
 }
 
-async function getPasswordHash(password) {
+async function getPasswordHash({ password }) {
   const { genSaltRounds, hashPassword } = useCryptography();
 
   const salt = await genSaltRounds();
-  const hashedPassword = await hashPassword(password, salt);
 
-  return {
-    hashedPassword,
-  };
+  return hashPassword(password, salt);
 }
 
-export default async function registerUser({ email, password, name }) {
-  const { hashedPassword } = await getPasswordHash(password);
+export default async function registerUser(user) {
+  const hashedPassword = await getPasswordHash(user);
 
-  const response = await register({ email, password: hashedPassword, name });
+  const response = await register({ ...user, password: hashedPassword });
 
   return response;
 }
