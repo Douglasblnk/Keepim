@@ -94,28 +94,3 @@ const makeLogin = async() => {
     </div>
   </div>
 </template>
-
-<style lang="postcss">
-.login-page {
-  @apply
-    flex
-    flex-col
-    h-screen
-    w-screen
-    justify-around
-    items-center;
-
-  &__header {
-    @apply
-      flex
-      flex-col
-      flex-[4]
-      justify-center;
-  }
-
-  &__action {
-    @apply
-      flex-1;
-  }
-}
-</style>
