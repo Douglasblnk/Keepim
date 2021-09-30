@@ -13,6 +13,7 @@
     "bcrypt": "^5.0.1",
     "date-fns": "^2.23.0",
     "eslint-define-config": "^1.0.9",
+    "jsonwebtoken": "^8.5.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
