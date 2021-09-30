@@ -67,7 +67,6 @@ const makeLogin = async() => {
           placeholder="Usuário:"
           w:m="t-xl"
           @keydown.enter="makeLogin"
-          @keypress="errorMsg && (errorMsg = '')"
         />
 
         <PInput
@@ -76,7 +75,6 @@ const makeLogin = async() => {
           placeholder="Senha:"
           w:m="t-md"
           @keydown.enter="makeLogin"
-          @keypress="errorMsg && (errorMsg = '')"
         />
       </div>
     </div>
