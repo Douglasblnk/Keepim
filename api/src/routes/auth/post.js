@@ -1,5 +1,5 @@
 import {
-  getBody, isObjectEmpty, lambdaResp, lambdaRespErr,
+  getBody, isObjectEmpty, lambdaResp,
 } from '@/utils/utils';
 
 import validateUser from '@/lib/services/auth/validate-user';
@@ -19,10 +19,8 @@ export async function run(event) {
     const response = await validateUser(params);
 
     return lambdaResp(200, response);
-  } catch (error) {
-    console.log('err post auth :>> ', error);
-
-    return lambdaRespErr(error);
+  } catch ({ status, error }) {
+    return lambdaResp(status, error);
   }
 }
 
