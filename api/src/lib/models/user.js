@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { formatISO } from 'date-fns';
 import dynamodbFactory from '@/composables/use-dynamodb-factory';
 import tables from '@/utils/tables';
@@ -11,7 +10,7 @@ export default function userModel(user) {
     const params = {
       TableName: tables.USER,
       Item: {
-        id: uuidv4(),
+        id: user.id,
         email: user.email,
         name: user.name,
         password: user.password,
@@ -28,8 +27,15 @@ export default function userModel(user) {
   const queryUser = async () => {
     const params = {
       TableName: tables.USER,
-
+      KeyConditionExpression: 'id = :id',
+      ExpressionAttributeValues: {
+        ':id': user.id,
+      },
     };
+
+    const { Items } = await db.query(params).promise();
+
+    return Items;
   };
 
   return {
