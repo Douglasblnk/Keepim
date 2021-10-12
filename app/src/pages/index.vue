@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import useRequest from '@composables/use-request';
 import useAlert from '@composables/use-alert';
@@ -60,7 +59,7 @@ const makeLogin = async() => {
     >
       <PhotoKeepTitle />
 
-      <div class="login-page__input">
+      <div w:m="t-md">
         <PInput
           v-model="user"
           type="text"

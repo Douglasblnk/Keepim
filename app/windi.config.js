@@ -28,6 +28,7 @@ const config = defineConfig({
     },
 
     colors: {
+      background: '#2C2D30',
       transparent: 'transparent',
       black: '#000',
       white: '#fff',
@@ -49,8 +50,9 @@ const config = defineConfig({
       info: '#31CCEC',
       warning: '#F2C037',
 
-      primary: '#6F95AA',
+      primary: '#4599C8',
       secondary: '#A4C2E4',
+      ascendent: '#36373B',
     },
 
     spacing: {
