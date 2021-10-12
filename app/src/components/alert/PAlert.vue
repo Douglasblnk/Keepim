@@ -40,7 +40,7 @@ defineProps({
           w:p="x-lg"
           w:rounded="full"
           w:font="base"
-          w:shadow="10 gray-600"
+          w:shadow="10 gray-700"
         >
           {{ text }}
         </div>
