@@ -1,51 +1,42 @@
-<script>
-import { computed, defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'PButton',
-
-  props: {
-    type: {
-      type: String,
-      default: 'button',
-    },
-
-    label: {
-      type: String,
-      default: '',
-    },
-
-    icon: {
-      type: String,
-      default: '',
-    },
-
-    iconSize: {
-      type: String,
-      default: '',
-    },
-
-    primary: Boolean,
-    secondary: Boolean,
-    disabled: Boolean,
-    loading: Boolean,
-    circle: Boolean,
+<script setup>
+const props = defineProps({
+  type: {
+    type: String,
+    default: 'button',
   },
 
-  setup(props) {
-    const customClasses = computed(() => ({
-      'p-button--primary': props.primary,
-      'p-button--secondary': props.secondary,
-      'p-button--disabled': props.disabled,
-      'p-button--loading': props.loading,
-      'p-button--circle': props.circle,
-    }));
-
-    return {
-      customClasses,
-    };
+  label: {
+    type: String,
+    default: '',
   },
+
+  icon: {
+    type: String,
+    default: '',
+  },
+
+  iconSize: {
+    type: String,
+    default: '',
+  },
+
+  primary: Boolean,
+  secondary: Boolean,
+  ascendent: Boolean,
+  disabled: Boolean,
+  loading: Boolean,
+  circle: Boolean,
 });
+
+const customClasses = computed(() => ({
+  'p-button--primary': props.primary,
+  'p-button--secondary': props.secondary,
+  'p-button--ascendent': props.ascendent,
+  'p-button--disabled': props.disabled,
+  'p-button--loading': props.loading,
+  'p-button--circle': props.circle,
+}));
+
 </script>
 
 <template>
@@ -110,6 +101,11 @@ export default defineComponent({
   &--secondary {
     @apply
       bg-secondary;
+  }
+
+  &--ascendent {
+    @apply
+      bg-ascendent;
   }
 
   &--disabled {
