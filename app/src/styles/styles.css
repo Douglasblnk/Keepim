@@ -27,7 +27,7 @@ body {
   width: 100%;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f1f1f1;
+  @apply bg-background;
 }
 
 button {
