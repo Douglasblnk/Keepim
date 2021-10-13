@@ -9,7 +9,7 @@ provider:
 
 functions:
   authLogin:
-    handler: src/routes/auth/post.run
+    handler: src/routes/auth/login.run
     memorySize: 128
     events:
       - http:
@@ -22,6 +22,14 @@ functions:
     events:
       - http:
           path: /register
+          method: POST
+
+  validateToken:
+    handler: src/routes/auth/token.run
+    memorySize: 128
+    events:
+      - http:
+          path: /validate-token
           method: POST
 
 custom:
