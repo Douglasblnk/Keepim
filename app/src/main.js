@@ -6,6 +6,7 @@ import App from './App.vue';
 
 import icons from '@/utils/icons';
 import createRouterInstance from '@/routes';
+import { validateToken } from '@/utils/token';
 
 icons();
 
@@ -19,4 +20,6 @@ router.isReady().then(async() => {
   app
     .component('FIcon', FontAwesomeIcon)
     .mount('#app');
+
+  validateToken(router.currentRoute);
 });

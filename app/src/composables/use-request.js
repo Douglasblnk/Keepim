@@ -33,7 +33,6 @@ export default function() {
       axiosResponse.data = response.data;
     }
     catch (error) {
-      console.log('error :>> ', error);
       axiosResponse.error = handleError(error);
     }
 

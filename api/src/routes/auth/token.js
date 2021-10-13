@@ -6,7 +6,7 @@ import validateToken from '@/lib/services/auth/validate-token';
 
 function getParameters(event) {
   const body = getBody(event);
-  console.log('body :>> ', event);
+
   if (isObjectEmpty(body)) throw new Error('Missing parameters');
 
   return body;
