@@ -14,8 +14,8 @@ export default defineConfig({
       '@composables': [resolve(__dirname, './src/composables')],
     },
   },
-  server: {
-    open: true,
+  optimizeDeps: {
+    include: ['axios'],
   },
   plugins: [
     vue(),
