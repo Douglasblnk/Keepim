@@ -9,8 +9,6 @@ export default async function validateToken({ token }) {
 
     const verified = verifyJwt(token);
 
-    console.log('verified :>> ', verified);
-
     return verified;
   } catch (err) {
     throw unauthorizedError(err);
