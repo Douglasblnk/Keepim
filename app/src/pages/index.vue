@@ -83,7 +83,7 @@ const makeLogin = async() => {
 
     <div w:flex="1">
       <PButton
-        w:p="8"
+        w:p="!8"
         icon="arrow-right"
         icon-size="lg"
         primary
