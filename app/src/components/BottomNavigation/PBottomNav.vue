@@ -1,5 +1,11 @@
 <script setup>
+import { useRoute } from 'vue-router';
 
+const { name } = useRoute();
+
+const isSelected = (option) => {
+  return name === option;
+};
 </script>
 
 <template>
@@ -11,14 +17,55 @@
     w:m="x-auto"
   >
     <div
-      w:w="3/5"
+      w:flex="~"
+      w:justify="between"
+      w:align="items-center"
+      w:w="4/5 md:1/5"
       w:p="x-xl y-md"
       w:rounded="full"
       w:bg="gray-100 opacity-5"
       w:backdrop="~ blur-md"
       w:text="white"
     >
-      poxa
+      <div
+        :class="isSelected('explore') && 'selected'"
+        w:cursor="pointer"
+      >
+        <FIcon
+          icon="th-large"
+          size="lg"
+        />
+      </div>
+
+      <div
+        :class="isSelected('home') && 'selected'"
+        w:cursor="pointer"
+      >
+        <FIcon
+          icon="home"
+          size="lg"
+        />
+      </div>
+
+      <div
+        :class="isSelected('folders') && 'selected'"
+        w:cursor="pointer"
+      >
+        <FIcon
+          icon="th-list"
+          size="lg"
+        />
+      </div>
     </div>
   </div>
 </template>
+
+<style lang="postcss" scoped>
+.selected {
+  @apply
+    bg-primary
+      rounded-full
+      py-sm
+      px-lg;
+}
+</style>
