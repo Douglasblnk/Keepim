@@ -1,7 +1,14 @@
 <script setup>
+import { useRoute } from 'vue-router';
 import useAlert from '@/composables/use-alert';
 
 const { isShowing, alertText, alertType } = useAlert();
+
+const isBottomNavHidden = computed(() => {
+  const { name } = useRoute();
+
+  return name !== 'index';
+});
 </script>
 
 <template>
@@ -22,7 +29,12 @@ const { isShowing, alertText, alertType } = useAlert();
     :text="alertText"
   />
 
-  <PBottomNav />
+  <transition
+    name="fade"
+    mode="out-in"
+  >
+    <PBottomNav v-if="isBottomNavHidden" />
+  </transition>
 </template>
 
 <style>
