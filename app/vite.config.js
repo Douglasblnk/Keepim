@@ -6,6 +6,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Pages from 'vite-plugin-pages';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import windiConfig from './windi.config';
 
 export default defineConfig({
   resolve: {
@@ -31,7 +32,9 @@ export default defineConfig({
         };
       },
     }),
-    WindiCSS(),
+    WindiCSS({
+      config: windiConfig,
+    }),
     AutoImport({
       include: [
         /\.vue\??/, // .vue

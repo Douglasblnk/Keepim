@@ -38,11 +38,7 @@ const config = defineConfig({
         200: '#d5d5d5',
         300: '#bdbdbd',
         400: '#9e9e9e',
-        500: '#757575',
-        600: '#616161',
-        700: '#424242',
-        800: '#212121',
-        900: '#000000',
+        500: '#4E4F55',
       },
 
       positive: '#21BA45',
@@ -52,7 +48,7 @@ const config = defineConfig({
 
       primary: '#4599C8',
       secondary: '#A4C2E4',
-      ascendent: '#36373B',
+      ascendent: '#3D3E43',
     },
 
     spacing: {
@@ -64,6 +60,7 @@ const config = defineConfig({
       md: '16px',
       lg: '24px',
       xl: '48px',
+      xxl: '64px',
     },
 
     animation: {
@@ -326,20 +323,10 @@ const config = defineConfig({
       ],
     },
     fontSize: {
-      base: '14px',
-      h1: '6rem',
-      h2: '3.75rem',
-      h3: '3rem',
-      h4: '2.125rem',
-      h5: '1.5rem',
-      h6: '1.25rem',
-      subtitle1: '1rem',
-      subtitle2: '0.875rem',
-      body1: '1rem',
-      body2: '0.875rem',
-      overline: '0.75rem',
-      caption: '0.75rem',
-      button: '14px',
+      small: '0.75rem',
+      base: '1rem',
+      medium: '1.5rem',
+      large: '2.25rem',
     },
 
     fontWeight: {
