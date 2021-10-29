@@ -17,9 +17,9 @@ const app = createApp(App);
 app.use(router);
 
 router.isReady().then(async() => {
+  await validateToken(router.currentRoute);
+
   app
     .component('FIcon', FontAwesomeIcon)
     .mount('#app');
-
-  validateToken(router.currentRoute);
 });

@@ -24,7 +24,7 @@ const isSelected = (option) => {
       w:p="x-xl y-md"
       w:rounded="full"
       w:bg="gray-100 opacity-5"
-      w:backdrop="~ blur-md"
+      w:backdrop="~ blur-lg"
       w:text="white"
     >
       <div
