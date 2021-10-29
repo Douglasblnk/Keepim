@@ -1,7 +1,7 @@
 <script setup>
 import { onClickOutside } from '@vueuse/core';
 
-defineProps({
+const props = defineProps({
   modelValue: Boolean,
 });
 
@@ -10,6 +10,22 @@ const emit = defineEmits(['close']);
 const target = ref(null);
 
 onClickOutside(target, event => emit('close'));
+
+const lockBodyScroll = () => {
+  document.body.style.overflow = 'hidden';
+};
+
+const unlockBodyScroll = () => {
+  document.body.style.overflow = 'auto';
+};
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    if (value) return lockBodyScroll();
+    return unlockBodyScroll();
+  },
+);
 </script>
 
 <template>
@@ -20,11 +36,12 @@ onClickOutside(target, event => emit('close'));
         w:pos="absolute top-0 left-0"
         w:backdrop="~ blur-lg"
         w:bg="black opacity-30"
-        w:w="full"
-        w:h="full"
+        w:w="screen"
+        w:h="screen"
         w:flex="~"
         w:justify="center"
         w:align="items-center"
+        w:z="notify"
       >
         <div
           ref="target"
