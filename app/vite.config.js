@@ -16,7 +16,13 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['axios'],
+    include: [
+      'vue',
+      'vue-router',
+      'axios',
+      'swiper',
+      '@vueuse/core',
+    ],
   },
   plugins: [
     vue(),
