@@ -63,7 +63,7 @@ const makeLogin = async() => {
       <PhotoKeepTitle />
 
       <div w:m="t-md">
-        <PInput
+        <Input
           v-model="user"
           type="text"
           placeholder="Usuário:"
@@ -71,7 +71,7 @@ const makeLogin = async() => {
           @keydown.enter="makeLogin"
         />
 
-        <PInput
+        <Input
           v-model="password"
           type="password"
           placeholder="Senha:"
@@ -82,7 +82,7 @@ const makeLogin = async() => {
     </div>
 
     <div w:flex="1">
-      <PButton
+      <Button
         w:p="!8"
         icon="arrow-right"
         icon-size="lg"

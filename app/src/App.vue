@@ -23,7 +23,7 @@ const isBottomNavHidden = computed(() => {
     </Suspense>
   </RouterView>
 
-  <PAlert
+  <Alert
     :is-showing="isShowing"
     :type="alertType"
     :text="alertText"
@@ -33,7 +33,7 @@ const isBottomNavHidden = computed(() => {
     name="fade"
     mode="out-in"
   >
-    <PBottomNav v-if="isBottomNavHidden" />
+    <BottomNav v-if="isBottomNavHidden" />
   </transition>
 </template>
 
