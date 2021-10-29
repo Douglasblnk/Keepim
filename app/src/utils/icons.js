@@ -6,6 +6,9 @@ import {
   faThLarge,
   faHome,
   faThList,
+  faFolderPlus,
+  faImages,
+  faTags,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function() {
@@ -15,5 +18,8 @@ export default function() {
     faThLarge,
     faHome,
     faThList,
+    faFolderPlus,
+    faImages,
+    faTags,
   ]);
 }
