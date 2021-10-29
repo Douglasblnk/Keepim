@@ -1,94 +1,28 @@
 <script setup>
+const showModal = ref(false);
+
+const addFolder = () => {
+  showModal.value = true;
+};
 </script>
 
 <template>
   <div
-    w:p="y-xl"
+    w:w="md:6/12"
+    w:m="x-auto"
     w:text="white"
   >
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
-    </div>
-    <div
-      w:p="y-xl"
-      w:text="white"
-    >
-      Olá tudo bem?
+    <PhotoKeepTitle />
+
+    <div w:m="x-lg md:auto">
+      <ShortcutAction
+        @add-folder="addFolder"
+      />
+
+      <Modal
+        v-model="showModal"
+        @close="showModal = false"
+      />
     </div>
   </div>
 </template>
