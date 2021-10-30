@@ -33,7 +33,7 @@ watch(
     <Transition name="fade">
       <div
         v-if="modelValue"
-        w:pos="absolute top-0 left-0"
+        w:pos="fixed top-0 left-0"
         w:backdrop="~ blur-lg"
         w:bg="black opacity-30"
         w:w="screen"
