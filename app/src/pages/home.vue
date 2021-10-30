@@ -1,9 +1,38 @@
 <script setup>
 const showModal = ref(false);
+const modalComponent = shallowRef(null);
+const modalProps = ref(null);
+const modalRef = ref(null);
 
-const addFolder = () => {
+const executeAction = (component) => {
+  modalComponent.value = defineAsyncComponent(
+    () => import(`../components/organisms/${component}.vue`),
+  );
+
   showModal.value = true;
 };
+
+const openImage = (item) => {
+  modalComponent.value = defineAsyncComponent(
+    () => import('../components/molecules/ImgModal.vue'),
+  );
+
+  modalProps.value = item;
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  modalProps.value = null;
+  showModal.value = false;
+};
+
+const poxa = () => {
+  console.log(modalRef.value);
+};
+
+console.log('modalRef :>> ', modalRef);
+
+const isComponent = computed(() => modalComponent.value);
 
 const lastImages = [
   { url: 'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg' },
@@ -74,7 +103,7 @@ const lastFolders = [
             w:w="200px"
             :url="item.url"
             clickable
-            @click="$emit('open-image', item)"
+            @click="openImage(item)"
           />
         </template>
       </SlideContent>
@@ -94,13 +123,22 @@ const lastFolders = [
       </SlideContent>
 
       <ShortcutAction
-        @add-folder="addFolder"
+        @add-folder="executeAction('AddFolderModal')"
+        @add-image="executeAction('AddImageModal')"
+        @add-category="executeAction('AddCategoryModal')"
       />
 
       <Modal
+        ref="modalRef"
         v-model="showModal"
-        @close="showModal = false"
-      />
+        @close="closeModal"
+      >
+        <Component
+          :is="isComponent"
+          v-bind="modalProps"
+          @close="modalRef.closeModal()"
+        />
+      </Modal>
     </div>
   </div>
 </template>
