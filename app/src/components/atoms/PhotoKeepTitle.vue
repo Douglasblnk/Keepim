@@ -30,6 +30,7 @@ onBeforeUnmount(() => Fn());
     w:pos="sticky top-0"
     w:select="none"
     w:transition="~ all"
+    w:z="marginals"
     :w:text="reachedTop ? 'gray-100 [24px] center' : 'gray-100 [38px] center'"
   >
     PhotoKeep
