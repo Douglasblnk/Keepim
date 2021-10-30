@@ -15,6 +15,7 @@ const isSelected = (option) => {
     w:flex="~"
     w:justify="center"
     w:m="x-auto"
+    w:z="marginals"
   >
     <div
       w:flex="~"
