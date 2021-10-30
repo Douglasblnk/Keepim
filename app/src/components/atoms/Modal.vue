@@ -9,23 +9,38 @@ const emit = defineEmits(['close']);
 
 const target = ref(null);
 
-onClickOutside(target, event => emit('close'));
+const secondRender = ref(false);
 
-const lockBodyScroll = () => {
-  document.body.style.overflow = 'hidden';
+const closeModal = () => {
+  secondRender.value = false;
+
+  setTimeout(() => {
+    emit('close');
+  }, 100);
 };
 
-const unlockBodyScroll = () => {
-  document.body.style.overflow = 'auto';
-};
+onClickOutside(target, closeModal);
 
 watch(
   () => props.modelValue,
   (value) => {
-    if (value) return lockBodyScroll();
-    return unlockBodyScroll();
+    if (value) {
+      document.body.style.overflow = 'hidden';
+
+      return setTimeout(() => {
+        secondRender.value = true;
+      }, 100);
+    }
+
+    else {
+      document.body.style.overflow = 'auto';
+
+      secondRender.value = false;
+    }
   },
 );
+
+defineExpose({ closeModal });
 </script>
 
 <template>
@@ -43,14 +58,14 @@ watch(
         w:align="items-center"
         w:z="notify"
       >
-        <div
-          ref="target"
-          w:bg="gray-500"
-          w:p="x-lg y-lg"
-          w:rounded="md"
-        >
-          poxa
-        </div>
+        <Transition name="modal">
+          <div
+            v-if="secondRender"
+            ref="target"
+          >
+            <slot />
+          </div>
+        </Transition>
       </div>
     </Transition>
   </Teleport>
