@@ -10,6 +10,7 @@ import {
   faImages,
   faTags,
   faLongArrowAltRight,
+  faFolder,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function() {
@@ -23,5 +24,6 @@ export default function() {
     faImages,
     faTags,
     faLongArrowAltRight,
+    faFolder,
   ]);
 }
