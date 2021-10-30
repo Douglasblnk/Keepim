@@ -18,7 +18,7 @@ defineProps({
   },
 });
 
-defineEmits(['see-all, open-image']);
+defineEmits(['see-all']);
 
 onMounted(async() => {
   await useSwiper(
