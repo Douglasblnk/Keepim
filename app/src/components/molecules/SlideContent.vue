@@ -18,6 +18,8 @@ defineProps({
   },
 });
 
+defineEmits(['see-all, open-image']);
+
 onMounted(async() => {
   await useSwiper(
     '.swiper',
@@ -33,19 +35,21 @@ onMounted(async() => {
 </script>
 
 <template>
-  <div
-    w:flex="~ col"
-  >
+  <div w:flex="~ col">
     <div
       w:flex="~"
       w:justify="between"
     >
-      <p>{{ title }}</p>
+      <p w:text="medium">
+        {{ title }}
+      </p>
 
       <div
         v-if="showAction"
         w:flex="~"
         w:align="items-center"
+        w:cursor="pointer"
+        @click="$emit('see-all')"
       >
         <p w:text="small gray-400">
           Ver todas
@@ -64,19 +68,14 @@ onMounted(async() => {
         class="swiper slide-content"
         w:flex="~"
       >
-        <div
-          class="swiper-wrapper"
-        >
+        <div class="swiper-wrapper">
           <div
             v-for="(item, index) in items"
             :key="`slide-content-${index}`"
             class="swiper-slide"
             w:w="!auto"
           >
-            <Img
-              w:w="200px"
-              :url="item.url"
-            />
+            <slot v-bind="item" />
           </div>
         </div>
       </div>
