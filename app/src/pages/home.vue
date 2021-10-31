@@ -35,7 +35,7 @@ console.log('modalRef :>> ', modalRef);
 const isComponent = computed(() => modalComponent.value);
 
 const lastImages = [
-  { url: 'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg' },
+  { url: 'https://previews.123rf.com/images/captblack76/captblack761210/captblack76121000063/15975743-vertical-view-of-eiffel-tower-and-cityscape-paris-france.jpg' },
   { url: 'https://marketingcomcafe.com.br/wp-content/uploads/2017/12/banco-imagens-gratis.png' },
   { url: 'https://s1.static.brasilescola.uol.com.br/be/conteudo/images/imagem-em-lente-convexa.jpg' },
   { url: 'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg' },
