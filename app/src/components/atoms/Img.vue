@@ -16,6 +16,11 @@ defineProps({
     type: [String, Number],
     default: 16 / 9,
   },
+
+  objectFit: {
+    type: String,
+    default: 'cover',
+  },
 });
 </script>
 
@@ -23,6 +28,7 @@ defineProps({
   <div
     w:pos="relative"
     w:w="full"
+    w:h="full"
     w:display="inline-block"
     w:text="middle"
     w:overflow="hidden"
@@ -36,7 +42,6 @@ defineProps({
 
     <div w:pos="absolute top-0 left-0 right-0 bottom-0">
       <img
-        w:object="cover [50%, 50%]"
         w:w="full"
         w:h="full"
         w:border="none"
@@ -44,7 +49,7 @@ defineProps({
         :w:opacity="clickable ? 'active:50 md:hover:50' : ''"
         :w:cursor="clickable ? 'pointer' : ''"
         :src="url"
-        :style="style"
+        :style="{ objectFit: objectFit, ...style }"
         :alt="alt"
       >
     </div>

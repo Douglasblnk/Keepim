@@ -18,8 +18,8 @@ defineEmits(['close']);
   <div
     w:flex="~ col"
     w:justify="between"
-    w:h="60vh"
-    w:w="90vw"
+    w:h="90vh"
+    w:w="90vw md:50vw"
   >
     <div
       w:flex="~ 1"
@@ -28,11 +28,13 @@ defineEmits(['close']);
     >
       <Img
         :url="url"
+        object-fit="contain"
       />
     </div>
 
     <div
       w:flex="~ 2"
+      w:p="t-lg"
       w:justify="center"
     >
       <Button
