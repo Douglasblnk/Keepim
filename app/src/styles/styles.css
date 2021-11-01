@@ -16,7 +16,6 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  touch-action: none;
 }
 
 span, p, strong, small, h1, h2, h3, h4, h5 {
@@ -27,6 +26,7 @@ body {
   width: 100%;
   min-width: 320px;
   min-height: 100vh;
+  
   @apply bg-background;
 }
 
@@ -37,4 +37,21 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  @apply rounded-full w-1;
+}
+
+::-webkit-scrollbar-track {
+  @apply rounded-full bg-gray-500;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-gray-400;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-opacity-70;
 }
