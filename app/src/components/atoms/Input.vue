@@ -17,11 +17,22 @@ const props = defineProps({
     default: '',
   },
 
+  label: {
+    type: String,
+    default: '',
+  },
+
+  labelColor: {
+    type: String,
+    default: 'white',
+  },
+
   errorMsg: {
     type: String,
     default: '',
   },
 
+  light: Boolean,
   error: Boolean,
 });
 
@@ -33,13 +44,20 @@ const model = computed({
 
 <template>
   <div w:flex="~ col">
+    <p
+      w:m="b-xs"
+      :style="{ color: labelColor }"
+    >
+      {{ label }}
+    </p>
+
     <input
       v-model="model"
       w:rounded="full"
       w:flex="~"
       w:outline="none"
       w:text="white"
-      w:bg="ascendent"
+      :w:bg="light ? 'gray-500' : 'ascendent'"
       w:w="full"
       w:p="y-3 x-5"
       :w:border="error ? '1 solid danger' : 'none'"
