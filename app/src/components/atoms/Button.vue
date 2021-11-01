@@ -26,6 +26,8 @@ const props = defineProps({
   disabled: Boolean,
   loading: Boolean,
   circle: Boolean,
+  flat: Boolean,
+  unelevated: Boolean,
 });
 
 const customClasses = computed(() => ({
@@ -35,6 +37,8 @@ const customClasses = computed(() => ({
   'p-button--disabled': props.disabled,
   'p-button--loading': props.loading,
   'p-button--circle': props.circle,
+  'p-button--flat': props.flat,
+  'p-button--unelevated': props.unelevated,
 }));
 
 </script>
@@ -67,6 +71,7 @@ const customClasses = computed(() => ({
     <span
       w:text="white"
       w:font="semibold tracking-wide"
+      w:select="none"
     >
       {{ label }}
     </span>
@@ -117,6 +122,16 @@ const customClasses = computed(() => ({
     @apply
       h-12
       w-12;
+  }
+
+  &--flat {
+    @apply
+      rounded-md;
+  }
+
+  &--unelevated {
+    @apply
+      !shadow-none;
   }
 }
 </style>
