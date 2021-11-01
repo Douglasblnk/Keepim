@@ -51,7 +51,10 @@ onMounted(async() => {
         w:cursor="pointer"
         @click="$emit('see-all')"
       >
-        <p w:text="small gray-400">
+        <p
+          w:text="small gray-400"
+          w:select="none"
+        >
           Ver todas
         </p>
 
