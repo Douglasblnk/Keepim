@@ -12,6 +12,12 @@ export const getBody = (event, defaultValue = null) => {
   return event.body;
 };
 
+export const getHeaders = (event, defaultValue = null) => {
+  if (!isObject(event || event.headers)) return defaultValue;
+  if (typeof event.headers === 'string') return JSON.parse(event.headers);
+  return event.headers;
+};
+
 export const lambdaResp = (statusCode, body, headers = {}) => ({ statusCode, ...(body ? { body: objToStr(body) } : ''), headers });
 
 export const lambdaRespErr = ({
