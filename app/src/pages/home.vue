@@ -26,12 +26,6 @@ const closeModal = () => {
   showModal.value = false;
 };
 
-const poxa = () => {
-  console.log(modalRef.value);
-};
-
-console.log('modalRef :>> ', modalRef);
-
 const isComponent = computed(() => modalComponent.value);
 
 const lastImages = [
@@ -109,7 +103,7 @@ const lastFolders = [
       </SlideContent>
 
       <SlideContent
-        title="Ultimas imagens"
+        title="Ultimas pastas"
         w:m="b-xl"
         :items="lastFolders"
       >

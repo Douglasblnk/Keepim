@@ -56,7 +56,7 @@ defineExpose({ closeModal });
         w:flex="~"
         w:justify="center"
         w:align="items-center"
-        w:z="notify"
+        w:z="fullscreen"
       >
         <Transition name="modal">
           <div

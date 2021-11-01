@@ -56,6 +56,7 @@ const config = defineConfig({
       px: '1px',
       0: '0px',
       none: '0px',
+      xs: '4px',
       sm: '8px',
       md: '16px',
       lg: '24px',
