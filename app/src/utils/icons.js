@@ -12,6 +12,7 @@ import {
   faLongArrowAltRight,
   faFolder,
   faTimes,
+  faCloudUploadAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function() {
@@ -27,5 +28,6 @@ export default function() {
     faLongArrowAltRight,
     faFolder,
     faTimes,
+    faCloudUploadAlt,
   ]);
 }
