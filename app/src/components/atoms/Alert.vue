@@ -28,7 +28,8 @@ defineProps({
         w:w="full"
         w:flex="~"
         w:justify="center"
-        w:pos="absolute top-lg"
+        w:pos="fixed top-lg"
+        w:z="notify"
       >
         <div
           :class="`bg-${type}`"
