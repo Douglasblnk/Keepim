@@ -8,6 +8,14 @@ provider:
   region: sa-east-1
 
 functions:
+  test:
+    handler: src/routes/test/test.run
+    memorySize: 128
+    events:
+      - http:
+          path: /
+          method: GET
+
   authLogin:
     handler: src/routes/auth/login.run
     memorySize: 128
@@ -32,9 +40,18 @@ functions:
           path: /validate-token
           method: POST
 
+  createFolder:
+    handler: src/routes/folder/create.run
+    memorySize: 128
+    events:
+      - http:
+          path: /folder
+          method: POST
+
 custom:
   serverless-offline:
     httpPort: 4000
+    host: 192.168.10.22
     websocketPort: 4001
     lambdaPort: 4002
 
