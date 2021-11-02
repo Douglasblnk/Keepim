@@ -12,7 +12,7 @@ function getParameters(event) {
   return body;
 }
 
-export async function run(event) {
+export async function handler(event) {
   try {
     const params = getParameters(event);
 
@@ -24,4 +24,4 @@ export async function run(event) {
   }
 }
 
-export default run;
+export default handler;

@@ -17,7 +17,7 @@ function getParameters(event) {
   return { body, headers };
 }
 
-export async function run(event) {
+export async function handler(event) {
   try {
     const params = getParameters(event);
     console.log('params :>> ', params);
@@ -25,10 +25,10 @@ export async function run(event) {
 
     return lambdaResp(200, { msg: 'ok' });
   } catch (error) {
-    console.log('err run post folder:>> ', error);
+    console.log('err handler post folder:>> ', error);
 
     return lambdaRespErr(error);
   }
 }
 
-export default run;
+export default handler;

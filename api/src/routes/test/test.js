@@ -1,7 +1,7 @@
 import { lambdaResp } from '@/utils/utils';
 
-export async function run() {
+export async function handler() {
   return lambdaResp(200, { msg: 'OK' });
 }
 
-export default run;
+export default handler;

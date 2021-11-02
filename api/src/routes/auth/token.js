@@ -12,10 +12,11 @@ function getParameters(event) {
   return body;
 }
 
-export async function run(event) {
+export async function handler(event) {
+  console.log('event :>> ', event);
   try {
     const params = getParameters(event);
-
+    console.log('params TOKENNNNNNN :>> ', params);
     const response = await validateToken(params);
 
     return lambdaResp(200, response);
@@ -26,4 +27,4 @@ export async function run(event) {
   }
 }
 
-export default run;
+export default handler;

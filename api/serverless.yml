@@ -9,7 +9,7 @@ provider:
 
 functions:
   test:
-    handler: src/routes/test/test.run
+    handler: src/routes/test/test.handler
     memorySize: 128
     events:
       - http:
@@ -17,7 +17,7 @@ functions:
           method: GET
 
   authLogin:
-    handler: src/routes/auth/login.run
+    handler: src/routes/auth/login.handler
     memorySize: 128
     events:
       - http:
@@ -25,7 +25,7 @@ functions:
           method: POST
 
   registerUser:
-    handler: src/routes/user/post.run
+    handler: src/routes/user/post.handler
     memorySize: 128
     events:
       - http:
@@ -33,7 +33,7 @@ functions:
           method: POST
 
   validateToken:
-    handler: src/routes/auth/token.run
+    handler: src/routes/auth/token.handler
     memorySize: 128
     events:
       - http:
