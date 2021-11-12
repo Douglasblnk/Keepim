@@ -2,11 +2,27 @@ Resources:
   UserTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: Auth.User
+      TableName: User
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
       KeySchema:
         - AttributeName: id
           KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  FolderTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Folder
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: folderId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: folderId
+          KeyType: RANGE
       BillingMode: PAY_PER_REQUEST
