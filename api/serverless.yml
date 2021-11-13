@@ -51,6 +51,17 @@ functions:
           path: /folder
           method: POST
 
+  getFolder:
+    handler:
+      - src/middleware/authorization.handler
+      - then: src/routes/folder/get.handler
+      - catch: src/utils/handlerError.handler
+    memorySize: 128
+    events:
+      - http:
+          path: /folder
+          method: GET
+
 custom:
   serverless-offline:
     httpPort: 4000
