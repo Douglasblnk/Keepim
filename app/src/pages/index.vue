@@ -27,7 +27,7 @@ const makeLogin = async() => {
   const { data, error } = await useAxios('auth')
     .post({
       data: {
-        id: user.value,
+        id: user.value.toLowerCase(),
         password: password.value,
       },
     });
