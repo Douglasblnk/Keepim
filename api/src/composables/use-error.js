@@ -17,8 +17,14 @@ export default function useError() {
     error,
   });
 
+  const badRequestError = (error) => ({
+    status: httpStatus.BAD_REQUEST,
+    error,
+  });
+
   return {
     notFoundError,
     unauthorizedError,
+    badRequestError,
   };
 }
