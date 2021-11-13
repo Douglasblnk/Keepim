@@ -21,7 +21,7 @@ export default function userModel(user) {
 
     await db.put(params).promise();
 
-    return { status: 201, msg: 'User created' };
+    return { status: 200, msg: 'User created' };
   };
 
   const queryUser = async () => {
