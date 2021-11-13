@@ -1,11 +1,13 @@
-import Axios from 'axios';
 import { computed } from 'vue';
+import Axios from 'axios';
+
+import { handleAuthorizationError } from '@/utils';
 
 export default function() {
   const baseUrl = computed(() => {
     const { MODE, VITE_BASE_API_URL } = import.meta.env;
 
-    if (MODE === 'development') return 'http://192.168.10.22:4000/dev';
+    if (MODE === 'development') return 'http://localhost:4000/dev';
     return VITE_BASE_API_URL;
   });
 
@@ -16,7 +18,7 @@ export default function() {
 
     const { data, status } = response;
 
-    if (data && status !== 200) return { data, status };
+    if (status !== 200) return { data, status };
   };
 
   const request = async(args) => {
@@ -33,7 +35,9 @@ export default function() {
       axiosResponse.data = response.data;
     }
     catch (error) {
-      axiosResponse.error = handleError(error);
+      axiosResponse.error = handleAuthorizationError(
+        handleError(error),
+      );
     }
 
     return { ...axiosResponse };
