@@ -42,8 +42,8 @@ functions:
 
   createFolder:
     handler:
-      - src/routes/auth/token.handler
-      - then: src/routes/folder/create.handler
+      - src/middleware/authorization.handler
+      - then: src/routes/folder/post.handler
       - catch: src/utils/handlerError.handler
     memorySize: 128
     events:
@@ -52,12 +52,8 @@ functions:
           method: POST
 
 custom:
-  middleware:
-    folderName: .middleware
-
   serverless-offline:
     httpPort: 4000
-    host: 192.168.10.22
     websocketPort: 4001
     lambdaPort: 4002
 
