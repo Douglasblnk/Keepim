@@ -5,7 +5,7 @@ import {
   isObjectEmpty,
 } from '@/utils/utils';
 
-import registerUser from '@/lib/services/user/register-user';
+import registerUser from '@/services/user/register-user';
 
 function getParameters(event) {
   const body = getBody(event);
@@ -22,7 +22,7 @@ export async function handler(event) {
     const response = await registerUser(params);
 
     return lambdaResp(200, response);
-  } catch (error) {
+  } catch ({ status, error }) {
     console.log('err handler post user:>> ', error);
 
     return lambdaRespErr(error);
