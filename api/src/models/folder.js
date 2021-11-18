@@ -5,6 +5,18 @@ export default function folderModel(folder) {
   const { doc } = dynamodbFactory();
   const db = doc();
 
+  const getKeyConditionExpression = () => (
+    folder.folderId
+      ? 'userId = :userId AND folderId = :folderId'
+      : 'userId = :userId'
+  );
+
+  const getExpressionAttributesValues = () => (
+    folder.folderId
+      ? { ':userId': folder.userId, ':folderId': folder.folderId }
+      : { ':userId': folder.userId }
+  );
+
   const putFolder = async () => {
     const params = {
       TableName: tables.FOLDER,
@@ -26,11 +38,9 @@ export default function folderModel(folder) {
   const queryFolder = async () => {
     const params = {
       TableName: tables.FOLDER,
-      KeyConditionExpression: 'userId = :userId AND folderId = :folderId',
-      ExpressionAttributeValues: {
-        ':userId': folder.userId,
-        ':folderId': folder.folderId,
-      },
+      KeyConditionExpression: getKeyConditionExpression(),
+      ExpressionAttributeValues: getExpressionAttributesValues(),
+      ...(folder.limit ? { Limit: folder.limit } : {}),
     };
 
     const { Items } = await db.query(params).promise();
