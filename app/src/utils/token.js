@@ -1,4 +1,3 @@
-import { useRoute } from 'vue-router';
 import useRequest from '@/composables/use-request';
 import { removeAccess } from '@/routes/index';
 
@@ -14,8 +13,8 @@ export function removeToken() {
   localStorage.removeItem('token');
 }
 
-export async function validateToken(currentRoute) {
-  const { name } = currentRoute.value;
+export async function validateToken(router) {
+  const { name } = router.value;
 
   if (name === 'index') return;
 

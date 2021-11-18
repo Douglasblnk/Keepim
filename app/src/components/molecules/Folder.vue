@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  title: {
+  name: {
     type: String,
     default: '',
   },
@@ -38,7 +38,7 @@ const reducedImgs = computed(() => {
       w:justify="between"
     >
       <div w:flex="~ col">
-        <p>{{ title }}</p>
+        <p>{{ name }}</p>
         <small w:text="gray-400">{{ date }}</small>
       </div>
 

@@ -1,5 +1,7 @@
-import Axios from 'axios';
 import { computed } from 'vue';
+import Axios from 'axios';
+
+import { handleAuthorizationError } from '@/utils';
 
 export default function() {
   const baseUrl = computed(() => {
@@ -16,7 +18,7 @@ export default function() {
 
     const { data, status } = response;
 
-    if (data && status !== 200) return { data, status };
+    if (status !== 200) return { data, status };
   };
 
   const request = async(args) => {
@@ -33,7 +35,9 @@ export default function() {
       axiosResponse.data = response.data;
     }
     catch (error) {
-      axiosResponse.error = handleError(error);
+      axiosResponse.error = handleAuthorizationError(
+        handleError(error),
+      );
     }
 
     return { ...axiosResponse };

@@ -8,8 +8,16 @@ provider:
   region: sa-east-1
 
 functions:
+  test:
+    handler: src/routes/test/test.handler
+    memorySize: 128
+    events:
+      - http:
+          path: /
+          method: GET
+
   authLogin:
-    handler: src/routes/auth/login.run
+    handler: src/routes/auth/login.handler
     memorySize: 128
     events:
       - http:
@@ -17,7 +25,7 @@ functions:
           method: POST
 
   registerUser:
-    handler: src/routes/user/post.run
+    handler: src/routes/user/post.handler
     memorySize: 128
     events:
       - http:
@@ -25,12 +33,34 @@ functions:
           method: POST
 
   validateToken:
-    handler: src/routes/auth/token.run
+    handler: src/routes/auth/token.handler
     memorySize: 128
     events:
       - http:
           path: /validate-token
           method: POST
+
+  createFolder:
+    handler:
+      - src/middleware/authorization.handler
+      - then: src/routes/folder/post.handler
+      - catch: src/utils/handlerError.handler
+    memorySize: 128
+    events:
+      - http:
+          path: /folder
+          method: POST
+
+  getFolder:
+    handler:
+      - src/middleware/authorization.handler
+      - then: src/routes/folder/get.handler
+      - catch: src/utils/handlerError.handler
+    memorySize: 128
+    events:
+      - http:
+          path: /folder
+          method: GET
 
 custom:
   serverless-offline:
@@ -53,6 +83,7 @@ custom:
       dir: offline/migrations
 
 plugins:
+  - serverless-middleware
   - serverless-webpack
   - serverless-offline
   - serverless-prune-plugin

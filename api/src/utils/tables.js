@@ -1,3 +1,4 @@
 export default {
-  USER: 'Auth.User',
+  USER: 'User',
+  FOLDER: 'Folder',
 };

@@ -1,5 +1,5 @@
 import useCryptography from '@/composables/use-cryptography';
-import userModel from '@/lib/models/user';
+import userModel from '@/models/user';
 
 async function register(user) {
   const { putUser } = userModel(user);

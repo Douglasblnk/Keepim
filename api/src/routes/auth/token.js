@@ -1,8 +1,10 @@
 import {
-  getBody, isObjectEmpty, lambdaResp,
+  getBody,
+  isObjectEmpty,
+  lambdaResp,
 } from '@/utils/utils';
 
-import validateToken from '@/lib/services/auth/validate-token';
+import validateToken from '@/services/auth/validate-token';
 
 function getParameters(event) {
   const body = getBody(event);
@@ -12,7 +14,7 @@ function getParameters(event) {
   return body;
 }
 
-export async function run(event) {
+export async function handler(event) {
   try {
     const params = getParameters(event);
 
@@ -20,10 +22,10 @@ export async function run(event) {
 
     return lambdaResp(200, response);
   } catch ({ status, error }) {
-    console.log('error validateToken :>> ', error);
+    console.log('error validateToken :>> ', status, error);
 
-    return lambdaResp(status, error);
+    return lambdaResp(status, error.name || error);
   }
 }
 
-export default run;
+export default handler;

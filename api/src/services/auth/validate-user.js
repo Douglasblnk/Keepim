@@ -1,4 +1,4 @@
-import userModel from '@/lib/models/user';
+import userModel from '@/models/user';
 import useCryptography from '@/composables/use-cryptography';
 import useAuthentication from '@/composables/use-authentication';
 import useError from '@/composables/use-error';

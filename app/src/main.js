@@ -16,10 +16,10 @@ const app = createApp(App);
 
 app.use(router);
 
-router.isReady().then(async() => {
-  await validateToken(router.currentRoute);
-
-  app
-    .component('FIcon', FontAwesomeIcon)
-    .mount('#app');
+router.isReady().then(() => {
+  validateToken(router.currentRoute).then(() => {
+    app
+      .component('FIcon', FontAwesomeIcon)
+      .mount('#app');
+  });
 });

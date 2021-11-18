@@ -16,7 +16,7 @@ const addImages = (imgs) => {
   images.value = [...imgs];
 };
 
-const cancel = () => {
+const closeModal = () => {
   images.value = [];
 
   emit('close');
@@ -31,15 +31,29 @@ const validateSubmission = () => {
 const createFolder = async() => {
   const payload = {
     data: {
-      folderName: folderName.value,
-      folderDate: folderDate.value,
+      name: folderName.value,
+      date: folderDate.value,
     },
     headers: {
       token: `Bearer ${getToken()}`,
     },
   };
 
-  useAxios('folder').post(payload);
+  const { data, error } = await useAxios('folder').post(payload);
+
+  if (error && error.status !== 200) {
+    return setAlert({
+      type: 'negative',
+      text: error.data,
+    });
+  }
+
+  setAlert({
+    type: 'positive',
+    text: data.msg,
+  });
+
+  closeModal();
 };
 
 const confirm = async() => {
@@ -54,8 +68,6 @@ const confirm = async() => {
   }
 
   await createFolder();
-
-  cancel();
 };
 
 </script>
@@ -129,7 +141,7 @@ const confirm = async() => {
         w:m="x-xs"
         flat
         unelevated
-        @click="cancel"
+        @click="closeModal"
       />
 
       <Button
