@@ -1,0 +1,19 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "errno": 2,
+    "code": "ELIFECYCLE",
+    "pkgid": "@douglasblnk/photokeep@0.0.1",
+    "stage": "api",
+    "script": "cd api && make dev",
+    "pkgname": "@douglasblnk/photokeep",
+    "err": {
+      "name": "pnpm",
+      "message": "@douglasblnk/photokeep@0.0.1 api: `cd api && make dev`\nExit status 2",
+      "code": "ELIFECYCLE",
+      "stack": "pnpm: @douglasblnk/photokeep@0.0.1 api: `cd api && make dev`\nExit status 2\n    at EventEmitter.<anonymous> (/home/douglas/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:105664:20)\n    at EventEmitter.emit (node:events:520:28)\n    at ChildProcess.<anonymous> (/home/douglas/.nvm/versions/node/v16.14.0/lib/node_modules/pnpm/dist/pnpm.cjs:92211:18)\n    at ChildProcess.emit (node:events:520:28)\n    at maybeClose (node:internal/child_process:1092:16)\n    at Process.ChildProcess._handle.onexit (node:internal/child_process:302:5)"
+    }
+  }
+}
