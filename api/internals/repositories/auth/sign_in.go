@@ -4,6 +4,6 @@ import (
 	"photokeep-api/api/rest/schemas"
 )
 
-func SignIn(data *schemas.Login) {
+func SignIn(data *schemas.Login) error {
 	
 }

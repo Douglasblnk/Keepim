@@ -4,6 +4,7 @@ import (
 	"log"
 	"photokeep-api/api/rest"
 	"photokeep-api/internals/configs"
+	"photokeep-api/internals/database"
 )
 
 func init() {
