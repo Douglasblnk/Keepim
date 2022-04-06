@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"photokeep-api/api/rest/schemas"
 	rutils "photokeep-api/api/rest/utils"
-	authRepository "photokeep-api/internals/repositories/auth"
+	authServices "photokeep-api/internals/services/auth"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,5 +16,5 @@ func HandleAuth(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, err.Error())
 	}
 
-	authRepository.SignIn(body)
+	authServices.SignIn(body)
 }
