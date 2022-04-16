@@ -3,9 +3,9 @@ package routes
 import (
 	"photokeep-api/api/rest/handlers"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
-func AuthRoutes(rg *gin.RouterGroup) {
-	rg.POST("/login", handlers.HandleAuth)
+func AuthRoutes(app *fiber.App) {
+	app.Get("/sign-in", handlers.SignInHandler)
 }

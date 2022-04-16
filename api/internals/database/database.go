@@ -11,7 +11,9 @@ import (
 var DBClient *mongo.Client
 
 func InitDB() (err error) {
-	DBClient, err = mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017/"))
+	DBClient, err = mongo.NewClient(
+		options.Client().ApplyURI("mongodb://localhost:27017/"),
+	)
 
 	if err != nil {
 		return err

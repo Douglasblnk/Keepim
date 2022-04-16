@@ -1,15 +1,21 @@
 package rest
 
 import (
+	"fmt"
+	"log"
 	"photokeep-api/api/rest/routes"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
 func InitServer() {
-	app := gin.Default()
-	
-	routes.AuthRoutes(app.Group("auth"))
+	app := fiber.New()
 
-	app.Run(":3000")
+	routes.SetUpRoutes(app)
+
+	if err := app.Listen(":3000"); err != nil {
+			log.Fatal(err)
+	}
+
+	fmt.Println("Listening in port 3000")
 }
