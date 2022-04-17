@@ -10,6 +10,12 @@ import (
 
 var DBClient *mongo.Client
 
+func GetContext() context.Context {
+	ctx, _ := context.WithTimeout(context.Background(), 30 * time.Second)
+
+	return ctx
+}
+
 func InitDB() (err error) {
 	DBClient, err = mongo.NewClient(
 		options.Client().ApplyURI("mongodb://localhost:27017/"),
@@ -19,17 +25,11 @@ func InitDB() (err error) {
 		return err
 	}
 
-	return nil
-}
-
-func Connect() (*mongo.Client, error) {
-	ctx, _ := context.WithTimeout(context.Background(), 30 * time.Second)
-
-	err := DBClient.Connect(ctx)
+	err = DBClient.Connect(GetContext())
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return DBClient, nil
+	return nil
 }

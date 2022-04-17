@@ -7,5 +7,5 @@ import (
 )
 
 func AuthRoutes(app *fiber.App) {
-	app.Get("/sign-in", handlers.SignInHandler)
+	app.Post("/sign-in", handlers.SignInHandler)
 }

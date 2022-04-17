@@ -1,6 +1,6 @@
 package schemas
 
 type Login struct {
-	Name string
-	Password string
+	Username string `json:"username" validate:"required"`
+	Password string `json:"password" validate:"required"`
 }

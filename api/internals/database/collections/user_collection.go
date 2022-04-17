@@ -1,7 +1,11 @@
-package database
+package collections
 
-import "photokeep-api/internals/database"
+import (
+	"photokeep-api/internals/database"
 
-func UserCollection() {
-	database.Connect()
+	"go.mongodb.org/mongo-driver/mongo"
+)
+
+func UserCollection() *mongo.Collection {
+	return database.DBClient.Database("photokeep").Collection("user")
 }
