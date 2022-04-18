@@ -1,17 +1,17 @@
-package rutils
+package utils
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
-func GetBody[T any](ctx *gin.Context) (*T, error) {
-	var body *T
+func GetBody[T any](model T, c *fiber.Ctx) []*ErrorResponse {
+	c.BodyParser(model)
 
-	err := ctx.BindJSON(&body)
+	err := ValidateStruct(model)
 
 	if err != nil {
-		return nil, err
+			return err
 	}
 
-	return body, nil
+	return nil
 }
