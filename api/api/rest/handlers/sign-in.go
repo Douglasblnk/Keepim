@@ -15,11 +15,11 @@ func SignInHandler(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(err)
 	}
 
-	err := authService.SignIn(loginSchema)
+	response, err := authService.SignIn(loginSchema)
 	
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(err)
   }
 
-  return c.Status(fiber.StatusCreated).SendString("OK")
+  return c.Status(fiber.StatusCreated).JSON(response)
 }

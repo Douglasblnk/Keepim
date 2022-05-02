@@ -1,13 +1,13 @@
 package authService
 
 import (
+	"photokeep-api/internals/dto"
 	"photokeep-api/internals/exceptions"
-	"photokeep-api/internals/models"
 	userRepository "photokeep-api/internals/repositories/user"
 	securityUtils "photokeep-api/internals/utils/security"
 )
 
-func ValidateUser(username string, password string) (*models.User, error) {
+func ValidateUser(username string, password string) (*dto.UserDTO, error) {
 	user, err := userRepository.FindUserByUsername(username)
 
 	if err != nil {
@@ -20,5 +20,10 @@ func ValidateUser(username string, password string) (*models.User, error) {
 		return nil, exceptions.ErrAuthorizationFailed
 	}
 
-	return user, nil
+	userDTO := &dto.UserDTO{
+		Name: user.Name,
+		Username: user.Username,
+	}
+	
+	return userDTO, nil
 }

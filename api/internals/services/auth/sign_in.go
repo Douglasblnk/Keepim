@@ -1,18 +1,34 @@
 package authService
 
 import (
-	"fmt"
 	"photokeep-api/api/rest/schemas"
+	"photokeep-api/internals/dto"
 )
 
-func SignIn(data *schemas.Login) error {
+func SignIn(data *schemas.Login) (*dto.SignInResponseDTO, error) {
 	user, err := ValidateUser(data.Username, data.Password)
 	
 	if err != nil {
-		fmt.Println("err", err)
-		return err
+		return nil, err
 	}
-	fmt.Println("user", user)
+	
+	session, err := CreateSession(user.Username)
 
-	return nil
+	if err != nil {
+		return nil, err
+	}
+	
+	accessToken, err := CreateAccessToken(session.RefreshToken)
+	
+	if err != nil {
+		return nil, err
+	}
+	
+	response := &dto.SignInResponseDTO{
+		AccessToken:  accessToken,
+		RefreshToken: session.RefreshToken,
+		User:         user,
+	}
+	
+	return response, nil
 }
