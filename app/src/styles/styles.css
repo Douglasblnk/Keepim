@@ -26,6 +26,9 @@ body {
   width: 100%;
   min-width: 320px;
   min-height: 100vh;
+  margin: 0 !important;
+  padding: 0;
+  background: var(--color-primary);
 }
 
 button {

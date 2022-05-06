@@ -1,9 +1,7 @@
 import { extractorSplit } from '@unocss/core'
 import { autocompleteExtractorAttributify } from '@unocss/preset-attributify'
+import { colors } from './rules/colors'
 
-// import { colors } from './rules'
-import { extractorAttributify } from './extractors'
-import shortcuts from './shortcuts'
 import theme from './theme'
 
 const preset = (options = {}) => {
@@ -21,6 +19,10 @@ const preset = (options = {}) => {
     autocompleteExtractorAttributify,
   ]
 
+  const rules = [
+    ...colors,
+  ]
+
   return {
     name: 'preset-multiplier-core',
     layers: {
@@ -29,8 +31,6 @@ const preset = (options = {}) => {
     theme,
     rules,
     extractors,
-    shortcuts,
-    variants,
     options,
     autocomplete: {
       extractors: autocompleteExtractors,

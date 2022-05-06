@@ -1,29 +1,31 @@
-import useRequest from '@/composables/use-request';
-import { removeAccess } from '@/routes/index';
+import useRequest from '@/composables/use-request'
+import { removeAccess } from '@/routes/index'
 
 export function getToken() {
-  return localStorage.getItem('token');
+  return localStorage.getItem('token')
 }
 
 export function setToken(token) {
-  localStorage.setItem('token', token);
+  localStorage.setItem('token', token)
 }
 
 export function removeToken() {
-  localStorage.removeItem('token');
+  localStorage.removeItem('token')
 }
 
 export async function validateToken(router) {
-  const { name } = router.value;
+  const { name } = router.value
 
-  if (name === 'index') return;
+  if (name === 'index')
+    return
 
-  const { useAxios } = useRequest();
+  const { useAxios } = useRequest()
 
   const { data, error } = await useAxios('validate-token')
     .post({
-      data: { token: `Bearer ${getToken()}` },
-    });
+      data: { token: `Bearer ${ getToken() }` },
+    })
 
-  if (!data && error) removeAccess();
+  if (!data && error)
+    removeAccess()
 }

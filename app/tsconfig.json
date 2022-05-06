@@ -16,8 +16,8 @@
     "allowJs": true,
     "types": [],
     "paths": {
-      "@/*": ["./*"],
-      "~/*": ["./src/*"],
+      "@/*": ["./src/*"],
+      "@composables/*": ["./src/composables/*"],
     },
   },
   "exclude": [

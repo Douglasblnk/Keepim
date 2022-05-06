@@ -1,20 +1,22 @@
-import { resolve } from 'path';
-import vue from '@vitejs/plugin-vue';
-import Components from 'unplugin-vue-components/vite';
-import AutoImport from 'unplugin-auto-import/vite';
-import Pages from 'vite-plugin-pages';
-import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
-import Unocss from 'unocss/vite';
+import { resolve } from 'path'
+import vue from '@vitejs/plugin-vue'
+import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Pages from 'vite-plugin-pages'
+import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
+import Unocss from 'unocss/vite'
 import presetWind from '@unocss/preset-wind'
 import presetAttributify from '@unocss/preset-attributify'
-
+import transformerDirective from '@unocss/transformer-directives'
+import presetMini from '@unocss/preset-mini'
+import presetCore from './src/unocss/index'
 
 export default defineConfig({
   resolve: {
     alias: {
-      '@': [resolve(__dirname, './src')],
-      '@composables': [resolve(__dirname, './src/composables')],
+      '@': [ resolve(__dirname, './src') ],
+      '@composables': [ resolve(__dirname, './src/composables') ],
     },
   },
   optimizeDeps: {
@@ -31,14 +33,15 @@ export default defineConfig({
 
     Pages({
       extendRoute(route) {
-        const { path } = route;
+        const { path } = route
 
-        if (path === '/') return route;
+        if (path === '/')
+          return route
 
         return {
           ...route,
           meta: { auth: true },
-        };
+        }
       },
     }),
 
@@ -46,7 +49,7 @@ export default defineConfig({
       include: [
         /\.vue\??/, // .vue
       ],
-      
+
       imports: [
         'vue',
         'vue-router',
@@ -71,11 +74,16 @@ export default defineConfig({
 
     Unocss({
       presets: [
+        presetMini(),
         presetWind(),
+        presetCore(),
         presetAttributify({
 
         }),
-      ]
-    })
+      ],
+      transformers: [
+        transformerDirective(),
+      ],
+    }),
   ],
-});
+})

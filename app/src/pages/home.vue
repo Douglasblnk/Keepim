@@ -1,61 +1,61 @@
 <script setup>
-import useAlert from '@composables/use-alert';
-import useRequest from '@/composables/use-request';
-import { getToken } from '@/utils/token';
+import useAlert from '@composables/use-alert'
+import useRequest from '@/composables/use-request'
+import { getToken } from '@/utils/token'
 
-const { useAxios } = useRequest();
-const { setAlert } = useAlert();
+const { useAxios } = useRequest()
+const { setAlert } = useAlert()
 
-const showModal = ref(false);
-const modalComponent = shallowRef(null);
-const modalProps = ref(null);
-const modalRef = ref(null);
-const lastFolders = ref([]);
+const showModal = ref(false)
+const modalComponent = shallowRef(null)
+const modalProps = ref(null)
+const modalRef = ref(null)
+const lastFolders = ref([])
 
-const isComponent = computed(() => modalComponent.value);
+const isComponent = computed(() => modalComponent.value)
 
 const executeAction = (component) => {
   modalComponent.value = defineAsyncComponent(
-    () => import(`../components/organisms/${component}.vue`),
-  );
+    () => import(`../components/organisms/${ component }.vue`),
+  )
 
-  showModal.value = true;
-};
+  showModal.value = true
+}
 
 const openImage = (item) => {
   modalComponent.value = defineAsyncComponent(
     () => import('../components/molecules/ImgModal.vue'),
-  );
+  )
 
-  modalProps.value = item;
-  showModal.value = true;
-};
+  modalProps.value = item
+  showModal.value = true
+}
 
 const closeModal = () => {
-  modalProps.value = null;
-  showModal.value = false;
-};
+  modalProps.value = null
+  showModal.value = false
+}
 
-const getLastFolders = async() => {
+const getLastFolders = async () => {
   const { data, error } = await useAxios('folder')
     .get({
       headers: {
         limit: 4,
-        token: `Bearer ${getToken()}`,
+        token: `Bearer ${ getToken() }`,
       },
-    });
+    })
 
   if (error && error.status !== 200) {
     return setAlert({
       type: 'negative',
       text: error.data,
-    });
+    })
   }
 
-  lastFolders.value = data;
-};
+  lastFolders.value = data
+}
 
-getLastFolders();
+getLastFolders()
 
 const lastImages = [
   { url: 'https://previews.123rf.com/images/captblack76/captblack761210/captblack76121000063/15975743-vertical-view-of-eiffel-tower-and-cityscape-paris-france.jpg' },
@@ -67,7 +67,7 @@ const lastImages = [
   { url: 'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg' },
   { url: 'https://marketingcomcafe.com.br/wp-content/uploads/2017/12/banco-imagens-gratis.png' },
   { url: 'https://s1.static.brasilescola.uol.com.br/be/conteudo/images/imagem-em-lente-convexa.jpg' },
-];
+]
 </script>
 
 <template>

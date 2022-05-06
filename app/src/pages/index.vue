@@ -1,28 +1,29 @@
 <script setup>
-import { useRouter } from 'vue-router';
-import useRequest from '@composables/use-request';
-import useAlert from '@composables/use-alert';
-import { setToken } from '@/utils/token';
+import { useRouter } from 'vue-router'
+import useRequest from '@composables/use-request'
+import useAlert from '@composables/use-alert'
+import { setToken } from '@/utils/token'
 
-const password = ref();
-const user = ref();
-const loading = ref(false);
+const password = ref()
+const user = ref()
+const loading = ref(false)
 
-const { useAxios } = useRequest();
-const { setAlert } = useAlert();
-const { replace } = useRouter();
+const { useAxios } = useRequest()
+const { setAlert } = useAlert()
+const { replace } = useRouter()
 
 const setErrorState = (error) => {
   setAlert({
     type: 'negative',
     text: error,
-  });
-};
+  })
+}
 
-const makeLogin = async() => {
-  if (!password.value) return setErrorState('Por favor, digite suas credenciais.');
+const makeLogin = async () => {
+  if (!password.value)
+    return setErrorState('Por favor, digite suas credenciais.')
 
-  loading.value = true;
+  loading.value = true
 
   const { data, error } = await useAxios('auth')
     .post({
@@ -30,22 +31,23 @@ const makeLogin = async() => {
         id: user.value.toLowerCase(),
         password: password.value,
       },
-    });
+    })
 
-  loading.value = false;
+  loading.value = false
 
-  if (!data && error) return setErrorState(error.data);
+  if (!data && error)
+    return setErrorState(error.data)
 
   setAlert({
     type: 'positive',
     text: 'Login efetuado com sucesso!',
     timeout: 1000,
-  });
+  })
 
-  setToken(data);
+  setToken(data)
 
-  setTimeout(() => replace('/home'), 1000);
-};
+  setTimeout(() => replace('/home'), 1000)
+}
 </script>
 
 <template>
@@ -83,11 +85,12 @@ const makeLogin = async() => {
 
     <div un-flex="1">
       <Button
-        un-p="!8"
+        un-p="md"
         icon="arrow-right"
         icon-size="lg"
         primary
         circle
+        label="poxa vida"
         :loading="loading"
         @click="makeLogin"
       />

@@ -28,7 +28,7 @@ const props = defineProps({
   circle: Boolean,
   flat: Boolean,
   unelevated: Boolean,
-});
+})
 
 const customClasses = computed(() => ({
   'p-button--primary': props.primary,
@@ -39,20 +39,30 @@ const customClasses = computed(() => ({
   'p-button--circle': props.circle,
   'p-button--flat': props.flat,
   'p-button--unelevated': props.unelevated,
-}));
-
+}))
 </script>
 
 <template>
   <button
     class="p-button"
+    un-rounded-full
+    un-flex
+    un-bg-gray-200
+    un-py-2
+    un-px-5
+    un-transition-shadow
+    un-shadow-2
+    un-items-center
+    un-justify-center
+    un-outline-none
+    un-active:shadow-8
     :class="customClasses"
     :disabled="disabled || loading"
     :type="type"
   >
     <div
-      class="p-button__icon"
       v-if="icon"
+      class="p-button__icon"
     >
       <FIcon
         v-if="!loading"
@@ -78,60 +88,34 @@ const customClasses = computed(() => ({
   </button>
 </template>
 
-<style lang="postcss">
-.p-button {
-  @apply
-    rounded-full
-    flex
-    bg-gray-200
-    py-2
-    px-5
-    transition-shadow
-    shadow-2
-    items-center
-    justify-center
-    !outline-none
-    active:shadow-8;
+<style lang="sass">
+.p-button
+  &__icon
+    color: white
 
-  &__icon {
-    @apply
-      text-white;
-  }
+  &--primary
+    background-color: var(--color-primary)
 
-  &--primary {
-    @apply
-      bg-primary;
-  }
+  &--secondary
+    background-color: var(--color-secondary)
 
-  &--secondary {
-    @apply
-      bg-secondary;
-  }
-
-  &--ascendent {
-    @apply
-      bg-ascendent;
-  }
-
-  &--disabled {
-    @apply
-      opacity-30;
-  }
-
-  &--circle {
-    @apply
-      h-12
-      w-12;
-  }
-
-  &--flat {
-    @apply
-      rounded-md;
-  }
-
-  &--unelevated {
-    @apply
-      !shadow-none;
-  }
-}
+  &--ascendent
+    background-color: var(--color-ascendent)
 </style>
+
+// &--disabled
+//   @apply
+//     opacity-30
+
+// &--circle
+//   @apply
+//     h-12
+//     w-12
+
+// &--flat
+//   @apply
+//     rounded-md
+
+// &--unelevated
+//   @apply
+//     !shadow-none

@@ -1,19 +1,22 @@
-import { createApp } from 'vue';
+import { createApp } from 'vue'
 
 import 'uno.css'
-import App from './App.vue';
+import 'uno:components.css'
+import 'uno:utilities.css'
 
-import createRouterInstance from '@/routes';
-import { validateToken } from '@/utils/token';
+import App from './App.vue'
 
-const router = createRouterInstance();
+import createRouterInstance from '@/routes'
+import { validateToken } from '@/utils/token'
 
-const app = createApp(App);
+const router = createRouterInstance()
 
-app.use(router);
+const app = createApp(App)
+
+app.use(router)
 
 router.isReady().then(() => {
   validateToken(router.currentRoute).then(() => {
-    app.mount('#app');
-  });
-});
+    app.mount('#app')
+  })
+})
