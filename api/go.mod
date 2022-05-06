@@ -6,6 +6,7 @@ require (
 	github.com/cosmtrek/air v1.29.0
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/gofiber/fiber/v2 v2.32.0
+	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/joho/godotenv v1.4.0
 	go.mongodb.org/mongo-driver v1.8.4
 	golang.org/x/crypto v0.0.0-20220321153916-2c7772ba3064
