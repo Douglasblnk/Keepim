@@ -1,10 +1,23 @@
-const { defineConfig } = require('eslint-define-config');
-
-module.exports = defineConfig({
+module.exports = {
   rules: {
-    semi: ['error', 'always'],
-    'quote-props': 0,
-    'no-unused-vars': 'off',
-    'no-undef': 'off',
+    'array-bracket-spacing': [ 'error', 'always' ],
+    'object-curly-spacing': [ 'error', 'always' ],
+    'computed-property-spacing': [ 'error', 'always' ],
+    'template-curly-spacing': [ 'error', 'always' ],
+    'curly': [ 'error', 'all' ],
+    'comma-dangle': [ 'error', {
+      arrays: 'always-multiline',
+      objects: 'always-multiline',
+      imports: 'only-multiline',
+      exports: 'always-multiline',
+      functions: 'always-multiline',
+    } ],
+    'max-len': 'off',
   },
-});
+  globals: {
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly',
+  },
+}

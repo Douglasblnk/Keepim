@@ -1,12 +1,14 @@
 import { resolve } from 'path';
 import vue from '@vitejs/plugin-vue';
-import WindiCSS from 'vite-plugin-windicss';
 import Components from 'unplugin-vue-components/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import Pages from 'vite-plugin-pages';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import windiConfig from './windi.config';
+import Unocss from 'unocss/vite';
+import presetWind from '@unocss/preset-wind'
+import presetAttributify from '@unocss/preset-attributify'
+
 
 export default defineConfig({
   resolve: {
@@ -26,6 +28,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+
     Pages({
       extendRoute(route) {
         const { path } = route;
@@ -38,18 +41,18 @@ export default defineConfig({
         };
       },
     }),
-    WindiCSS({
-      config: windiConfig,
-    }),
+
     AutoImport({
       include: [
         /\.vue\??/, // .vue
       ],
+      
       imports: [
         'vue',
         'vue-router',
       ],
     }),
+
     VitePWA({
       manifest: {
         name: 'PhotoKeep',
@@ -58,11 +61,21 @@ export default defineConfig({
         display: 'standalone',
       },
     }),
+
     Components({
       dirs: [
         'src/components',
         'src/pages',
       ],
     }),
+
+    Unocss({
+      presets: [
+        presetWind(),
+        presetAttributify({
+
+        }),
+      ]
+    })
   ],
 });
