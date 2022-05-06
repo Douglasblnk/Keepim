@@ -75,52 +75,52 @@ const confirm = async() => {
 <template>
   <div
     class="add-folder-modal"
-    w:w="90vw md:500px"
-    w:p="x-lg y-lg"
-    w:bg="ascendent"
-    w:rounded="md"
+    un-w="90vw md:500px"
+    un-p="x-lg y-lg"
+    un-bg="ascendent"
+    un-rounded="md"
   >
     <div
-      w:flex="~ col"
-      w:align="items-center"
+      un-flex="~ col"
+      un-align="items-center"
     >
       <FIcon
         icon="folder-plus"
         size="3x"
-        w:text="white"
+        un-text="white"
       />
 
       <p
-        w:text="medium white"
-        w:m="t-md"
+        un-text="medium white"
+        un-m="t-md"
       >
         Adicionar pasta
       </p>
     </div>
 
     <div
-      w:flex="~ col"
-      w:m="t-xl"
-      w:p="x-sm"
+      un-flex="~ col"
+      un-m="t-xl"
+      un-p="x-sm"
     >
       <Input
         v-model="folderName"
         label="Nome da pasta:"
         placeholder="Digite o nome da pasta"
-        w:w="full"
+        un-w="full"
         light
       />
 
       <Input
         v-model="folderDate"
         label="Data:"
-        w:m="y-lg"
-        w:w="10/12"
+        un-m="y-lg"
+        un-w="10/12"
         type="date"
         light
       />
 
-      <p w:text="white">
+      <p un-text="white">
         Adicionar imagens
       </p>
 
@@ -130,15 +130,15 @@ const confirm = async() => {
     </div>
 
     <div
-      w:w="full"
-      w:flex="~"
-      w:justify="center"
-      w:m="t-xl"
+      un-w="full"
+      un-flex="~"
+      un-justify="center"
+      un-m="t-xl"
     >
       <Button
         label="Cancelar"
-        w:bg="!gray-500"
-        w:m="x-xs"
+        un-bg="!gray-500"
+        un-m="x-xs"
         flat
         unelevated
         @click="closeModal"
@@ -146,7 +146,7 @@ const confirm = async() => {
 
       <Button
         label="Adicionar"
-        w:m="x-xs"
+        un-m="x-xs"
         primary
         flat
         unelevated

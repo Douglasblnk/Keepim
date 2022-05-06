@@ -48,15 +48,15 @@ defineExpose({ closeModal });
     <Transition name="fade">
       <div
         v-if="modelValue"
-        w:pos="fixed top-0 left-0"
-        w:backdrop="~ blur-lg"
-        w:bg="black opacity-30"
-        w:w="screen"
-        w:h="screen"
-        w:flex="~"
-        w:justify="center"
-        w:align="items-center"
-        w:z="fullscreen"
+        un-pos="fixed top-0 left-0"
+        un-backdrop="~ blur-lg"
+        un-bg="black opacity-30"
+        un-w="screen"
+        un-h="screen"
+        un-flex="~"
+        un-justify="center"
+        un-align="items-center"
+        un-z="fullscreen"
       >
         <Transition name="modal">
           <div

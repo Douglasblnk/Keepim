@@ -35,48 +35,48 @@ onMounted(async() => {
 </script>
 
 <template>
-  <div w:flex="~ col">
+  <div un-flex="~ col">
     <div
-      w:flex="~"
-      w:justify="between"
+      un-flex="~"
+      un-justify="between"
     >
-      <p w:text="medium">
+      <p un-text="medium">
         {{ title }}
       </p>
 
       <div
         v-if="showAction"
-        w:flex="~"
-        w:align="items-center"
-        w:cursor="pointer"
+        un-flex="~"
+        un-align="items-center"
+        un-cursor="pointer"
         @click="$emit('see-all')"
       >
         <p
-          w:text="small gray-400"
-          w:select="none"
+          un-text="small gray-400"
+          un-select="none"
         >
           Ver todas
         </p>
 
         <FIcon
           icon="long-arrow-alt-right"
-          w:m="l-sm"
-          w:text="gray-400"
+          un-m="l-sm"
+          un-text="gray-400"
         />
       </div>
     </div>
 
-    <div w:m="t-sm">
+    <div un-m="t-sm">
       <div
         class="swiper slide-content"
-        w:flex="~"
+        un-flex="~"
       >
         <div class="swiper-wrapper">
           <div
             v-for="(item, index) in items"
             :key="`slide-content-${index}`"
             class="swiper-slide"
-            w:w="!auto"
+            un-w="!auto"
           >
             <slot v-bind="item" />
           </div>

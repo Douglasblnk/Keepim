@@ -23,15 +23,15 @@ onBeforeUnmount(() => Fn());
 <template>
   <h1
     ref="target"
-    w:font="normal tracking-widest"
-    w:m="y-xxl"
-    w:p="y-lg"
-    w:bg="background"
-    w:pos="sticky top-0"
-    w:select="none"
-    w:transition="~ all"
-    w:z="marginals"
-    :w:text="reachedTop ? 'gray-100 [24px] center' : 'gray-100 [38px] center'"
+    un-font="normal tracking-widest"
+    un-m="y-xxl"
+    un-p="y-lg"
+    un-bg="background"
+    un-pos="sticky top-0"
+    un-select="none"
+    un-transition="~ all"
+    un-z="marginals"
+    :un-text="reachedTop ? 'gray-100 [24px] center' : 'gray-100 [38px] center'"
   >
     PhotoKeep
   </h1>

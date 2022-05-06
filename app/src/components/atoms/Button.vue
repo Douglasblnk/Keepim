@@ -69,9 +69,9 @@ const customClasses = computed(() => ({
     </div>
 
     <span
-      w:text="white"
-      w:font="semibold tracking-wide"
-      w:select="none"
+      un-text="white"
+      un-font="semibold tracking-wide"
+      un-select="none"
     >
       {{ label }}
     </span>

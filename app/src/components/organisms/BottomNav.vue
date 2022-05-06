@@ -10,27 +10,27 @@ const isSelected = (option) => {
 
 <template>
   <div
-    w:pos="fixed bottom-4"
-    w:w="full"
-    w:flex="~"
-    w:justify="center"
-    w:m="x-auto"
-    w:z="marginals"
+    un-pos="fixed bottom-4"
+    un-w="full"
+    un-flex="~"
+    un-justify="center"
+    un-m="x-auto"
+    un-z="marginals"
   >
     <div
-      w:flex="~"
-      w:justify="between"
-      w:align="items-center"
-      w:w="4/5 md:1/5"
-      w:p="x-xl y-md"
-      w:rounded="full"
-      w:bg="gray-100 opacity-5"
-      w:backdrop="~ blur-lg"
-      w:text="white"
+      un-flex="~"
+      un-justify="between"
+      un-align="items-center"
+      un-w="4/5 md:1/5"
+      un-p="x-xl y-md"
+      un-rounded="full"
+      un-bg="gray-100 opacity-5"
+      un-backdrop="~ blur-lg"
+      un-text="white"
     >
       <div
         :class="isSelected('explore') && 'selected'"
-        w:cursor="pointer"
+        un-cursor="pointer"
       >
         <FIcon
           icon="th-large"
@@ -40,7 +40,7 @@ const isSelected = (option) => {
 
       <div
         :class="isSelected('home') && 'selected'"
-        w:cursor="pointer"
+        un-cursor="pointer"
       >
         <FIcon
           icon="home"
@@ -50,7 +50,7 @@ const isSelected = (option) => {
 
       <div
         :class="isSelected('folders') && 'selected'"
-        w:cursor="pointer"
+        un-cursor="pointer"
       >
         <FIcon
           icon="th-list"

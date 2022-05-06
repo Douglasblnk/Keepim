@@ -72,22 +72,22 @@ const lastImages = [
 
 <template>
   <div
-    w:w="md:4/12"
-    w:m="x-auto"
-    w:p="b-[150px]"
-    w:text="white"
+    un-w="md:4/12"
+    un-m="x-auto"
+    un-p="b-[150px]"
+    un-text="white"
   >
     <PhotoKeepTitle />
 
-    <div w:m="x-lg md:auto">
+    <div un-m="x-lg md:auto">
       <SlideContent
         title="Ultimas imagens"
-        w:m="b-xl"
+        un-m="b-xl"
         :items="lastImages"
       >
         <template #default="item">
           <Img
-            w:w="200px"
+            un-w="200px"
             :url="item.url"
             clickable
             @click="openImage(item)"
@@ -97,7 +97,7 @@ const lastImages = [
 
       <SlideContent
         title="Ultimas pastas"
-        w:m="b-xl"
+        un-m="b-xl"
         :items="lastFolders"
       >
         <template #default="item">

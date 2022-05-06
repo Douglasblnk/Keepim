@@ -25,23 +25,23 @@ defineProps({
     >
       <div
         v-if="isShowing"
-        w:w="full"
-        w:flex="~"
-        w:justify="center"
-        w:pos="fixed top-lg"
-        w:z="notify"
+        un-w="full"
+        un-flex="~"
+        un-justify="center"
+        un-pos="fixed top-lg"
+        un-z="notify"
       >
         <div
           :class="`bg-${type}`"
-          w:h="xl"
-          w:flex="~"
-          w:text="white base"
-          w:justify="center"
-          w:align="items-center"
-          w:p="x-lg"
-          w:rounded="full"
-          w:font="base"
-          w:shadow="10 gray-700"
+          un-h="xl"
+          un-flex="~"
+          un-text="white base"
+          un-justify="center"
+          un-align="items-center"
+          un-p="x-lg"
+          un-rounded="full"
+          un-font="base"
+          un-shadow="10 gray-700"
         >
           {{ text }}
         </div>

@@ -43,9 +43,9 @@ const model = computed({
 </script>
 
 <template>
-  <div w:flex="~ col">
+  <div un-flex="~ col">
     <p
-      w:m="b-xs"
+      un-m="b-xs"
       :style="{ color: labelColor }"
     >
       {{ label }}
@@ -53,14 +53,14 @@ const model = computed({
 
     <input
       v-model="model"
-      w:rounded="full"
-      w:flex="~"
-      w:outline="none"
-      w:text="white"
-      :w:bg="light ? 'gray-500' : 'ascendent'"
-      w:w="full"
-      w:p="y-3 x-5"
-      :w:border="error ? '1 solid danger' : 'none'"
+      un-rounded="full"
+      un-flex="~"
+      un-outline="none"
+      un-text="white"
+      :un-bg="light ? 'gray-500' : 'ascendent'"
+      un-w="full"
+      un-p="y-3 x-5"
+      :un-border="error ? '1 solid danger' : 'none'"
       :type="type"
       :placeholder="placeholder"
     >

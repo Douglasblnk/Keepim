@@ -50,24 +50,24 @@ const makeLogin = async() => {
 
 <template>
   <div
-    w:flex="~ col"
-    w:h="screen"
-    w:w="screen"
-    w:justify="around"
-    w:align="items-center"
+    un-flex="~ col"
+    un-h="screen"
+    un-w="screen"
+    un-justify="around"
+    un-align="items-center"
   >
     <div
-      w:flex="~ col [4]"
-      w:justify="center"
+      un-flex="~ col [4]"
+      un-justify="center"
     >
       <PhotoKeepTitle />
 
-      <div w:m="t-md">
+      <div un-m="t-md">
         <Input
           v-model="user"
           type="text"
           placeholder="Usuário:"
-          w:m="t-xl"
+          un-m="t-xl"
           @keydown.enter="makeLogin"
         />
 
@@ -75,15 +75,15 @@ const makeLogin = async() => {
           v-model="password"
           type="password"
           placeholder="Senha:"
-          w:m="t-md"
+          un-m="t-md"
           @keydown.enter="makeLogin"
         />
       </div>
     </div>
 
-    <div w:flex="1">
+    <div un-flex="1">
       <Button
-        w:p="!8"
+        un-p="!8"
         icon="arrow-right"
         icon-size="lg"
         primary
