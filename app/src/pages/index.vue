@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import useRequest from '@composables/use-request'
+import useAxios from '@composables/use-axios'
 import useAlert from '@composables/use-alert'
 import { setToken } from '@/utils/token'
 
@@ -8,7 +8,7 @@ const password = ref()
 const user = ref()
 const loading = ref(false)
 
-const { useAxios } = useRequest()
+const { post } = useAxios()
 const { setAlert } = useAlert()
 const { replace } = useRouter()
 
@@ -25,12 +25,13 @@ const makeLogin = async () => {
 
   loading.value = true
 
-  const { data, error } = await useAxios('sign-in')
-    .post({
-      data: {
-        id: user.value.toLowerCase(),
-        password: password.value,
-      },
+  const { data, error } = await post('sign-in')
+    .data({
+      id: user.value.toLowerCase(),
+      password: password.value,
+    })
+    .headers({
+
     })
 
   loading.value = false

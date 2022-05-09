@@ -1,4 +1,4 @@
-import useRequest from '@/composables/use-request'
+import useRequest from '@/composables/use-axios'
 import { removeAccess } from '@/routes/index'
 
 export function getToken() {

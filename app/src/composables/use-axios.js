@@ -24,7 +24,7 @@ export default function () {
       return { data, status }
   }
 
-  const request = async (args) => {
+  const execute = async (args) => {
     const { path, ...options } = args
     const axiosResponse = {}
 
@@ -46,17 +46,26 @@ export default function () {
     return { ...axiosResponse }
   }
 
-  const useAxios = path => ({
-    get: options => request({ method: 'GET', ...options, path }),
+  const Get = () => {
+    execute({ method: 'GET', ...options, path })
+  }
 
-    post: options => request({ method: 'POST', ...options, path }),
+  const Post = () => {
+    execute({ method: 'POST', ...options, path })
+  }
 
-    put: options => request({ method: 'PUT', ...options, path }),
+  const Put = () => {
+    execute({ method: 'PUT', ...options, path })
+  }
 
-    delete: options => request({ method: 'DELETE', ...options, path }),
-  })
+  const Delete = () => {
+    execute({ method: 'DELETE', ...options, path })
+  }
 
   return {
-    useAxios,
+    Get,
+    Post,
+    Put,
+    Delete,
   }
 }

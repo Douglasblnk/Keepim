@@ -1,6 +1,6 @@
 <script setup>
 import useAlert from '@composables/use-alert'
-import useRequest from '@/composables/use-request'
+import useRequest from '@/composables/use-axios'
 import { getToken } from '@/utils/token'
 
 const { useAxios } = useRequest()
@@ -45,12 +45,11 @@ const getLastFolders = async () => {
       },
     })
 
-  if (error && error.status !== 200) {
+  if (error && error.status !== 200)
     return setAlert({
       type: 'negative',
       text: error.data,
     })
-  }
 
   lastFolders.value = data
 }

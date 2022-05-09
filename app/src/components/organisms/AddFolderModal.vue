@@ -1,75 +1,73 @@
 <script setup>
-import useAlert from '@composables/use-alert';
-import useRequest from '@/composables/use-request';
-import { getToken } from '@/utils/token';
+import useAlert from '@composables/use-alert'
+import useRequest from '@/composables/use-axios'
+import { getToken } from '@/utils/token'
 
-const emit = defineEmits(['close']);
+const emit = defineEmits([ 'close' ])
 
-const { setAlert } = useAlert();
-const { useAxios } = useRequest();
+const { setAlert } = useAlert()
+const { useAxios } = useRequest()
 
-const folderName = ref();
-const folderDate = ref();
-const images = ref([]);
+const folderName = ref()
+const folderDate = ref()
+const images = ref([])
 
 const addImages = (imgs) => {
-  images.value = [...imgs];
-};
+  images.value = [ ...imgs ]
+}
 
 const closeModal = () => {
-  images.value = [];
+  images.value = []
 
-  emit('close');
-};
+  emit('close')
+}
 
 const validateSubmission = () => {
-  if (!folderName.value || !folderDate.value) return false;
+  if (!folderName.value || !folderDate.value)
+    return false
 
-  return true;
-};
+  return true
+}
 
-const createFolder = async() => {
+const createFolder = async () => {
   const payload = {
     data: {
       name: folderName.value,
       date: folderDate.value,
     },
     headers: {
-      token: `Bearer ${getToken()}`,
+      token: `Bearer ${ getToken() }`,
     },
-  };
+  }
 
-  const { data, error } = await useAxios('folder').post(payload);
+  const { data, error } = await useAxios('folder').post(payload)
 
-  if (error && error.status !== 200) {
+  if (error && error.status !== 200)
     return setAlert({
       type: 'negative',
       text: error.data,
-    });
-  }
+    })
 
   setAlert({
     type: 'positive',
     text: data.msg,
-  });
+  })
 
-  closeModal();
-};
+  closeModal()
+}
 
-const confirm = async() => {
-  const isValid = validateSubmission();
+const confirm = async () => {
+  const isValid = validateSubmission()
 
-  if (!isValid) {
+  if (!isValid)
     return setAlert({
       type: 'negative',
       text: 'Preencha os campos corretamente!',
       timeout: 3000,
-    });
-  }
+    })
 
-  await createFolder();
-};
-
+  await createFolder()
+}
 </script>
 
 <template>
