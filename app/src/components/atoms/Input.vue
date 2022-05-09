@@ -1,9 +1,7 @@
 <script setup>
-const emit = defineEmits(['update:modelValue']);
-
 const props = defineProps({
   modelValue: {
-    type: [String, Number],
+    type: [ String, Number ],
     default: '',
   },
 
@@ -34,12 +32,14 @@ const props = defineProps({
 
   light: Boolean,
   error: Boolean,
-});
+})
+
+const emit = defineEmits([ 'update:modelValue' ])
 
 const model = computed({
   get: () => props.modelValue,
   set: value => emit('update:modelValue', value),
-});
+})
 </script>
 
 <template>
@@ -58,7 +58,6 @@ const model = computed({
       un-outline="none"
       un-text="white"
       :un-bg="light ? 'gray-500' : 'ascendent'"
-      un-w="full"
       un-p="y-3 x-5"
       :un-border="error ? '1 solid danger' : 'none'"
       :type="type"

@@ -18,6 +18,5 @@
   },
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "windicss.sortOnSave": true,
+  }
 }

@@ -6,11 +6,6 @@ import Pages from 'vite-plugin-pages'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import Unocss from 'unocss/vite'
-import presetWind from '@unocss/preset-wind'
-import presetAttributify from '@unocss/preset-attributify'
-import transformerDirective from '@unocss/transformer-directives'
-import presetMini from '@unocss/preset-mini'
-import presetCore from './src/unocss/index'
 
 export default defineConfig({
   resolve: {
@@ -72,18 +67,6 @@ export default defineConfig({
       ],
     }),
 
-    Unocss({
-      presets: [
-        presetMini(),
-        presetWind(),
-        presetCore(),
-        presetAttributify({
-
-        }),
-      ],
-      transformers: [
-        transformerDirective(),
-      ],
-    }),
+    Unocss(),
   ],
 })

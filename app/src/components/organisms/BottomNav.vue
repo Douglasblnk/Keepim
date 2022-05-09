@@ -1,11 +1,11 @@
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute } from 'vue-router'
 
-const { name } = useRoute();
+const { name } = useRoute()
 
 const isSelected = (option) => {
-  return name === option;
-};
+  return name === option
+}
 </script>
 
 <template>
@@ -61,12 +61,7 @@ const isSelected = (option) => {
   </div>
 </template>
 
-<style lang="postcss" scoped>
-.selected {
-  @apply
-    bg-primary
-      rounded-full
-      py-sm
-      px-lg;
-}
+<style lang="sass">
+.selected
+  @apply bg-primary rounded-full py-sm px-lg
 </style>

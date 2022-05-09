@@ -14,7 +14,7 @@ defineProps({
       'warning', 'info', 'positive', 'negative',
     ].includes(type),
   },
-});
+})
 </script>
 
 <template>

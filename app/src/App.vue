@@ -36,8 +36,3 @@ const isBottomNavHidden = computed(() => {
     <BottomNav v-if="isBottomNavHidden" />
   </transition>
 </template>
-
-<style>
-@import './styles/styles.css';
-@import './styles/transitions.css';
-</style>

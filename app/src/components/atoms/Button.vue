@@ -91,31 +91,26 @@ const customClasses = computed(() => ({
 <style lang="sass">
 .p-button
   &__icon
-    color: white
+    @apply text-white
 
   &--primary
-    background-color: var(--color-primary)
+    @apply bg-primary
 
   &--secondary
-    background-color: var(--color-secondary)
+    @apply bg-secondary
 
   &--ascendent
-    background-color: var(--color-ascendent)
+    @apply bg-ascendent
+
+  &--disabled
+    @apply opacity-30
+
+  &--circle
+    @apply h-12 w-12
+
+  &--flat
+    @apply rounded-md
+
+  &--unelevated
+    @apply shadow-none
 </style>
-
-// &--disabled
-//   @apply
-//     opacity-30
-
-// &--circle
-//   @apply
-//     h-12
-//     w-12
-
-// &--flat
-//   @apply
-//     rounded-md
-
-// &--unelevated
-//   @apply
-//     !shadow-none

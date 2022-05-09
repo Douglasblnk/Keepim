@@ -1,23 +1,23 @@
 <script setup>
-import { useEventListener } from '@vueuse/core';
+import { useEventListener } from '@vueuse/core'
 
-const target = ref(null);
-const reachedTop = ref(null);
+const target = ref(null)
+const reachedTop = ref(null)
 
 const Fn = useEventListener(
   document,
   'scroll',
   () => {
-    const { offsetTop } = target.value;
+    const { offsetTop } = target.value
 
     if (offsetTop > 64)
-      reachedTop.value = true;
+      reachedTop.value = true
 
-    else reachedTop.value = false;
+    else reachedTop.value = false
   },
-);
+)
 
-onBeforeUnmount(() => Fn());
+onBeforeUnmount(() => Fn())
 </script>
 
 <template>
