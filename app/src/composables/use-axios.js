@@ -46,20 +46,25 @@ export default function () {
     return { ...axiosResponse }
   }
 
-  const Get = () => {
-    execute({ method: 'GET', ...options, path })
+  const axiosOptions = options => ({
+    headers: headers => axiosOptions({ headers, ...options }),
+    data: data => execute({ data, ...options }),
+  })
+
+  const Get = (path) => {
+    return axiosOptions({ path, method: 'GET' })
   }
 
-  const Post = () => {
-    execute({ method: 'POST', ...options, path })
+  const Post = (path) => {
+    return axiosOptions({ path, method: 'POST' })
   }
 
-  const Put = () => {
-    execute({ method: 'PUT', ...options, path })
+  const Put = (path) => {
+    return axiosOptions({ path, method: 'PUT' })
   }
 
-  const Delete = () => {
-    execute({ method: 'DELETE', ...options, path })
+  const Delete = (path) => {
+    return axiosOptions({ path, method: 'DELETE' })
   }
 
   return {
