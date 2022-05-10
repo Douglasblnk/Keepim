@@ -10,6 +10,9 @@
   "editor.quickSuggestions": {
     "strings": true
   },
+  "files.exclude": {
+    "**/node_modules": true
+  },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
