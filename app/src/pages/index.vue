@@ -5,10 +5,10 @@ import useAlert from '@composables/use-alert'
 import { setToken } from '@/utils/token'
 
 const password = ref()
-const user = ref()
+const username = ref()
 const loading = ref(false)
 
-const { post } = useAxios()
+const { Post } = useAxios()
 const { setAlert } = useAlert()
 const { replace } = useRouter()
 
@@ -25,14 +25,10 @@ const makeLogin = async () => {
 
   loading.value = true
 
-  const { data, error } = await post('sign-in')
-    .data({
-      id: user.value.toLowerCase(),
-      password: password.value,
-    })
-    .headers({
-
-    })
+  const { data, error } = await Post('sign-in').data({
+    username: username.value.toLowerCase(),
+    password: password.value,
+  })
 
   loading.value = false
 
@@ -67,7 +63,7 @@ const makeLogin = async () => {
 
       <div un-m="t-md">
         <Input
-          v-model="user"
+          v-model="username"
           type="text"
           placeholder="Usuário:"
           un-m="t-xl"
