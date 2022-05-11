@@ -6,6 +6,7 @@ import Pages from 'vite-plugin-pages'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import Unocss from 'unocss/vite'
+import Icons from 'unplugin-icons/vite'
 
 export default defineConfig({
   resolve: {
@@ -65,6 +66,10 @@ export default defineConfig({
         'src/components',
         'src/pages',
       ],
+    }),
+
+    Icons({
+      autoInstall: true,
     }),
 
     Unocss(),
