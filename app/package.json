@@ -16,10 +16,11 @@
     "vue-router": "^4.0.15"
   },
   "devDependencies": {
-    "@iconify-json/mdi": "^1.1.12",
     "@antfu/eslint-config": "0.23.0",
+    "@iconify-json/mdi": "^1.1.12",
     "@unocss/autocomplete": "0.32.13",
     "@unocss/preset-attributify": "^0.32.13",
+    "@unocss/preset-icons": "^0.33.2",
     "@unocss/preset-mini": "^0.32.13",
     "@unocss/preset-wind": "^0.32.13",
     "@unocss/transformer-directives": "^0.32.13",
