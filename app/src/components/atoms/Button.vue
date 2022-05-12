@@ -10,23 +10,12 @@ const props = defineProps({
     default: '',
   },
 
-  icon: {
-    type: String,
-    default: '',
-  },
-
-  iconSize: {
-    type: String,
-    default: '',
-  },
-
   primary: Boolean,
   secondary: Boolean,
   ascendent: Boolean,
   disabled: Boolean,
   loading: Boolean,
   circle: Boolean,
-  flat: Boolean,
   unelevated: Boolean,
 })
 
@@ -37,7 +26,6 @@ const customClasses = computed(() => ({
   'p-button--disabled': props.disabled,
   'p-button--loading': props.loading,
   'p-button--circle': props.circle,
-  'p-button--flat': props.flat,
   'p-button--unelevated': props.unelevated,
 }))
 </script>
@@ -45,54 +33,33 @@ const customClasses = computed(() => ({
 <template>
   <button
     class="p-button"
-    un-rounded-full
-    un-flex
+    un-rounded
     un-bg-gray-200
-    un-py-2
-    un-px-5
+    un-py-3
+    un-px-6
     un-transition-shadow
     un-shadow-2
-    un-items-center
-    un-justify-center
     un-outline-none
+    un-border-none
     un-active:shadow-8
     :class="customClasses"
     :disabled="disabled || loading"
     :type="type"
   >
-    <div
-      v-if="icon"
-      class="p-button__icon"
-    >
-      <FIcon
-        v-if="!loading"
-        :icon="icon"
-        :size="iconSize"
-      />
-
-      <FIcon
-        v-else
-        icon="spinner"
-        class="fa-spin"
-        :size="iconSize"
-      />
-    </div>
-
-    <span
-      un-text="white"
-      un-font="semibold tracking-wide"
-      un-select="none"
-    >
-      {{ label }}
-    </span>
+    <slot>
+      <span
+        un-text="white"
+        un-font="semibold tracking-wide"
+        un-select="none"
+      >
+        {{ label }}
+      </span>
+    </slot>
   </button>
 </template>
 
 <style lang="sass">
 .p-button
-  &__icon
-    @apply text-white
-
   &--primary
     @apply bg-primary
 
@@ -106,10 +73,7 @@ const customClasses = computed(() => ({
     @apply opacity-30
 
   &--circle
-    @apply h-12 w-12
-
-  &--flat
-    @apply rounded-md
+    @apply rounded-full p-0
 
   &--unelevated
     @apply shadow-none
