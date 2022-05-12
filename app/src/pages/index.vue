@@ -50,18 +50,18 @@ const makeLogin = async () => {
 <template>
   <div
     un-flex="~ col"
-    un-h="screen"
-    un-w="screen"
-    un-justify="around"
-    un-align="items-center"
+    un-h-screen
+    un-w-screen
+    un-justify-around
+    un-items-center
   >
     <div
       un-flex="~ col [4]"
-      un-justify="center"
+      un-justify-center
     >
       <PhotoKeepTitle />
 
-      <div un-m="t-md">
+      <div un-mt>
         <Input
           v-model="username"
           type="text"
@@ -82,15 +82,20 @@ const makeLogin = async () => {
 
     <div un-flex="1">
       <Button
-        un-p="md"
-        icon="arrow-right"
-        icon-size="lg"
         primary
+        un-text-white
         circle
-        label="poxa vida"
-        :loading="loading"
+        un-w-14
+        un-h-14
         @click="makeLogin"
-      />
+      >
+        <Icon
+          v-if="!loading"
+          icon="i-mdi-arrow-right"
+          un-text-white
+          un-text-md
+        />
+      </Button>
     </div>
   </div>
 </template>
