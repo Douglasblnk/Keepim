@@ -1,4 +1,4 @@
-import useRequest from '@/composables/use-axios'
+import useAxios from '@/composables/use-axios'
 import { removeAccess } from '@/routes/index'
 
 export function getToken() {
@@ -19,11 +19,11 @@ export async function validateToken(router) {
   if (name === 'index')
     return
 
-  const { useAxios } = useRequest()
+  const { Post } = useAxios()
 
-  const { data, error } = await useAxios('validate-token')
-    .post({
-      data: { token: `Bearer ${ getToken() }` },
+  const { data, error } = await Post('validate-token')
+    .data({
+      token: `Bearer ${ getToken() }`,
     })
 
   if (!data && error)

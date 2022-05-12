@@ -1,9 +1,9 @@
 <script setup>
 import useAlert from '@composables/use-alert'
-import useRequest from '@/composables/use-axios'
+import useAxios from '@/composables/use-axios'
 import { getToken } from '@/utils/token'
 
-const { useAxios } = useRequest()
+const { Get } = useAxios()
 const { setAlert } = useAlert()
 
 const showModal = ref(false)
@@ -37,12 +37,10 @@ const closeModal = () => {
 }
 
 const getLastFolders = async () => {
-  const { data, error } = await useAxios('folder')
-    .get({
-      headers: {
-        limit: 4,
-        token: `Bearer ${ getToken() }`,
-      },
+  const { data, error } = await Get('folder')
+    .headers({
+      limit: 4,
+      token: `Bearer ${ getToken() }`,
     })
 
   if (error && error.status !== 200)
