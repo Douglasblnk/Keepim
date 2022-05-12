@@ -233,24 +233,9 @@ export default {
   },
 
   fontSize: {
-    small: '0.75rem',
+    sm: '0.75rem',
     base: '1rem',
-    medium: '1.5rem',
-    large: '2.25rem',
+    md: '1.5rem',
+    lg: '2.25rem',
   },
-
-  /* ---------------------------------------- */
-  /*                 Behaviors                */
-  /* ---------------------------------------- */
-  // https://windicss.org/utilities/behaviors.html
-
-  /* ---------------------------------------- */
-  /*                Transitions               */
-  /* ---------------------------------------- */
-  // https://windicss.org/utilities/transitions.html
-
-  /* ---------------------------------------- */
-  /*                Transforms                */
-  /* ---------------------------------------- */
-  // https://windicss.org/utilities/transforms.html
 }
