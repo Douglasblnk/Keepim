@@ -24,13 +24,13 @@ onBeforeUnmount(() => Fn())
   <h1
     ref="target"
     un-font="normal tracking-widest"
-    un-m="y-xxl"
-    un-p="y-lg"
-    un-bg="background"
     un-pos="sticky top-0"
-    un-select="none"
     un-transition="~ all"
-    un-z="marginals"
+    un-my-xxl
+    un-py-lg
+    un-bg-background
+    un-select-none
+    un-z-marginals
     :un-text="reachedTop ? 'gray-100 [24px] center' : 'gray-100 [38px] center'"
   >
     PhotoKeep
