@@ -7,6 +7,7 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import Unocss from 'unocss/vite'
 import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 
 export default defineConfig({
   resolve: {
@@ -65,6 +66,9 @@ export default defineConfig({
       dirs: [
         'src/components',
         'src/pages',
+      ],
+      resolvers: [
+        IconsResolver(),
       ],
     }),
 
