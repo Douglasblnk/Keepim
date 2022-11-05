@@ -48,7 +48,8 @@ export default function () {
 
   const axiosOptions = options => ({
     headers: headers => axiosOptions({ headers, ...options }),
-    data: data => execute({ data, ...options }),
+    data: data => axiosOptions({ data, ...options }),
+    execute: () => execute({ ...options }),
   })
 
   const Get = (path) => {

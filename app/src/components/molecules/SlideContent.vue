@@ -1,7 +1,7 @@
 <script setup>
-import useSwiper from '@composables/use-swiper';
+import useSwiper from '@composables/use-swiper'
 
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     default: '',
@@ -16,11 +16,11 @@ defineProps({
     type: Boolean,
     default: true,
   },
-});
+})
 
-defineEmits(['see-all']);
+defineEmits([ 'seeAll' ])
 
-onMounted(async() => {
+onMounted(async () => {
   await useSwiper(
     '.swiper',
     {
@@ -29,54 +29,54 @@ onMounted(async() => {
       grabCursor: true,
       freeMode: true,
     },
-    ['FreeMode'],
-  );
-});
+    [ 'FreeMode' ],
+  )
+})
 </script>
 
 <template>
-  <div un-flex="~ col">
+  <div un-flex un-flex-col>
     <div
-      un-flex="~"
-      un-justify="between"
+      un-flex
+      un-justify-between
     >
-      <p un-text="medium">
+      <p un-text-medium>
         {{ title }}
       </p>
 
       <div
         v-if="showAction"
-        un-flex="~"
-        un-align="items-center"
-        un-cursor="pointer"
-        @click="$emit('see-all')"
+        un-flex
+        un-items-center
+        un-cursor-pointer
+        @click="$emit('seeAll')"
       >
         <p
           un-text="small gray-400"
-          un-select="none"
+          un-select-none
         >
           Ver todas
         </p>
 
-        <FIcon
-          icon="long-arrow-alt-right"
+        <Icon
+          icon="i-mdi-arrow-right"
           un-m="l-sm"
           un-text="gray-400"
         />
       </div>
     </div>
 
-    <div un-m="t-sm">
+    <div un-mt-sm>
       <div
         class="swiper slide-content"
-        un-flex="~"
+        un-flex
       >
         <div class="swiper-wrapper">
           <div
             v-for="(item, index) in items"
             :key="`slide-content-${index}`"
             class="swiper-slide"
-            un-w="!auto"
+            un-w="auto"
           >
             <slot v-bind="item" />
           </div>

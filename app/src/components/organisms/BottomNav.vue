@@ -10,41 +10,43 @@ const isSelected = (option) => {
 
 <template>
   <div
-    un-pos="fixed bottom-4"
-    un-w="full"
-    un-flex="~"
-    un-justify="center"
-    un-m="x-auto"
-    un-z="marginals"
+    un-pos="fixed bottom-6"
+    un-w-full
+    un-flex
+    un-justify-center
+    un-mx-auto
+    un-z-10
   >
     <div
-      un-flex="~"
-      un-justify="between"
-      un-align="items-center"
-      un-w="4/5 md:1/5"
+      un-w="col-6 md:1/4"
       un-p="x-xl y-md"
-      un-rounded="full"
       un-bg="gray-100 opacity-5"
       un-backdrop="~ blur-lg"
-      un-text="white"
+      un-flex
+      un-md-justify-around
+      un-justify-between
+      un-items-center
+      un-rounded-full
+      un-text-white
     >
       <div
         :class="isSelected('explore') && 'selected'"
-        un-cursor="pointer"
+        un-cursor-pointer
       >
-        <FIcon
-          icon="th-large"
-          size="lg"
+        <Icon
+          icon="i-mdi-folder-table"
+          un-text-md
         />
       </div>
 
       <div
         :class="isSelected('home') && 'selected'"
         un-cursor="pointer"
+        un-mx-md
       >
-        <FIcon
-          icon="home"
-          size="lg"
+        <Icon
+          icon="i-mdi-home"
+          un-text-md
         />
       </div>
 
@@ -52,9 +54,9 @@ const isSelected = (option) => {
         :class="isSelected('folders') && 'selected'"
         un-cursor="pointer"
       >
-        <FIcon
-          icon="th-list"
-          size="lg"
+        <Icon
+          icon="i-mdi-format-list-bulleted"
+          un-text-md
         />
       </div>
     </div>

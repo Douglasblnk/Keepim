@@ -25,23 +25,23 @@ defineProps({
     >
       <div
         v-if="isShowing"
-        un-w="full"
-        un-flex="~"
-        un-justify="center"
         un-pos="fixed top-lg"
-        un-z="notify"
+        un-w-full
+        un-flex
+        un-justify-center
+        un-z-notify
       >
         <div
           :class="`bg-${type}`"
-          un-h="xl"
-          un-flex="~"
           un-text="white base"
-          un-justify="center"
-          un-align="items-center"
-          un-p="x-lg"
-          un-rounded="full"
-          un-font="base"
           un-shadow="10 gray-700"
+          un-h-xl
+          un-flex
+          un-justify-center
+          un-items-center
+          un-px-lg
+          un-rounded-full
+          un-font-base
         >
           {{ text }}
         </div>

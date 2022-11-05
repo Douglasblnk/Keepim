@@ -1,35 +1,35 @@
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-const defaultType = 'warning';
-const defaultText = 'Internal Server Error';
+const defaultType = 'warning'
+const defaultText = 'Internal Server Error'
 
-const isShowing = ref(false);
-const alertType = ref();
-const alertText = ref();
+const isShowing = ref(false)
+const alertType = ref()
+const alertText = ref()
 
-const alertState = ref();
+const alertState = ref()
 
 export default function useAlert() {
   function handleAlertState(timeout = 4000) {
-    clearTimeout(alertState.value);
+    clearTimeout(alertState.value)
 
     alertState.value = setTimeout(() => {
-      closeAlert();
-    }, timeout);
-  };
+      closeAlert()
+    }, timeout)
+  }
 
   function setAlert({ type = defaultText, text = defaultText, timeout }) {
-    isShowing.value = true;
-    alertText.value = text;
-    alertType.value = type;
+    isShowing.value = true
+    alertText.value = text
+    alertType.value = type
 
-    handleAlertState(timeout);
+    handleAlertState(timeout)
   }
 
   function closeAlert() {
-    isShowing.value = false;
-    alertText.value = '';
-    alertType.value = defaultType;
+    isShowing.value = false
+    alertText.value = ''
+    alertType.value = defaultType
   }
 
   return {
@@ -38,5 +38,5 @@ export default function useAlert() {
     isShowing,
     alertText,
     alertType,
-  };
+  }
 }

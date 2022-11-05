@@ -25,6 +25,19 @@ const baseSize = {
   'prose': '65ch',
 }
 
+const spacing = {
+  DEFAULT: '4px',
+  px: '1px',
+  0: '0px',
+  none: '0px',
+  xs: '4px',
+  sm: '8px',
+  md: '16px',
+  lg: '24px',
+  xl: '48px',
+  xxl: '64px',
+}
+
 /**
  * @type { BaseTheme }
  */
@@ -75,16 +88,7 @@ export default {
   /* ---------------------------------------- */
   // https://windicss.org/utilities/spacing.html
   spacing: {
-    DEFAULT: '4px',
-    px: '1px',
-    0: '0px',
-    none: '0px',
-    xs: '4px',
-    sm: '8px',
-    md: '16px',
-    lg: '24px',
-    xl: '48px',
-    xxl: '64px',
+    ...spacing,
   },
 
   /* ---------------------------------------- */
@@ -92,10 +96,12 @@ export default {
   /* ---------------------------------------- */
   // https://windicss.org/utilities/sizing.html
   width: {
+    ...spacing,
     ...baseSize,
   },
 
   height: {
+    ...spacing,
     ...baseSize,
   },
 

@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     Button: typeof import('./src/components/atoms/Button.vue')['default']
     Folder: typeof import('./src/components/molecules/Folder.vue')['default']
     Home: typeof import('./src/pages/home.vue')['default']
+    Icon: typeof import('./src/components/atoms/Icon.vue')['default']
     Img: typeof import('./src/components/atoms/Img.vue')['default']
     ImgModal: typeof import('./src/components/molecules/ImgModal.vue')['default']
     Input: typeof import('./src/components/atoms/Input.vue')['default']

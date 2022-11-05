@@ -2,15 +2,18 @@ import useAxios from '@/composables/use-axios'
 import { removeAccess } from '@/routes/index'
 
 export function getToken() {
-  return localStorage.getItem('token')
+  return localStorage.getItem('accessToken')
 }
 
-export function setToken(token) {
-  localStorage.setItem('token', token)
+export function setToken(data) {
+  const { Token } = data.AccessToken
+
+  localStorage.setItem('accessToken', Token)
+  localStorage.setItem('refreshToken', data.RefreshToken)
 }
 
 export function removeToken() {
-  localStorage.removeItem('token')
+  localStorage.removeItem('accessToken')
 }
 
 export async function validateToken(router) {
@@ -25,6 +28,7 @@ export async function validateToken(router) {
     .data({
       token: `Bearer ${ getToken() }`,
     })
+    .execute()
 
   if (!data && error)
     removeAccess()

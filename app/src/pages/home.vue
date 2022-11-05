@@ -36,23 +36,24 @@ const closeModal = () => {
   showModal.value = false
 }
 
-const getLastFolders = async () => {
-  const { data, error } = await Get('folder')
-    .headers({
-      limit: 4,
-      token: `Bearer ${ getToken() }`,
-    })
+// const getLastFolders = async () => {
+//   const { data, error } = await Get('folder')
+//     .headers({
+//       limit: 4,
+//       token: `Bearer ${ getToken() }`,
+//     })
+//     .execute()
 
-  if (error && error.status !== 200)
-    return setAlert({
-      type: 'negative',
-      text: error.data,
-    })
+//   if (error && error.status !== 200)
+//     return setAlert({
+//       type: 'negative',
+//       text: error.data,
+//     })
 
-  lastFolders.value = data
-}
+//   lastFolders.value = data
+// }
 
-getLastFolders()
+// getLastFolders()
 
 const lastImages = [
   { url: 'https://previews.123rf.com/images/captblack76/captblack761210/captblack76121000063/15975743-vertical-view-of-eiffel-tower-and-cityscape-paris-france.jpg' },
@@ -70,21 +71,21 @@ const lastImages = [
 <template>
   <div
     un-w="md:4/12"
-    un-m="x-auto"
     un-p="b-[150px]"
-    un-text="white"
+    un-mx-auto
+    un-text-white
   >
     <PhotoKeepTitle />
 
     <div un-m="x-lg md:auto">
       <SlideContent
         title="Ultimas imagens"
-        un-m="b-xl"
+        un-mb-xl
         :items="lastImages"
       >
         <template #default="item">
           <Img
-            un-w="200px"
+            un-w-200px
             :url="item.url"
             clickable
             @click="openImage(item)"
@@ -92,9 +93,9 @@ const lastImages = [
         </template>
       </SlideContent>
 
-      <SlideContent
+      <!-- <SlideContent
         title="Ultimas pastas"
-        un-m="b-xl"
+        un-mb-xl
         :items="lastFolders"
       >
         <template #default="item">
@@ -104,15 +105,15 @@ const lastImages = [
             :images="item.images"
           />
         </template>
-      </SlideContent>
+      </SlideContent> -->
 
-      <ShortcutAction
+      <!-- <ShortcutAction
         @add-folder="executeAction('AddFolderModal')"
         @add-image="executeAction('AddImageModal')"
         @add-category="executeAction('AddCategoryModal')"
-      />
+      /> -->
 
-      <Modal
+      <!-- <Modal
         ref="modalRef"
         v-model="showModal"
         @close="closeModal"
@@ -122,7 +123,7 @@ const lastImages = [
           v-bind="modalProps"
           @close="modalRef.closeModal()"
         />
-      </Modal>
+      </Modal> -->
     </div>
   </div>
 </template>

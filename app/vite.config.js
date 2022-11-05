@@ -45,6 +45,7 @@ export default defineConfig({
     AutoImport({
       include: [
         /\.vue\??/, // .vue
+        /\.js\??/, // .js
       ],
 
       imports: [

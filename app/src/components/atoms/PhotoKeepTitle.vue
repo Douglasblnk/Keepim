@@ -30,8 +30,8 @@ onBeforeUnmount(() => Fn())
     un-py-lg
     un-bg-background
     un-select-none
-    un-z-marginals
-    :un-text="reachedTop ? 'gray-100 [24px] center' : 'gray-100 [38px] center'"
+    un-z-10
+    :un-text="reachedTop ? 'gray-100 24px center' : 'gray-100 38px center'"
   >
     PhotoKeep
   </h1>

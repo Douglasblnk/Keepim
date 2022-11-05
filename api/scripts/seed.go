@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"photokeep-api/internals/models"
+	securityUtils "photokeep-api/internals/utils/security"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -58,7 +59,14 @@ func userSeed(client *mongo.Client, ctx context.Context) {
 	
 	for index := range users {
 		user := users[index]
-		user.Password = "123"
+
+		hash, err := securityUtils.HashPassword("123")
+		 
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		user.Password = string(hash)
 
 		insertValue[index] = user
 	}
