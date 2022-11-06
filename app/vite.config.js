@@ -23,30 +23,40 @@ export default defineConfig({
       'axios',
       'swiper',
       '@vueuse/core',
+      '@vueuse/integrations/useAxios',
     ],
   },
   plugins: [
     vue(),
 
     Pages({
-      extendRoute(route) {
-        const { path } = route
+      dirs: [ { dir: 'src/pages', baseRoute: '' } ],
 
-        if (path === '/')
-          return route
+      // extendRoute(route) {
+      //   const { path } = route
 
-        return {
-          ...route,
-          meta: { auth: true },
-        }
-      },
+      //   if (path === '/')
+      //     return route
+
+      //   return {
+      //     ...route,
+      //     meta: { auth: true },
+      //   }
+      // },
     }),
 
     AutoImport({
-      include: [
-        /\.vue\??/, // .vue
-        /\.js\??/, // .js
+      dirs: [
+        'src/composables/**',
       ],
+
+      vueTemplate: true,
+
+      eslintrc: {
+        enabled: true,
+      },
+
+      dts: 'src/auto-imports.d.ts',
 
       imports: [
         'vue',
@@ -64,10 +74,10 @@ export default defineConfig({
     }),
 
     Components({
-      dirs: [
-        'src/components',
-        'src/pages',
-      ],
+      dirs: [ 'src/components' ],
+
+      dts: 'src/components.d.ts',
+
       resolvers: [
         IconsResolver(),
       ],
