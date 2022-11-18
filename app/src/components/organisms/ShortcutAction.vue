@@ -7,74 +7,74 @@ defineEmits([
 </script>
 
 <template>
-  <div w:flex="~ col">
-    <p w:text="medium">
+  <div un-flex="~ col">
+    <p un-text="medium">
       Atalhos
     </p>
 
     <div
-      w:flex="~ wrap"
-      w:m="t-sm"
+      un-flex="~ wrap"
+      un-m="t-sm"
     >
       <div
-        w:flex="~ col"
-        w:align="items-center"
-        w:p="md"
-        w:m="r-sm b-sm"
-        w:bg="ascendent active:gray-500 md:hover:gray-500"
-        w:transition="~"
-        w:rounded="md"
-        w:cursor="pointer"
+        un-flex="~ col"
+        un-align="items-center"
+        un-p="md"
+        un-m="r-sm b-sm"
+        un-bg="ascendent active:gray-500 md:hover:gray-500"
+        un-transition="~"
+        un-rounded="md"
+        un-cursor="pointer"
         @click="$emit('add-folder')"
       >
         <FIcon
           icon="folder-plus"
-          w:m="b-sm"
+          un-m="b-sm"
         />
 
-        <p w:select="none">
+        <p un-select="none">
           Adicionar pasta
         </p>
       </div>
 
       <div
-        w:flex="~ col"
-        w:align="items-center"
-        w:p="md"
-        w:m="r-sm b-sm"
-        w:bg="ascendent active:gray-500 md:hover:gray-500"
-        w:transition="~"
-        w:rounded="md"
-        w:cursor="pointer"
+        un-flex="~ col"
+        un-align="items-center"
+        un-p="md"
+        un-m="r-sm b-sm"
+        un-bg="ascendent active:gray-500 md:hover:gray-500"
+        un-transition="~"
+        un-rounded="md"
+        un-cursor="pointer"
         @click="$emit('add-image')"
       >
         <FIcon
           icon="images"
-          w:m="b-sm"
+          un-m="b-sm"
         />
 
-        <p w:select="none">
+        <p un-select="none">
           Adicionar imagem
         </p>
       </div>
 
       <div
-        w:flex="~ col"
-        w:align="items-center"
-        w:p="md"
-        w:m="r-sm b-sm"
-        w:bg="ascendent active:gray-500 md:hover:gray-500"
-        w:transition="~"
-        w:rounded="md"
-        w:cursor="pointer"
+        un-flex="~ col"
+        un-align="items-center"
+        un-p="md"
+        un-m="r-sm b-sm"
+        un-bg="ascendent active:gray-500 md:hover:gray-500"
+        un-transition="~"
+        un-rounded="md"
+        un-cursor="pointer"
         @click="$emit('add-category')"
       >
         <FIcon
           icon="tags"
-          w:m="b-sm"
+          un-m="b-sm"
         />
 
-        <p w:select="none">
+        <p un-select="none">
           Adicionar categoria
         </p>
       </div>

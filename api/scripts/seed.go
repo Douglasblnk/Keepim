@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"photokeep-api/internals/models"
+	securityUtils "photokeep-api/internals/utils/security"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -13,7 +15,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func Connect(uri string) (*mongo.Client, context.Context, context.CancelFunc) {
+func connect(uri string) (*mongo.Client, context.Context, context.CancelFunc) {
 	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
 
 	clientOptions := options.Client().ApplyURI(uri).SetServerAPIOptions(serverAPIOptions)
@@ -29,8 +31,8 @@ func Connect(uri string) (*mongo.Client, context.Context, context.CancelFunc) {
 	return client, ctx, cancel
 }
 
-func InsertMany(data []interface{}) {
-	client, ctx, cancel := Connect("mongodb://localhost:27017/")
+func insertMany(data []interface{}) {
+	client, ctx, cancel := connect("mongodb://localhost:27017/")
 	defer cancel()
 
 	coll := client.Database(os.Getenv("DB_NAME")).Collection("user")
@@ -38,7 +40,7 @@ func InsertMany(data []interface{}) {
 	coll.InsertMany(ctx, data)
 }
 
-func UserSeed(client *mongo.Client, ctx context.Context) {
+func userSeed(client *mongo.Client, ctx context.Context) {
 	collection := client.Database(os.Getenv("DB_NAME")).Collection("user")
 
 	cursor, err := collection.Find(ctx, bson.M{})
@@ -47,13 +49,29 @@ func UserSeed(client *mongo.Client, ctx context.Context) {
 		log.Fatal(err)
 	}
 
-	var users []interface{}
+	var users []models.User
 
 	if err = cursor.All(ctx, &users); err != nil {
 		log.Fatal(err)
 	}
 
-	InsertMany(users)
+	insertValue := make([]interface{}, len(users))
+	
+	for index := range users {
+		user := users[index]
+
+		hash, err := securityUtils.HashPassword("123")
+		 
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		user.Password = string(hash)
+
+		insertValue[index] = user
+	}
+
+	insertMany(insertValue)
 }
 
 func init() { godotenv.Load() }
@@ -66,10 +84,10 @@ func main() {
 		os.Getenv("DB_NAME"),
 	)
 
-	client, ctx, cancel := Connect(uri)
+	client, ctx, cancel := connect(uri)
 	defer cancel()
 	
-	UserSeed(client, ctx)
+	userSeed(client, ctx)
 
 
 	client.Disconnect(ctx)

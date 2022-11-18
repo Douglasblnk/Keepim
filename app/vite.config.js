@@ -1,18 +1,19 @@
-import { resolve } from 'path';
-import vue from '@vitejs/plugin-vue';
-import WindiCSS from 'vite-plugin-windicss';
-import Components from 'unplugin-vue-components/vite';
-import AutoImport from 'unplugin-auto-import/vite';
-import Pages from 'vite-plugin-pages';
-import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
-import windiConfig from './windi.config';
+import { resolve } from 'path'
+import vue from '@vitejs/plugin-vue'
+import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Pages from 'vite-plugin-pages'
+import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
+import Unocss from 'unocss/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 
 export default defineConfig({
   resolve: {
     alias: {
-      '@': [resolve(__dirname, './src')],
-      '@composables': [resolve(__dirname, './src/composables')],
+      '@': [ resolve(__dirname, './src') ],
+      '@composables': [ resolve(__dirname, './src/composables') ],
     },
   },
   optimizeDeps: {
@@ -22,34 +23,47 @@ export default defineConfig({
       'axios',
       'swiper',
       '@vueuse/core',
+      '@vueuse/integrations/useAxios',
     ],
   },
   plugins: [
     vue(),
+
     Pages({
-      extendRoute(route) {
-        const { path } = route;
+      dirs: [ { dir: 'src/pages', baseRoute: '' } ],
 
-        if (path === '/') return route;
+      // extendRoute(route) {
+      //   const { path } = route
 
-        return {
-          ...route,
-          meta: { auth: true },
-        };
-      },
+      //   if (path === '/')
+      //     return route
+
+      //   return {
+      //     ...route,
+      //     meta: { auth: true },
+      //   }
+      // },
     }),
-    WindiCSS({
-      config: windiConfig,
-    }),
+
     AutoImport({
-      include: [
-        /\.vue\??/, // .vue
+      dirs: [
+        'src/composables/**',
       ],
+
+      vueTemplate: true,
+
+      eslintrc: {
+        enabled: true,
+      },
+
+      dts: 'src/auto-imports.d.ts',
+
       imports: [
         'vue',
         'vue-router',
       ],
     }),
+
     VitePWA({
       manifest: {
         name: 'PhotoKeep',
@@ -58,11 +72,21 @@ export default defineConfig({
         display: 'standalone',
       },
     }),
+
     Components({
-      dirs: [
-        'src/components',
-        'src/pages',
+      dirs: [ 'src/components' ],
+
+      dts: 'src/components.d.ts',
+
+      resolvers: [
+        IconsResolver(),
       ],
     }),
+
+    Icons({
+      autoInstall: true,
+    }),
+
+    Unocss(),
   ],
-});
+})

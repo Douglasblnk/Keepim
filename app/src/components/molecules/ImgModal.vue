@@ -16,15 +16,15 @@ defineEmits(['close']);
 
 <template>
   <div
-    w:flex="~ col"
-    w:justify="between"
-    w:h="90vh"
-    w:w="90vw md:50vw"
+    un-flex="~ col"
+    un-justify="between"
+    un-h="90vh"
+    un-w="90vw md:50vw"
   >
     <div
-      w:flex="~ 1"
-      w:justify="center"
-      w:align="items-center"
+      un-flex="~ 1"
+      un-justify="center"
+      un-align="items-center"
     >
       <Img
         :url="url"
@@ -33,15 +33,15 @@ defineEmits(['close']);
     </div>
 
     <div
-      w:flex="~ 2"
-      w:p="t-lg"
-      w:justify="center"
+      un-flex="~ 2"
+      un-p="t-lg"
+      un-justify="center"
     >
       <Button
         icon="times"
         icon-size="lg"
-        w:w="!xxl"
-        w:h="!xxl"
+        un-w="!xxl"
+        un-h="!xxl"
         circle
         primary
         @click="$emit('close')"

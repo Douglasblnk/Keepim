@@ -37,28 +37,28 @@ const openFileExplorer = () => {
 
 <template>
   <div
-    w:flex="~ col"
-    w:align="items-center"
-    w:w="full"
-    w:h="auto"
-    w:border="white dashed ~"
-    w:rounded="md"
-    w:p="md"
-    w:m="t-sm"
-    w:cursor="pointer"
+    un-flex="~ col"
+    un-align="items-center"
+    un-w="full"
+    un-h="auto"
+    un-border="white dashed ~"
+    un-rounded="md"
+    un-p="md"
+    un-m="t-sm"
+    un-cursor="pointer"
     @click="openFileExplorer"
   >
     <template v-if="!filesList.length">
       <FIcon
         icon="cloud-upload-alt"
         size="3x"
-        w:text="white"
+        un-text="white"
       />
 
       <p
-        w:m="t-sm"
-        w:text="white center"
-        w:select="none"
+        un-m="t-sm"
+        un-text="white center"
+        un-select="none"
       >
         Arraste ou clique para fazer o upload
       </p>
@@ -66,13 +66,13 @@ const openFileExplorer = () => {
 
     <div
       v-else
-      w:flex="~"
-      w:w="full"
+      un-flex="~"
+      un-w="full"
     >
       <Img
         v-for="(image, index) in reducedImagesBlob"
         class="add-folder-modal__img"
-        w:w="50px"
+        un-w="50px"
         ratio="1"
         rounded
         elevated
@@ -83,16 +83,16 @@ const openFileExplorer = () => {
       <div
         v-if="filesBlob.length > 5"
         class="add-folder-modal__img"
-        w:w="50px"
-        w:h="50px"
-        w:flex="~"
-        w:justify="center"
-        w:align="items-center"
-        w:rounded="full"
-        w:bg="gray-500"
-        w:z="marginals"
+        un-w="50px"
+        un-h="50px"
+        un-flex="~"
+        un-justify="center"
+        un-align="items-center"
+        un-rounded="full"
+        un-bg="gray-500"
+        un-z="marginals"
       >
-        <p w:text="white">
+        <p un-text="white">
           + {{ filesBlob.length - 5 }}
         </p>
       </div>
@@ -100,7 +100,7 @@ const openFileExplorer = () => {
 
     <input
       ref="fileRef"
-      w:display="hidden"
+      un-display="hidden"
       type="file"
       accept="image/png, image/jpeg"
       multiple

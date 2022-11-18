@@ -1,19 +1,14 @@
 <script setup>
-defineProps({
+const props = defineProps({
   url: String,
-
   style: String,
-
   alt: String,
-
   rounded: Boolean,
-
   elevated: Boolean,
-
   clickable: Boolean,
 
   ratio: {
-    type: [String, Number],
+    type: [ String, Number ],
     default: 16 / 9,
   },
 
@@ -21,36 +16,36 @@ defineProps({
     type: String,
     default: 'cover',
   },
-});
+})
 </script>
 
 <template>
   <div
-    w:pos="relative"
-    w:w="full"
-    w:h="full"
-    w:display="inline-block"
-    w:text="middle"
-    w:overflow="hidden"
-    :w:shadow="elevated ? '6' : 'none'"
-    :w:rounded="rounded ? 'full' : 'md'"
+    un-pos-relative
+    un-w-full
+    un-h-full
+    un-display-inline-block
+    un-text-middle
+    un-overflow-hidden
+    :un-shadow="elevated ? '6' : 'none'"
+    :un-rounded="rounded ? 'full' : 'md'"
   >
     <div
       v-if="ratio"
-      :style="{ paddingBottom: `${ 100 / Number(ratio) }%` }"
+      :style="{ paddingBottom: `${100 / Number(ratio)}%` }"
     />
 
-    <div w:pos="absolute top-0 left-0 right-0 bottom-0">
+    <div un-pos="absolute top-0 left-0 right-0 bottom-0">
       <img
-        w:w="full"
-        w:h="full"
-        w:border="none"
-        w:transition="~"
-        :w:opacity="clickable ? 'active:50 md:hover:50' : ''"
-        :w:cursor="clickable ? 'pointer' : ''"
+        un-w-full
+        un-h-full
+        un-border-none
+        un-transition
         :src="url"
-        :style="{ objectFit: objectFit, ...style }"
+        :style="{ objectFit, ...style }"
         :alt="alt"
+        :un-opacity="clickable && 'active:50 md:hover:50'"
+        :un-cursor="clickable && 'pointer'"
       >
     </div>
   </div>
