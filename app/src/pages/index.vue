@@ -1,73 +1,77 @@
 <script setup>
-import { useRouter } from 'vue-router';
-import useRequest from '@composables/use-request';
-import useAlert from '@composables/use-alert';
-import { setToken } from '@/utils/token';
+import { useRouter } from 'vue-router'
+import useAxios from '@composables/use-axios'
+import useAlert from '@composables/use-alert'
+import useState from '@composables/use-state'
+import { setToken } from '@/utils/token'
 
-const password = ref();
-const user = ref();
-const loading = ref(false);
+const password = ref()
+const username = ref()
+const loading = ref(false)
 
-const { useAxios } = useRequest();
-const { setAlert } = useAlert();
-const { replace } = useRouter();
+const { Post } = useAxios()
+const { setAlert } = useAlert()
+const { replace } = useRouter()
+const { setUserState } = useState()
 
 const setErrorState = (error) => {
   setAlert({
     type: 'negative',
     text: error,
-  });
-};
+  })
+}
 
-const makeLogin = async() => {
-  if (!password.value) return setErrorState('Por favor, digite suas credenciais.');
+const makeLogin = async () => {
+  if (!password.value)
+    return setErrorState('Por favor, digite suas credenciais.')
 
-  loading.value = true;
+  loading.value = true
 
-  const { data, error } = await useAxios('auth')
-    .post({
-      data: {
-        id: user.value.toLowerCase(),
-        password: password.value,
-      },
-    });
+  const { data, error } = await Post('sign-in')
+    .data({
+      username: username.value.toLowerCase(),
+      password: password.value,
+    })
+    .execute()
 
-  loading.value = false;
+  loading.value = false
 
-  if (!data && error) return setErrorState(error.data);
+  if (!data && error)
+    return setErrorState(error.data)
 
   setAlert({
     type: 'positive',
     text: 'Login efetuado com sucesso!',
     timeout: 1000,
-  });
+  })
 
-  setToken(data);
+  setToken(data)
+  setUserState(data)
 
-  setTimeout(() => replace('/home'), 1000);
-};
+  setTimeout(() => replace('/home'), 1000)
+}
 </script>
 
 <template>
   <div
-    w:flex="~ col"
-    w:h="screen"
-    w:w="screen"
-    w:justify="around"
-    w:align="items-center"
+    un-flex="~ col"
+    un-h-screen
+    un-w-screen
+    un-justify-around
+    un-items-center
   >
     <div
-      w:flex="~ col [4]"
-      w:justify="center"
+      un-flex="~ col [4]"
+      un-justify-center
     >
       <PhotoKeepTitle />
 
-      <div w:m="t-md">
+      <div un-mt>
         <Input
-          v-model="user"
+          v-model="username"
           type="text"
           placeholder="Usuário:"
-          w:m="t-xl"
+          un-m="t-xl"
           @keydown.enter="makeLogin"
         />
 
@@ -75,22 +79,28 @@ const makeLogin = async() => {
           v-model="password"
           type="password"
           placeholder="Senha:"
-          w:m="t-md"
+          un-m="t-md"
           @keydown.enter="makeLogin"
         />
       </div>
     </div>
 
-    <div w:flex="1">
+    <div un-flex="1">
       <Button
-        w:p="!8"
-        icon="arrow-right"
-        icon-size="lg"
         primary
+        un-text-white
         circle
-        :loading="loading"
+        un-w-14
+        un-h-14
         @click="makeLogin"
-      />
+      >
+        <Icon
+          v-if="!loading"
+          icon="i-mdi-arrow-right"
+          un-text-white
+          un-text-md
+        />
+      </Button>
     </div>
   </div>
 </template>

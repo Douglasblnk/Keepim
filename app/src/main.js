@@ -1,25 +1,25 @@
-import { createApp } from 'vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { createApp } from 'vue'
 
-import 'virtual:windi.css';
-import App from './App.vue';
+import 'uno.css'
+import 'uno:components.css'
+import 'uno:utilities.css'
+import '@/styles/index.sass'
+import '@/styles/transitions.sass'
+import '@/styles/variables.sass'
 
-import icons from '@/utils/icons';
-import createRouterInstance from '@/routes';
-import { validateToken } from '@/utils/token';
+import App from './App.vue'
 
-icons();
+import createRouterInstance from '@/routes'
+import { validateToken } from '@/utils/token'
 
-const router = createRouterInstance();
+const router = createRouterInstance()
 
-const app = createApp(App);
+const app = createApp(App)
 
-app.use(router);
+app.use(router)
 
 router.isReady().then(() => {
   validateToken(router.currentRoute).then(() => {
-    app
-      .component('FIcon', FontAwesomeIcon)
-      .mount('#app');
-  });
-});
+    app.mount('#app')
+  })
+})

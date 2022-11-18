@@ -1,10 +1,55 @@
-const { defineConfig } = require('eslint-define-config');
-
-module.exports = defineConfig({
+module.exports = {
+  extends: [
+    '@antfu',
+    '.eslintrc-auto-import.json',
+  ],
   rules: {
-    semi: ['error', 'always'],
-    'quote-props': 0,
-    'no-unused-vars': 'off',
-    'no-undef': 'off',
+    'curly': [
+      'error',
+      'all',
+    ],
+    'vue/max-attributes-per-line': [
+      'error',
+      {
+        singleline: { max: 1 },
+        multiline: { max: 1 },
+      },
+    ],
+    'vue/attributes-order': [
+      'error',
+      {
+        order: [
+          'DEFINITION',
+          'LIST_RENDERING',
+          'CONDITIONALS',
+          'TWO_WAY_BINDING',
+          'RENDER_MODIFIERS',
+          'OTHER_DIRECTIVES',
+          'UNIQUE',
+          'SLOT',
+          'GLOBAL',
+          'OTHER_ATTR',
+          'EVENTS',
+          'CONTENT',
+        ],
+        alphabetical: false,
+      },
+    ],
+    'array-bracket-spacing': [ 'error', 'always' ],
+    'max-len': 'off',
+    'no-shadow': [ 'error', { ignoreOnInitialization: true } ],
+    'no-unused-vars': [
+      'error',
+      {
+        ignoreRestSiblings: true,
+        argsIgnorePattern: '^_',
+      },
+    ],
   },
-});
+  globals: {
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly',
+  },
+}

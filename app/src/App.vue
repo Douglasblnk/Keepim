@@ -1,14 +1,14 @@
 <script setup>
-import { useRoute } from 'vue-router';
-import useAlert from '@/composables/use-alert';
+import { useRoute } from 'vue-router'
+import useAlert from '@/composables/use-alert'
 
-const { isShowing, alertText, alertType } = useAlert();
+const { isShowing, alertText, alertType } = useAlert()
 
 const isBottomNavHidden = computed(() => {
-  const { name } = useRoute();
+  const { name } = useRoute()
 
-  return name !== 'index';
-});
+  return name !== 'index'
+})
 </script>
 
 <template>
@@ -36,8 +36,3 @@ const isBottomNavHidden = computed(() => {
     <BottomNav v-if="isBottomNavHidden" />
   </transition>
 </template>
-
-<style>
-@import './styles/styles.css';
-@import './styles/transitions.css';
-</style>

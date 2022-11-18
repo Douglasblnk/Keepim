@@ -14,7 +14,7 @@ defineProps({
       'warning', 'info', 'positive', 'negative',
     ].includes(type),
   },
-});
+})
 </script>
 
 <template>
@@ -25,23 +25,23 @@ defineProps({
     >
       <div
         v-if="isShowing"
-        w:w="full"
-        w:flex="~"
-        w:justify="center"
-        w:pos="fixed top-lg"
-        w:z="notify"
+        un-pos="fixed top-lg"
+        un-w-full
+        un-flex
+        un-justify-center
+        un-z-notify
       >
         <div
           :class="`bg-${type}`"
-          w:h="xl"
-          w:flex="~"
-          w:text="white base"
-          w:justify="center"
-          w:align="items-center"
-          w:p="x-lg"
-          w:rounded="full"
-          w:font="base"
-          w:shadow="10 gray-700"
+          un-text="white base"
+          un-shadow="10 gray-700"
+          un-h-xl
+          un-flex
+          un-justify-center
+          un-items-center
+          un-px-lg
+          un-rounded-full
+          un-font-base
         >
           {{ text }}
         </div>

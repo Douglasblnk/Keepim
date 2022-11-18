@@ -6,10 +6,16 @@ import (
 	"photokeep-api/api/rest/routes"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func InitServer() {
 	app := fiber.New()
+	
+	app.Use(cors.New(cors.Config{
+    AllowOrigins: "http://localhost:8080",
+    AllowHeaders:  "Origin, Content-Type, Accept",
+	}))
 
 	routes.SetUpRoutes(app)
 

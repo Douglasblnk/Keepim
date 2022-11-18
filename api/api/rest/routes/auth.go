@@ -8,4 +8,5 @@ import (
 
 func AuthRoutes(app *fiber.App) {
 	app.Post("/sign-in", handlers.SignInHandler)
+	app.Post("validate-access-token", handlers.ValidateAccessTokenHandler)
 }

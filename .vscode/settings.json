@@ -10,11 +10,16 @@
   "editor.quickSuggestions": {
     "strings": true
   },
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "windicss.sortOnSave": true,
+  }
 }

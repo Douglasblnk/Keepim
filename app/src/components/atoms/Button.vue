@@ -10,25 +10,14 @@ const props = defineProps({
     default: '',
   },
 
-  icon: {
-    type: String,
-    default: '',
-  },
-
-  iconSize: {
-    type: String,
-    default: '',
-  },
-
   primary: Boolean,
   secondary: Boolean,
   ascendent: Boolean,
   disabled: Boolean,
   loading: Boolean,
   circle: Boolean,
-  flat: Boolean,
   unelevated: Boolean,
-});
+})
 
 const customClasses = computed(() => ({
   'p-button--primary': props.primary,
@@ -37,101 +26,55 @@ const customClasses = computed(() => ({
   'p-button--disabled': props.disabled,
   'p-button--loading': props.loading,
   'p-button--circle': props.circle,
-  'p-button--flat': props.flat,
   'p-button--unelevated': props.unelevated,
-}));
-
+}))
 </script>
 
 <template>
   <button
     class="p-button"
+    un-rounded
+    un-bg-gray-200
+    un-py-3
+    un-px-6
+    un-transition-shadow
+    un-shadow-2
+    un-outline-none
+    un-border-none
+    un-active:shadow-8
     :class="customClasses"
     :disabled="disabled || loading"
     :type="type"
   >
-    <div
-      class="p-button__icon"
-      v-if="icon"
-    >
-      <FIcon
-        v-if="!loading"
-        :icon="icon"
-        :size="iconSize"
-      />
-
-      <FIcon
-        v-else
-        icon="spinner"
-        class="fa-spin"
-        :size="iconSize"
-      />
-    </div>
-
-    <span
-      w:text="white"
-      w:font="semibold tracking-wide"
-      w:select="none"
-    >
-      {{ label }}
-    </span>
+    <slot>
+      <span
+        un-text="white"
+        un-font="semibold tracking-wide"
+        un-select="none"
+      >
+        {{ label }}
+      </span>
+    </slot>
   </button>
 </template>
 
-<style lang="postcss">
-.p-button {
-  @apply
-    rounded-full
-    flex
-    bg-gray-200
-    py-2
-    px-5
-    transition-shadow
-    shadow-2
-    items-center
-    justify-center
-    !outline-none
-    active:shadow-8;
+<style lang="sass">
+.p-button
+  &--primary
+    @apply bg-primary
 
-  &__icon {
-    @apply
-      text-white;
-  }
+  &--secondary
+    @apply bg-secondary
 
-  &--primary {
-    @apply
-      bg-primary;
-  }
+  &--ascendent
+    @apply bg-ascendent
 
-  &--secondary {
-    @apply
-      bg-secondary;
-  }
+  &--disabled
+    @apply opacity-30
 
-  &--ascendent {
-    @apply
-      bg-ascendent;
-  }
+  &--circle
+    @apply rounded-full p-0
 
-  &--disabled {
-    @apply
-      opacity-30;
-  }
-
-  &--circle {
-    @apply
-      h-12
-      w-12;
-  }
-
-  &--flat {
-    @apply
-      rounded-md;
-  }
-
-  &--unelevated {
-    @apply
-      !shadow-none;
-  }
-}
+  &--unelevated
+    @apply shadow-none
 </style>
