@@ -25,8 +25,7 @@ function handleIndexPage() {
 }
 
 function handleUncauthRoute() {
-  if (hasToken())
-    return replace.value('/home')
+  if (hasToken()) { return replace.value('/home') }
 
   removeAccess()
 }
@@ -34,11 +33,9 @@ function handleUncauthRoute() {
 function handleCommonRoutes({ to }) {
   const { meta, name } = to
 
-  if (!name)
-    return handleUncauthRoute()
+  if (!name) { return handleUncauthRoute() }
 
-  if (!meta.auth || !hasToken())
-    removeAccess()
+  if (!meta.auth || !hasToken()) { removeAccess() }
 }
 
 function handleRoutes({ to, next }) {
@@ -57,9 +54,9 @@ export default function createRouterInstance() {
     routes,
   })
 
-  replace.value = router.replace
+  // replace.value = router.replace
 
-  router.beforeEach((to, from, next) => handleRoutes({ to, next }))
+  // router.beforeEach((to, from, next) => handleRoutes({ to, next }))
 
   return router
 }

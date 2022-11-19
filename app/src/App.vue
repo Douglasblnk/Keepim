@@ -1,13 +1,16 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import useAlert from '@/composables/use-alert'
 
-const { isShowing, alertText, alertType } = useAlert()
+const $q = useQuasar()
+
+$q.iconMapFn = iconName => (iconName.startsWith('i-') ? { cls: iconName } : undefined)
+
+$q.dark.set(true)
 
 const isBottomNavHidden = computed(() => {
   const { name } = useRoute()
 
-  return name !== 'index'
+  return name !== undefined && name !== 'login'
 })
 </script>
 
@@ -22,12 +25,6 @@ const isBottomNavHidden = computed(() => {
       </transition>
     </Suspense>
   </RouterView>
-
-  <Alert
-    :is-showing="isShowing"
-    :type="alertType"
-    :text="alertText"
-  />
 
   <transition
     name="fade"
