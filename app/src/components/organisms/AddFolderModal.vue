@@ -1,6 +1,6 @@
 <script setup>
 import useAlert from '@composables/use-alert'
-import useRequest from '@/composables/use-axios'
+import useRequest from '@/composables/use-requestst'
 import { getToken } from '@/utils/token'
 
 const emit = defineEmits([ 'close' ])
@@ -23,8 +23,7 @@ const closeModal = () => {
 }
 
 const validateSubmission = () => {
-  if (!folderName.value || !folderDate.value)
-    return false
+  if (!folderName.value || !folderDate.value) { return false }
 
   return true
 }
@@ -36,17 +35,18 @@ const createFolder = async () => {
       date: folderDate.value,
     },
     headers: {
-      token: `Bearer ${ getToken() }`,
+      token: `Bearer ${getToken()}`,
     },
   }
 
   const { data, error } = await useAxios('folder').post(payload)
 
-  if (error && error.status !== 200)
+  if (error && error.status !== 200) {
     return setAlert({
       type: 'negative',
       text: error.data,
     })
+  }
 
   setAlert({
     type: 'positive',
@@ -59,12 +59,13 @@ const createFolder = async () => {
 const confirm = async () => {
   const isValid = validateSubmission()
 
-  if (!isValid)
+  if (!isValid) {
     return setAlert({
       type: 'negative',
       text: 'Preencha os campos corretamente!',
       timeout: 3000,
     })
+  }
 
   await createFolder()
 }
@@ -75,7 +76,7 @@ const confirm = async () => {
     class="add-folder-modal"
     un-w="90vw md:500px"
     un-p="x-lg y-lg"
-    un-bg="ascendent"
+    un-bg="accent"
     un-rounded="md"
   >
     <div

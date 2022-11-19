@@ -1,6 +1,6 @@
 export const user = ref({})
 
-export default function () {
+export default () => {
   const setUserState = (data) => {
     user.value = { ...data }
   }

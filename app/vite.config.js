@@ -1,4 +1,5 @@
 import { resolve } from 'path'
+import { quasar as Quasar, transformAssetUrls } from '@quasar/vite-plugin'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -10,10 +11,13 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 
 export default defineConfig({
+  server: {
+    open: true,
+  },
   resolve: {
     alias: {
-      '@': [ resolve(__dirname, './src') ],
-      '@composables': [ resolve(__dirname, './src/composables') ],
+      '@': resolve(__dirname, './src'),
+      '@composables': resolve(__dirname, './src/composables'),
     },
   },
   optimizeDeps: {
@@ -27,27 +31,17 @@ export default defineConfig({
     ],
   },
   plugins: [
-    vue(),
+    vue({
+      template: { transformAssetUrls },
+    }),
 
     Pages({
       dirs: [ { dir: 'src/pages', baseRoute: '' } ],
-
-      // extendRoute(route) {
-      //   const { path } = route
-
-      //   if (path === '/')
-      //     return route
-
-      //   return {
-      //     ...route,
-      //     meta: { auth: true },
-      //   }
-      // },
     }),
 
     AutoImport({
       dirs: [
-        'src/composables/**',
+        'src/composables/**/**',
       ],
 
       vueTemplate: true,
@@ -61,6 +55,9 @@ export default defineConfig({
       imports: [
         'vue',
         'vue-router',
+        'vue/macros',
+        'quasar',
+        'vee-validate',
       ],
     }),
 
@@ -83,8 +80,11 @@ export default defineConfig({
       ],
     }),
 
-    Icons({
-      autoInstall: true,
+    Icons(),
+
+    Quasar({
+      autoImportComponentCase: 'pascal',
+      sassVariables: 'src/styles/variables.sass',
     }),
 
     Unocss(),

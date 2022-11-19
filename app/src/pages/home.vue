@@ -16,7 +16,7 @@ const isComponent = computed(() => modalComponent.value)
 
 const executeAction = (component) => {
   modalComponent.value = defineAsyncComponent(
-    () => import(`../components/organisms/${ component }.vue`),
+    () => import(`../components/organisms/${component}.vue`),
   )
 
   showModal.value = true
@@ -75,8 +75,6 @@ const lastImages = [
     un-mx-auto
     un-text-white
   >
-    <PhotoKeepTitle />
-
     <div un-m="x-lg md:auto">
       <SlideContent
         title="Ultimas imagens"
@@ -127,3 +125,7 @@ const lastImages = [
     </div>
   </div>
 </template>
+
+<route lang="yaml">
+alias: /
+</route>

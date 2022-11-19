@@ -3,7 +3,7 @@ defineEmits([
   'add-folder',
   'add-image',
   'add-category',
-]);
+])
 </script>
 
 <template>
@@ -21,7 +21,7 @@ defineEmits([
         un-align="items-center"
         un-p="md"
         un-m="r-sm b-sm"
-        un-bg="ascendent active:gray-500 md:hover:gray-500"
+        un-bg="accent active:gray-500 md:hover:gray-500"
         un-transition="~"
         un-rounded="md"
         un-cursor="pointer"
@@ -42,7 +42,7 @@ defineEmits([
         un-align="items-center"
         un-p="md"
         un-m="r-sm b-sm"
-        un-bg="ascendent active:gray-500 md:hover:gray-500"
+        un-bg="accent active:gray-500 md:hover:gray-500"
         un-transition="~"
         un-rounded="md"
         un-cursor="pointer"
@@ -63,7 +63,7 @@ defineEmits([
         un-align="items-center"
         un-p="md"
         un-m="r-sm b-sm"
-        un-bg="ascendent active:gray-500 md:hover:gray-500"
+        un-bg="accent active:gray-500 md:hover:gray-500"
         un-transition="~"
         un-rounded="md"
         un-cursor="pointer"

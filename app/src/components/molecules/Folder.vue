@@ -14,11 +14,11 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-});
+})
 
 const reducedImgs = computed(() => {
-  return props.images.splice(0, 5);
-});
+  return props.images.splice(0, 5)
+})
 </script>
 
 <template>
@@ -27,7 +27,7 @@ const reducedImgs = computed(() => {
     un-w="200px"
     un-flex="~ col"
     un-p="x-md y-md"
-    un-bg="ascendent active:gray-500 md:hover:gray-500"
+    un-bg="accent active:gray-500 md:hover:gray-500"
     un-cursor="pointer"
     un-transition="~"
     un-rounded="md"
