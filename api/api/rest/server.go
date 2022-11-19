@@ -13,7 +13,7 @@ func InitServer() {
 	app := fiber.New()
 	
 	app.Use(cors.New(cors.Config{
-    AllowOrigins: "http://localhost:8080",
+    AllowOrigins: "http://localhost:5173",
     AllowHeaders:  "Origin, Content-Type, Accept",
 	}))
 

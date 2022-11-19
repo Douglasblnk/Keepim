@@ -11,7 +11,7 @@ func ValidateUser(username string, password string) (*dto.UserDTO, error) {
 	user, err := userRepository.FindUserByUsername(username)
 
 	if err != nil {
-		return nil, err
+		return nil, exceptions.ErrAuthorizationFailed
 	}
 
 	passwordMatches := securityUtils.CompareHash(user.Password, password)
