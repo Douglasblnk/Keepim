@@ -1,12 +1,9 @@
-@font-face
-  font-family: 'Nunito'
-  src: url('../assets/fonts/Nunito-Regular.ttf') format("truetype")
-  font-weight: normal
+@import 'transitions'
 
-@font-face
+@import 'quasar/index'
+
+*
   font-family: 'Nunito'
-  src: url('../assets/fonts/Nunito-ExtraBold.ttf') format("truetype")
-  font-weight: 900
 
 html
   -webkit-font-smoothing: antialiased
@@ -15,16 +12,12 @@ html
   margin: 0
   padding: 0
 
-span, p, strong, small, h1, h2, h3, h4, h5
-  font-family: 'Nunito'
-
 body
   width: 100%
   min-width: 320px
-  min-height: 100vh
   margin: 0 !important
   padding: 0
-  background: var(--color-background)
+  background: var(--color-white)
 
 button
   cursor: pointer

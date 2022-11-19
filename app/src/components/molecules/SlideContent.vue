@@ -1,6 +1,4 @@
 <script setup>
-import useSwiper from '@composables/use-swiper'
-
 const props = defineProps({
   title: {
     type: String,
@@ -20,8 +18,10 @@ const props = defineProps({
 
 defineEmits([ 'seeAll' ])
 
+const { createSwiper } = useUtils()
+
 onMounted(async () => {
-  await useSwiper(
+  await createSwiper(
     '.swiper',
     {
       slidesPerView: 'auto',
@@ -35,7 +35,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div un-flex un-flex-col>
+  <div
+    un-flex
+    un-flex-col
+  >
     <div
       un-flex
       un-justify-between

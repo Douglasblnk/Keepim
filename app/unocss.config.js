@@ -3,6 +3,7 @@ import {
   presetAttributify,
   presetIcons,
   presetUno,
+  presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
@@ -39,6 +40,10 @@ const baseSize = {
 }
 
 export default defineConfig({
+  shortcuts: [
+    { column: 'flex flex-wrap flex-col h-auto min-h-0 max-h-full' },
+  ],
+
   theme: {
     /* ---------------------------------------- */
     /*                   Core                   */
@@ -58,17 +63,20 @@ export default defineConfig({
     /* ---------------------------------------- */
     // https://windicss.org/utilities/colors.html#customization
     colors: {
-      background: '#2C2D30',
+      background: '#202427',
+      inherit: 'inherit',
+      current: 'currentColor',
       transparent: 'transparent',
       black: '#000',
       white: '#fff',
+
       gray: {
-        50: '#f2f2f2',
-        100: '#e8e8e8',
-        200: '#d5d5d5',
-        300: '#bdbdbd',
-        400: '#9e9e9e',
-        500: '#4E4F55',
+        50: '#292D36',
+      },
+
+      dark: {
+        DEFAULT: '#202427',
+        page: '#202427',
       },
 
       positive: '#21BA45',
@@ -78,7 +86,7 @@ export default defineConfig({
 
       primary: '#4599C8',
       secondary: '#A4C2E4',
-      ascendent: '#3D3E43',
+      accent: '#3D3E43',
     },
 
     /* ---------------------------------------- */
@@ -249,12 +257,30 @@ export default defineConfig({
     presetAttributify({
       prefixedOnly: true,
     }),
-
     presetIcons({
       extraProperties: {
         display: 'inline-block',
       },
       warn: true,
+    }),
+    presetWebFonts({
+      provider: 'google',
+      fonts: {
+        nunito: [
+          {
+            name: 'Nunito',
+            weights: [ '400', '700', '800', '900' ],
+            italic: true,
+          },
+        ],
+        montserrat: [
+          {
+            name: 'Montserrat',
+            weights: [ '400', '700', '800', '900' ],
+            italic: true,
+          },
+        ],
+      },
     }),
   ],
 

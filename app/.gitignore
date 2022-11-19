@@ -4,3 +4,7 @@ dist
 dist-ssr
 *.local
 .env
+
+src/components.d.ts
+src/auto-imports.d.ts
+.eslintrc-auto-import.json
