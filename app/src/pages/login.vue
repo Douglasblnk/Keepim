@@ -107,5 +107,7 @@ const makeLogin = async () => {
 </template>
 
 <route lang="yaml">
-alias: /login
+path: /login
+meta:
+  title: Entrar
 </route>

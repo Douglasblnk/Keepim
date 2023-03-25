@@ -36,7 +36,10 @@ const {
       />
     </template>
 
-    <template #prepend>
+    <template
+      v-if="icon"
+      #prepend
+    >
       <QIcon
         :name="icon"
         size="xs"
