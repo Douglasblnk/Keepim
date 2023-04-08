@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { quasar as Quasar, transformAssetUrls } from '@quasar/vite-plugin'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
@@ -28,6 +28,7 @@ export default defineConfig({
       'swiper',
       '@vueuse/core',
       '@vueuse/integrations/useAxios',
+      '@vueuse/head',
     ],
   },
   plugins: [
@@ -58,6 +59,8 @@ export default defineConfig({
         'vue/macros',
         'quasar',
         'vee-validate',
+        '@vueuse/head',
+        '@vueuse/core',
       ],
     }),
 

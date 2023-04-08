@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { ClosePopup, Notify, Quasar, Ripple } from 'quasar'
 import { configure, defineRule } from 'vee-validate'
+import { createHead } from '@vueuse/head'
 import { email, min, regex, required } from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
 import pt_BR from '@vee-validate/i18n/dist/locale/pt_BR.json'
@@ -22,7 +23,9 @@ import createRouterInstance from '@/routes'
 const router = createRouterInstance()
 
 const app = createApp(App)
+const head = createHead()
 
+app.use(head)
 app.use(router)
 
 app.use(Quasar, {

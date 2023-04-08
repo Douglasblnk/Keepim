@@ -3,6 +3,9 @@ import { useRoute } from 'vue-router'
 
 const $q = useQuasar()
 
+const route = useRoute()
+const title = ref()
+
 $q.iconMapFn = iconName => (iconName.startsWith('i-') ? { cls: iconName } : undefined)
 
 $q.dark.set(true)
@@ -11,6 +14,17 @@ const isBottomNavHidden = computed(() => {
   const { name } = useRoute()
 
   return name !== undefined && name !== 'login'
+})
+
+watch(
+  () => route.meta,
+  (meta) => {
+    title.value = meta.title ? ` - ${meta.title}` : ''
+  },
+)
+
+useHead({
+  title: computed(() => `Keepim ${title.value || ''}`),
 })
 </script>
 
