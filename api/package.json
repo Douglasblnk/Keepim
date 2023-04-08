@@ -1,0 +1,39 @@
+{
+  "name": "keepim-serverless-typescript-api",
+  "version": "0.0.1",
+  "main": "serverless.ts",
+  "scripts": {
+    "api": "sls offline start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=14.15.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.309.0",
+    "@aws-sdk/util-dynamodb": "^3.309.0",
+    "@middy/core": "^4.2.8",
+    "@middy/http-json-body-parser": "^4.2.8"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.38.4",
+    "@serverless/typescript": "^3.29.0",
+    "@types/aws-lambda": "^8.10.114",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "esbuild": "^0.17.15",
+    "eslint": "^8.37.0",
+    "json-schema-to-ts": "^2.7.2",
+    "serverless": "^3.29.0",
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-esbuild": "^1.43.0",
+    "serverless-offline": "^12.0.4",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.0.3"
+  },
+  "license": "MIT"
+}
