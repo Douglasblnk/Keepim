@@ -6,6 +6,27 @@ on:
       - main
 
 jobs:
+  deploy-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy API
+        run: npx serverless deploy --stage production
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
   build:
     runs-on: ubuntu-latest
 
@@ -16,24 +37,15 @@ jobs:
       - name: Set node version
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
-
-      - name: Authenticate npm with the GPR
-        uses: jgierer12/npm-auth-gpr@v1.0.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: 14.x
 
       - name: Setup Env
         run: npm install
         working-directory: ./app
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Vite Build
         run: npm run build
         working-directory: ./app
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: jakejarvis/s3-sync-action@master
         with:
