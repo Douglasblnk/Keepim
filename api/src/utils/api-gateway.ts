@@ -1,6 +1,6 @@
-import type { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from 'aws-lambda'
-import type { FromSchema } from 'json-schema-to-ts'
+import type { APIGatewayProxyEvent } from 'aws-lambda'
 
-type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & { body: FromSchema<S> }
-
-export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<ValidatedAPIGatewayProxyEvent<S>, APIGatewayProxyResult>
+export interface CustomAPIGatewayProxyEvent<TBody = any, TPathParameters = any> extends Omit<APIGatewayProxyEvent, 'body' | 'pathParameters'> {
+  body: TBody
+  pathParameters: TPathParameters
+}

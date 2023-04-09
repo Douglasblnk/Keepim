@@ -1,8 +1,9 @@
-import type { APIGatewayProxyEvent } from 'aws-lambda'
 import { lambdaErrorResponse, lambdaOKResponse, middyfy } from '@utils/lambda'
 import { getUserById } from '@service/user'
+import type { CustomAPIGatewayProxyEvent } from '@utils/api-gateway'
+import type { UserSchemaParams } from './schema'
 
-const handler = async (event: APIGatewayProxyEvent) => {
+const handler = async (event: CustomAPIGatewayProxyEvent<any, UserSchemaParams>) => {
   try {
     const { id } = event.pathParameters
 

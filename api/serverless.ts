@@ -8,6 +8,7 @@ const serverlessConfiguration: AWS = {
   frameworkVersion: '3',
   plugins: [
     'serverless-esbuild',
+    'serverless-iam-roles-per-function',
     'serverless-dynamodb-local',
     'serverless-offline',
   ],

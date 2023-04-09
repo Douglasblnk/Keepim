@@ -1,7 +1,3 @@
-export interface HelloSchema {
-  type: 'object'
-  properties: {
-    id: { type: 'string' }
-  }
-  required: ['name']
+export interface UserSchemaParams {
+  id: string
 }
