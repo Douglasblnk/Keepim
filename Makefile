@@ -1,5 +1,5 @@
 back:
-	cd api && make dev
+	cd api && pnpm api
 
 front:
 	cd app && pnpm dev
