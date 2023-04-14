@@ -1,8 +1,9 @@
 <template>
   <div
     class="keepim-title"
-    un-column
-    un-items-end
+    un-flex="~ col"
+    un-justify-center
+    un-items-center
   >
     <span
       class="keepim-title__color"

@@ -8,16 +8,14 @@ const defaultSwiper = {
   grabCursor: true,
 }
 
-const setupDependencies = async (dependency, options) => {
-  if (!dependency.length) {
+async function setupDependencies(dependency, options) {
+  if (!dependency.length)
     return options
-  }
 
   const dependencies = []
 
-  for (const dep of dependency) {
+  for (const dep of dependency)
     dependencies.push((await import('swiper'))[dep])
-  }
 
   return {
     ...options,
@@ -25,17 +23,11 @@ const setupDependencies = async (dependency, options) => {
   }
 }
 
-const createSwiper = async (
-  container,
+export async function createSwiper(container,
   options = defaultSwiper,
-  dependency = [],
-) => {
+  dependency = []) {
   return new Swiper(
     container,
     await setupDependencies(dependency, options),
   )
-}
-
-export default {
-  createSwiper,
 }

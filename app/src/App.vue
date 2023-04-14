@@ -1,6 +1,8 @@
 <script setup>
 import { useRoute } from 'vue-router'
 
+const { routeTransition } = useRouteTransition()
+
 const $q = useQuasar()
 
 const route = useRoute()
@@ -32,7 +34,7 @@ useHead({
   <RouterView v-slot="{ Component }">
     <Suspense>
       <transition
-        name="fade"
+        :name="routeTransition"
         mode="out-in"
       >
         <component :is="Component" />

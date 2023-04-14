@@ -4,9 +4,9 @@ defineProps({
     type: Array,
     default: () => [],
   },
-});
+})
 
-defineEmits(['close', 'confirm']);
+defineEmits([ 'close', 'confirm' ])
 </script>
 
 <template>

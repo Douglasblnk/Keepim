@@ -1,38 +1,39 @@
 <script setup>
-const emit = defineEmits(['inserted']);
+const emit = defineEmits([ 'inserted' ])
 
-const fileRef = ref(null);
-const filesList = ref([]);
-const filesBlob = ref([]);
+const fileRef = ref(null)
+const filesList = ref([])
+const filesBlob = ref([])
 
 const reducedImagesBlob = computed(() => {
-  const copiedImagesBlob = [...filesBlob.value];
+  const copiedImagesBlob = [ ...filesBlob.value ]
 
-  return copiedImagesBlob.splice(0, 5);
-});
+  return copiedImagesBlob.splice(0, 5)
+})
 
-const createFilesBlob = (files) => {
-  filesBlob.value = [];
+function createFilesBlob(files) {
+  filesBlob.value = []
 
   for (const file of files)
-    filesBlob.value.push(URL.createObjectURL(file));
-};
+    filesBlob.value.push(URL.createObjectURL(file))
+}
 
-const addFile = (event) => {
-  const { files } = event.target;
+function addFile(event) {
+  const { files } = event.target
 
-  if (!files.length) return;
+  if (!files.length)
+    return
 
-  filesList.value = [...files];
+  filesList.value = [ ...files ]
 
-  createFilesBlob(files);
+  createFilesBlob(files)
 
-  emit('inserted', files);
-};
+  emit('inserted', files)
+}
 
-const openFileExplorer = () => {
-  fileRef.value.click();
-};
+function openFileExplorer() {
+  fileRef.value.click()
+}
 </script>
 
 <template>
@@ -71,12 +72,12 @@ const openFileExplorer = () => {
     >
       <Img
         v-for="(image, index) in reducedImagesBlob"
+        :key="`image-blob-${index}`"
         class="add-folder-modal__img"
         un-w="50px"
         ratio="1"
         rounded
         elevated
-        :key="`image-blob-${index}`"
         :url="image"
       />
 
@@ -105,6 +106,6 @@ const openFileExplorer = () => {
       accept="image/png, image/jpeg"
       multiple
       @change="addFile"
-    />
+    >
   </div>
 </template>

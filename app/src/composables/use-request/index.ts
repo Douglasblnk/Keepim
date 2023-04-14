@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig } from 'axios'
 import Axios from 'axios'
 import { useAxios } from '@vueuse/integrations/useAxios'
-
+import { eventHook } from '@utils/index'
 import type { UseAxiosOptions } from '@vueuse/integrations/useAxios'
 import type { MaybeRef } from '@vueuse/core'
 import type { DatasourceType } from './types'
@@ -9,9 +9,8 @@ import type { DatasourceType } from './types'
 const baseUrl = computed(() => {
   const { MODE, VITE_BASE_API_URL } = import.meta.env
 
-  if (MODE === 'development') {
+  if (MODE === 'development')
     return 'http://localhost:3000'
-  }
 
   return VITE_BASE_API_URL
 })
@@ -21,15 +20,12 @@ const instance = Axios.create({
 })
 
 export default (datasource: DatasourceType, variables: MaybeRef<any> = {}, config: UseAxiosOptions) => {
-  const { eventHook } = useUtils()
-
   const onDone = eventHook()
   const onError = eventHook()
 
   const getUri = (vars: any) => {
-    if (typeof datasource.uri === 'function') {
+    if (typeof datasource.uri === 'function')
       return datasource.uri(vars)
-    }
 
     return datasource.uri
   }
@@ -47,9 +43,8 @@ export default (datasource: DatasourceType, variables: MaybeRef<any> = {}, confi
 
     const nonDataVars = Object.keys({ ...getParams(vars), ...getHeaders(vars) })
 
-    for (const nonDataVar of nonDataVars) {
+    for (const nonDataVar of nonDataVars)
       delete varsCopy[nonDataVar]
-    }
 
     return varsCopy
   }
@@ -102,18 +97,16 @@ export default (datasource: DatasourceType, variables: MaybeRef<any> = {}, confi
   watch(
     () => data.value,
     () => {
-      if (data.value !== undefined) {
+      if (data.value !== undefined)
         onDone.trigger(data)
-      }
     },
   )
 
   watch(
     () => error.value,
     () => {
-      if (error.value !== undefined) {
+      if (error.value !== undefined)
         onError.trigger(error)
-      }
     },
   )
 

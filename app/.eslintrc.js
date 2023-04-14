@@ -4,10 +4,6 @@ module.exports = {
     '.eslintrc-auto-import.json',
   ],
   rules: {
-    'curly': [
-      'error',
-      'all',
-    ],
     'vue/max-attributes-per-line': [
       'error',
       {
@@ -37,6 +33,7 @@ module.exports = {
     ],
     'array-bracket-spacing': [ 'error', 'always' ],
     'max-len': 'off',
+    'no-console': 'warn',
     'no-shadow': [ 'error', { ignoreOnInitialization: true } ],
     'no-unused-vars': [
       'error',

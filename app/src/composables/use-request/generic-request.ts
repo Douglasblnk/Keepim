@@ -1,11 +1,11 @@
 import type { DatasourceType } from './types'
 
-export const genericRequest = ({
+export function genericRequest({
   requestMethod = { method: 'GET' },
   uri,
   params,
   headers,
-}: DatasourceType) => {
+}: DatasourceType) {
   return {
     requestMethod,
     uri,

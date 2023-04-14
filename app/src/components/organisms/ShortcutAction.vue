@@ -1,8 +1,8 @@
 <script setup>
-defineEmits([
-  'add-folder',
-  'add-image',
-  'add-category',
+const emit = defineEmits([
+  'addFolder',
+  'addImage',
+  'addCategory',
 ])
 </script>
 
@@ -25,7 +25,7 @@ defineEmits([
         un-transition="~"
         un-rounded="md"
         un-cursor="pointer"
-        @click="$emit('add-folder')"
+        @click="emit('addFolder')"
       >
         <FIcon
           icon="folder-plus"
@@ -46,7 +46,7 @@ defineEmits([
         un-transition="~"
         un-rounded="md"
         un-cursor="pointer"
-        @click="$emit('add-image')"
+        @click="emit('addImage')"
       >
         <FIcon
           icon="images"
@@ -67,7 +67,7 @@ defineEmits([
         un-transition="~"
         un-rounded="md"
         un-cursor="pointer"
-        @click="$emit('add-category')"
+        @click="emit('addCategory')"
       >
         <FIcon
           icon="tags"

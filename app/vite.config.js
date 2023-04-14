@@ -18,6 +18,7 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, './src'),
       '@composables': resolve(__dirname, './src/composables'),
+      '@utils': resolve(__dirname, './src/utils'),
     },
   },
   optimizeDeps: {

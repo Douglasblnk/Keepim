@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   url: String,
   style: String,
   alt: String,
