@@ -1,46 +1,46 @@
 <script setup>
-import { onClickOutside } from '@vueuse/core';
+import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps({
   modelValue: Boolean,
-});
+})
 
-const emit = defineEmits(['close']);
+const emit = defineEmits([ 'close' ])
 
-const target = ref(null);
+const target = ref(null)
 
-const secondRender = ref(false);
+const secondRender = ref(false)
 
-const closeModal = () => {
-  secondRender.value = false;
+function closeModal() {
+  secondRender.value = false
 
   setTimeout(() => {
-    emit('close');
-  }, 100);
-};
+    emit('close')
+  }, 100)
+}
 
-onClickOutside(target, closeModal);
+onClickOutside(target, closeModal)
 
 watch(
   () => props.modelValue,
   (value) => {
     if (value) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden'
 
       return setTimeout(() => {
-        secondRender.value = true;
-      }, 100);
+        secondRender.value = true
+      }, 100)
     }
 
     else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'auto'
 
-      secondRender.value = false;
+      secondRender.value = false
     }
   },
-);
+)
 
-defineExpose({ closeModal });
+defineExpose({ closeModal })
 </script>
 
 <template>

@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router'
 
 const { name } = useRoute()
 
-const isSelected = (option) => {
+function isSelected(option) {
   return name === option
 }
 </script>

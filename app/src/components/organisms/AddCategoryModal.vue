@@ -1,5 +1,5 @@
 <script setup>
-defineEmits(['close', 'confirm']);
+defineEmits([ 'close', 'confirm' ])
 </script>
 
 <template>

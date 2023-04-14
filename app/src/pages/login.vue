@@ -1,6 +1,5 @@
 <script setup>
 import { useRouter } from 'vue-router'
-// import { setToken } from '@/utils/token'
 
 const { notify } = useQuasar()
 const { validate } = useForm()
@@ -22,7 +21,6 @@ onDone((data) => {
 
   setTimeout(() => replace('/home'), 1000)
 
-  // setToken(data)
   // setUserState(data)
 
   notify({
@@ -41,12 +39,11 @@ onError((error) => {
   })
 })
 
-const makeLogin = async () => {
+async function makeLogin() {
   const { valid } = await validate()
 
-  if (!valid) {
+  if (!valid)
     return
-  }
 
   execute({
     username: username.value.toLowerCase(),
@@ -57,22 +54,31 @@ const makeLogin = async () => {
 
 <template>
   <div
+    un-w="sm:col-7 md:col-5 lg:col-3"
+    un-m-auto
     un-flex="~ col"
     un-h-screen
-    un-mx-auto
-    un-w="sm:col-6 md:col-4 80vw"
   >
-    <div
-      un-flex="~ col [2]"
-      un-justify-center
-      un-items-center
-    >
-      <KeepimTitle
-        un-py-5xl
-      />
-    </div>
+    <KeepimTitle
+      un-py-5xl
+      un-flex-grow
+    />
 
-    <div un-flex="~ col [2]">
+    <div
+      un-flex="~ col"
+      un-flex-grow
+      un-justify-center
+      un-px-md
+    >
+      <div
+        un-mb-6xl
+        un-text-center
+      >
+        <span un-text="white 2xl">
+          Acesse sua conta
+        </span>
+      </div>
+
       <KInput
         v-model="username"
         type="text"
@@ -92,17 +98,37 @@ const makeLogin = async () => {
         name="senha"
         @keydown.enter="makeLogin"
       />
-    </div>
 
-    <div un-flex="1">
       <QBtn
         label="Acessar"
         color="primary"
-        un-w-full
+        un-mt-sm
         no-caps
         @click="makeLogin"
       />
     </div>
+
+    <span
+      un-flex-grow
+      un-text-gray-text
+      un-flex
+      un-w-full
+      un-justify-center
+      un-items-end
+      un-py-md
+    >
+      Não possui uma conta ainda?
+
+      <span
+        un-ml-xs
+        un-text-secondary
+        un-cursor-pointer
+      >
+        <RouterLink to="/registrar">
+          Cadastre-se
+        </RouterLink>
+      </span>
+    </span>
   </div>
 </template>
 
