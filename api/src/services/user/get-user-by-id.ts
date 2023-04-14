@@ -1,10 +1,8 @@
-import { getUser } from '@repository/user'
+import { findUserByUsername } from '@repository/user'
 import { userDto } from '@dto/user'
 
-const getUserById = async (id: string) => {
-  const user = await getUser(id)
+export default async (id: string) => {
+  const user = await findUserByUsername(id)
 
   return userDto(user)
 }
-
-export default getUserById

@@ -1,7 +1,10 @@
 export interface UserModel {
   id: string
-  userId: string
+  username: string
   name: string
   email: string
-  password: boolean
+  password: string
+  createdAt: Date
+  updatedAt: Date
+  deleted: boolean
 }
