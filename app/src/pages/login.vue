@@ -1,42 +1,33 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { handleError } from '@/utils/handle-error'
 
 const { notify } = useQuasar()
 const { validate } = useForm()
 
-const {
-  execute,
-  onDone,
-  onError,
-} = useRequest(SIGN_IN)
-
 const { replace } = useRouter()
-// const { setUserState } = useState()
 
 const password = ref()
 const username = ref()
 
-onDone((data) => {
-  console.log('data :>> ', data)
+const { isFetching, refetch } = useQuery({
+  queryKey: [ 'sign-in', { password, username } ],
+  queryFn: ({ queryKey }) => signIn(queryKey[1]),
+  enabled: false,
+  onSuccess: (data) => {
+    notify({
+      type: 'positive',
+      message: 'Login efetuado com sucesso!',
+      timeout: 1000,
+    })
+  },
+  onError: (error) => {
+    const err = handleError(error)
 
-  setTimeout(() => replace('/home'), 1000)
-
-  // setUserState(data)
-
-  notify({
-    type: 'positive',
-    message: 'Login efetuado com sucesso!',
-    timeout: 1000,
-  })
-})
-
-onError((error) => {
-  console.log('error :>> ', error)
-  notify({
-    type: 'negative',
-    message: error.value?.message,
-    timeout: 1000,
-  })
+    notify({
+      type: 'negative',
+      message: err,
+    })
+  },
 })
 
 async function makeLogin() {
@@ -45,10 +36,7 @@ async function makeLogin() {
   if (!valid)
     return
 
-  execute({
-    username: username.value.toLowerCase(),
-    password: password.value,
-  })
+  refetch()
 }
 </script>
 
@@ -67,7 +55,7 @@ async function makeLogin() {
     <div
       un-flex="~ col"
       un-flex-grow
-      un-justify-center
+      un-justify-start
       un-px-md
     >
       <div
@@ -86,7 +74,8 @@ async function makeLogin() {
         label="Usuário:"
         icon="i-mdi-email-outline"
         vee-rules="required"
-        @keydown.enter="makeLogin"
+        tabindex="1"
+        :loading="isFetching"
       />
 
       <KInput
@@ -96,6 +85,8 @@ async function makeLogin() {
         icon="i-mdi-lock-outline"
         vee-rules="required|min:8"
         name="senha"
+        tabindex="2"
+        :loading="isFetching"
         @keydown.enter="makeLogin"
       />
 
@@ -104,11 +95,12 @@ async function makeLogin() {
         color="primary"
         un-mt-sm
         no-caps
+        :loading="isFetching"
         @click="makeLogin"
       />
     </div>
 
-    <span
+    <!-- <span
       un-flex-grow
       un-text-gray-text
       un-flex
@@ -128,7 +120,7 @@ async function makeLogin() {
           Cadastre-se
         </RouterLink>
       </span>
-    </span>
+    </span> -->
   </div>
 </template>
 

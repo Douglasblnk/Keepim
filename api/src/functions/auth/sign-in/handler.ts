@@ -2,6 +2,7 @@ import { lambdaErrorResponse, lambdaOKResponse, middyfy } from '@utils/lambda'
 import type { CustomAPIGatewayProxyEvent } from '@utils/api-gateway'
 import { errMissingParams } from '@exceptions/auth-exceptions'
 import { signIn } from '@service/auth'
+import { serialize } from 'cookie'
 import type { SignInSchemaBody } from './schema'
 
 const getBody = (body: SignInSchemaBody) => {
@@ -15,9 +16,11 @@ const handler = async (event: CustomAPIGatewayProxyEvent<SignInSchemaBody, any>)
   try {
     const signInSchema = getBody(event.body)
 
-    const response = await signIn(signInSchema)
+    const { accessToken, user } = await signIn(signInSchema)
 
-    return lambdaOKResponse(response)
+    const cookies = serialize('access_token', accessToken.token, { httpOnly: true, secure: true })
+
+    return lambdaOKResponse(user, { 'Set-Cookie': cookies })
   }
 
   catch (error) {

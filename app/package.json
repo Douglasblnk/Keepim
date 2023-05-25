@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.16.2",
+    "@tanstack/vue-query": "^4.29.1",
     "@vee-validate/i18n": "4.8.3",
     "@vee-validate/rules": "4.8.4",
     "@vueuse/core": "^9.13.0",
-    "@vueuse/integrations": "^9.13.0",
     "@vueuse/head": "1.1.23",
     "axios": "^1.3.5",
     "quasar": "^2.11.10",
@@ -29,6 +29,7 @@
     "@unocss/autocomplete": "0.51.4",
     "@unocss/preset-attributify": "^0.51.4",
     "@vitejs/plugin-vue": "^4.1.0",
+    "@types/node": "18.13.0",
     "@vue/compiler-sfc": "^3.2.47",
     "eslint": "^8.38.0",
     "eslint-define-config": "^1.17.0",
@@ -43,7 +44,8 @@
     "unplugin-vue-components": "^0.24.1",
     "vite": "^4.2.1",
     "vite-plugin-pages": "^0.29.0",
-    "vite-plugin-pwa": "^0.14.7"
+    "vite-plugin-pwa": "^0.14.7",
+    "vue-tsc": "1.1.0"
   },
   "engines": {
     "node": ">=14.17.0",
