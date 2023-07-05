@@ -40,6 +40,17 @@ export default defineConfig({
 
     Pages({
       dirs: [ { dir: 'src/pages', baseRoute: '' } ],
+      extendRoute(route) {
+        const { path } = route
+
+        if (path === '/login')
+          return route
+
+        return {
+          ...route,
+          meta: { auth: true },
+        }
+      },
     }),
 
     AutoImport({

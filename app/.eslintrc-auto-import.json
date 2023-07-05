@@ -20,6 +20,7 @@
     "asyncComputed": true,
     "autoResetRef": true,
     "axios": true,
+    "checkAuthentication": true,
     "computed": true,
     "computedAsync": true,
     "computedEager": true,
