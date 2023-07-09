@@ -1,42 +1,50 @@
 <script setup>
-import { handleError } from '@/utils/handle-error'
+import { notify } from '@utils/index'
+import { getErrorMsg } from '@/utils/handle-error'
 
-const { notify } = useQuasar()
 const { validate } = useForm()
 
 const { replace } = useRouter()
 
 const password = ref()
 const username = ref()
+const isLoading = ref(false)
 
-const { isFetching, refetch } = useQuery({
-  queryKey: [ 'sign-in', { password, username } ],
-  queryFn: ({ queryKey }) => signIn(queryKey[1]),
-  enabled: false,
-  onSuccess: (data) => {
+async function makeLogin() {
+  isLoading.value = true
+
+  try {
+    const { valid } = await validate()
+
+    if (!valid)
+      return
+
+    const response = await signInRequest({
+      password: password.value,
+      username: username.value,
+    })
+
+    console.log('response :>> ', response)
+
     notify({
       type: 'positive',
       message: 'Login efetuado com sucesso!',
       timeout: 1000,
     })
-  },
-  onError: (error) => {
-    const err = handleError(error)
 
+    replace('/')
+  }
+
+  catch (error) {
     notify({
       type: 'negative',
-      message: err,
+      message: getErrorMsg(error),
     })
-  },
-})
+  }
 
-async function makeLogin() {
-  const { valid } = await validate()
-
-  if (!valid)
-    return
-
-  refetch()
+  finally {
+    isLoading.value = false
+  }
 }
 </script>
 
@@ -75,7 +83,7 @@ async function makeLogin() {
         icon="i-mdi-email-outline"
         vee-rules="required"
         tabindex="1"
-        :loading="isFetching"
+        :loading="isLoading"
       />
 
       <KInput
@@ -86,7 +94,7 @@ async function makeLogin() {
         vee-rules="required|min:8"
         name="senha"
         tabindex="2"
-        :loading="isFetching"
+        :loading="isLoading"
         @keydown.enter="makeLogin"
       />
 
@@ -95,21 +103,19 @@ async function makeLogin() {
         color="primary"
         un-mt-sm
         no-caps
-        :loading="isFetching"
+        :loading="isLoading"
         @click="makeLogin"
       />
     </div>
 
-    <!-- <span
-      un-flex-grow
+    <div
       un-text-gray-text
-      un-flex
+      un-flex="~ col"
       un-w-full
-      un-justify-center
-      un-items-end
+      un-items-center
       un-py-md
     >
-      Não possui uma conta ainda?
+      <span>Não possui uma conta ainda?</span>
 
       <span
         un-ml-xs
@@ -120,7 +126,7 @@ async function makeLogin() {
           Cadastre-se
         </RouterLink>
       </span>
-    </span> -->
+    </div>
   </div>
 </template>
 

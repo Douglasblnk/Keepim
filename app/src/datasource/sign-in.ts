@@ -3,7 +3,7 @@ interface SignInBody {
   password: string
 }
 
-export async function signIn(body: SignInBody) {
+export async function signInRequest(body: SignInBody) {
   const { data } = await axios.post('/sign-in', body, { withCredentials: true })
 
   return data

@@ -1,7 +1,9 @@
 import SignIn from './sign-in'
-import validateSession from './validate-session'
+import ValidateSession from './validate-session'
+import RefreshAccessToken from './refresh-access-token'
 
 export default {
   SignIn,
-  validateSession,
+  ValidateSession,
+  RefreshAccessToken,
 }

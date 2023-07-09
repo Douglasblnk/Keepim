@@ -19,9 +19,10 @@ export const lambdaOKResponse = <TRes, THeaders = {}>(response: TRes, headers?: 
   }
 }
 
-export const lambdaErrorResponse = (error: Record<string, unknown>) => {
+export const lambdaErrorResponse = <THeaders = {}>(error: Record<string, unknown>, headers?: THeaders) => {
   return {
     statusCode: error.statusCode || 400,
+    ...(headers ? { headers } : {}),
     body: JSON.stringify(error),
   }
 }

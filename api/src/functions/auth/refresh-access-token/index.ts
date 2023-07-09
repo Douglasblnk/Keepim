@@ -1,10 +1,10 @@
 export default {
-  handler: 'src/functions/auth/validate-session/handler.main',
+  handler: 'src/functions/auth/refresh-access-token/handler.main',
   events: [
     {
       http: {
         method: 'post',
-        path: 'validate-session',
+        path: 'refresh-access-token',
         cors: true,
       },
     },

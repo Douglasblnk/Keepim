@@ -5,17 +5,17 @@ export default {
       TableName: 'Keepim.Session',
       AttributeDefinitions: [
         {
-          AttributeName: 'refreshToken',
+          AttributeName: 'id',
           AttributeType: 'S',
         },
         {
-          AttributeName: 'id',
+          AttributeName: 'refreshToken',
           AttributeType: 'S',
         },
       ],
       KeySchema: [
         {
-          AttributeName: 'refreshToken',
+          AttributeName: 'id',
           KeyType: 'HASH',
         },
       ],
@@ -25,10 +25,10 @@ export default {
       },
       GlobalSecondaryIndexes: [
         {
-          IndexName: 'session-id-index',
+          IndexName: 'session-refresh-token-index',
           KeySchema: [
             {
-              AttributeName: 'id',
+              AttributeName: 'refreshToken',
               KeyType: 'HASH',
             },
           ],

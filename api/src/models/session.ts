@@ -5,20 +5,18 @@ export interface SessionModel {
   id: string
   username: string
   refreshToken: string
-  createdAt: number
-  updatedAt: number
+  expiredAt: number
   deleted: boolean
 }
 
-export const createSessionModel = (session: Omit<SessionModel, 'id' | 'createdAt' | 'updatedAt' | 'deleted'>): SessionModel => {
+export const createSessionModel = (session: Omit<SessionModel, 'id' | 'expiredAt' | 'deleted'>): SessionModel => {
   const currentTimestamp = getCurrentDate()
 
   return {
     id: uuid(),
     username: session.username,
     refreshToken: session.refreshToken,
-    createdAt: currentTimestamp,
-    updatedAt: currentTimestamp,
+    expiredAt: currentTimestamp + +process.env.REFRESH_TOKEN_EXPIRATION,
     deleted: false,
   }
 }

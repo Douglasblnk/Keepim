@@ -4,7 +4,7 @@ import validateUser from './validate-user'
 import createSession from './create-session'
 import createAccessToken from './create-access-token'
 
-const signIn = async (signInSchema: SignInSchemaBody) => {
+export default async (signInSchema: SignInSchemaBody) => {
   const user = await validateUser(signInSchema.username, signInSchema.password)
   const session = await createSession(user)
   const accessToken = await createAccessToken(session.refreshToken)
@@ -15,5 +15,3 @@ const signIn = async (signInSchema: SignInSchemaBody) => {
     user,
   })
 }
-
-export default signIn

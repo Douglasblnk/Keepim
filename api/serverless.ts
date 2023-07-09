@@ -30,6 +30,7 @@ const serverlessConfiguration: AWS = {
       SESSION_DB_TABLE: '${env:SESSION_DB_TABLE}',
       USER_DB_TABLE: '${env:USER_DB_TABLE}',
       JWT_EXPIRATION_TIME: '${env:JWT_EXPIRATION_TIME}',
+      REFRESH_TOKEN_EXPIRATION: '${env:REFRESH_TOKEN_EXPIRATION}',
       JWT_SECRET: '${env:JWT_SECRET}',
     },
   },

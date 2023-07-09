@@ -15,7 +15,7 @@ export function isNetworkError(error: unknown): error is ApiError {
   return error instanceof AxiosError && error.request && error.message === 'Network Error'
 }
 
-export function handleError(error: unknown) {
+export function getErrorMsg(error: unknown) {
   if (typeof error === 'string')
     return error
 
@@ -26,4 +26,13 @@ export function handleError(error: unknown) {
     return error.response.data.error
 
   return 'Ocorreu um erro inesperado.'
+}
+
+export function parseAxiosError(error: AxiosError<any>) {
+  const { data, status } = error.response || {}
+
+  return {
+    data,
+    status,
+  }
 }

@@ -1,9 +1,19 @@
-import { lambdaErrorResponse, middyfy } from '@utils/lambda'
-import type { CustomAPIGatewayProxyEvent } from '@utils/api-gateway'
+import { lambdaErrorResponse, lambdaOKResponse, middyfy } from '@utils/lambda'
+import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
+import { validateAccessToken } from '@service/auth'
+import { getAccessToken } from '@utils/auth'
+import { errAuthorizationFailed } from '@exceptions/auth-exceptions'
 
 const handler = async (event: CustomAPIGatewayProxyEvent<{}, any>) => {
   try {
-    console.log('event.headers :>> ', event.headers)
+    const accessToken = getAccessToken(event)
+
+    if (!accessToken)
+      throw errAuthorizationFailed()
+
+    const valid = await validateAccessToken(accessToken)
+
+    return lambdaOKResponse(valid)
   }
 
   catch (error) {
