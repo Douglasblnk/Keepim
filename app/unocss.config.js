@@ -268,6 +268,7 @@ export default defineConfig({
     presetIcons({
       extraProperties: {
         display: 'inline-block',
+        color: '',
       },
       warn: true,
     }),

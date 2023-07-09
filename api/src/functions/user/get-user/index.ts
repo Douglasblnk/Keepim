@@ -5,6 +5,9 @@ export default {
       http: {
         method: 'get',
         path: 'user/{id}',
+        cors: {
+          origin: 'https://keepim.douglasblnk.com',
+        },
       },
     },
   ],

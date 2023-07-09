@@ -21,6 +21,7 @@ const isBottomNavHidden = computed(() => {
 watch(
   () => route.meta,
   (meta) => {
+    console.log(meta)
     title.value = meta.title ? ` - ${meta.title}` : ''
   },
 )

@@ -1,7 +1,7 @@
 import { accessTokenDto } from '@dto/auth'
 import { errSessionNotFound } from '@exceptions/auth-exceptions'
 import { errUserNotFound } from '@exceptions/user-exceptions'
-import { findSessionByRefreshToken } from '@repository/auth'
+import { findSessionByRefreshToken } from '@repository/session'
 import { findUserByUsername } from '@repository/user'
 import { sign } from 'jsonwebtoken'
 
@@ -18,7 +18,7 @@ export default async (refreshToken: string) => {
 
   const jwtPayload = {
     username: user.username,
-    session: session.id,
+    sessionID: session.id,
   }
 
   const jwtSecret = process.env.JWT_SECRET

@@ -19,6 +19,7 @@
     "useDefineForClassFields": true,
     "allowJs": true,
     "types": [
+      "node",
       "quasar",
       "vite/client",
       "vite-plugin-pages/client",
@@ -28,6 +29,7 @@
       "@/*": ["./src/*"],
       "@composables/*": ["./src/composables/*"],
       "@utils/*": ["./src/utils/*"],
+      "@datasource/*": ["./src/datasource/*"],
     },
   },
   "exclude": [

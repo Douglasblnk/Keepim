@@ -1,5 +1,4 @@
 import dynamoDBClient from '@database/index'
-import { mountCommandInput } from '@utils/dynamodb'
 import { GetItemCommand, QueryCommand } from '@aws-sdk/client-dynamodb'
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb'
 import type { GetItemCommandInput, QueryCommandInput } from '@aws-sdk/client-dynamodb'
@@ -10,10 +9,10 @@ const TABLE_NAME = process.env.USER_DB_TABLE
 export const findUserByUsername = async (username: string) => {
   const db = dynamoDBClient()
 
-  const getItemCommandInput = mountCommandInput<GetItemCommandInput>({
+  const getItemCommandInput: GetItemCommandInput = {
     TableName: TABLE_NAME,
     Key: marshall({ username }),
-  })
+  }
 
   const getItemCommand = new GetItemCommand(getItemCommandInput)
 
@@ -25,14 +24,14 @@ export const findUserByUsername = async (username: string) => {
 export const findUserByEmail = async (email: string) => {
   const db = dynamoDBClient()
 
-  const queryCommandInput = mountCommandInput<QueryCommandInput>({
+  const queryCommandInput: QueryCommandInput = {
     TableName: TABLE_NAME,
     IndexName: 'email-index',
     ExpressionAttributeValues: marshall({
       ':email': email,
     }),
     KeyConditionExpression: 'email = :email',
-  })
+  }
 
   const queryCommand = new QueryCommand(queryCommandInput)
 

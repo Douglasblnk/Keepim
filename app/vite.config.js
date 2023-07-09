@@ -19,6 +19,7 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
       '@composables': resolve(__dirname, './src/composables'),
       '@utils': resolve(__dirname, './src/utils'),
+      '@datasource': resolve(__dirname, './src/datasource'),
     },
   },
   optimizeDeps: {
@@ -39,11 +40,27 @@ export default defineConfig({
 
     Pages({
       dirs: [ { dir: 'src/pages', baseRoute: '' } ],
+      extendRoute(route) {
+        const { path } = route
+
+        if (path === '/login')
+          return route
+
+        return {
+          ...route,
+          meta: { auth: true },
+        }
+      },
     }),
 
     AutoImport({
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/, /\.vue\?vue/, // .vue
+      ],
       dirs: [
-        'src/composables/**/**',
+        'src/composables/**',
+        'src/datasource/**',
       ],
 
       vueTemplate: true,
@@ -62,6 +79,11 @@ export default defineConfig({
         'vee-validate',
         '@vueuse/head',
         '@vueuse/core',
+        {
+          '@tanstack/vue-query': [
+            'useQuery',
+          ],
+        },
       ],
     }),
 

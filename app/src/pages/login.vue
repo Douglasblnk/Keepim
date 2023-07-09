@@ -1,54 +1,50 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { notify } from '@utils/index'
+import { getErrorMsg } from '@/utils/handle-error'
 
-const { notify } = useQuasar()
 const { validate } = useForm()
 
-const {
-  execute,
-  onDone,
-  onError,
-} = useRequest(SIGN_IN)
-
 const { replace } = useRouter()
-// const { setUserState } = useState()
 
 const password = ref()
 const username = ref()
-
-onDone((data) => {
-  console.log('data :>> ', data)
-
-  setTimeout(() => replace('/home'), 1000)
-
-  // setUserState(data)
-
-  notify({
-    type: 'positive',
-    message: 'Login efetuado com sucesso!',
-    timeout: 1000,
-  })
-})
-
-onError((error) => {
-  console.log('error :>> ', error)
-  notify({
-    type: 'negative',
-    message: error.value?.message,
-    timeout: 1000,
-  })
-})
+const isLoading = ref(false)
 
 async function makeLogin() {
-  const { valid } = await validate()
+  isLoading.value = true
 
-  if (!valid)
-    return
+  try {
+    const { valid } = await validate()
 
-  execute({
-    username: username.value.toLowerCase(),
-    password: password.value,
-  })
+    if (!valid)
+      return
+
+    const response = await signInRequest({
+      password: password.value,
+      username: username.value,
+    })
+
+    console.log('response :>> ', response)
+
+    notify({
+      type: 'positive',
+      message: 'Login efetuado com sucesso!',
+      timeout: 1000,
+    })
+
+    replace('/')
+  }
+
+  catch (error) {
+    notify({
+      type: 'negative',
+      message: getErrorMsg(error),
+    })
+  }
+
+  finally {
+    isLoading.value = false
+  }
 }
 </script>
 
@@ -67,7 +63,7 @@ async function makeLogin() {
     <div
       un-flex="~ col"
       un-flex-grow
-      un-justify-center
+      un-justify-start
       un-px-md
     >
       <div
@@ -86,7 +82,8 @@ async function makeLogin() {
         label="Usuário:"
         icon="i-mdi-email-outline"
         vee-rules="required"
-        @keydown.enter="makeLogin"
+        tabindex="1"
+        :loading="isLoading"
       />
 
       <KInput
@@ -96,6 +93,8 @@ async function makeLogin() {
         icon="i-mdi-lock-outline"
         vee-rules="required|min:8"
         name="senha"
+        tabindex="2"
+        :loading="isLoading"
         @keydown.enter="makeLogin"
       />
 
@@ -104,20 +103,19 @@ async function makeLogin() {
         color="primary"
         un-mt-sm
         no-caps
+        :loading="isLoading"
         @click="makeLogin"
       />
     </div>
 
-    <span
-      un-flex-grow
+    <div
       un-text-gray-text
-      un-flex
+      un-flex="~ col"
       un-w-full
-      un-justify-center
-      un-items-end
+      un-items-center
       un-py-md
     >
-      Não possui uma conta ainda?
+      <span>Não possui uma conta ainda?</span>
 
       <span
         un-ml-xs
@@ -128,7 +126,7 @@ async function makeLogin() {
           Cadastre-se
         </RouterLink>
       </span>
-    </span>
+    </div>
   </div>
 </template>
 
