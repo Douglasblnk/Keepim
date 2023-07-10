@@ -28,6 +28,12 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REFRESH_TOKEN_LENGTH: ${{ secrets.REFRESH_TOKEN_LENGTH }}
+          JWT_EXPIRATION_TIME: ${{ secrets.JWT_EXPIRATION_TIME }}
+          REFRESH_TOKEN_EXPIRATION: ${{ secrets.REFRESH_TOKEN_EXPIRATION }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          SESSION_DB_TABLE: ${{ secrets.SESSION_DB_TABLE }}
+          USER_DB_TABLE: ${{ secrets.USER_DB_TABLE }}
 
   build:
     runs-on: ubuntu-latest
