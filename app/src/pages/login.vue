@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { notify } from '@utils/index'
 import { getErrorMsg } from '@/utils/handle-error'
 
 const { validate } = useForm()
-
+const { setStorageState } = useLocalStorage()
 const { replace } = useRouter()
 
 const password = ref()
@@ -24,7 +24,7 @@ async function makeLogin() {
       username: username.value,
     })
 
-    console.log('response :>> ', response)
+    setStorageState('user-info', response)
 
     notify({
       type: 'positive',
@@ -38,7 +38,7 @@ async function makeLogin() {
   catch (error) {
     notify({
       type: 'negative',
-      message: getErrorMsg(error),
+      message: getErrorMsg(error) as string,
     })
   }
 
@@ -122,9 +122,9 @@ async function makeLogin() {
         un-text-secondary
         un-cursor-pointer
       >
-        <RouterLink to="/registrar">
+        <!-- <RouterLink to="/registrar">
           Cadastre-se
-        </RouterLink>
+        </RouterLink> -->
       </span>
     </div>
   </div>

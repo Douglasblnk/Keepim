@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useRoute } from 'vue-router'
 
 const { routeTransition } = useRouteTransition()
@@ -21,7 +21,6 @@ const isBottomNavHidden = computed(() => {
 watch(
   () => route.meta,
   (meta) => {
-    console.log(meta)
     title.value = meta.title ? ` - ${meta.title}` : ''
   },
 )

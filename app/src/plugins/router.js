@@ -7,7 +7,7 @@ export const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, _, next) => handleRoutes(to, next))
+router.beforeEach((to, prev, next) => handleRoutes(to, prev, next))
 
 export function install(app) {
   app.use(router)

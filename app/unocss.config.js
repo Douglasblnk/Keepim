@@ -42,6 +42,7 @@ const baseSize = {
 export default defineConfig({
   shortcuts: [
     { column: 'flex flex-wrap flex-col h-auto min-h-0 max-h-full' },
+    { center: 'flex items-center justify-center' },
   ],
 
   theme: {
@@ -82,9 +83,8 @@ export default defineConfig({
       },
 
       dark: {
-        DEFAULT: '#202427',
-        page: '#202427',
-        field: '#292D36',
+        primary: '#292D36',
+        secondary: '#23272B',
       },
 
       positive: '#21BA45',
