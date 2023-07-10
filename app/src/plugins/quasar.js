@@ -25,8 +25,8 @@ export function install(app) {
         'secondary'   : 'var(--color-secondary)',
         'accent'      : 'var(--color-accent)',
 
-        'dark'        : 'var(--color-dark)',
-        'dark-page'   : 'var(--color-dark-page)',
+        'dark'        : 'var(--color-background)',
+        'dark-page'   : 'var(--color-background)',
 
         'positive'    : 'var(--color-positive)',
         'negative'    : 'var(--color-negative)',

@@ -10,12 +10,12 @@
     un-h-full
     un-text-gray-text
   >
-    HOME
+    EXPLORAR
   </div>
 </template>
 
 <route lang="yaml">
-path: /
+path: /explorar
 meta:
-  title: Home
+  title: Explorar
 </route>

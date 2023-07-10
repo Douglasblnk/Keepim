@@ -10,12 +10,12 @@
     un-h-full
     un-text-gray-text
   >
-    HOME
+    COLEÇÕES
   </div>
 </template>
 
 <route lang="yaml">
-path: /
+path: /colecoes
 meta:
-  title: Home
+  title: Coleções
 </route>
