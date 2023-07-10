@@ -5,6 +5,14 @@ import useLocalStorage from '../composables/use-local-storage'
 import { parseAxiosError } from './handle-error'
 import { notify } from '.'
 
+const { getStorageState, deleteStorageState } = useLocalStorage()
+
+function reauthenticate(next) {
+  deleteStorageState('user-info')
+
+  next({ name: 'login' })
+}
+
 async function refreshAccessToken(to, next) {
   try {
     await refreshAccessTokenRequest()
@@ -19,16 +27,14 @@ async function refreshAccessToken(to, next) {
       timeout: 1000,
     })
 
-    return next({ name: 'login' })
+    return reauthenticate(next)
   }
 }
 
 export default async function handleRoutes(to: RouteLocationNormalized, prev: RouteLocationNormalized, next: NavigationGuardNext) {
   if (to.path === '/login') {
-    const { getStorageState } = useLocalStorage()
-
     if (getStorageState('user-info'))
-      next({ name: prev.name || 'home' })
+      return next({ name: prev.name || 'home' })
   }
 
   if (!to.meta.auth)
@@ -40,7 +46,7 @@ export default async function handleRoutes(to: RouteLocationNormalized, prev: Ro
     if (authenticated)
       return next()
 
-    return next({ name: 'login' })
+    return reauthenticate(next)
   }
 
   catch (error) {
@@ -55,6 +61,6 @@ export default async function handleRoutes(to: RouteLocationNormalized, prev: Ro
       timeout: 1000,
     })
 
-    return next({ name: 'login' })
+    return reauthenticate(next)
   }
 }
