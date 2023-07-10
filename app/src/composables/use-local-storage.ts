@@ -2,13 +2,13 @@ import { useStorage } from '@vueuse/core'
 
 const storageState: Ref<Record<string, any>> = ref({})
 
+const { length: _, ...items } = localStorage
+
+Object.entries(items).forEach(([ key, value ]) => {
+  storageState.value[key] = useStorage(key, value)
+})
+
 export default () => {
-  const { length: _, ...items } = localStorage
-
-  Object.entries(items).forEach(([ key, value ]) => {
-    storageState.value[key] = useStorage(key, value)
-  })
-
   const setStorageState = (stateKey: string, content: any) => {
     storageState.value[stateKey] = useStorage(stateKey, content)
   }
