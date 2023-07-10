@@ -1,5 +1,5 @@
 export default {
-  UserTable2: {
+  UserTable: {
     Type: 'AWS::DynamoDB::Table',
     Properties: {
       TableName: 'Keepim.User',
