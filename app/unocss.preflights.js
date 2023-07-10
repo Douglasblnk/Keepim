@@ -1,14 +1,15 @@
 import { theme as unoTheme } from '@unocss/preset-mini/theme'
 import { colorResolver } from '@unocss/preset-mini/utils'
 
-const flattenObj = (ob, separator = '.') => {
+function flattenObj(ob, separator = '.') {
   const result = {}
 
   for (const i in ob) {
     if ((typeof ob[i]) === 'object' && !Array.isArray(ob[i])) {
       const temp = flattenObj(ob[i], separator)
 
-      for (const j in temp) { result[`${i}${separator}${j}`] = temp[j] }
+      for (const j in temp)
+        result[`${i}${separator}${j}`] = temp[j]
     }
 
     else { result[i] = ob[i] }

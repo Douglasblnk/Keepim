@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "outDir": "./built",
     "module": "ESNext",
     "target": "ESNext",
     "lib": ["DOM", "ESNext"],
@@ -8,21 +9,37 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "skipLibCheck": true,
+    "isolatedModules": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "sourceMap": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
     "allowJs": true,
-    "types": [],
+    "types": [
+      "node",
+      "quasar",
+      "vite/client",
+      "vite-plugin-pages/client",
+      "vue/ref-macros",
+    ],
     "paths": {
       "@/*": ["./src/*"],
       "@composables/*": ["./src/composables/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@datasource/*": ["./src/datasource/*"],
     },
   },
   "exclude": [
     "dist",
     "node_modules",
     "public",
-  ]
+  ],
+  "include": [
+    "src/*.d.ts",
+    "src/**/*.vue"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

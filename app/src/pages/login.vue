@@ -1,78 +1,80 @@
-<script setup>
-import { useRouter } from 'vue-router'
-// import { setToken } from '@/utils/token'
+<script setup lang="ts">
+import { notify } from '@utils/index'
+import { getErrorMsg } from '@/utils/handle-error'
 
-const { notify } = useQuasar()
 const { validate } = useForm()
-
-const {
-  execute,
-  onDone,
-  onError,
-} = useRequest(SIGN_IN)
-
+const { setStorageState } = useLocalStorage()
 const { replace } = useRouter()
-// const { setUserState } = useState()
 
 const password = ref()
 const username = ref()
+const isLoading = ref(false)
 
-onDone((data) => {
-  console.log('data :>> ', data)
+async function makeLogin() {
+  isLoading.value = true
 
-  setTimeout(() => replace('/home'), 1000)
+  try {
+    const { valid } = await validate()
 
-  // setToken(data)
-  // setUserState(data)
+    if (!valid)
+      return
 
-  notify({
-    type: 'positive',
-    message: 'Login efetuado com sucesso!',
-    timeout: 1000,
-  })
-})
+    const response = await signInRequest({
+      password: password.value,
+      username: username.value,
+    })
 
-onError((error) => {
-  console.log('error :>> ', error)
-  notify({
-    type: 'negative',
-    message: error.value?.message,
-    timeout: 1000,
-  })
-})
+    setStorageState('user-info', response)
 
-const makeLogin = async () => {
-  const { valid } = await validate()
+    notify({
+      type: 'positive',
+      message: 'Login efetuado com sucesso!',
+      timeout: 1000,
+    })
 
-  if (!valid) {
-    return
+    replace('/')
   }
 
-  execute({
-    username: username.value.toLowerCase(),
-    password: password.value,
-  })
+  catch (error) {
+    notify({
+      type: 'negative',
+      message: getErrorMsg(error) as string,
+    })
+  }
+
+  finally {
+    isLoading.value = false
+  }
 }
 </script>
 
 <template>
   <div
+    un-w="sm:col-7 md:col-5 lg:col-3"
+    un-m-auto
     un-flex="~ col"
     un-h-screen
-    un-mx-auto
-    un-w="sm:col-6 md:col-4 80vw"
   >
-    <div
-      un-flex="~ col [2]"
-      un-justify-center
-      un-items-center
-    >
-      <KeepimTitle
-        un-py-5xl
-      />
-    </div>
+    <KeepimTitle
+      un-py-5xl
+      un-flex-grow
+    />
 
-    <div un-flex="~ col [2]">
+    <div
+      un-flex="~ col"
+      un-flex-grow
+      un-justify-start
+      un-px-md
+    >
+      <div
+        un-mb-6xl
+        un-text-center
+      >
+        <span un-text="white 2xl">
+          Acesse sua conta
+        </span>
+      </div>
+
       <KInput
         v-model="username"
         type="text"
@@ -80,7 +82,8 @@ const makeLogin = async () => {
         label="Usuário:"
         icon="i-mdi-email-outline"
         vee-rules="required"
-        @keydown.enter="makeLogin"
+        tabindex="1"
+        :loading="isLoading"
       />
 
       <KInput
@@ -90,18 +93,39 @@ const makeLogin = async () => {
         icon="i-mdi-lock-outline"
         vee-rules="required|min:8"
         name="senha"
+        tabindex="2"
+        :loading="isLoading"
         @keydown.enter="makeLogin"
       />
-    </div>
 
-    <div un-flex="1">
       <QBtn
         label="Acessar"
         color="primary"
-        un-w-full
+        un-mt-sm
         no-caps
+        :loading="isLoading"
         @click="makeLogin"
       />
+    </div>
+
+    <div
+      un-text-gray-text
+      un-flex="~ col"
+      un-w-full
+      un-items-center
+      un-py-md
+    >
+      <span>Não possui uma conta ainda?</span>
+
+      <span
+        un-ml-xs
+        un-text-secondary
+        un-cursor-pointer
+      >
+        <!-- <RouterLink to="/registrar">
+          Cadastre-se
+        </RouterLink> -->
+      </span>
     </div>
   </div>
 </template>

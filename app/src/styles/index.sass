@@ -3,19 +3,19 @@
 @import 'quasar/index'
 
 *
+  box-sizing: border-box !important
+  font-synthesis: none
   font-family: 'Nunito'
-
-html
+  text-rendering: optimizeLegibility
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  box-sizing: border-box
-  margin: 0
-  padding: 0
+  -webkit-text-size-adjust: 100%
 
 body
   width: 100%
   min-width: 320px
-  margin: 0 !important
+  min-height: 100vh
+  margin: 0
   padding: 0
   background: var(--color-white)
 
@@ -29,14 +29,14 @@ a
 .swiper, .swiper-wrapper
   z-index: 0 !important
 
-// ::-webkit-scrollbar
-//   @apply rounded-full w-1
+::-webkit-scrollbar
+  @apply rounded-full w-1
 
-// ::-webkit-scrollbar-track
-//   @apply rounded-full bg-gray-500
+::-webkit-scrollbar-track
+  @apply rounded-full bg-gray-500
 
-// ::-webkit-scrollbar-thumb
-//   @apply rounded-full bg-gray-400
+::-webkit-scrollbar-thumb
+  @apply rounded-full bg-gray-400
 
-// ::-webkit-scrollbar-thumb:hover
-//   @apply bg-opacity-70
+::-webkit-scrollbar-thumb:hover
+  @apply bg-opacity-70

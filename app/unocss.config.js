@@ -42,6 +42,7 @@ const baseSize = {
 export default defineConfig({
   shortcuts: [
     { column: 'flex flex-wrap flex-col h-auto min-h-0 max-h-full' },
+    { center: 'flex items-center justify-center' },
   ],
 
   theme: {
@@ -71,12 +72,19 @@ export default defineConfig({
       white: '#fff',
 
       gray: {
-        50: '#292D36',
+        bg: '#333645',
+        text: '#9c9ca4',
+        50: '#f2f2f2',
+        100: '#e8e8e8',
+        200: '#d5d5d5',
+        300: '#bdbdbd',
+        400: '#9e9e9e',
+        500: '#4E4F55',
       },
 
       dark: {
-        DEFAULT: '#202427',
-        page: '#202427',
+        primary: '#292D36',
+        secondary: '#23272B',
       },
 
       positive: '#21BA45',
@@ -260,6 +268,7 @@ export default defineConfig({
     presetIcons({
       extraProperties: {
         display: 'inline-block',
+        color: '',
       },
       warn: true,
     }),

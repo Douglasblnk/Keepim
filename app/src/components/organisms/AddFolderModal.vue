@@ -12,23 +12,24 @@ const folderName = ref()
 const folderDate = ref()
 const images = ref([])
 
-const addImages = (imgs) => {
+function addImages(imgs) {
   images.value = [ ...imgs ]
 }
 
-const closeModal = () => {
+function closeModal() {
   images.value = []
 
   emit('close')
 }
 
-const validateSubmission = () => {
-  if (!folderName.value || !folderDate.value) { return false }
+function validateSubmission() {
+  if (!folderName.value || !folderDate.value)
+    return false
 
   return true
 }
 
-const createFolder = async () => {
+async function createFolder() {
   const payload = {
     data: {
       name: folderName.value,
@@ -56,7 +57,7 @@ const createFolder = async () => {
   closeModal()
 }
 
-const confirm = async () => {
+async function confirm() {
   const isValid = validateSubmission()
 
   if (!isValid) {

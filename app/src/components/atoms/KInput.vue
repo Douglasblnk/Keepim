@@ -1,7 +1,9 @@
 <script setup>
 import { useField } from 'vee-validate'
+import { fieldProps } from '@utils/index'
+
 const props = defineProps({
-  ...useUtils().fieldProps,
+  ...fieldProps,
   icon: String,
 })
 

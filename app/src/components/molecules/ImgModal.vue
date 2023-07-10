@@ -9,9 +9,9 @@ defineProps({
     type: Array,
     default: () => [],
   },
-});
+})
 
-defineEmits(['close']);
+defineEmits([ 'close' ])
 </script>
 
 <template>

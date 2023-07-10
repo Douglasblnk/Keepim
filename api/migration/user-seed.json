@@ -1,16 +1,16 @@
 [
   {
+    "username": "douglasblnk",
     "id": "c508da30-b2e5-4e03-94b5-a3cf4f2c97b7",
-    "userId": "douglasblnk",
     "name": "Douglas Blank",
     "email": "douglasblank1@gmail.com",
-    "password": "$2a$12$HJMwmuOXjfYGz6An9Fzf/eMbKBQLAgyqd7SbFe0jOKQGR9/hevblS"
+    "password": "$2a$12$jCogYAg83ZGLX8k.KcwbMu/nH62.b4YI2cIoltg5zSH0X2gvT9sFS"
   },
   {
+    "username": "anamdf",
     "id": "16b08d00-11ec-43bc-b9e3-9dd528357d2a",
-    "userId": "anamdf",
     "name": "Ana Carolina",
     "email": "anacarolina@gmail.com",
-    "password": "$2a$12$u7kFnyg6NvdBVoK4RG5P5e5w7iJk8fXLj7qTygsmpWtXhVb/pBUQ."
+    "password": "$2a$12$RAxCLC4s2J9/Po1ysOEy0.XOdPUYTdyYF.SEdf9V4zjRScjXZX/.O"
   }
 ]

@@ -1,73 +1,18 @@
 import { createApp } from 'vue'
-import { ClosePopup, Notify, Quasar, Ripple } from 'quasar'
-import { configure, defineRule } from 'vee-validate'
-import { createHead } from '@vueuse/head'
-import { email, min, regex, required } from '@vee-validate/rules'
-import { localize, setLocale } from '@vee-validate/i18n'
-import pt_BR from '@vee-validate/i18n/dist/locale/pt_BR.json'
 
-import iconSet from 'quasar/icon-set/svg-mdi-v6'
-import lang from 'quasar/lang/pt-BR'
+import App from './App.vue'
+import { applyPlugins } from '@/plugins'
 
+import '@quasar/extras/mdi-v6/mdi-v6.css'
 import '@/styles/index.sass'
-
 import 'uno.css'
 import 'uno:components.css'
 import 'uno:utilities.css'
 
-import App from './App.vue'
-
-import createRouterInstance from '@/routes'
-// import { validateToken } from '@/utils/token'
-
-const router = createRouterInstance()
-
 const app = createApp(App)
-const head = createHead()
 
-app.use(head)
-app.use(router)
+const plugins = applyPlugins(app)
 
-app.use(Quasar, {
-  iconSet,
-  lang,
-  plugins: {
-    Notify,
-  },
-  directives: {
-    ClosePopup,
-    Ripple,
-  },
-  config: {
-    notify: {
-      position: 'top',
-      timeout: 5000,
-    },
-    brand: {
-      'primary': 'var(--color-primary)',
-      'secondary': 'var(--color-secondary)',
-      'accent': 'var(--color-accent)',
-
-      'dark': 'var(--color-dark)',
-      'dark-page': 'var(--color-dark-page)',
-
-      'positive': 'var(--color-positive)',
-      'negative': 'var(--color-negative)',
-      'info': 'var(--color-info)',
-      'warning': 'var(--color-warning)',
-    },
-  },
+Promise.all(plugins).then(() => {
+  app.mount('#app')
 })
-
-configure({
-  generateMessage: localize({ pt_BR }),
-})
-
-defineRule('required', required)
-defineRule('email', email)
-defineRule('regex', regex)
-defineRule('min', min)
-
-setLocale('pt_BR')
-
-app.mount('#app')

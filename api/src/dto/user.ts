@@ -1,16 +1,14 @@
 import type { UserModel } from './../models/user'
 
-interface GetUserDTO {
-  id: string
-  userId: string
+export interface UserDTO {
+  username: string
   name: string
   email: string
 }
 
-export const userDto = (user: UserModel): GetUserDTO => {
+export const userDto = (user: UserModel): UserDTO => {
   return {
-    id: user.id,
-    userId: user.userId,
+    username: user.username,
     name: user.name,
     email: user.email,
   }

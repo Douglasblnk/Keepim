@@ -15,12 +15,23 @@
     "@aws-sdk/client-dynamodb": "^3.309.0",
     "@aws-sdk/util-dynamodb": "^3.309.0",
     "@middy/core": "^4.2.8",
-    "@middy/http-json-body-parser": "^4.2.8"
+    "@middy/http-cors": "^4.3.0",
+    "@middy/http-json-body-parser": "^4.2.8",
+    "@types/cookie": "^0.5.1",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/uuid": "^9.0.1",
+    "bcryptjs": "^2.4.3",
+    "cookie": "^0.5.0",
+    "dayjs": "^1.11.7",
+    "jsonwebtoken": "^9.0.0",
+    "seedrandom": "^3.0.5",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.4",
     "@serverless/typescript": "^3.29.0",
     "@types/aws-lambda": "^8.10.114",
+    "@types/bcryptjs": "^2.4.2",
     "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
@@ -36,6 +47,11 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.3"
+  },
+  "overrides": {
+    "serverless-dynamodb-local": {
+      "dynamodb-localhost": "https://github.com/99x/dynamodb-localhost#db30898f8c40932c7177be7b2f1a81360d12876d"
+    }
   },
   "license": "MIT"
 }
