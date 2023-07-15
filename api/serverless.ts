@@ -11,7 +11,7 @@ const serverlessConfiguration: AWS = {
   plugins: [
     'serverless-esbuild',
     'serverless-iam-roles-per-function',
-    'serverless-dynamodb-local',
+    'serverless-dynamodb',
     'serverless-offline',
     'serverless-prune-plugin',
   ],
@@ -63,7 +63,7 @@ const serverlessConfiguration: AWS = {
       websocketPort: 4001,
       lambdaPort: 4002,
     },
-    dynamodb: {
+    serverlessDynamodb: {
       stages: 'dev',
       start: {
         port: 8000,
