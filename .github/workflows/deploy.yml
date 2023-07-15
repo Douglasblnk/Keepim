@@ -6,8 +6,26 @@ on:
       - main
 
 jobs:
-  deploy-api:
-    if: ${{ contains(github.event.head_commit.modified, 'api/') }}
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      api: ${{ steps.filter.outputs.api }}
+      app: ${{ steps.filter.outputs.app }}
+    steps:
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          api:
+            - 'api/**'
+          app:
+            - 'app/**'
+
+  build-api:
+    needs: changes
+    if: ${{ needs.changes.outputs.api == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -35,8 +53,9 @@ jobs:
           SESSION_DB_TABLE: ${{ secrets.SESSION_DB_TABLE }}
           USER_DB_TABLE: ${{ secrets.USER_DB_TABLE }}
 
-  build:
-    if: ${{ contains(github.event.head_commit.modified, 'app/') }}
+  build-app:
+    needs: changes
+    if: ${{ needs.changes.outputs.app == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
