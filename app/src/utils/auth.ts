@@ -55,12 +55,6 @@ export default async function handleRoutes(to: RouteLocationNormalized, prev: Ro
     if (data?.name === 'TokenExpiredError')
       return refreshAccessToken(to, next)
 
-    notify({
-      message: 'Sessão expirada. Faça login novamente.',
-      type: 'negative',
-      timeout: 1000,
-    })
-
     return reauthenticate(next)
   }
 }
