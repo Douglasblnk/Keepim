@@ -3,7 +3,7 @@ import type { AWS } from '@serverless/typescript'
 import Health from '@functions/health'
 import User from '@functions/user'
 import Auth from '@functions/auth'
-import { SessionResources, UserResources } from './resources'
+import { CollectionResources, SessionResources, UserResources } from './resources'
 
 const serverlessConfiguration: AWS = {
   service: 'keepim-api',
@@ -63,8 +63,10 @@ const serverlessConfiguration: AWS = {
       websocketPort: 4001,
       lambdaPort: 4002,
     },
-    serverlessDynamodb: {
-      stages: 'dev',
+    dynamodb: {
+      stages: [
+        'dev',
+      ],
       start: {
         port: 8000,
         inMemory: true,
@@ -87,6 +89,7 @@ const serverlessConfiguration: AWS = {
     Resources: {
       ...SessionResources,
       ...UserResources,
+      ...CollectionResources,
     },
   },
 }
