@@ -28,7 +28,7 @@ export function getErrorMsg(error: unknown) {
   return 'Ocorreu um erro inesperado.'
 }
 
-export function parseAxiosError(error: AxiosError<any>) {
+export function parseAxiosError(error: any) {
   const { data, status } = error.response || {}
 
   return {
