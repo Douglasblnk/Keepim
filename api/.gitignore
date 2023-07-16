@@ -11,4 +11,7 @@ jspm_packages
 # esbuild directories
 .esbuild
 
+# serverless-middleware directorie
+.middleware
+
 .env
