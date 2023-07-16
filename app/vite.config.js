@@ -20,6 +20,7 @@ export default defineConfig({
       '@composables': resolve(__dirname, './src/composables'),
       '@utils': resolve(__dirname, './src/utils'),
       '@datasource': resolve(__dirname, './src/datasource'),
+      '@constants': resolve(__dirname, './src/constants'),
     },
   },
   optimizeDeps: {
