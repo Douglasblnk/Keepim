@@ -1,5 +1,9 @@
 export default {
-  handler: 'src/functions/user/get-user/handler.main',
+  middleware: [
+    'src/functions/middlewares/authentication.main',
+    { then: 'src/functions/user/get-user/handler.main' },
+    { catch: 'src/utils/utils.handleError' },
+  ],
   events: [
     {
       http: {
