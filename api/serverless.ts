@@ -13,6 +13,7 @@ const serverlessConfiguration: AWS = {
     'serverless-iam-roles-per-function',
     'serverless-dynamodb',
     'serverless-offline',
+    'serverless-middleware',
     'serverless-prune-plugin',
   ],
   provider: {
@@ -64,9 +65,7 @@ const serverlessConfiguration: AWS = {
       lambdaPort: 4002,
     },
     dynamodb: {
-      stages: [
-        'dev',
-      ],
+      stages: 'dev',
       start: {
         port: 8000,
         inMemory: true,

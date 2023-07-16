@@ -91,6 +91,9 @@ devDependencies:
   serverless-iam-roles-per-function:
     specifier: ^3.2.0-e97ab49
     version: 3.2.0-e97ab49
+  serverless-middleware:
+    specifier: ^3.2.0
+    version: 3.2.0
   serverless-offline:
     specifier: ^12.0.4
     version: 12.0.4(serverless@3.29.0)
@@ -6608,6 +6611,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       lodash: 4.17.21
+    dev: true
+
+  /serverless-middleware@3.2.0:
+    resolution: {integrity: sha512-zCLZyq6y5pKNUQ7IIOKTxWfImh8oCDbio3Ti5plH6Ja4+mISitfGzMcLfaP2xWfa7gIfZmHK5MKtj8ZxRLII8A==}
     dev: true
 
   /serverless-offline@12.0.4(serverless@3.29.0):
