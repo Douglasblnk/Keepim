@@ -2,18 +2,26 @@ import type { AxiosError } from 'axios'
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 import { checkAuthenticationRequest, refreshAccessTokenRequest } from '../datasource/authentication'
 import useLocalStorage from '../composables/use-local-storage'
-import { parseAxiosError } from './handle-error'
-import { notify } from '.'
+import { parseAxiosError } from '../utils/handle-error'
+import { notify } from '../utils'
 
 const { getStorageState, deleteStorageState } = useLocalStorage()
 
-function reauthenticate(next) {
+function reauthenticate(next: NavigationGuardNext) {
+  if (getStorageState('user-info')) {
+    notify({
+      message: 'Sessão expirada. Faça login novamente.',
+      type: 'negative',
+      timeout: 1000,
+    })
+  }
+
   deleteStorageState('user-info')
 
   next({ name: 'login' })
 }
 
-async function refreshAccessToken(to, next) {
+async function refreshAccessToken(next: NavigationGuardNext) {
   try {
     await refreshAccessTokenRequest()
 
@@ -21,12 +29,6 @@ async function refreshAccessToken(to, next) {
   }
 
   catch (error) {
-    notify({
-      message: 'Sessão expirada. Faça login novamente.',
-      type: 'negative',
-      timeout: 1000,
-    })
-
     return reauthenticate(next)
   }
 }
@@ -53,7 +55,7 @@ export default async function handleRoutes(to: RouteLocationNormalized, prev: Ro
     const { data } = parseAxiosError(error as AxiosError)
 
     if (data?.name === 'TokenExpiredError')
-      return refreshAccessToken(to, next)
+      return refreshAccessToken(next)
 
     return reauthenticate(next)
   }
