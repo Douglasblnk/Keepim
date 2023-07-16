@@ -11,8 +11,9 @@ const serverlessConfiguration: AWS = {
   plugins: [
     'serverless-esbuild',
     'serverless-iam-roles-per-function',
-    'serverless-dynamodb-local',
+    'serverless-dynamodb',
     'serverless-offline',
+    'serverless-middleware',
     'serverless-prune-plugin',
   ],
   provider: {
