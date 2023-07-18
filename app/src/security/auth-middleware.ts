@@ -1,7 +1,9 @@
-import { httpCodes } from '@constants/http-codes'
+import useLocalStorage from '../composables/use-local-storage'
+import { httpCodes } from '../constants/http-codes'
 import { router } from '../plugins/router'
-import { parseAxiosError } from '@/utils/handle-error'
-import { notify } from '@/utils'
+import { notify } from '../utils'
+import { parseAxiosError } from '../utils/handle-error'
+import { refreshAccessTokenRequest } from '../datasource/authentication'
 
 export default async function authMiddleware<T = any>(fn: () => Promise<T>) {
   try {
