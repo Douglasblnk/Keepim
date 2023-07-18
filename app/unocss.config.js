@@ -43,6 +43,7 @@ export default defineConfig({
   shortcuts: [
     { column: 'flex flex-wrap flex-col h-auto min-h-0 max-h-full' },
     { center: 'flex items-center justify-center' },
+    { title: 'text-md font-bold' },
   ],
 
   theme: {
@@ -91,6 +92,7 @@ export default defineConfig({
       negative: '#F56C6C',
       info: '#31CCEC',
       warning: '#F2C037',
+      cancel: '#767981',
 
       primary: '#4599C8',
       secondary: '#A4C2E4',
