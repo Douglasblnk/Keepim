@@ -4,9 +4,9 @@ defineProps<{ modelValue: boolean }>()
 const emit = defineEmits([ 'onAction', 'update:modelValue' ])
 
 const actions = [
-  { name: 'Nova coleção', icon: 'i-mdi-folder-plus-outline', emit: 'addCollection' },
-  { name: 'Nova imagem', icon: 'i-mdi-image-plus-outline', emit: 'addImage' },
-  { name: 'Nova categoria', icon: 'i-mdi-tag-plus-outline', emit: 'addCategory' },
+  { name: 'Nova coleção', icon: 'i-mdi-folder-plus-outline', emit: 'CreateCollectionDialog' },
+  { name: 'Nova imagem', icon: 'i-mdi-image-plus-outline', emit: 'AddImageDialog' },
+  { name: 'Nova categoria', icon: 'i-mdi-tag-plus-outline', emit: 'AddCategoryDialog' },
 ]
 </script>
 
@@ -41,6 +41,9 @@ const actions = [
             un-items-center
             un-justify-end
             un-gap-md
+            un-cursor-pointer
+            un-transition="duration-200"
+            un-hover-transform="~ scale-90"
             @click="emit('onAction', action.emit); emit('update:modelValue', false)"
           >
             <span un-text-shadow-xl>{{ action.name }}</span>
