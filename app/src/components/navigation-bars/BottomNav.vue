@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const { push } = useRouter()
+const { setDialog } = useDialog()
+
+const isLoading = ref(false)
 
 const SELECTED = [
   'bg-primary',
@@ -26,8 +29,20 @@ function toggleQuickActions() {
   document.body.style.overflow = isQuickActionsOpen.value ? 'hidden' : ''
 }
 
-function onAction(action: string) {
-  console.log('action :>> ', action)
+function onAction(component: string) {
+  const { emit, close } = setDialog({ component, props: { isLoading } })
+
+  emit('on-create', (event, off) => {
+    console.log('event :>> ', event)
+    isLoading.value = true
+
+    setTimeout(() => {
+      isLoading.value = false
+
+      off()
+      close()
+    }, 2000)
+  })
 }
 </script>
 
@@ -127,7 +142,7 @@ function onAction(action: string) {
 
     <QuickActions
       v-model="isQuickActionsOpen"
-      @onAction="onAction"
+      @on-action="onAction"
     />
   </div>
 </template>
