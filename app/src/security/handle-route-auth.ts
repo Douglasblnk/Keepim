@@ -1,7 +1,7 @@
 import type { AxiosError } from 'axios'
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
-import { checkAuthenticationRequest, refreshAccessTokenRequest } from '../datasource/authentication'
 import useLocalStorage from '../composables/use-local-storage'
+import { checkAuthenticationRequest, refreshAccessTokenRequest } from '../datasource/authentication'
 import { parseAxiosError } from '../utils/handle-error'
 import { notify } from '../utils'
 

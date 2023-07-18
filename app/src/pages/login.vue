@@ -102,7 +102,6 @@ async function makeLogin() {
         label="Acessar"
         color="primary"
         un-mt-sm
-        no-caps
         :loading="isLoading"
         @click="makeLogin"
       />

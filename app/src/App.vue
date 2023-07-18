@@ -48,4 +48,6 @@ useHead({
   >
     <BottomNav v-if="isBottomNavHidden" />
   </transition>
+
+  <GenericDialog />
 </template>

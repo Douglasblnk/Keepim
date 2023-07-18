@@ -1,11 +1,11 @@
-<script setup>
+<script setup lang="ts">
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { v4 as uuid } from 'uuid'
 import { useField } from 'vee-validate'
-import { fieldProps } from '@utils/index'
+import type { FieldProps } from '@utils/utils'
 
-const props = defineProps({
-  ...fieldProps,
-  icon: String,
-})
+const props = defineProps<FieldProps & { icon?: string }>()
 
 const {
   value: inputValue,
@@ -13,7 +13,11 @@ const {
   handleBlur,
   handleChange,
   handleReset,
-} = useField(props.name, props.veeRules, { initialValue: props.modelValue })
+} = useField(
+  () => props.name || uuid(),
+  props.veeRules || {},
+  { initialValue: props.modelValue, syncVModel: true },
+)
 </script>
 
 <template>
