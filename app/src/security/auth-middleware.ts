@@ -1,9 +1,7 @@
-import useLocalStorage from '../composables/use-local-storage'
-import { httpCodes } from '../constants/http-codes'
-import { router } from '../plugins/router'
-import { notify } from '../utils'
 import { parseAxiosError } from '../utils/handle-error'
-import { refreshAccessTokenRequest } from '../datasource/authentication'
+import { notify } from '../utils'
+import { router } from './../plugins/router'
+import { httpCodes } from './../constants/http-codes'
 
 export default async function authMiddleware<T = any>(fn: () => Promise<T>) {
   try {
@@ -32,6 +30,10 @@ export default async function authMiddleware<T = any>(fn: () => Promise<T>) {
         useLocalStorage().deleteStorageState('user-info')
         router.replace({ name: 'login' })
       }
+    }
+
+    else {
+      throw error
     }
   }
 }

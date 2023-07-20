@@ -4,7 +4,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 function getApiUrl() {
   return isProduction
-    ? `https://api.${window.location.hostname.slice(8)}`
+    ? `https://api.${window.location.hostname.slice(7)}`
     : 'http://localhost:3000/dev'
 }
 
