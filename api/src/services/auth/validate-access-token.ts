@@ -11,5 +11,5 @@ export default async (accessToken: string) => {
   if (isObjectEmpty(session))
     throw errSessionNotFound()
 
-  return 'OK'
+  return session
 }

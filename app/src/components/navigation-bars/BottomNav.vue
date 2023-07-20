@@ -2,8 +2,6 @@
 const { push } = useRouter()
 const { setDialog } = useDialog()
 
-const isLoading = ref(false)
-
 const SELECTED = [
   'bg-primary',
   'rounded-full',
@@ -30,19 +28,7 @@ function toggleQuickActions() {
 }
 
 function onAction(component: string) {
-  const { emit, close } = setDialog({ component, props: { isLoading } })
-
-  emit('on-create', (event, off) => {
-    console.log('event :>> ', event)
-    isLoading.value = true
-
-    setTimeout(() => {
-      isLoading.value = false
-
-      off()
-      close()
-    }, 2000)
-  })
+  setDialog({ component })
 }
 </script>
 

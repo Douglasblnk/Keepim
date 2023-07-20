@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 
+import type { MiddlewareContext } from '@type/lambda'
 import { lambdaErrorResponse } from './lambda'
 
 export const isObjectEmpty = (obj: Object) => typeof obj === 'object' && !Object.keys(obj).length
@@ -41,4 +42,11 @@ export const handleError = async (_: any, context: any) => {
   const error = getError(context)
 
   return lambdaErrorResponse({ error, statusCode: 401 })
+}
+
+export function joinWithContextUsername<TBody>(body: TBody, context: MiddlewareContext) {
+  return {
+    ...body,
+    username: context.prev,
+  }
 }

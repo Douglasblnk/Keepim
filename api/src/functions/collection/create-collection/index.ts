@@ -2,15 +2,15 @@ export default {
   middleware: [
     'src/middlewares/authentication.main',
     {
-      then: 'src/functions/user/get-user/handler.main',
+      then: 'src/functions/collection/create-collection/handler.main',
       catch: 'src/utils/utils.handleError',
     },
   ],
   events: [
     {
       http: {
-        method: 'get',
-        path: 'user/{id}',
+        method: 'post',
+        path: 'collection',
         cors: {
           origin: 'https://keepim.douglasblnk.com',
         },
@@ -19,7 +19,7 @@ export default {
   ],
   iamRoleStatements: [{
     Effect: 'Allow',
-    Action: ['dynamodb:GetItem'],
+    Action: ['dynamodb:PutItem'],
     Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.User',
   }],
 }

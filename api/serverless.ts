@@ -3,7 +3,8 @@ import type { AWS } from '@serverless/typescript'
 import Health from '@functions/health'
 import User from '@functions/user'
 import Auth from '@functions/auth'
-import { SessionResources, UserResources } from './resources'
+import Collection from '@functions/collection'
+import { CollectionResources, SessionResources, UserResources } from './resources'
 
 const serverlessConfiguration: AWS = {
   service: 'keepim-api',
@@ -29,6 +30,7 @@ const serverlessConfiguration: AWS = {
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
       REFRESH_TOKEN_LENGTH: '${env:REFRESH_TOKEN_LENGTH}',
       SESSION_DB_TABLE: '${env:SESSION_DB_TABLE}',
+      COLLECTION_DB_TABLE: '${env:COLLECTION_DB_TABLE}',
       USER_DB_TABLE: '${env:USER_DB_TABLE}',
       JWT_EXPIRATION_TIME: '${env:JWT_EXPIRATION_TIME}',
       REFRESH_TOKEN_EXPIRATION: '${env:REFRESH_TOKEN_EXPIRATION}',
@@ -39,6 +41,7 @@ const serverlessConfiguration: AWS = {
     Health,
     ...User,
     ...Auth,
+    ...Collection,
   },
   package: {
     individually: true,
@@ -79,6 +82,10 @@ const serverlessConfiguration: AWS = {
               table: 'Keepim.User',
               sources: ['./migration/user-seed.json'],
             },
+            {
+              table: 'Keepim.Collection',
+              sources: ['./migration/collection-seed.json'],
+            },
           ],
         },
       },
@@ -88,6 +95,7 @@ const serverlessConfiguration: AWS = {
     Resources: {
       ...SessionResources,
       ...UserResources,
+      ...CollectionResources,
     },
   },
 }

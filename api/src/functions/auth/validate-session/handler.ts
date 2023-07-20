@@ -11,9 +11,9 @@ const handler = async (event: CustomAPIGatewayProxyEvent<{}, any>) => {
     if (!accessToken)
       throw errAuthorizationFailed()
 
-    const valid = await validateAccessToken(accessToken)
+    const session = await validateAccessToken(accessToken)
 
-    return lambdaOKResponse(valid)
+    return lambdaOKResponse(!!session)
   }
 
   catch (error) {
