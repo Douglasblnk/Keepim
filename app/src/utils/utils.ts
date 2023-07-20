@@ -13,7 +13,7 @@ export const regexRules = {
 export interface FieldProps {
   name?: string
   veeRules?: string | Record<string, unknown>
-  modelValue: any
+  modelValue?: any
 }
 
 const messageOptions = {
@@ -23,7 +23,7 @@ const messageOptions = {
 }
 
 export function eventHook() {
-  const fns: Record<string, Function> = {}
+  const fns: Record<string, (_agr1: any, _agr2: any) => void> = {}
 
   const off = (event: string) => {
     delete fns[event]
@@ -44,16 +44,22 @@ export function eventHook() {
   }
 }
 
-export function notify(options: QNotifyCreateOptions) {
+export async function notify(options: QNotifyCreateOptions) {
   const { message, type, timeout } = { ...messageOptions, ...options }
 
   const msg = unref(message)
 
-  Notify.create({
-    type: type || 'success',
-    message: msg,
-    timeout,
-    ...options,
+  return new Promise<void>((resolve) => {
+    Notify.create({
+      type: type || 'success',
+      message: msg,
+      timeout,
+      ...options,
+    })
+
+    timeout
+      ? setTimeout(() => resolve(), timeout)
+      : resolve()
   })
 }
 
