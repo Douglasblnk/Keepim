@@ -2,7 +2,10 @@
   {
     "username": "douglasblnk",
     "id": "f56df3e9-f4ef-4d3c-aa86-67e15193b5b2",
-    "name": "Heloisa",
-    "date": "2022-07-23"
+    "collectionName": "Heloisa",
+    "collectionDate": "2022-07-23",
+    "createdAt": 1689811541,
+    "updatedAt": 1689811541,
+    "deleted": false
   }
 ]
