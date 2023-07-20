@@ -1,10 +1,49 @@
 <script setup lang="ts">
-defineProps<{ isLoading?: boolean }>()
+import { useForm } from 'vee-validate'
+import { notify } from '@/utils'
+import { getErrorMsg } from '@/utils/handle-error'
 
-const { close, emit } = useDialog()
+const { validate } = useForm()
+const { close } = useDialog()
 
 const collection = ref('')
 const creationDate = ref('')
+const isLoading = ref(false)
+
+async function createCollection() {
+  const { valid } = await validate()
+
+  if (!valid)
+    return
+
+  isLoading.value = true
+
+  try {
+    await createCollectionRequest({
+      collectionName: collection.value,
+      collectionDate: creationDate.value,
+    })
+
+    await notify({
+      type: 'positive',
+      message: 'Coleção criada com sucesso!',
+      timeout: 800,
+    })
+
+    close()
+  }
+
+  catch (error) {
+    notify({
+      type: 'negative',
+      message: getErrorMsg(error) as string,
+    })
+  }
+
+  finally {
+    isLoading.value = false
+  }
+}
 </script>
 
 <template>
@@ -29,6 +68,8 @@ const creationDate = ref('')
 
     <KInput
       v-model="collection"
+      vee-rules="required"
+      name="coleção"
       placeholder="Coleção..."
     />
   </div>
@@ -38,6 +79,8 @@ const creationDate = ref('')
 
     <KInputDate
       v-model="creationDate"
+      name="data"
+      vee-rules="required"
     />
   </div>
 
@@ -60,7 +103,7 @@ const creationDate = ref('')
       color="primary"
       un-w-full
       :loading="isLoading"
-      @click="emit('on-create', { collection, creationDate })"
+      @click="createCollection"
     />
   </div>
 </template>
