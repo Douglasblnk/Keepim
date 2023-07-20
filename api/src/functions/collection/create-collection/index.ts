@@ -1,10 +1,16 @@
 export default {
-  handler: 'src/functions/collection/create-collection/handler.main',
+  middleware: [
+    'src/middlewares/authentication.main',
+    {
+      then: 'src/functions/collection/create-collection/handler.main',
+      catch: 'src/utils/utils.handleError',
+    },
+  ],
   events: [
     {
       http: {
         method: 'post',
-        path: 'collection/',
+        path: 'collection',
         cors: {
           origin: 'https://keepim.douglasblnk.com',
         },

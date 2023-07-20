@@ -1,18 +1,15 @@
-import { lambdaOKResponse, middyfy } from '@utils/lambda'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import { getAccessToken } from '@utils/auth'
 import { validateAccessToken } from '@service/auth'
 import { errAuthorizationFailed } from '@exceptions/auth-exceptions'
 
-const handler = async (event: CustomAPIGatewayProxyEvent<any, {}>) => {
+export const main = async (event: CustomAPIGatewayProxyEvent<any, {}>) => {
   const accessToken = getAccessToken(event)
 
-  const valid = await validateAccessToken(accessToken)
+  const session = await validateAccessToken(accessToken)
 
-  if (valid !== 'OK')
+  if (!session)
     throw errAuthorizationFailed()
 
-  return lambdaOKResponse(valid)
+  return session.username
 }
-
-export const main = middyfy(handler)
