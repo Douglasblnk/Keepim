@@ -1,4 +1,4 @@
-export interface CollectionSchemaParams {
-  name: string
-  date: string
+export interface CollectionSchemaBody {
+  collectionName: string
+  collectionDate: string
 }
