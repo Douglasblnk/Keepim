@@ -5,9 +5,6 @@ export default {
       http: {
         method: 'post',
         path: 'validate-session',
-        cors: {
-          origin: 'https://keepim.douglasblnk.com',
-        },
       },
     },
   ],

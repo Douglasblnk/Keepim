@@ -5,9 +5,6 @@ export default {
       http: {
         method: 'post',
         path: 'refresh-access-token',
-        cors: {
-          origin: 'https://keepim.douglasblnk.com',
-        },
       },
     },
   ],
