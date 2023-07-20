@@ -54,6 +54,7 @@ jobs:
           JWT_EXPIRATION_TIME: ${{ secrets.JWT_EXPIRATION_TIME }}
           REFRESH_TOKEN_EXPIRATION: ${{ secrets.REFRESH_TOKEN_EXPIRATION }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          COLLECTION_DB_TABLE: ${{ secrets.COLLECTION_DB_TABLE }}
           SESSION_DB_TABLE: ${{ secrets.SESSION_DB_TABLE }}
           USER_DB_TABLE: ${{ secrets.USER_DB_TABLE }}
 
