@@ -30,6 +30,7 @@
       "@composables/*": ["./src/composables/*"],
       "@utils/*": ["./src/utils/*"],
       "@datasource/*": ["./src/datasource/*"],
+      "@security/*": ["./src/security/*"],
       "@constants/*": ["./src/constants/*"],
     },
   },

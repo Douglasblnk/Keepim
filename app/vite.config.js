@@ -20,6 +20,7 @@ export default defineConfig({
       '@composables': resolve(__dirname, './src/composables'),
       '@utils': resolve(__dirname, './src/utils'),
       '@datasource': resolve(__dirname, './src/datasource'),
+      '@security': resolve(__dirname, './src/security'),
       '@constants': resolve(__dirname, './src/constants'),
     },
   },
@@ -32,6 +33,7 @@ export default defineConfig({
       '@vueuse/core',
       '@vueuse/integrations/useAxios',
       '@vueuse/head',
+      'uuid',
     ],
   },
   plugins: [
