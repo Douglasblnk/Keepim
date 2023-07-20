@@ -13,6 +13,7 @@ export default {
         path: 'collection',
         cors: {
           origin: 'https://keepim.douglasblnk.com',
+          allowCredentials: true,
         },
       },
     },

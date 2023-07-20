@@ -1,9 +1,10 @@
-import { lambdaErrorResponse, lambdaOKResponse, middyfy } from '@utils/lambda'
+import { lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import { errAuthorizationFailed } from '@exceptions/auth-exceptions'
 import { getAccessToken } from '@utils/auth'
 import { refreshAccessToken } from '@service/auth'
 import { serialize } from 'cookie'
+import { middyfy } from '@middleware/middyfy'
 
 const handler = async (event: CustomAPIGatewayProxyEvent<{}, any>) => {
   try {

@@ -1,6 +1,7 @@
-import { lambdaErrorResponse, lambdaOKResponse, middyfy } from '@utils/lambda'
+import { lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
 import { getUserByUsername } from '@service/user'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
+import { middyfy } from '@middleware/middyfy'
 import type { UserSchemaParams } from './schema'
 
 const handler = async (event: CustomAPIGatewayProxyEvent<any, UserSchemaParams>) => {

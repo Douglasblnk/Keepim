@@ -10,7 +10,8 @@
       "@dto/*": ["src/dto/*"],
       "@database/*": ["src/database/*"],
       "@repository/*": ["src/repositories/*"],
-      "@service/*": ["src/services/*"]
+      "@service/*": ["src/services/*"],
+      "@middleware/*": ["src/middlewares/*"]
     }
   }
 }

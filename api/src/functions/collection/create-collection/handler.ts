@@ -1,8 +1,9 @@
-import { getLambdaBody, lambdaErrorResponse, lambdaOKResponse, middyfy } from '@utils/lambda'
+import { getLambdaBody, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
 import { joinWithContextUsername } from '@utils/utils'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import { createCollection } from '@service/collection'
 import type { MiddlewareContext } from '@type/lambda'
+import { middyfy } from '@middleware/middyfy'
 import type { CollectionSchemaBody } from './schema'
 
 const handler = async (event: CustomAPIGatewayProxyEvent<CollectionSchemaBody, any>, context: MiddlewareContext) => {

@@ -1,16 +1,4 @@
-import middy from '@middy/core'
-import middyJsonBodyParser from '@middy/http-json-body-parser'
-import cors from '@middy/http-cors'
 import { errMissingParams } from '@exceptions/auth-exceptions'
-
-export const middyfy = (handler) => {
-  return middy(handler)
-    .use(middyJsonBodyParser())
-    .use(cors({
-      credentials: true,
-      origin: 'https://keepim.douglasblnk.com',
-    }))
-}
 
 export const lambdaOKResponse = <TRes, THeaders = {}>(response: TRes, headers?: THeaders) => {
   return {
@@ -23,7 +11,11 @@ export const lambdaOKResponse = <TRes, THeaders = {}>(response: TRes, headers?: 
 export const lambdaErrorResponse = <THeaders = {}>(error: Record<string, unknown>, headers?: THeaders) => {
   return {
     statusCode: error.statusCode || 400,
-    ...(headers ? { headers } : {}),
+    headers: {
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Origin': 'https://keepim.douglasblnk.com',
+      ...headers,
+    },
     body: JSON.stringify(error),
   }
 }
