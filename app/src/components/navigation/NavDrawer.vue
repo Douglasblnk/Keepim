@@ -7,13 +7,15 @@ import IconAddFolder from '~icons/mdi/folder-plus-outline'
 import IconAddImage from '~icons/mdi/image-plus-outline'
 import IconAddCategory from '~icons/mdi/tag-plus-outline'
 
+const route = useRoute()
 const { push } = useRouter()
 const { setDialog } = useDialog()
+const { setStorageState, getStorageState } = useLocalStorage()
 
-const miniState = ref(false)
-const miniStateTransition = ref(false)
+const drawerSavedState = getStorageState('drawer-state')
 
-const route = useRoute()
+const miniState = ref(drawerSavedState === 'true')
+const miniStateTransition = ref(drawerSavedState === 'true')
 
 const items = [
   {
@@ -73,14 +75,14 @@ function toggleMiniState() {
   else {
     miniStateTransition.value = miniState.value
   }
+
+  setStorageState('drawer-state', miniState.value ? 'true' : 'false')
 }
 </script>
 
 <template>
   <QDrawer
     behavior="desktop"
-    overlay
-    persistent
     :mini="miniState"
     :mini-width="90"
   >

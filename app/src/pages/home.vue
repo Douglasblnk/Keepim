@@ -6,13 +6,13 @@ const { data, isLoading } = useQuery({
 </script>
 
 <template>
-  <div>
+  <KLayoutPage>
     <TopHeader
       title="Últimas Atualizações"
       :is-loading="isLoading"
       :sub-items="{ collections: data }"
     />
-  </div>
+  </KLayoutPage>
 </template>
 
 <route lang="yaml">

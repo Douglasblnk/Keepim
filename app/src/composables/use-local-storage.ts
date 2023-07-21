@@ -1,6 +1,6 @@
 import { useStorage } from '@vueuse/core'
 
-type States = 'user-info'
+type States = 'user-info' | 'drawer-state'
 
 interface StorageState {
   'user-info': {
@@ -9,6 +9,7 @@ interface StorageState {
     email: string
     avatar: string
   }
+  'drawer-state': string
 }
 
 const storageState: Ref<Record<string, any>> = ref({})
@@ -34,7 +35,7 @@ export default () => {
     storageState.value[stateKey] = null
   }
 
-  const userStorage = computed(() => getStorageState('user-info'))
+  const userStorage = computed(() => getStorageState('user-info') || {})
 
   return {
     setStorageState,
