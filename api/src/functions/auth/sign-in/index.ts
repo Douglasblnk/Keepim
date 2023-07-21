@@ -12,12 +12,22 @@ export default {
       },
     },
   ],
-  iamRoleStatements: [{
-    Effect: 'Allow',
-    Action: [
-      'dynamodb:GetItem',
-      'dynamodb:PutItem',
-    ],
-    Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.User',
-  }],
+  iamRoleStatements: [
+    {
+      Effect: 'Allow',
+      Action: [
+        'dynamodb:GetItem',
+        'dynamodb:Query',
+      ],
+      Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.User',
+    },
+    {
+      Effect: 'Allow',
+      Action: [
+        'dynamodb:PutItem',
+        'dynamodb:Query',
+      ],
+      Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Session',
+    },
+  ],
 }

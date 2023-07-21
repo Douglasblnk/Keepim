@@ -21,6 +21,6 @@ export default {
   iamRoleStatements: [{
     Effect: 'Allow',
     Action: ['dynamodb:PutItem'],
-    Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.User',
+    Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Collection',
   }],
 }

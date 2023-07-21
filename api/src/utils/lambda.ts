@@ -3,7 +3,11 @@ import { errMissingParams } from '@exceptions/auth-exceptions'
 export const lambdaOKResponse = <TRes, THeaders = {}>(response: TRes, headers?: THeaders) => {
   return {
     statusCode: 200,
-    ...(headers ? { headers } : {}),
+    headers: {
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Origin': 'https://keepim.douglasblnk.com',
+      ...headers,
+    },
     body: JSON.stringify(response),
   }
 }
