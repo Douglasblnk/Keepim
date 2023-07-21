@@ -17,7 +17,6 @@ export default {
       Effect: 'Allow',
       Action: [
         'dynamodb:GetItem',
-        'dynamodb:Query',
         'dynamodb:UpdateItem',
         'dynamodb:DeleteItem',
       ],
@@ -26,8 +25,13 @@ export default {
     {
       Effect: 'Allow',
       Action: [
-        'dynamodb:GetItem',
+        'dynamodb:Query',
       ],
+      Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Session/index/session-refresh-token-index',
+    },
+    {
+      Effect: 'Allow',
+      Action: ['dynamodb:GetItem'],
       Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.User',
     },
   ],

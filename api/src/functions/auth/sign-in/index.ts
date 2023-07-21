@@ -15,19 +15,23 @@ export default {
   iamRoleStatements: [
     {
       Effect: 'Allow',
-      Action: [
-        'dynamodb:GetItem',
-        'dynamodb:Query',
-      ],
+      Action: ['dynamodb:GetItem'],
       Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.User',
     },
     {
       Effect: 'Allow',
-      Action: [
-        'dynamodb:PutItem',
-        'dynamodb:Query',
-      ],
+      Action: ['dynamodb:Query'],
+      Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.User/index/email-index',
+    },
+    {
+      Effect: 'Allow',
+      Action: ['dynamodb:PutItem'],
       Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Session',
+    },
+    {
+      Effect: 'Allow',
+      Action: ['dynamodb:Query'],
+      Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Session/index/session-refresh-token-index',
     },
   ],
 }
