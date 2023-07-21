@@ -4,6 +4,7 @@ import { parse } from 'cookie'
 import { decode, verify } from 'jsonwebtoken'
 
 export const getAccessToken = (event: CustomAPIGatewayProxyEvent<{}, any>) => {
+  console.log('event.headers :>> ', event.headers)
   const cookies = event.headers?.Cookie
 
   const parsedCookies = parse(cookies || '')
