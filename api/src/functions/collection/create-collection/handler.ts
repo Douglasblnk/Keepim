@@ -1,4 +1,3 @@
-import authenticationMiddleware from '@middleware/authentication'
 import { getLambdaBody, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import { middyfy } from '@middleware/middyfy'
@@ -21,4 +20,4 @@ const handler = async (event: CustomAPIGatewayProxyEvent<CollectionSchemaBody, a
   }
 }
 
-export const main = middyfy(handler, authenticationMiddleware())
+export const main = middyfy(handler)

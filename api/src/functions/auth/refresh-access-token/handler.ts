@@ -1,3 +1,4 @@
+import { env } from 'node:process'
 import { lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import { errAuthorizationFailed } from '@exceptions/auth-exceptions'
@@ -6,7 +7,7 @@ import { refreshAccessToken } from '@service/auth'
 import { serialize } from 'cookie'
 import { middyfy } from '@middleware/middyfy'
 
-const handler = async (event: CustomAPIGatewayProxyEvent<{}, any>) => {
+const handler = async (event: CustomAPIGatewayProxyEvent<any, any>) => {
   try {
     const accessToken = getAccessToken(event)
 
@@ -21,7 +22,7 @@ const handler = async (event: CustomAPIGatewayProxyEvent<{}, any>) => {
       {
         httpOnly: true,
         secure: true,
-        maxAge: +process.env.REFRESH_TOKEN_EXPIRATION,
+        maxAge: +env.REFRESH_TOKEN_EXPIRATION,
       },
     )
 

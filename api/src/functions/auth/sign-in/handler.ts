@@ -1,3 +1,4 @@
+import { env } from 'node:process'
 import { getLambdaBody, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import { signIn } from '@service/auth'
@@ -17,7 +18,7 @@ const handler = async (event: CustomAPIGatewayProxyEvent<SignInSchemaBody, any>)
       {
         httpOnly: true,
         secure: true,
-        maxAge: +process.env.REFRESH_TOKEN_EXPIRATION,
+        maxAge: +env.REFRESH_TOKEN_EXPIRATION,
       })
 
     return lambdaOKResponse(user, { 'Set-Cookie': cookies })

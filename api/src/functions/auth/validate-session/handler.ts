@@ -5,7 +5,7 @@ import { getAccessToken } from '@utils/auth'
 import { errAuthorizationFailed } from '@exceptions/auth-exceptions'
 import { middyfy } from '@middleware/middyfy'
 
-const handler = async (event: CustomAPIGatewayProxyEvent<{}, any>) => {
+const handler = async (event: CustomAPIGatewayProxyEvent<any, any>) => {
   try {
     const accessToken = getAccessToken(event)
 
