@@ -1,4 +1,4 @@
-import authMiddleware from '@security/auth-middleware'
+import authMiddleware from '@middleware/auth-middleware'
 
 interface CollectionBody {
   collectionName: string

@@ -11,12 +11,15 @@ export interface CollectionModel {
   deleted: boolean
 }
 
-export const createCollectionModel = (collection: Omit<CollectionModel, 'id' | 'deleted' | 'createdAt' | 'updatedAt'>): CollectionModel => {
+export const createCollectionModel = (
+  collection: Omit<CollectionModel, 'username' | 'id' | 'deleted' | 'createdAt' | 'updatedAt'>,
+  username: string,
+): CollectionModel => {
   const currentTimestamp = getCurrentDate()
 
   return {
     id: uuid(),
-    username: collection.username,
+    username,
     collectionName: collection.collectionName,
     collectionDate: collection.collectionDate,
     createdAt: currentTimestamp,

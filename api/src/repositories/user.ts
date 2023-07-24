@@ -1,10 +1,11 @@
+import { env } from 'node:process'
 import dynamoDBClient from '@database/index'
 import { GetItemCommand, QueryCommand } from '@aws-sdk/client-dynamodb'
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb'
 import type { GetItemCommandInput, QueryCommandInput } from '@aws-sdk/client-dynamodb'
 import type { UserModel } from '@model/user'
 
-const TABLE_NAME = process.env.USER_DB_TABLE
+const TABLE_NAME = env.USER_DB_TABLE
 
 export const findUserByUsername = async (username: string) => {
   const db = dynamoDBClient()

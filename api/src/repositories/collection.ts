@@ -1,10 +1,11 @@
+import { env } from 'node:process'
 import dynamoDBClient from '@database/index'
 import { PutItemCommand } from '@aws-sdk/client-dynamodb'
 import { marshall } from '@aws-sdk/util-dynamodb'
 import type { PutItemCommandInput } from '@aws-sdk/client-dynamodb'
 import type { CollectionModel } from '@model/collection'
 
-const TABLE_NAME = process.env.COLLECTION_DB_TABLE
+const TABLE_NAME = env.COLLECTION_DB_TABLE
 
 export const putCollection = async (collection: CollectionModel) => {
   const db = dynamoDBClient()
