@@ -1,6 +1,6 @@
 import routes from 'virtual:generated-pages'
 import { createRouter, createWebHistory } from 'vue-router'
-import handleRoutes from '../security/handle-route-auth'
+import handleRoutes from '../middleware/handle-route-auth'
 
 export const router = createRouter({
   history: createWebHistory(),

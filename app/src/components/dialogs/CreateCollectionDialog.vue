@@ -19,10 +19,13 @@ async function createCollection() {
   isLoading.value = true
 
   try {
-    await createCollectionRequest({
+    const response = await createCollectionRequest({
       collectionName: collection.value,
       collectionDate: creationDate.value,
     })
+
+    if (!response)
+      return
 
     await notify({
       type: 'positive',
