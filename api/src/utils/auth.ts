@@ -1,3 +1,4 @@
+import { env } from 'node:process'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import type { JWTPayload } from '@type/jwt-payload'
 import { parse } from 'cookie'
@@ -15,7 +16,7 @@ export const getAccessToken = (event: CustomAPIGatewayProxyEvent<any, any>) => {
 }
 
 export const verifyAccessToken = (accessToken: string): JWTPayload => {
-  const jwtSecret = process.env.JWT_SECRET
+  const jwtSecret = env.JWT_SECRET
 
   const verified = verify(accessToken, jwtSecret, { complete: true })
 
