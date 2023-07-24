@@ -1,10 +1,11 @@
+import { env } from 'node:process'
 import dynamoDBClient from '@database/index'
 import { DeleteItemCommand, GetItemCommand, PutItemCommand, QueryCommand, UpdateItemCommand } from '@aws-sdk/client-dynamodb'
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb'
 import type { DeleteItemCommandInput, GetItemCommandInput, PutItemCommandInput, QueryCommandInput, UpdateItemInput } from '@aws-sdk/client-dynamodb'
 import type { SessionModel } from '@model/session'
 
-const TABLE_NAME = process.env.SESSION_DB_TABLE
+const TABLE_NAME = env.SESSION_DB_TABLE
 
 export const putSession = async (session: SessionModel) => {
   const db = dynamoDBClient()

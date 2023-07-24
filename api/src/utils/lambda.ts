@@ -1,6 +1,6 @@
 import { errMissingParams } from '@exceptions/auth-exceptions'
 
-export const lambdaOKResponse = <TRes, THeaders = {}>(response: TRes, headers?: THeaders) => {
+export const lambdaOKResponse = <TRes, THeaders = object>(response: TRes, headers?: THeaders) => {
   return {
     statusCode: 200,
     headers: {
@@ -12,7 +12,7 @@ export const lambdaOKResponse = <TRes, THeaders = {}>(response: TRes, headers?: 
   }
 }
 
-export const lambdaErrorResponse = <THeaders = {}>(error: Record<string, unknown>, headers?: THeaders) => {
+export const lambdaErrorResponse = <THeaders = object>(error: Record<string, unknown>, headers?: THeaders) => {
   return {
     statusCode: error.statusCode || 400,
     headers: {
