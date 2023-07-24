@@ -16,13 +16,14 @@ interface HandlerFn<T> {
 export const middyfy = <T>(handler: HandlerFn<T>, custom?: CustomMiddleware) => {
   const middlewareChain = middy(handler)
     .use(middyJsonBodyParser())
-    .use(cors({
-      credentials: true,
-      origin: 'https://keepim.douglasblnk.com',
-    }))
 
   if (custom)
     middlewareChain.use(custom)
+
+  middlewareChain.use(cors({
+    credentials: true,
+    origin: 'https://keepim.douglasblnk.com',
+  }))
 
   return middlewareChain
 }
