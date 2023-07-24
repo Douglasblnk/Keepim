@@ -14,7 +14,6 @@ const serverlessConfiguration: AWS = {
     'serverless-iam-roles-per-function',
     'serverless-dynamodb',
     'serverless-offline',
-    'serverless-middleware',
     'serverless-prune-plugin',
   ],
   provider: {
