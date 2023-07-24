@@ -1,9 +1,7 @@
 import dayjs from 'dayjs'
-
-import type { MiddlewareContext } from '@type/lambda'
 import { lambdaErrorResponse } from './lambda'
 
-export const isObjectEmpty = (obj: Object) => typeof obj === 'object' && !Object.keys(obj).length
+export const isObjectEmpty = (obj: object) => typeof obj === 'object' && !Object.keys(obj).length
 
 export const getCurrentDate = () => {
   return dayjs().unix()
@@ -26,9 +24,7 @@ export const isEmail = (username: string) => {
   return username.match(emailRegex)
 }
 
-export const getError = (context) => {
-  const error = context.prev
-
+export const getError = (error) => {
   if (error && error.name)
     return error.name
 
@@ -38,15 +34,13 @@ export const getError = (context) => {
   return error
 }
 
-export const handleError = async (_: any, context: any) => {
-  const error = getError(context)
-
-  return lambdaErrorResponse({ error, statusCode: 401 })
+export const handleAuthMiddlewareError = async (error: any) => {
+  return lambdaErrorResponse(error)
 }
 
-export function joinWithContextUsername<TBody>(body: TBody, context: MiddlewareContext) {
-  return {
-    ...body,
-    username: context.prev,
-  }
+export const getUsernameFromBody = (body: { username?: string }) => {
+  if (body.username)
+    return body.username
+
+  throw new Error('Missing username')
 }

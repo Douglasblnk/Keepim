@@ -3,8 +3,11 @@ import type { JWTPayload } from '@type/jwt-payload'
 import { parse } from 'cookie'
 import { decode, verify } from 'jsonwebtoken'
 
-export const getAccessToken = (event: CustomAPIGatewayProxyEvent<{}, any>) => {
-  const cookies = event.headers?.cookie || event.headers?.Cookie
+export const getAccessToken = (event: CustomAPIGatewayProxyEvent<any, any>) => {
+  const cookies = event.headers?.cookie
+    || event.headers?.Cookie
+    || event.headers?.cookies
+    || event.headers?.Cookies
 
   const parsedCookies = parse(cookies || '')
 
