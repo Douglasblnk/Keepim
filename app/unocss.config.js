@@ -43,7 +43,7 @@ export default defineConfig({
   shortcuts: [
     { column: 'flex flex-wrap flex-col h-auto min-h-0 max-h-full' },
     { center: 'flex items-center justify-center' },
-    { title: 'text-md font-bold' },
+    { title: 'text-md font-bold m-y-sm font-poppins' },
   ],
 
   theme: {
@@ -284,9 +284,9 @@ export default defineConfig({
             italic: true,
           },
         ],
-        montserrat: [
+        poppins: [
           {
-            name: 'Montserrat',
+            name: 'Poppins',
             weights: [ '400', '700', '800', '900' ],
             italic: true,
           },

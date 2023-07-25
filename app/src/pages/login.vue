@@ -64,7 +64,6 @@ async function makeLogin() {
       un-flex="~ col"
       un-flex-grow
       un-justify-start
-      un-px-md
     >
       <div
         un-mb-6xl
