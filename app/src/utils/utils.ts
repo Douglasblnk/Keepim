@@ -22,6 +22,29 @@ const messageOptions = {
   timeout: 2000,
 }
 
+export const isObjectEmpty = <T extends object>(obj: T | undefined) => typeof obj === 'object' && !Object.keys(obj).length
+
+export function checkImgExists(image: string | undefined) {
+  if (!image)
+    return false
+
+  const img = new Image()
+  img.src = image
+
+  if (img.complete) {
+    return true
+  }
+
+  else {
+    img.onload = () => {
+      return true
+    }
+    img.onerror = () => {
+      return false
+    }
+  }
+}
+
 export function eventHook() {
   const fns: Record<string, (_agr1: any, _agr2: any) => void> = {}
 
