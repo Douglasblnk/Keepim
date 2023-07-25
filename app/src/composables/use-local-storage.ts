@@ -25,7 +25,9 @@ export default () => {
   }
 
   const getStorageState = <T extends keyof StorageState>(stateKey: States): StorageState[T] => {
-    return JSON.parse(storageState.value[stateKey])
+    const state = storageState.value[stateKey]
+
+    return typeof state === 'string' ? JSON.parse(state) : state
   }
 
   const deleteStorageState = (stateKey: States) => {
