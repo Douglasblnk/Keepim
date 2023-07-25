@@ -6,19 +6,6 @@ on:
       - main
 
 jobs:
-  update_develop:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Pull main to develop
-        run: |
-          # Commit and push the changes to the develop branch
-          git checkout develop
-          git pull origin main
-
   check_changes:
     runs-on: ubuntu-latest
     permissions:
@@ -113,3 +100,15 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: "sa-east-1"
           SOURCE_DIR: "app/dist"
+  
+  update_develop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Pull main to develop
+        run: |
+          git checkout develop
+          git pull origin main
