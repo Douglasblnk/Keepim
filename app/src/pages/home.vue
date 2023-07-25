@@ -1,16 +1,13 @@
 <script setup lang="ts">
-
+const collections = ref(1)
 </script>
 
 <template>
-  <div
-    un-flex="~ col"
-    un-items-center
-    un-justify-center
-    un-h-full
-    un-text-gray-text
-  >
-    HOME
+  <div>
+    <TopHeader
+      title="Últimas Atualizações"
+      :sub-items="{ collections }"
+    />
   </div>
 </template>
 
