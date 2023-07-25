@@ -8,7 +8,34 @@ const { close } = useDialog()
 
 const collection = ref('')
 const creationDate = ref('')
-const isLoading = ref(false)
+
+const queryClient = useQueryClient()
+
+const {
+  mutate,
+  isLoading,
+} = useMutation({
+  mutationFn: createCollectionRequest,
+  onError: (error) => {
+    notify({
+      type: 'negative',
+      message: getErrorMsg(error) as string,
+    })
+  },
+  onSuccess: async (data) => {
+    if (data !== undefined) {
+      await notify({
+        type: 'positive',
+        message: 'Coleção criada com sucesso!',
+        timeout: 800,
+      })
+
+      close()
+
+      queryClient.invalidateQueries({ queryKey: [ 'collections-count' ] })
+    }
+  },
+})
 
 async function createCollection() {
   const { valid } = await validate()
@@ -16,36 +43,10 @@ async function createCollection() {
   if (!valid)
     return
 
-  isLoading.value = true
-
-  try {
-    const response = await createCollectionRequest({
-      collectionName: collection.value,
-      collectionDate: creationDate.value,
-    })
-
-    if (!response)
-      return
-
-    await notify({
-      type: 'positive',
-      message: 'Coleção criada com sucesso!',
-      timeout: 800,
-    })
-
-    close()
-  }
-
-  catch (error) {
-    notify({
-      type: 'negative',
-      message: getErrorMsg(error) as string,
-    })
-  }
-
-  finally {
-    isLoading.value = false
-  }
+  mutate({
+    collectionName: collection.value,
+    collectionDate: creationDate.value,
+  })
 }
 </script>
 

@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { errMissingParams } from '@exceptions/auth-exceptions'
 import { lambdaErrorResponse } from './lambda'
 
 export const isObjectEmpty = (obj: object) => typeof obj === 'object' && !Object.keys(obj).length
@@ -42,5 +43,5 @@ export const getUsernameFromBody = (body: { username?: string }) => {
   if (body.username)
     return body.username
 
-  throw new Error('Missing username')
+  throw errMissingParams()
 }

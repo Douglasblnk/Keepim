@@ -99,4 +99,5 @@ const serverlessConfiguration: AWS = {
   },
 }
 
+// eslint-disable-next-line antfu/no-cjs-exports
 module.exports = serverlessConfiguration

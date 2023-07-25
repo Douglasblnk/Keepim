@@ -39,7 +39,7 @@ function onAction(component: string) {
     un-flex
     un-justify-center
     un-mx-auto
-    un-z-10
+    un-z-50
   >
     <div
       un-w-full
