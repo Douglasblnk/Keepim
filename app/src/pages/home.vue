@@ -1,12 +1,16 @@
 <script setup lang="ts">
-const collections = ref(1)
+const { data, isLoading } = useQuery({
+  queryKey: [ 'collections-count' ],
+  queryFn: getCollectionsCountRequest,
+})
 </script>
 
 <template>
   <div>
     <TopHeader
       title="Últimas Atualizações"
-      :sub-items="{ collections }"
+      :is-loading="isLoading"
+      :sub-items="{ collections: data }"
     />
   </div>
 </template>
