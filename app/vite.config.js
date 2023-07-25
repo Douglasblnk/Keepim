@@ -85,6 +85,8 @@ export default defineConfig({
         {
           '@tanstack/vue-query': [
             'useQuery',
+            'useMutation',
+            'useQueryClient',
           ],
         },
       ],
