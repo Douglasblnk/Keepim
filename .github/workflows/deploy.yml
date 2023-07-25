@@ -102,6 +102,7 @@ jobs:
           SOURCE_DIR: "app/dist"
   
   update_develop:
+    needs: [build_api, build_app]
     runs-on: ubuntu-latest
 
     steps:
@@ -110,5 +111,6 @@ jobs:
 
       - name: Pull main to develop
         run: |
+          git fetch
           git checkout develop
           git pull origin main
