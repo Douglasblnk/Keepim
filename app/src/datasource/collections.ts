@@ -12,3 +12,11 @@ export async function createCollectionRequest(body: CollectionBody) {
     return data
   })
 }
+
+export async function getCollectionsCountRequest() {
+  return authMiddleware(async () => {
+    const { data } = await axios.get('/collections-count', { withCredentials: true })
+
+    return data
+  })
+}

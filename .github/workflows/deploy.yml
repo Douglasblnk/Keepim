@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  changes:
+  check_changes:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: read
@@ -27,9 +27,9 @@ jobs:
           app:
             - 'app/**'
 
-  build-api:
-    needs: changes
-    if: ${{ needs.changes.outputs.api == 'true' }}
+  build_api:
+    needs: check_changes
+    if: ${{ needs.check_changes.outputs.api == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -38,7 +38,13 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version: 18.x
+
+      - name: API Version Update
+        id: api-version
+        uses: paulhatch/semantic-version@v5.0.2
+        with:
+          change_path: "./api"
 
       - name: Install dependencies
         run: npm install
@@ -58,20 +64,26 @@ jobs:
           SESSION_DB_TABLE: ${{ secrets.SESSION_DB_TABLE }}
           USER_DB_TABLE: ${{ secrets.USER_DB_TABLE }}
 
-  build-app:
-    needs: changes
-    if: ${{ needs.changes.outputs.app == 'true' }}
+  build_app:
+    needs: check_changes
+    if: ${{ needs.check_changes.outputs.app == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set node version
+      - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version: 18.x
+      
+      - name: API Version Update
+        id: api-version
+        uses: paulhatch/semantic-version@v5.0.2
+        with:
+          change_path: "./app"
 
-      - name: Setup Env
+      - name: Install dependencies
         run: npm install
         working-directory: ./app
 
@@ -88,3 +100,15 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: "sa-east-1"
           SOURCE_DIR: "app/dist"
+  
+  update_develop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Pull main to develop
+        run: |
+          git checkout develop
+          git pull origin main

@@ -1,16 +1,23 @@
 <script setup lang="ts">
-
+const { data, isLoading } = useQuery({
+  queryKey: [ 'collections-count' ],
+  queryFn: getCollectionsCountRequest,
+})
 </script>
 
 <template>
-  <div
-    un-flex="~ col"
-    un-items-center
-    un-justify-center
-    un-h-full
-    un-text-gray-text
-  >
-    COLEÇÕES
+  <div>
+    <div
+      un-pos-sticky
+      un-top-0
+      un-z-10
+    >
+      <TopHeader
+        title="Coleções"
+        :is-loading="isLoading"
+        :sub-items="{ collections: data }"
+      />
+    </div>
   </div>
 </template>
 
