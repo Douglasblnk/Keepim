@@ -4,6 +4,7 @@ import { isObjectEmpty } from '@utils/index'
 const props = defineProps<{
   title: string
   withBlur?: boolean
+  isLoading?: boolean
   subItems?: { collections?: number; images?: number; categories?: number }
 }>()
 
@@ -42,8 +43,17 @@ const subItemsTranslated = {
           v-for="(subitem, key) in subItems"
           :key="`subitem-${key}`"
         >
-          {{ subitem }}
-          <span un-text-gray>{{ subItemsTranslated[key] }}</span>
+          <template v-if="!isLoading">
+            {{ subitem }}
+            <span un-text-gray>{{ subItemsTranslated[key] }}</span>
+          </template>
+
+          <QSkeleton
+            v-else
+            un-w-14
+            un-h-4
+            un-rounded-md
+          />
         </div>
       </div>
     </div>
