@@ -5,27 +5,32 @@
     un-justify-center
     un-items-center
   >
-    <span
-      class="keepim-title__color"
-      un-font="bold montserrat"
-      un-bg-background
-      un-py-sm
-      un-select-none
-      un-text="gray-100 6xl center"
+    <div
+      un-flex="~ col"
+      un-items-end
     >
-      Keepim
-    </span>
-
-    <span
-      un-text-white
-      un-w-150px
-      un-text-end
-    >
-      A place to keep <span
+      <span
         class="keepim-title__color"
-        un-font-bold
-      >memories.</span>
-    </span>
+        un-font="bold montserrat"
+        un-bg-background
+        un-py-sm
+        un-select-none
+        un-text="gray-100 6xl center"
+      >
+        Keepim
+      </span>
+
+      <span
+        un-text-white
+        un-w-150px
+        un-text-end
+      >
+        A place to keep <span
+          class="keepim-title__color"
+          un-font-bold
+        >memories.</span>
+      </span>
+    </div>
   </div>
 </template>
 
