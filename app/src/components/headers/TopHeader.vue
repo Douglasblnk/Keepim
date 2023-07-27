@@ -8,9 +8,7 @@ const props = defineProps<{
   subItems?: { collections?: number; images?: number; categories?: number }
 }>()
 
-const { getStorageState } = useLocalStorage()
-
-const user = computed(() => getStorageState('user-info'))
+const { userStorage } = useLocalStorage()
 
 const subItemsTranslated = {
   collections: props.subItems?.collections === 1 ? 'coleção' : 'coleções',
@@ -21,7 +19,6 @@ const subItemsTranslated = {
 
 <template>
   <div
-    un-p-lg
     un-flex
     un-justify-between
     :class="withBlur ? 'backdrop-blur-md' : 'bg-background'"
@@ -59,10 +56,12 @@ const subItemsTranslated = {
     </div>
 
     <KAvatar
-      size="lg"
+      size="xl"
       color="primary"
-      :img="user.avatar"
-      :label="user.name"
+      un-cursor-pointer
+      :img="userStorage.avatar"
+      :label="userStorage.name"
+      @click="() => $router.push('/configuracoes')"
     />
   </div>
 </template>
