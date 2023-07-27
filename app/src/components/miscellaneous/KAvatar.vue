@@ -2,10 +2,8 @@
 import { checkImgExists } from '@utils/index'
 
 const props = defineProps<{
-  backgroundColor?: string
   color?: string
   label?: string
-  size?: string
   img?: string
 }>()
 

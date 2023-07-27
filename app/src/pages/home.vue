@@ -6,7 +6,7 @@ const { data, isLoading } = useQuery({
 </script>
 
 <template>
-  <div>
+  <div un-p-lg>
     <TopHeader
       title="Últimas Atualizações"
       :is-loading="isLoading"
