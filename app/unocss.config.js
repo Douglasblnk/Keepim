@@ -47,11 +47,6 @@ export default defineConfig({
   ],
 
   theme: {
-    /* ---------------------------------------- */
-    /*                   Core                   */
-    /* ---------------------------------------- */
-    // https://windicss.org/utilities/variants.html
-    // https://tailwindcss.com/docs/breakpoints
     breakpoints: {
       sm: '600px',
       md: '1240px',
@@ -60,10 +55,6 @@ export default defineConfig({
       xxl: '2560px',
     },
 
-    /* ---------------------------------------- */
-    /*                  Colors                  */
-    /* ---------------------------------------- */
-    // https://windicss.org/utilities/colors.html#customization
     colors: {
       background: '#202427',
       inherit: 'inherit',
@@ -99,18 +90,10 @@ export default defineConfig({
       accent: '#3D3E43',
     },
 
-    /* ---------------------------------------- */
-    /*                  Spacing                 */
-    /* ---------------------------------------- */
-    // https://windicss.org/utilities/spacing.html
     spacing: {
       ...spacing,
     },
 
-    /* ---------------------------------------- */
-    /*                  Sizing                  */
-    /* ---------------------------------------- */
-    // https://windicss.org/utilities/sizing.html
     width: {
       ...spacing,
       ...baseSize,
@@ -121,20 +104,6 @@ export default defineConfig({
       ...baseSize,
     },
 
-    /* ---------------------------------------- */
-    /*                   Flex                   */
-    /* ---------------------------------------- */
-    // https://windicss.org/utilities/flexbox.html
-
-    /* ---------------------------------------- */
-    /*                   Grid                   */
-    /* ---------------------------------------- */
-    // https://windicss.org/utilities/grid.html
-
-    /* ---------------------------------------- */
-    /*                Positioning               */
-    /* ---------------------------------------- */
-    // https://windicss.org/utilities/positioning.html
     zIndex: {
       auto: 'auto',
       0: '0',
@@ -145,15 +114,6 @@ export default defineConfig({
       max: '9998',
     },
 
-    /* ---------------------------------------- */
-    /*                    SVG                   */
-    /* ---------------------------------------- */
-    // https://windicss.org/utilities/svg.html
-
-    /* ---------------------------------------- */
-    /*                  Filter                  */
-    /* ---------------------------------------- */
-    // https://windicss.org/utilities/filters.html
     blur: {
       'DEFAULT': '4px',
       'none': '0',
@@ -164,7 +124,6 @@ export default defineConfig({
       '2xl': '48px',
     },
     dropShadow: {
-      // ...defaultTheme.dropShadow,
       DEFAULT: '0 1px 5px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12)',
       0: '0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 rgba(0, 0, 0, 0.12)',
       1: '0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12)',
@@ -193,10 +152,6 @@ export default defineConfig({
       24: '0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12)',
     },
 
-    /* ---------------------------------------- */
-    /*                  Effects                 */
-    /* ---------------------------------------- */
-    // https://windicss.org/utilities/effects.html
     boxShadow: {
       'none': 'none',
       'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
@@ -260,6 +215,7 @@ export default defineConfig({
       md: '1.5rem',
       lg: '2.25rem',
     },
+
   },
 
   presets: [
