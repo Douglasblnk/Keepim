@@ -51,7 +51,7 @@ export default defineConfig({
 
         return {
           ...route,
-          meta: { auth: true },
+          meta: { auth: true, ...route.meta },
         }
       },
     }),
