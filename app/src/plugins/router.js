@@ -12,7 +12,7 @@ export const router = createRouter({
 router.beforeEach((to, prev, next) => {
   const { transition } = to.meta
   const { backTransition } = prev.meta
-  console.log('backTransition :>> ', backTransition)
+
   setRouteTransition(transition || backTransition)
 
   return handleRoutes(to, prev, next)
