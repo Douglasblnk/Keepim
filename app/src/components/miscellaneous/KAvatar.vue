@@ -2,10 +2,8 @@
 import { checkImgExists } from '@utils/index'
 
 const props = defineProps<{
-  backgroundColor?: string
   color?: string
   label?: string
-  size?: string
   img?: string
 }>()
 
@@ -34,7 +32,10 @@ const color = computed(() => (imgExist.value ? 'transparent' : props.color))
         no-transition
       />
 
-      <span v-show="!imgExist">
+      <span
+        v-show="!imgExist"
+        un-select-none
+      >
         {{ firstLetterLabel }}
       </span>
     </slot>

@@ -1,5 +1,4 @@
 import dayjs from 'dayjs'
-import { errMissingParams } from '@exceptions/auth-exceptions'
 import { lambdaErrorResponse } from './lambda'
 
 export const isObjectEmpty = (obj: object) => typeof obj === 'object' && !Object.keys(obj).length
@@ -37,11 +36,4 @@ export const getError = (error) => {
 
 export const handleAuthMiddlewareError = async (error: any) => {
   return lambdaErrorResponse(error)
-}
-
-export const getUsernameFromBody = (body: { username?: string }) => {
-  if (body.username)
-    return body.username
-
-  throw errMissingParams()
 }

@@ -6,7 +6,7 @@ const { data, isLoading } = useQuery({
 </script>
 
 <template>
-  <div>
+  <div un-p-lg>
     <div
       un-pos-sticky
       un-top-0

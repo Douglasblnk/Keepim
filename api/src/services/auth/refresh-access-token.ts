@@ -1,3 +1,4 @@
+import { env } from 'node:process'
 import dayjs from 'dayjs'
 
 import type { SessionModel } from '@model/session'
@@ -8,8 +9,8 @@ import { errAuthorizationFailed, errSessionNotFound } from '@exceptions/auth-exc
 import createAccessToken from './create-access-token'
 
 async function updateCurrentSession(session: SessionModel) {
-  const newRefreshToken = generateRandomText(+process.env.REFRESH_TOKEN_LENGTH)
-  const expiredAt = getCurrentDate() + +process.env.REFRESH_TOKEN_EXPIRATION
+  const newRefreshToken = generateRandomText(+env.REFRESH_TOKEN_LENGTH)
+  const expiredAt = getCurrentDate() + +env.REFRESH_TOKEN_EXPIRATION
 
   return updateSession(session.id, newRefreshToken, expiredAt)
 }

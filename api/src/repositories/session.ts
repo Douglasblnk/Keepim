@@ -54,6 +54,25 @@ export const findSessionByID = async (id: string) => {
   return unmarshall(Item || {}) as SessionModel
 }
 
+export const findSessionByUsername = async (username: string) => {
+  const db = dynamoDBClient()
+
+  const queryCommandInput: QueryCommandInput = {
+    TableName: TABLE_NAME,
+    IndexName: 'session-username-index',
+    ExpressionAttributeValues: marshall({
+      ':username': username,
+    }),
+    KeyConditionExpression: 'username = :username',
+  }
+
+  const queryCommand = new QueryCommand(queryCommandInput)
+
+  const { Items } = await db.send(queryCommand)
+
+  return unmarshall(Items[0] || {}) as SessionModel
+}
+
 export const updateSession = async (id: string, newRefreshToken: string, expiredAt: number) => {
   const db = dynamoDBClient()
 
