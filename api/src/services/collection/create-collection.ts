@@ -3,8 +3,8 @@ import type { CollectionSchemaBody } from '@functions/collection/create-collecti
 import { putCollection } from '@repository/collection'
 import { collectionDto } from '@dto/collection'
 
-export default async (body: CollectionSchemaBody, username: string) => {
-  const collectionModel = createCollectionModel(body, username)
+export default async (body: CollectionSchemaBody) => {
+  const collectionModel = createCollectionModel(body)
 
   await putCollection(collectionModel)
 

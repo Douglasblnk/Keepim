@@ -3,7 +3,7 @@ import { getCurrentDate } from '@utils/utils'
 
 export interface CollectionModel {
   id: string
-  username: string
+  username?: string
   collectionName: string
   collectionDate: string
   createdAt: number
@@ -11,15 +11,12 @@ export interface CollectionModel {
   deleted: boolean
 }
 
-export const createCollectionModel = (
-  collection: Omit<CollectionModel, 'username' | 'id' | 'deleted' | 'createdAt' | 'updatedAt'>,
-  username: string,
-): CollectionModel => {
+export const createCollectionModel = (collection: Omit<CollectionModel, 'id' | 'deleted' | 'createdAt' | 'updatedAt'>): CollectionModel => {
   const currentTimestamp = getCurrentDate()
 
   return {
     id: uuid(),
-    username,
+    username: collection?.username,
     collectionName: collection.collectionName,
     collectionDate: collection.collectionDate,
     createdAt: currentTimestamp,
