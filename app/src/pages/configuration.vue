@@ -33,5 +33,6 @@ const { back } = useRouter()
 path: /configuracoes
 meta:
   title: Configurações
-  transition: slide-down
+  transition: slide-up
+  backTransition: slide-down-back
 </route>

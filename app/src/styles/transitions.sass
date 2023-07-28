@@ -6,23 +6,29 @@
 .fade-leave-to
   opacity: 0
 
-.modal-enter-active,
-.modal-leave-active
-  transition: transform 0.3s ease
-
-.modal-enter-from,
-.modal-leave-to
-  transform: scale(0)
-
 // SLIDE DOWN
 .slide-down-enter-active,
 .slide-down-leave-active
   transition: all .3s ease
 
-.slide-down-enter-from,
+.slide-down-enter-from
+  opacity: 0
+  transform: translateY(-60px)
+
 .slide-down-leave-to
   opacity: 0
-  transform: translateY(-30px)
+
+// SLIDE-DOWN-BACK
+.slide-down-back-enter-active,
+.slide-down-back-leave-active
+  transition: all .3s ease
+
+.slide-down-back-enter-from
+  opacity: 0
+
+.slide-down-back-leave-to
+  opacity: 0
+  transform: translateY(60px)
 
 // SLIDE LEFT
 .slide-left-enter-active,
@@ -44,6 +50,3 @@
 .slide-up-enter-from
   opacity: 0
   transform: translateY(60px)
-.slide-up-leave-to
-  opacity: 0
-  transform: translateY(-60px)
