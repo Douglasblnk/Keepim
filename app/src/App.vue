@@ -12,10 +12,15 @@ $q.iconMapFn = iconName => (iconName.startsWith('i-') ? { cls: iconName } : unde
 
 $q.dark.set(true)
 
+const bottomNavHiddenPattern = [
+  'login',
+  'configuration',
+]
+
 const isBottomNavHidden = computed(() => {
   const { name } = useRoute()
 
-  return name !== undefined && name !== 'login'
+  return name !== undefined && !bottomNavHiddenPattern.includes(name as string)
 })
 
 watch(

@@ -1,3 +1,4 @@
+import { env } from 'node:process'
 import { accessTokenDto } from '@dto/auth'
 import { errSessionNotFound } from '@exceptions/auth-exceptions'
 import { errUserNotFound } from '@exceptions/user-exceptions'
@@ -21,8 +22,8 @@ export default async (refreshToken: string) => {
     sessionID: session.id,
   }
 
-  const jwtSecret = process.env.JWT_SECRET
-  const jwtExpiration = +process.env.JWT_EXPIRATION_TIME
+  const jwtSecret = env.JWT_SECRET
+  const jwtExpiration = +env.JWT_EXPIRATION_TIME
 
   const accessToken = sign(jwtPayload, jwtSecret, { expiresIn: jwtExpiration })
 

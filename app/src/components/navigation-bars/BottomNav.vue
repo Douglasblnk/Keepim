@@ -69,7 +69,7 @@ function onAction(component: string) {
         >
           <QIcon
             name="i-mdi-home-outline"
-            un-text-md
+            un-text-lg
           />
 
           <span v-show="isSelected('home')">Home</span>
@@ -86,7 +86,7 @@ function onAction(component: string) {
         >
           <QIcon
             name="i-mdi-folder-table-outline"
-            un-text-md
+            un-text-lg
           />
 
           <span v-show="isSelected('collections')">Coleções</span>
@@ -103,7 +103,7 @@ function onAction(component: string) {
         >
           <QIcon
             name="i-mdi-format-list-bulleted"
-            un-text-md
+            un-text-lg
           />
 
           <span v-show="isSelected('explore')">Pesquisar</span>
@@ -121,7 +121,7 @@ function onAction(component: string) {
       >
         <QIcon
           name="i-mdi-plus"
-          un-text-md
+          un-text-lg
         />
       </div>
     </div>

@@ -34,9 +34,12 @@ export default () => {
     storageState.value[stateKey] = null
   }
 
+  const userStorage = computed(() => getStorageState('user-info'))
+
   return {
     setStorageState,
     getStorageState,
     deleteStorageState,
+    userStorage,
   }
 }

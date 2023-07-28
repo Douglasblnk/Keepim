@@ -18,8 +18,8 @@ const actions = [
     >
       <div
         v-if="modelValue"
-        un-w-screen
-        un-h-screen
+        un-w-full
+        un-h-full
         un-fixed
         un-left-0
         un-top-0
@@ -30,7 +30,7 @@ const actions = [
         un-z-40
       >
         <div
-          un-mb-100px
+          un-pb-100px
           un-mr-lg
           un-flex="~ col"
           un-gap-md
