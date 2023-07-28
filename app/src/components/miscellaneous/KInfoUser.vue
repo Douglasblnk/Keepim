@@ -3,30 +3,39 @@ const { userStorage } = useLocalStorage()
 </script>
 
 <template>
-  <div
-    un-flex
-    un-items-center
-    un-gap-md
+  <QCard
+    un-border-0
+    un-shadow
   >
-    <KAvatar
-      size="60px"
-      color="primary"
-      :img="userStorage.avatar"
-      :label="userStorage.name"
-    />
-
-    <div
+    <QCardSection
       un-flex="~ col"
-      un-gap-xs
+      un-items-center
+      un-text-center
+      un-gap-md
     >
-      <span
-        un-text-18px
-        un-font-bold
-      >
-        {{ userStorage.name }}
-      </span>
+      <KAvatar
+        size="120px"
+        color="primary"
+        :img="userStorage?.avatar"
+        :label="userStorage?.name"
+      />
 
-      <span un-text-gray>{{ userStorage.email }}</span>
-    </div>
-  </div>
+      <div
+        un-flex="~ col"
+        un-gap-xs
+      >
+        <span
+          un-text-18px
+          un-font-bold
+        >
+          {{ userStorage?.name }}
+        </span>
+
+        <span
+          un-text-sm
+          un-text-gray
+        >{{ userStorage?.username }}</span>
+      </div>
+    </QCardSection>
+  </QCard>
 </template>
