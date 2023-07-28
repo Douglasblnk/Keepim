@@ -12,6 +12,10 @@ export default {
           AttributeName: 'refreshToken',
           AttributeType: 'S',
         },
+        {
+          AttributeName: 'username',
+          AttributeType: 'S',
+        },
       ],
       KeySchema: [
         {
@@ -29,6 +33,22 @@ export default {
           KeySchema: [
             {
               AttributeName: 'refreshToken',
+              KeyType: 'HASH',
+            },
+          ],
+          Projection: {
+            ProjectionType: 'ALL',
+          },
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          },
+        },
+        {
+          IndexName: 'session-username-index',
+          KeySchema: [
+            {
+              AttributeName: 'username',
               KeyType: 'HASH',
             },
           ],
