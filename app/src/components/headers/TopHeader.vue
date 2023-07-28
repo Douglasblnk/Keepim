@@ -8,6 +8,7 @@ const props = defineProps<{
   subItems?: { collections?: number; images?: number; categories?: number }
 }>()
 
+const { push } = useRouter()
 const { userStorage } = useLocalStorage()
 
 const subItemsTranslated = {
@@ -61,7 +62,7 @@ const subItemsTranslated = {
       un-cursor-pointer
       :img="userStorage.avatar"
       :label="userStorage.name"
-      @click="() => $router.push('/configuracoes')"
+      @click="push('/configuracoes')"
     />
   </div>
 </template>
