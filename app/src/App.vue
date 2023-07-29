@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-
 const { routeTransition } = useRouteTransition()
+const route = useRoute()
 
 const $q = useQuasar()
 
-const route = useRoute()
-const title = ref()
+const isMobile = computed(() => $q.screen.width <= 600)
 
 $q.iconMapFn = iconName => (iconName.startsWith('i-') ? { cls: iconName } : undefined)
 
@@ -17,11 +15,15 @@ const bottomNavHiddenPattern = [
   'configuration',
 ]
 
-const isBottomNavHidden = computed(() => {
-  const { name } = useRoute()
-
-  return name !== undefined && !bottomNavHiddenPattern.includes(name as string)
+const isDrawerShown = computed(() => {
+  return route.name !== undefined && !isMobile.value && route.name !== 'login'
 })
+
+const isBottomNavHidden = computed(() => {
+  return route.name !== undefined && !bottomNavHiddenPattern.includes(route.name as string) && isMobile.value
+})
+
+const title = ref()
 
 watch(
   () => route.meta,
@@ -36,23 +38,34 @@ useHead({
 </script>
 
 <template>
-  <RouterView v-slot="{ Component }">
-    <Suspense>
-      <transition
-        :name="routeTransition"
-        mode="out-in"
-      >
-        <component :is="Component" />
-      </transition>
-    </Suspense>
-  </RouterView>
+  <QLayout view="lhr LpR lFr">
+    <RouterView v-slot="{ Component }">
+      <QPageContainer>
+        <QPage un-flex="~ col grow">
+          <NavDrawer :model-value="isDrawerShown" />
 
-  <transition
-    name="fade"
-    mode="out-in"
-  >
-    <BottomNav v-if="isBottomNavHidden" />
-  </transition>
+          <Suspense>
+            <transition
+              :name="routeTransition"
+              mode="out-in"
+            >
+              <component
+                :is="Component"
+                un-p-lg
+              />
+            </transition>
+          </Suspense>
+
+          <Transition
+            name="fade"
+            mode="out-in"
+          >
+            <BottomNav v-if="isBottomNavHidden" />
+          </Transition>
+        </QPage>
+      </QPageContainer>
+    </RouterView>
+  </QLayout>
 
   <GenericDialog />
 </template>
