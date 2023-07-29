@@ -29,9 +29,9 @@ async function logout() {
   <div
     un-sm-w-col-8
     un-md-w-col-5
+    un-mx-auto
     un-p-lg
     un-grow
-    un-h-full
     un-flex="~ col"
   >
     <div
@@ -52,7 +52,7 @@ async function logout() {
         un-title
         un-mx-auto
       >
-        Configurações
+        Perfil
       </h1>
     </div>
 

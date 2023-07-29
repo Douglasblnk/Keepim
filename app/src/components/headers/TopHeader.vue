@@ -8,6 +8,8 @@ const props = defineProps<{
   subItems?: { collections?: number; images?: number; categories?: number }
 }>()
 
+const isMobile = inject('isMobile') as ComputedRef<boolean>
+
 const { push } = useRouter()
 const { userStorage } = useLocalStorage()
 
@@ -57,6 +59,7 @@ const subItemsTranslated = {
     </div>
 
     <KAvatar
+      v-if="isMobile"
       size="xl"
       color="primary"
       un-cursor-pointer

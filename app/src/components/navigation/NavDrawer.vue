@@ -79,6 +79,8 @@ function toggleMiniState() {
 <template>
   <QDrawer
     behavior="desktop"
+    overlay
+    persistent
     :mini="miniState"
     :mini-width="90"
   >

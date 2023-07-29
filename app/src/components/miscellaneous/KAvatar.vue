@@ -22,7 +22,6 @@ const color = computed(() => (imgExist.value ? 'transparent' : props.color))
   <QAvatar
     :color="color"
     un-shadow-lg
-    un-overflow-hidden
   >
     <slot>
       <QImg

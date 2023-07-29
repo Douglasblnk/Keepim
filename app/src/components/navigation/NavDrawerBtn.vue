@@ -2,7 +2,8 @@
 defineProps<{
   items: {
     name: string
-    icon: globalThis.Component
+    icon?: globalThis.Component
+    avatar?: string
     isActive?: ComputedRef<boolean>
     action: () => void
   }[]
@@ -45,7 +46,19 @@ defineProps<{
     </QTooltip>
 
     <QIcon un-text-lg>
-      <Component :is="child.icon" />
+      <KAvatar
+        v-if="!child.icon"
+        color="primary"
+        size="lg"
+        :img="child.avatar"
+        :label="child.name"
+        un-rounded-full
+      />
+
+      <Component
+        :is="child.icon"
+        v-else
+      />
     </QIcon>
 
     <span

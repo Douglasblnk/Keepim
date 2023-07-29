@@ -35,6 +35,8 @@ watch(
 useHead({
   title: computed(() => `Keepim ${title.value || ''}`),
 })
+
+provide('isMobile', isMobile)
 </script>
 
 <template>
@@ -49,10 +51,7 @@ useHead({
               :name="routeTransition"
               mode="out-in"
             >
-              <component
-                :is="Component"
-                un-p-lg
-              />
+              <component :is="Component" />
             </transition>
           </Suspense>
 

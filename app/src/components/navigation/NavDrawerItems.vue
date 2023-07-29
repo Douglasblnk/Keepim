@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import IconConfig from '~icons/mdi/cog-outline'
-
 defineProps<{
   items: {
     name: string
@@ -14,6 +12,8 @@ defineProps<{
   miniState: boolean
   miniStateTransition: boolean
 }>()
+
+const { userStorage } = useLocalStorage()
 
 const { push } = useRouter()
 </script>
@@ -55,8 +55,8 @@ const { push } = useRouter()
     <NavDrawerBtn
       :items="[
         {
-          name: 'Configurações',
-          icon: IconConfig,
+          name: userStorage.name,
+          avatar: userStorage.avatar,
           action: () => push('/configuracoes'),
         },
       ]"
