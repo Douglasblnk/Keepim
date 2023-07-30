@@ -25,7 +25,7 @@ export default {
     },
     {
       Effect: 'Allow',
-      Action: ['dynamodb:Delete'],
+      Action: ['dynamodb:DeleteItem'],
       Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Session',
     },
   ],

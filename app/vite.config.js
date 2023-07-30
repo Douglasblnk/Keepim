@@ -111,7 +111,10 @@ export default defineConfig({
       ],
     }),
 
-    Icons(),
+    Icons({
+      autoInstall: true,
+      compiler: 'vue3',
+    }),
 
     Quasar({
       autoImportComponentCase: 'pascal',
