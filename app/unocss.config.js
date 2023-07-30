@@ -40,6 +40,10 @@ const baseSize = {
 }
 
 export default defineConfig({
+  safelist: [
+    ...'text-xs text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl text-6xl'.split(' '),
+  ],
+
   shortcuts: [
     { column: 'flex flex-wrap flex-col h-auto min-h-0 max-h-full' },
     { center: 'flex items-center justify-center' },

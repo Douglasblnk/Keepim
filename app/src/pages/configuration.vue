@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { back, replace } = useRouter()
+const { replace } = useRouter()
 const { deleteStorageState } = useLocalStorage()
 
 const confirmLogout = ref(false)
@@ -26,40 +26,12 @@ async function logout() {
 </script>
 
 <template>
-  <div
-    un-p-lg
-    un-h-screen
-  >
+  <KLayoutPage default-header="Perfil">
     <div
-      un-sm-w-col-8
-      un-md-w-col-5
-      un-mx-auto
-      un-h-full
+      un-grow
       un-flex="~ col"
     >
-      <div
-        un-relative
-        un-flex
-        un-items-center
-        un-justify-between
-      >
-        <QIcon
-          name="i-mdi-arrow-left"
-          size="md"
-          un-absolute
-          un-cursor-pointer
-          @click="back"
-        />
-
-        <h1
-          un-title
-          un-mx-auto
-        >
-          Configurações
-        </h1>
-      </div>
-
-      <KInfoUser un-mt-xl />
+      <KInfoUser un-mt-lg />
 
       <ConfigButton
         title="Editar perfil"
@@ -70,7 +42,7 @@ async function logout() {
       />
 
       <ConfigButton
-        title="Configurações"
+        title="Sistema"
         description="Configure o tema da aplicação"
         icon="i-mdi-cog-outline"
         color="bg-#6D9ABB"
@@ -78,9 +50,9 @@ async function logout() {
       />
 
       <div
-        un-flex="~ col-reverse"
+        un-flex="~ col-reverse grow"
         un-w-full
-        un-flex-grow
+        un-mb-lg
       >
         <Transition
           name="fade-100"
@@ -109,7 +81,7 @@ async function logout() {
         </Transition>
       </div>
     </div>
-  </div>
+  </KLayoutPage>
 </template>
 
 <route lang="yaml">
