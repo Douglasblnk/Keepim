@@ -4,7 +4,7 @@ const route = useRoute()
 
 const $q = useQuasar()
 
-const isMobile = computed(() => $q.screen.width <= 600)
+const isMobile = computed(() => $q.screen.width <= 768)
 
 $q.iconMapFn = iconName => (iconName.startsWith('i-') ? { cls: iconName } : undefined)
 
@@ -56,7 +56,7 @@ provide('isMobile', isMobile)
           </Suspense>
 
           <Transition
-            name="fade"
+            name="slide-up"
             mode="out-in"
           >
             <BottomNav v-if="isBottomNavHidden" />

@@ -32,12 +32,6 @@ async function logout() {
       un-flex="~ col"
     >
       <KInfoUser un-mt-lg />
-      <KInfoUser un-mt-lg />
-      <KInfoUser un-mt-lg />
-      <KInfoUser un-mt-lg />
-      <KInfoUser un-mt-lg />
-      <KInfoUser un-mt-lg />
-      <KInfoUser un-mt-lg />
 
       <ConfigButton
         title="Editar perfil"
@@ -56,9 +50,9 @@ async function logout() {
       />
 
       <div
-        un-flex="~ col-reverse"
+        un-flex="~ col-reverse grow"
         un-w-full
-        un-flex-grow
+        un-mb-lg
       >
         <Transition
           name="fade-100"

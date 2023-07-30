@@ -29,7 +29,7 @@ const subItemsTranslated = {
     <div>
       <h1
         un-title
-        un-max-w-160px
+        :class="isMobile && 'max-w-160px'"
       >
         {{ title }}
       </h1>
