@@ -111,6 +111,7 @@ jobs:
 
       - name: Pull main to develop
         run: |
+          git config pull.rebase false
           git fetch
           git checkout develop
           git pull origin main
