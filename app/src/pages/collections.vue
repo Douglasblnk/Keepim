@@ -6,19 +6,15 @@ const { data, isLoading } = useQuery({
 </script>
 
 <template>
-  <div un-p-lg>
-    <div
-      un-pos-sticky
-      un-top-0
-      un-z-10
-    >
+  <KLayoutPage>
+    <template #header>
       <TopHeader
         title="Coleções"
         :is-loading="isLoading"
         :sub-items="{ collections: data }"
       />
-    </div>
-  </div>
+    </template>
+  </KLayoutPage>
 </template>
 
 <route lang="yaml">

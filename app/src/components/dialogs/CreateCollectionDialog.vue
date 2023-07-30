@@ -79,7 +79,7 @@ async function createCollection() {
   </div>
 
   <div un-space-y-sm>
-    <label un-font-bold>Data da criação:</label>
+    <label un-font-bold>Data da coleção:</label>
 
     <KInputDate
       v-model="creationDate"

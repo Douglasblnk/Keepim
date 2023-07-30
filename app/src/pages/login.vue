@@ -51,11 +51,13 @@ async function makeLogin() {
 <template>
   <div
     un-w="sm:col-7 md:col-5 lg:col-3"
-    un-m-auto
-    un-flex="~ col"
-    un-h-screen
+    un-mx-auto
+    un-flex="~ col grow"
+    un-h-full
   >
     <KeepimTitle
+      title="Keepim"
+      show-slogan
       un-py-5xl
       un-flex-grow
     />
