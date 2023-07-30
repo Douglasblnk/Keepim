@@ -27,7 +27,7 @@ defineProps<{
     un-transition="background duration-200"
     :class="{
       'bg-primary/80 hover:bg-primary': child.isActive?.value,
-      'hover:bg-gray-bg': !child.isActive?.value,
+      'hover:bg-dark-primary': !child.isActive?.value,
     }"
     @click="child.action"
   >
