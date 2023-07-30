@@ -49,12 +49,7 @@ async function makeLogin() {
 </script>
 
 <template>
-  <div
-    un-w="sm:col-7 md:col-5 lg:col-3"
-    un-mx-auto
-    un-flex="~ col grow"
-    un-h-full
-  >
+  <KLayoutPage>
     <KeepimTitle
       title="Keepim"
       show-slogan
@@ -66,7 +61,6 @@ async function makeLogin() {
       un-flex="~ col"
       un-flex-grow
       un-justify-start
-      un-px-md
     >
       <div
         un-mb-6xl
@@ -128,7 +122,7 @@ async function makeLogin() {
         </RouterLink> -->
       </span>
     </div>
-  </div>
+  </KLayoutPage>
 </template>
 
 <route lang="yaml">

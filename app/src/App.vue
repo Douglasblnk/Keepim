@@ -56,7 +56,10 @@ provide('isMobile', isMobile)
           </Suspense>
 
           <Transition
-            name="slide-up"
+            enter-active-class="transition-all duration-300 ease"
+            leave-active-class="transition-all duration-300 ease"
+            enter-from-class="opacity-0 translate-y-60"
+            leave-to-class="opacity-0 translate-y-60"
             mode="out-in"
           >
             <BottomNav v-if="isBottomNavHidden" />
