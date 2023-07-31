@@ -12,7 +12,7 @@ $q.dark.set(true)
 
 const bottomNavHiddenPattern = [
   'login',
-  'configuration',
+  'profile',
 ]
 
 const isDrawerShown = computed(() => {

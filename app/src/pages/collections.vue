@@ -3,6 +3,8 @@ const { data, isLoading } = useQuery({
   queryKey: [ 'collections-count' ],
   queryFn: getCollectionsCountRequest,
 })
+
+const search = ref('')
 </script>
 
 <template>
@@ -14,6 +16,15 @@ const { data, isLoading } = useQuery({
         :sub-items="{ collections: data }"
       />
     </template>
+
+    <div un-mt-xl>
+      <KInput
+        v-model="search"
+        label="Busque por coleções"
+        icon="i-mdi-magnify"
+        debounce="1000"
+      />
+    </div>
   </KLayoutPage>
 </template>
 

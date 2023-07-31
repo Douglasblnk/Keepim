@@ -8,9 +8,7 @@ const { back } = useRouter()
 
 <template>
   <div
-    un-sm-w-col-10
-    un-lg-w-col-7
-    un-w-full
+    un-w="sm:col-8 lg:col-6 col-12"
     un-flex="~ col grow"
     un-mx-auto
     :class="defaultHeader ? 'p-x-lg' : 'p-lg'"

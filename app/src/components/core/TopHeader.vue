@@ -65,7 +65,7 @@ const subItemsTranslated = {
       un-cursor-pointer
       :img="userStorage.avatar"
       :label="userStorage.name"
-      @click="push('/configuracoes')"
+      @click="push('/perfil')"
     />
   </div>
 </template>

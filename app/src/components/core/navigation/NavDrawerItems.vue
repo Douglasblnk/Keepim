@@ -57,7 +57,7 @@ const { push } = useRouter()
         {
           name: userStorage.name,
           avatar: userStorage.avatar,
-          action: () => push('/configuracoes'),
+          action: () => push('/perfil'),
         },
       ]"
       :mini-state="miniState"
