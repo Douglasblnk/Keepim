@@ -21,12 +21,14 @@ const hover = ref(false)
     @mouseleave="hover = false"
   >
     <div
-      v-if="thumbnail"
+      v-if="!thumbnail"
       un-p-md
+      un-flex
+      un-items-center
     >
       <QIcon
         name="i-mdi-image-off-outline"
-        size="md"
+        size="lg"
       />
     </div>
 
@@ -41,7 +43,7 @@ const hover = ref(false)
     >
       <QImg
         ratio="1"
-        src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/imagem-em-lente-convexa.jpg"
+        :src="thumbnail"
       />
     </div>
 
