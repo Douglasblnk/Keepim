@@ -42,10 +42,11 @@ function onAction(component: string) {
     un-z-50
   >
     <div
+      style="background: rgba(32, 36, 39, 0.70)"
       un-w-full
       un-h-80px
       un-p-x-lg
-      un-bg-dark-secondary
+      un-backdrop-blur-md
       un-flex
       un-justify-between
       un-items-center
