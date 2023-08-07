@@ -3,7 +3,6 @@ import { isObjectEmpty } from '@utils/index'
 
 const props = defineProps<{
   title: string
-  withBlur?: boolean
   isLoading?: boolean
   subItems?: { collections?: number; images?: number; categories?: number }
 }>()
@@ -24,7 +23,6 @@ const subItemsTranslated = {
   <div
     un-flex
     un-justify-between
-    :class="withBlur ? 'backdrop-blur-md' : 'bg-background'"
   >
     <div>
       <h1
@@ -65,7 +63,7 @@ const subItemsTranslated = {
       un-cursor-pointer
       :img="userStorage.avatar"
       :label="userStorage.name"
-      @click="push('/configuracoes')"
+      @click="push('/perfil')"
     />
   </div>
 </template>

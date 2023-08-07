@@ -66,23 +66,25 @@ const items = [
 function toggleMiniState() {
   miniState.value = !miniState.value
 
-  if (miniState.value) {
-    setTimeout(() => {
-      miniStateTransition.value = miniState.value
-    }, 90)
-  }
-
-  else {
+  setTimeout(() => {
     miniStateTransition.value = miniState.value
-  }
+  }, 130)
 
   setStorageState('drawer-state', miniState.value ? 'true' : 'false')
 }
+
+defineExpose({
+  miniState,
+  miniStateTransition,
+})
 </script>
 
 <template>
   <QDrawer
     behavior="desktop"
+    mini-to-overlay
+    overlay
+    persistent
     :mini="miniState"
     :mini-width="90"
   >
@@ -102,7 +104,6 @@ function toggleMiniState() {
     <NavDrawerItems
       :items="items"
       :mini-state="miniState"
-      :mini-state-transition="miniStateTransition"
     />
   </QDrawer>
 </template>

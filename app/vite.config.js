@@ -22,6 +22,7 @@ export default defineConfig({
       '@datasource': resolve(__dirname, './src/datasource'),
       '@middleware': resolve(__dirname, './src/middleware'),
       '@constants': resolve(__dirname, './src/constants'),
+      '@type': resolve(__dirname, './src/types'),
     },
   },
   optimizeDeps: {
@@ -85,6 +86,7 @@ export default defineConfig({
         {
           '@tanstack/vue-query': [
             'useQuery',
+            'useInfiniteQuery',
             'useMutation',
             'useQueryClient',
           ],

@@ -42,7 +42,7 @@ export default () => {
   watch(
     () => componentName.value,
     (value) => {
-      componentInstance.value = defineAsyncComponent(() => import(`@/components/dialogs/${value}.vue`))
+      componentInstance.value = defineAsyncComponent(() => import(`@/components/core/dialogs/${value}.vue`))
     },
     { immediate: true },
   )

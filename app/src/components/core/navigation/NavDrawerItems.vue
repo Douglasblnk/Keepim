@@ -10,7 +10,6 @@ defineProps<{
     }[]
   }[]
   miniState: boolean
-  miniStateTransition: boolean
 }>()
 
 const { userStorage } = useLocalStorage()
@@ -42,7 +41,6 @@ const { push } = useRouter()
         <NavDrawerBtn
           :items="item.children"
           :mini-state="miniState"
-          :mini-state-transition="miniStateTransition"
         />
 
         <QSeparator
@@ -57,11 +55,10 @@ const { push } = useRouter()
         {
           name: userStorage.name,
           avatar: userStorage.avatar,
-          action: () => push('/configuracoes'),
+          action: () => push('/perfil'),
         },
       ]"
       :mini-state="miniState"
-      :mini-state-transition="miniStateTransition"
     />
   </div>
 </template>

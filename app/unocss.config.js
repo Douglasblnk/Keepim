@@ -53,7 +53,7 @@ export default defineConfig({
   theme: {
     breakpoints: {
       sm: '600px',
-      md: '1240px',
+      md: '1024px',
       lg: '1440px',
       xl: '1920px',
       xxl: '2560px',

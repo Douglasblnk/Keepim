@@ -18,6 +18,7 @@ const actions = [
     >
       <div
         v-if="modelValue"
+        style="background: rgba(32, 36, 39, 0.70)"
         un-w-full
         un-h-full
         un-fixed
