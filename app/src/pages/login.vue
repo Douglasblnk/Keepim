@@ -49,7 +49,7 @@ async function makeLogin() {
 </script>
 
 <template>
-  <KLayoutPage un-w="sm:col-7 md:col-5 lg:col-3">
+  <KLayoutPage un-w="sm:col-7 md:col-5 lg:col-3 col-12">
     <KeepimTitle
       title="Keepim"
       show-slogan

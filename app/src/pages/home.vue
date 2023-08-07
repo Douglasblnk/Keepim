@@ -7,11 +7,13 @@ const { data, isLoading } = useQuery({
 
 <template>
   <KLayoutPage>
-    <TopHeader
-      title="Últimas Atualizações"
-      :is-loading="isLoading"
-      :sub-items="{ collections: data }"
-    />
+    <template #header>
+      <TopHeader
+        title="Últimas Atualizações"
+        :is-loading="isLoading"
+        :sub-items="{ collections: data }"
+      />
+    </template>
   </KLayoutPage>
 </template>
 
