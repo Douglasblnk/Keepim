@@ -25,6 +25,15 @@ const isBottomNavHidden = computed(() => {
 
 const title = ref()
 
+const navDrawer = ref()
+
+const pagePadding = computed(() => {
+  if (isMobile.value || route.name === 'login')
+    return 'padding-left: 0'
+
+  return navDrawer.value?.miniState ? 'padding-left: 90px' : 'padding-left: 300px'
+})
+
 watch(
   () => route.meta,
   (meta) => {
@@ -37,21 +46,28 @@ useHead({
 })
 
 provide('isMobile', isMobile)
+provide('miniState', computed(() => navDrawer.value?.miniStateTransition))
 </script>
 
 <template>
   <QLayout view="lhr LpR lFr">
     <RouterView v-slot="{ Component }">
-      <QPageContainer>
+      <QPageContainer :style="pagePadding">
         <QPage un-flex="~ col grow">
-          <NavDrawer :model-value="isDrawerShown" />
+          <NavDrawer
+            ref="navDrawer"
+            :model-value="isDrawerShown"
+          />
 
           <Suspense>
             <transition
               :name="routeTransition"
               mode="out-in"
             >
-              <component :is="Component" />
+              <component
+                :is="Component"
+                un-mx-auto
+              />
             </transition>
           </Suspense>
 
