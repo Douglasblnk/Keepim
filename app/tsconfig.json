@@ -33,6 +33,7 @@
       "@datasource/*": ["./src/datasource/*"],
       "@middleware/*": ["./src/middleware/*"],
       "@constants/*": ["./src/constants/*"],
+      "@type/*": ["./src/types/*"],
     },
   },
   "exclude": [
