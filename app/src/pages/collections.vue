@@ -1,10 +1,8 @@
 <script setup lang="ts">
-const { data, isLoading } = useQuery({
+const collectionCount = useQuery({
   queryKey: [ 'collections-count' ],
   queryFn: getCollectionsCountRequest,
 })
-
-const search = ref('')
 </script>
 
 <template>
@@ -12,19 +10,17 @@ const search = ref('')
     <template #header>
       <TopHeader
         title="Coleções"
-        :is-loading="isLoading"
-        :sub-items="{ collections: data }"
+        :is-loading="collectionCount.isLoading.value"
+        :sub-items="{ collections: collectionCount.data.value }"
+      />
+
+      <CollectionFilter
+        un-mt-xl
+        un-mb-md
       />
     </template>
 
-    <div un-mt-xl>
-      <KInput
-        v-model="search"
-        label="Busque por coleções"
-        icon="i-mdi-magnify"
-        debounce="1000"
-      />
-    </div>
+    <CollectionsList />
   </KLayoutPage>
 </template>
 
