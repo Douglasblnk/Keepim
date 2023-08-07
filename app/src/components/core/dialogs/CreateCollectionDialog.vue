@@ -33,6 +33,7 @@ const {
       close()
 
       queryClient.invalidateQueries({ queryKey: [ 'collections-count' ] })
+      queryClient.invalidateQueries({ queryKey: [ 'collections-list' ] })
     }
   },
 })
