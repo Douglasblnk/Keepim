@@ -8,6 +8,7 @@ export const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+console.log('router :>> ', router)
 
 router.beforeEach((to, prev, next) => {
   const { transition } = to.meta

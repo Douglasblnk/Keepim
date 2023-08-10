@@ -9,6 +9,7 @@ const { filters } = useFilters<CollectionsParams>('collections')
 
 const { orientation } = useScreenOrientation()
 const $q = useQuasar()
+const { push } = useRouter()
 
 const foldersWrapper = ref<HTMLDivElement | null>()
 
@@ -68,6 +69,10 @@ async function onLoad(_: number, done: (_stop?: boolean | undefined) => void) {
   await fetchNextPage()
 
   done()
+}
+
+function navigateToCollection(folder: CollectionsResponse) {
+  push(`/colecoes/${folder.collectionName}`)
 }
 
 watch(
@@ -132,6 +137,7 @@ watch(
             un-max-h-200px
             un-min-w-85px
             un-min-h-85px
+            @click="navigateToCollection(folder)"
           />
         </div>
       </div>

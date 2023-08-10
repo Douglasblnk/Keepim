@@ -16,7 +16,7 @@ const drawerSavedState = getStorageState('drawer-state')
 
 const miniState = ref(drawerSavedState === 'true')
 const miniStateTransition = ref(drawerSavedState === 'true')
-
+console.log('route.name :>> ', route.name)
 const items = [
   {
     name: 'Navegação',
@@ -30,7 +30,7 @@ const items = [
       {
         name: 'Coleções',
         icon: IconFolder,
-        isActive: computed(() => route.name === 'collections'),
+        isActive: computed(() => [ 'collections-id', 'collections' ].includes(route.name as string)),
         action: () => push('/colecoes'),
       },
       {
