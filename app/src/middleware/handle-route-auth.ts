@@ -35,9 +35,9 @@ async function refreshAccessToken(next: NavigationGuardNext) {
 
 export default async function handleRoutes(to: RouteLocationNormalized, prev: RouteLocationNormalized, next: NavigationGuardNext) {
   const userInfo = getStorageState('user-info')
-  console.log('userInfo :>> ', userInfo)
-  // if (!userInfo)
-  //   return reauthenticate(next)
+
+  if (to.path !== '/login' && !userInfo)
+    return reauthenticate(next)
 
   if (to.path === '/login' && userInfo)
     return next({ name: prev.name || 'home' })
