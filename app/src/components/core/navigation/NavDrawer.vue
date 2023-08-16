@@ -12,10 +12,8 @@ const { push } = useRouter()
 const { setDialog } = useDialog()
 const { storageState, setStorageState } = useLocalStorage()
 
-const drawerSavedState = storageState.value['drawer-mini-state']
-
-const miniState = ref(drawerSavedState === 'true')
-const miniStateTransition = ref(drawerSavedState === 'true')
+const miniState = ref(storageState.value['drawer-mini-state'] === 'true')
+const miniStateTransition = ref(storageState.value['drawer-mini-state'] === 'true')
 
 const items = [
   {
@@ -74,8 +72,8 @@ function toggleMiniState() {
 }
 
 onMounted(() => {
-  if (drawerSavedState === undefined)
-    setStorageState('drawer-mini-state', drawerSavedState)
+  if (storageState.value['drawer-mini-state'] === undefined)
+    setStorageState('drawer-mini-state', miniState.value)
 })
 
 defineExpose({

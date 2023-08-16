@@ -7,7 +7,7 @@ interface StorageState {
     email: string
     avatar: string
   }
-  'drawer-mini-state': string
+  'drawer-mini-state': boolean
 }
 
 const storageState = ref<Partial<Record<keyof StorageState, any>>>({})
