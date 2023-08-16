@@ -19,6 +19,7 @@ const authenticationMiddleware = () => {
       request.event.body = {
         ...request.event.body,
         username: session.username,
+        sessionId: session.id,
       }
     }
 

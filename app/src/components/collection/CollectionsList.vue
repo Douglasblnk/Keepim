@@ -84,6 +84,7 @@ watch(
 <template>
   <CollectionListSkeleton
     v-if="isLoading"
+    :folder-size="folderSize"
     un-mb-80px
   />
 
@@ -93,7 +94,7 @@ watch(
     un-mb-80px
   >
     <QInfiniteScroll
-      v-if="data.length"
+      v-if="data?.length"
       :offset="150"
       @load="onLoad"
     >

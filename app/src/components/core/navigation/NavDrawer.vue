@@ -10,13 +10,11 @@ import IconAddCategory from '~icons/mdi/tag-plus-outline'
 const route = useRoute()
 const { push } = useRouter()
 const { setDialog } = useDialog()
-const { setStorageState, getStorageState } = useLocalStorage()
+const { storageState, setStorageState } = useLocalStorage()
 
-const drawerSavedState = getStorageState('drawer-state')
+const miniState = ref(storageState.value['drawer-mini-state'] === 'true')
+const miniStateTransition = ref(storageState.value['drawer-mini-state'] === 'true')
 
-const miniState = ref(drawerSavedState === 'true')
-const miniStateTransition = ref(drawerSavedState === 'true')
-console.log('route.name :>> ', route.name)
 const items = [
   {
     name: 'Navegação',
@@ -70,8 +68,13 @@ function toggleMiniState() {
     miniStateTransition.value = miniState.value
   }, 130)
 
-  setStorageState('drawer-state', miniState.value ? 'true' : 'false')
+  storageState.value['drawer-mini-state'] = miniState.value
 }
+
+onMounted(() => {
+  if (storageState.value['drawer-mini-state'] === undefined)
+    setStorageState('drawer-mini-state', miniState.value)
+})
 
 defineExpose({
   miniState,

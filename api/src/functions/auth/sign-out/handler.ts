@@ -5,11 +5,11 @@ import { middyfy } from '@middleware/middyfy'
 import authenticationMiddleware from '@middleware/authentication'
 import { serialize } from 'cookie'
 
-const handler = async (event: CustomAPIGatewayProxyEvent<{ username?: string }, any>) => {
+const handler = async (event: CustomAPIGatewayProxyEvent<{ sessionId?: string }, any>) => {
   try {
-    const body = getLambdaBody(event.body, ['username'])
+    const body = getLambdaBody(event.body, ['sessionId'])
 
-    const response = await signOut(body.username)
+    const response = await signOut(body.sessionId)
 
     const cookies = serialize(
       'access_token',

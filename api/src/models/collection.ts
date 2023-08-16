@@ -17,7 +17,7 @@ export const createCollectionModel = (collection: Omit<CollectionModel, 'id' | '
   return {
     id: uuid(),
     username: collection?.username,
-    collectionName: collection.collectionName,
+    collectionName: collection.collectionName.trim(),
     collectionDate: collection.collectionDate,
     createdAt: currentTimestamp,
     updatedAt: currentTimestamp,

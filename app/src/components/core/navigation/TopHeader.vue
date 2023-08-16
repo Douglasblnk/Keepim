@@ -12,11 +12,11 @@ const isMobile = inject('isMobile') as ComputedRef<boolean>
 const { push } = useRouter()
 const { userStorage } = useLocalStorage()
 
-const subItemsTranslated = {
+const subItemsTranslated = computed(() => ({
   collections: props.subItems?.collections === 1 ? 'coleção' : 'coleções',
   images: props.subItems?.images === 1 ? 'imagem' : 'imagens',
   categories: props.subItems?.categories === 1 ? 'categoria' : 'categorias',
-}
+}))
 </script>
 
 <template>
