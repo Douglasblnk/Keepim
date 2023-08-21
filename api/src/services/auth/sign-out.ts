@@ -1,9 +1,9 @@
 import { errSessionNotFound } from '@exceptions/auth-exceptions'
-import { deleteSession, findSessionByUsername } from '@repository/session'
+import { deleteSession, findSessionByID } from '@repository/session'
 import { isObjectEmpty } from '@utils/utils'
 
-export default async (username: string) => {
-  const session = await findSessionByUsername(username)
+export default async (sessionId: string) => {
+  const session = await findSessionByID(sessionId)
 
   if (!session || isObjectEmpty(session))
     throw errSessionNotFound()

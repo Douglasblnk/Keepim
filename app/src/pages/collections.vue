@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data, isLoading } = useQuery({
+const collectionCount = useQuery({
   queryKey: [ 'collections-count' ],
   queryFn: getCollectionsCountRequest,
 })
@@ -10,10 +10,17 @@ const { data, isLoading } = useQuery({
     <template #header>
       <TopHeader
         title="Coleções"
-        :is-loading="isLoading"
-        :sub-items="{ collections: data }"
+        :is-loading="collectionCount.isLoading.value"
+        :sub-items="{ collections: collectionCount.data.value }"
+      />
+
+      <CollectionFilter
+        un-mt-xl
+        un-mb-md
       />
     </template>
+
+    <CollectionsList />
   </KLayoutPage>
 </template>
 

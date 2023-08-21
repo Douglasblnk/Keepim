@@ -12,7 +12,7 @@ $q.dark.set(true)
 
 const bottomNavHiddenPattern = [
   'login',
-  'configuration',
+  'profile',
 ]
 
 const isDrawerShown = computed(() => {
@@ -24,6 +24,15 @@ const isBottomNavHidden = computed(() => {
 })
 
 const title = ref()
+
+const navDrawer = ref()
+
+const pagePadding = computed(() => {
+  if (isMobile.value || route.name === 'login')
+    return 'padding-left: 0'
+
+  return navDrawer.value?.miniState ? 'padding-left: 90px' : 'padding-left: 300px'
+})
 
 watch(
   () => route.meta,
@@ -37,26 +46,36 @@ useHead({
 })
 
 provide('isMobile', isMobile)
+provide('miniState', computed(() => navDrawer.value?.miniStateTransition))
 </script>
 
 <template>
   <QLayout view="lhr LpR lFr">
     <RouterView v-slot="{ Component }">
-      <QPageContainer>
+      <QPageContainer :style="pagePadding">
         <QPage un-flex="~ col grow">
-          <NavDrawer :model-value="isDrawerShown" />
+          <NavDrawer
+            ref="navDrawer"
+            :model-value="isDrawerShown"
+          />
 
           <Suspense>
             <transition
               :name="routeTransition"
               mode="out-in"
             >
-              <component :is="Component" />
+              <component
+                :is="Component"
+                un-mx-auto
+              />
             </transition>
           </Suspense>
 
           <Transition
-            name="slide-up"
+            enter-active-class="transition-all duration-300 ease"
+            leave-active-class="transition-all duration-300 ease"
+            enter-from-class="opacity-0 translate-y-60"
+            leave-to-class="opacity-0 translate-y-60"
             mode="out-in"
           >
             <BottomNav v-if="isBottomNavHidden" />

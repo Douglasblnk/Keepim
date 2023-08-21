@@ -1,7 +1,5 @@
 import { useStorage } from '@vueuse/core'
 
-type States = 'user-info' | 'drawer-state'
-
 interface StorageState {
   'user-info': {
     username: string
@@ -9,29 +7,29 @@ interface StorageState {
     email: string
     avatar: string
   }
-  'drawer-state': string
+  'drawer-mini-state': boolean
 }
 
-const storageState: Ref<Record<string, any>> = ref({})
+const storageState = ref<Partial<Record<keyof StorageState, any>>>({})
 
 const { length: _, ...items } = localStorage
 
 Object.entries(items).forEach(([ key, value ]) => {
-  storageState.value[key] = useStorage(key, value)
+  storageState.value[key as keyof StorageState] = useStorage(key, value)
 })
 
 export default () => {
-  const setStorageState = (stateKey: States, content: any) => {
+  const setStorageState = (stateKey: keyof StorageState, content: any) => {
     storageState.value[stateKey] = useStorage(stateKey, content)
   }
 
-  const getStorageState = <T extends keyof StorageState>(stateKey: States): StorageState[T] => {
+  const getStorageState = <T extends keyof StorageState>(stateKey: keyof StorageState): StorageState[T] => {
     const state = storageState.value[stateKey]
 
     return typeof state === 'string' ? JSON.parse(state) : state
   }
 
-  const deleteStorageState = (stateKey: States) => {
+  const deleteStorageState = (stateKey: keyof StorageState) => {
     storageState.value[stateKey] = null
   }
 
@@ -42,5 +40,6 @@ export default () => {
     getStorageState,
     deleteStorageState,
     userStorage,
+    storageState,
   }
 }

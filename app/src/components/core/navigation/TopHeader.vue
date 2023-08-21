@@ -3,7 +3,6 @@ import { isObjectEmpty } from '@utils/index'
 
 const props = defineProps<{
   title: string
-  withBlur?: boolean
   isLoading?: boolean
   subItems?: { collections?: number; images?: number; categories?: number }
 }>()
@@ -13,18 +12,17 @@ const isMobile = inject('isMobile') as ComputedRef<boolean>
 const { push } = useRouter()
 const { userStorage } = useLocalStorage()
 
-const subItemsTranslated = {
+const subItemsTranslated = computed(() => ({
   collections: props.subItems?.collections === 1 ? 'coleção' : 'coleções',
   images: props.subItems?.images === 1 ? 'imagem' : 'imagens',
   categories: props.subItems?.categories === 1 ? 'categoria' : 'categorias',
-}
+}))
 </script>
 
 <template>
   <div
     un-flex
     un-justify-between
-    :class="withBlur ? 'backdrop-blur-md' : 'bg-background'"
   >
     <div>
       <h1
@@ -65,7 +63,7 @@ const subItemsTranslated = {
       un-cursor-pointer
       :img="userStorage.avatar"
       :label="userStorage.name"
-      @click="push('/configuracoes')"
+      @click="push('/perfil')"
     />
   </div>
 </template>

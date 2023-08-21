@@ -34,10 +34,13 @@ async function refreshAccessToken(next: NavigationGuardNext) {
 }
 
 export default async function handleRoutes(to: RouteLocationNormalized, prev: RouteLocationNormalized, next: NavigationGuardNext) {
-  if (to.path === '/login') {
-    if (getStorageState('user-info'))
-      return next({ name: prev.name || 'home' })
-  }
+  const userInfo = getStorageState('user-info')
+
+  if (to.path !== '/login' && !userInfo)
+    return reauthenticate(next)
+
+  if (to.path === '/login' && userInfo)
+    return next({ name: prev.name || 'home' })
 
   if (!to.meta.auth)
     return next()

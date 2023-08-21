@@ -10,12 +10,10 @@ import IconAddCategory from '~icons/mdi/tag-plus-outline'
 const route = useRoute()
 const { push } = useRouter()
 const { setDialog } = useDialog()
-const { setStorageState, getStorageState } = useLocalStorage()
+const { storageState, setStorageState } = useLocalStorage()
 
-const drawerSavedState = getStorageState('drawer-state')
-
-const miniState = ref(drawerSavedState === 'true')
-const miniStateTransition = ref(drawerSavedState === 'true')
+const miniState = ref(storageState.value['drawer-mini-state'] === 'true')
+const miniStateTransition = ref(storageState.value['drawer-mini-state'] === 'true')
 
 const items = [
   {
@@ -66,23 +64,30 @@ const items = [
 function toggleMiniState() {
   miniState.value = !miniState.value
 
-  if (miniState.value) {
-    setTimeout(() => {
-      miniStateTransition.value = miniState.value
-    }, 90)
-  }
-
-  else {
+  setTimeout(() => {
     miniStateTransition.value = miniState.value
-  }
+  }, 130)
 
-  setStorageState('drawer-state', miniState.value ? 'true' : 'false')
+  storageState.value['drawer-mini-state'] = miniState.value
 }
+
+onMounted(() => {
+  if (storageState.value['drawer-mini-state'] === undefined)
+    setStorageState('drawer-mini-state', miniState.value)
+})
+
+defineExpose({
+  miniState,
+  miniStateTransition,
+})
 </script>
 
 <template>
   <QDrawer
     behavior="desktop"
+    mini-to-overlay
+    overlay
+    persistent
     :mini="miniState"
     :mini-width="90"
   >
@@ -102,7 +107,6 @@ function toggleMiniState() {
     <NavDrawerItems
       :items="items"
       :mini-state="miniState"
-      :mini-state-transition="miniStateTransition"
     />
   </QDrawer>
 </template>

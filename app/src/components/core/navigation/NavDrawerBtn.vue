@@ -8,7 +8,6 @@ defineProps<{
     action: () => void
   }[]
   miniState: boolean
-  miniStateTransition: boolean
 }>()
 </script>
 

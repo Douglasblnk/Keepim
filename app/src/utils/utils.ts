@@ -22,7 +22,7 @@ const messageOptions = {
   timeout: 2000,
 }
 
-export const isObjectEmpty = <T extends object>(obj: T | undefined) => typeof obj === 'object' && !Object.keys(obj).length
+export const isObjectEmpty = (obj: any) => typeof obj === 'object' && !Object.keys(obj).length
 
 export function checkImgExists(image: string | undefined) {
   if (!image)
@@ -43,6 +43,10 @@ export function checkImgExists(image: string | undefined) {
       return false
     }
   }
+}
+
+export function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 export function eventHook() {

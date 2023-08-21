@@ -2,6 +2,8 @@
 const { replace } = useRouter()
 const { deleteStorageState } = useLocalStorage()
 
+const queryClient = useQueryClient()
+
 const confirmLogout = ref(false)
 const timeout: Ref<NodeJS.Timeout | null> = ref(null)
 
@@ -20,6 +22,8 @@ async function logout() {
 
   if (response) {
     deleteStorageState('user-info')
+    queryClient.invalidateQueries()
+
     replace('/login')
   }
 }
@@ -31,9 +35,9 @@ async function logout() {
       un-grow
       un-flex="~ col"
     >
-      <KInfoUser un-mt-lg />
+      <InfoUser un-mt-lg />
 
-      <ConfigButton
+      <LogoutButton
         title="Editar perfil"
         description="Altere suas informações de perfil"
         icon="i-mdi-account-outline"
@@ -41,7 +45,7 @@ async function logout() {
         un-mt-lg
       />
 
-      <ConfigButton
+      <LogoutButton
         title="Sistema"
         description="Configure o tema da aplicação"
         icon="i-mdi-cog-outline"
@@ -58,9 +62,9 @@ async function logout() {
           name="fade-100"
           mode="out-in"
         >
-          <ConfigButton
+          <LogoutButton
             v-if="!confirmLogout"
-            title="Sair do sistema"
+            title="Sair do app"
             icon="i-mdi-logout"
             color="bg-negative"
             un-mt-lg
@@ -68,7 +72,7 @@ async function logout() {
             @click="preLogout"
           />
 
-          <ConfigButton
+          <LogoutButton
             v-else
             title="Confirmar saída?"
             icon="i-mdi-check"
@@ -85,9 +89,9 @@ async function logout() {
 </template>
 
 <route lang="yaml">
-path: /configuracoes
+path: /perfil
 meta:
-  title: Configurações
+  title: Perfil
   transition: slide-up
   backTransition: slide-down-back
 </route>
