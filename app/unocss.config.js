@@ -8,6 +8,8 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
+import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
+
 import { preflightColors } from './unocss.preflights'
 
 const spacing = {
@@ -47,7 +49,7 @@ export default defineConfig({
   shortcuts: [
     { column: 'flex flex-wrap flex-col h-auto min-h-0 max-h-full' },
     { center: 'flex items-center justify-center' },
-    { title: 'text-lg font-bold m-y-sm font-poppins' },
+    { title: 'text-lg font-bold m-y-sm font-poppins leading-normal' },
   ],
 
   theme: {
@@ -177,6 +179,11 @@ export default defineConfig({
         color: '',
       },
       warn: true,
+      collections: {
+        custom: FileSystemIconLoader(
+          './public/icons',
+        ),
+      },
     }),
     presetWebFonts({
       provider: 'google',
