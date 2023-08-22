@@ -5,11 +5,12 @@ import type { CollectionsParams, CollectionsResponse, CustomInfiniteQueryReturnT
 
 const miniState = inject<ComputedRef<boolean>>('miniState')
 
-const { filters } = useFilters<CollectionsParams>('collections')
-
-const { orientation } = useScreenOrientation()
 const $q = useQuasar()
+
 const { push } = useRouter()
+
+const { filters } = useFilters<CollectionsParams>('collections')
+const { orientation } = useScreenOrientation()
 
 const foldersWrapper = ref<HTMLDivElement | null>()
 
@@ -65,6 +66,11 @@ function calcFolderSize() {
   }
 }
 
+watch(
+  () => [ $q.screen.width, foldersWrapper.value, miniState?.value, orientation.value ],
+  calcFolderSize,
+)
+
 async function onLoad(_: number, done: (_stop?: boolean | undefined) => void) {
   await fetchNextPage()
 
@@ -72,13 +78,8 @@ async function onLoad(_: number, done: (_stop?: boolean | undefined) => void) {
 }
 
 function navigateToCollection(folder: CollectionsResponse) {
-  push(`/colecoes/${folder.collectionName}`)
+  push(`/colecoes/${folder.id}`)
 }
-
-watch(
-  () => [ $q.screen.width, foldersWrapper.value, miniState?.value, orientation.value ],
-  calcFolderSize,
-)
 </script>
 
 <template>
