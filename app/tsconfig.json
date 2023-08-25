@@ -29,12 +29,17 @@
     "paths": {
       "@/*": ["./src/*"],
       "@composables/*": ["./src/composables/*"],
+      "@composables": ["./src/composables"],
+      "@stores/*": ["./src/stores/*"],
+      "@stores": ["./src/stores"],
       "@utils/*": ["./src/utils/*"],
+      "@utils": ["./src/utils"],
       "@datasource/*": ["./src/datasource/*"],
       "@middleware/*": ["./src/middleware/*"],
       "@constants/*": ["./src/constants/*"],
       "@type/*": ["./src/types/*"],
-    },
+      "@type": ["./src/types"]
+    }
   },
   "exclude": [
     "dist",
