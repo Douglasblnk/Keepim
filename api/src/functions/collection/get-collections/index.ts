@@ -20,6 +20,16 @@ export default {
     },
     {
       Effect: 'Allow',
+      Action: ['dynamodb:Query'],
+      Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Collection/index/collection-date-index',
+    },
+    {
+      Effect: 'Allow',
+      Action: ['dynamodb:Query'],
+      Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Collection/index/collection-name-index',
+    },
+    {
+      Effect: 'Allow',
       Action: ['dynamodb:GetItem'],
       Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Session',
     },
