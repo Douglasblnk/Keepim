@@ -16,10 +16,6 @@ export default {
           AttributeName: 'collectionDate',
           AttributeType: 'S',
         },
-        {
-          AttributeName: 'collectionName',
-          AttributeType: 'S',
-        },
       ],
       KeySchema: [
         {
@@ -45,26 +41,6 @@ export default {
             },
             {
               AttributeName: 'collectionDate',
-              KeyType: 'RANGE',
-            },
-          ],
-          Projection: {
-            ProjectionType: 'ALL',
-          },
-          ProvisionedThroughput: {
-            ReadCapacityUnits: 1,
-            WriteCapacityUnits: 1,
-          },
-        },
-        {
-          IndexName: 'collection-name-index',
-          KeySchema: [
-            {
-              AttributeName: 'username',
-              KeyType: 'HASH',
-            },
-            {
-              AttributeName: 'collectionName',
               KeyType: 'RANGE',
             },
           ],
