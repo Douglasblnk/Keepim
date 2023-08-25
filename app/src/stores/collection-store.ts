@@ -1,18 +1,17 @@
 import { defineStore } from 'pinia'
-
-import type { CollectionResponse } from '@/types'
+import type { CollectionResponse } from '../types'
 
 interface State {
-  collections: CollectionResponse[]
+  collection?: CollectionResponse
 }
 
 export const useCollectionStore = defineStore('collection-store', {
   state: (): State => ({
-    collections: [],
+    collection: undefined,
   }),
   actions: {
-    addCollection(collection) {
-      this.collections.push(collection)
+    setCollection(collection: CollectionResponse | undefined) {
+      this.collection = collection
     },
   },
 })

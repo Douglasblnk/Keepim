@@ -1,28 +1,18 @@
 <script setup lang="ts">
-import { capitalizeFirstLetter, dayjs } from '@utils'
-
 const props = defineProps<{
   id: string
 }>()
 
 useHead({ title: computed(() => `Keepim - ${props.id}`) })
 
+const { setCollection } = useCollectionStore()
+
 const { data, isLoading } = useQuery({
   queryKey: [ 'collection', props.id ],
-  queryFn: () => getCollectionRequest(props.id),
+  queryFn: ({ queryKey }) => getCollectionRequest(queryKey[1]),
 })
 
-const collectionDate = computed(() => {
-  const dayjsDate = dayjs(data.value?.collectionDate)
-
-  return `
-    ${dayjsDate.format('DD')}
-    de
-    ${capitalizeFirstLetter(dayjsDate.format('MMMM [de] YYYY'))}
-  `.trim()
-})
-
-provide('collection', data)
+watch(data, setCollection)
 
 onMounted(() => {
   document.body.style.overflow = 'hidden'
@@ -39,16 +29,9 @@ onUnmounted(() => {
     un-w="sm:col-8 lg:col-6 col-12"
     un-relative
   >
-    <CollectionViewHeader
-      :collection-name="data?.collectionName"
-      :collection-date="collectionDate"
-      :is-loading="isLoading"
-    />
+    <CollectionViewHeader :is-loading="isLoading" />
 
-    <CollectionView
-      :collection="data"
-      :is-loading="isLoading"
-    />
+    <CollectionView :is-loading="isLoading" />
   </div>
 </template>
 

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import type { CollectionResponse } from '@/types'
-
-const collection = inject<Ref<CollectionResponse | undefined>>('collection')!
+const { collection } = storeToRefs(useCollectionStore())
 
 const equipmentIcons: Record<string, string> = {
   camera: 'i-mdi-camera-outline',
@@ -13,9 +11,9 @@ const equipmentIcons: Record<string, string> = {
 }
 
 const missingDetails = computed(() => {
-  return !collection.value?.participants?.length
-    && !collection.value?.equipments?.length
-    && !collection.value?.place
+  return !collection?.value?.participants?.length
+    && !collection?.value?.equipments?.length
+    && !collection?.value?.place
 })
 </script>
 

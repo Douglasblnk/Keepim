@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { useGesture } from '@vueuse/gesture'
-import type { CollectionResponse } from '@/types'
 
 defineProps<{ isLoading: boolean }>()
 
-const collection = inject<Ref<CollectionResponse | undefined>>('collection')
 const isMobile = inject<ComputedRef<boolean>>('isMobile')
 
 const container = ref<HTMLDivElement | null>(null)
@@ -116,7 +114,7 @@ if (isMobile?.value) {
             <QScrollArea un-grow>
               <CollectionViewPhotosSkeleton v-if="isLoading" />
 
-              <CollectionViewPhotos />
+              <CollectionViewPhotos v-else />
             </QScrollArea>
           </div>
         </QTabPanel>

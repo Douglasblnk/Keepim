@@ -13,6 +13,7 @@ export interface CollectionsResponse {
   id: string
   collectionName: string
   collectionDate: string
+  thumbnail?: string
 }
 
 interface Equipment {
@@ -22,11 +23,13 @@ interface Equipment {
 
 export interface CollectionResponse {
   id: string
-  username?: string
+  username: string
   collectionDate: string
   collectionName: string
   description?: string
   equipments?: Equipment[]
   participants?: string[]
+  photos?: string[]
+  thumbnail?: string
   place?: string
 }

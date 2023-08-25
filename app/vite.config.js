@@ -18,6 +18,7 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, './src'),
       '@composables': resolve(__dirname, './src/composables'),
+      '@stores': resolve(__dirname, './src/stores'),
       '@utils': resolve(__dirname, './src/utils'),
       '@datasource': resolve(__dirname, './src/datasource'),
       '@middleware': resolve(__dirname, './src/middleware'),
@@ -40,6 +41,10 @@ export default defineConfig({
   plugins: [
     vue({
       template: { transformAssetUrls },
+      script: {
+        defineModel: true,
+        propsDestructure: true,
+      },
     }),
 
     Pages({
@@ -65,6 +70,7 @@ export default defineConfig({
       dirs: [
         'src/composables/**',
         'src/datasource/**',
+        'src/stores/**',
       ],
 
       vueTemplate: true,
@@ -81,6 +87,7 @@ export default defineConfig({
         'vue/macros',
         'quasar',
         'vee-validate',
+        'pinia',
         '@vueuse/head',
         '@vueuse/core',
         {

@@ -1,11 +1,21 @@
 <script setup lang="ts">
-defineProps<{
-  collectionName?: string
-  collectionDate?: string
-  isLoading: boolean
-}>()
+import { capitalizeFirstLetter, dayjs } from '@utils'
+
+defineProps<{ isLoading: boolean }>()
 
 const { back } = useRouter()
+
+const state = useCollectionStore()
+
+const collectionDate = computed(() => {
+  const dayjsDate = dayjs(state.collection?.collectionDate)
+
+  return `
+    ${dayjsDate.format('DD')}
+    de
+    ${capitalizeFirstLetter(dayjsDate.format('MMMM [de] YYYY'))}
+  `.trim()
+})
 </script>
 
 <template>
@@ -43,7 +53,7 @@ const { back } = useRouter()
         un-max-w="70%"
         un-truncate
       >
-        {{ collectionName }}
+        {{ state.collection?.collectionName }}
       </h1>
 
       <QSkeleton
