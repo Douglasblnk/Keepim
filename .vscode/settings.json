@@ -25,6 +25,7 @@
   "material-icon-theme.folders.associations": {
     "composables": "include",
     "datasource": "json",
-    "migration": "database"
+    "migration": "database",
+    "stores": "vuex-store"
   },
 }

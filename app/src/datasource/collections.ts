@@ -1,4 +1,4 @@
-import type { CollectionBody, CollectionsParams, CollectionsResponse } from '@type/collection'
+import type { CollectionBody, CollectionResponse, CollectionsParams, CollectionsResponse } from '@type/collection'
 import authMiddleware from '@middleware/auth-middleware'
 import type { QueryFunctionContext } from '@tanstack/vue-query'
 import type { WritableComputedRef } from 'vue'
@@ -26,6 +26,14 @@ export async function getCollectionsRequest({ queryKey, pageParam }: QueryFuncti
 
   return authMiddleware<EvaluatedKeyPagination<CollectionsResponse[]>>(async () => {
     const { data } = await axios.get('/collections', { withCredentials: true, params: { ...params, startKey } })
+
+    return data
+  })
+}
+
+export async function getCollectionRequest(id: string) {
+  return authMiddleware<CollectionResponse>(async () => {
+    const { data } = await axios.get(`/collection/${id}`, { withCredentials: true })
 
     return data
   })

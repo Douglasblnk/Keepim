@@ -30,7 +30,11 @@ async function logout() {
 </script>
 
 <template>
-  <KLayoutPage default-header="Perfil">
+  <KLayoutPage>
+    <template #header>
+      <SimpleHeader title="Perfil" />
+    </template>
+
     <div
       un-grow
       un-flex="~ col"

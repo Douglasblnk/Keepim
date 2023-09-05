@@ -28,7 +28,7 @@ const items = [
       {
         name: 'Coleções',
         icon: IconFolder,
-        isActive: computed(() => route.name === 'collections'),
+        isActive: computed(() => [ 'collections-id', 'collections' ].includes(route.name as string)),
         action: () => push('/colecoes'),
       },
       {
