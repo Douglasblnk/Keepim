@@ -53,8 +53,8 @@ const { push } = useRouter()
     <NavDrawerBtn
       :items="[
         {
-          name: userStorage.name,
-          avatar: userStorage.avatar,
+          name: userStorage?.name,
+          avatar: userStorage?.avatar,
           action: () => push('/perfil'),
         },
       ]"

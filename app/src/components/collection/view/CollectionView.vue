@@ -68,7 +68,6 @@ if (isMobile?.value) {
       >
         <QIcon
           :name="containerMarginTop === 60 ? 'i-mdi-arrow-expand-up' : 'i-mdi-arrow-expand-down'"
-          size="sm"
           un-text-gray-text
         />
       </div>

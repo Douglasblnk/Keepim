@@ -42,6 +42,11 @@ function clear() {
   modelValue.value = []
   filesUrl.value = []
 }
+
+onMounted(() => {
+  if (modelValue.value.length)
+    createFilesUrl(modelValue.value)
+})
 </script>
 
 <template>

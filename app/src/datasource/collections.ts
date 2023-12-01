@@ -1,12 +1,21 @@
 import type { CollectionBody, CollectionResponse, CollectionsParams, CollectionsResponse } from '@type/collection'
-import authMiddleware from '@middleware/auth-middleware'
+import type { EvaluatedKeyPagination } from '@type/pagination'
 import type { QueryFunctionContext } from '@tanstack/vue-query'
 import type { WritableComputedRef } from 'vue'
-import type { EvaluatedKeyPagination } from './../../../api/src/models/pagination'
+
+import authMiddleware from '@middleware/auth-middleware'
 
 export async function createCollectionRequest(body: CollectionBody) {
-  return authMiddleware(async () => {
+  return authMiddleware<CollectionBody & { id: string }>(async () => {
     const { data } = await axios.post('/collection', body, { withCredentials: true })
+
+    return data
+  })
+}
+
+export async function persistCollectionPhotosRequest(body: string[]) {
+  return authMiddleware(async () => {
+    const { data } = await axios.put('/collection-photos', body, { withCredentials: true })
 
     return data
   })

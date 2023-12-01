@@ -4,6 +4,7 @@ import Health from '@functions/health'
 import User from '@functions/user'
 import Auth from '@functions/auth'
 import Collection from '@functions/collection'
+import Photos from '@functions/photos'
 import { CollectionResources, SessionResources, UserResources } from './resources'
 
 const serverlessConfiguration: AWS = {
@@ -25,6 +26,7 @@ const serverlessConfiguration: AWS = {
       shouldStartNameWithService: true,
     },
     environment: {
+      BUCKET_NAME: '${env:BUCKET_NAME}',
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
       REFRESH_TOKEN_LENGTH: '${env:REFRESH_TOKEN_LENGTH}',
@@ -41,6 +43,7 @@ const serverlessConfiguration: AWS = {
     ...User,
     ...Auth,
     ...Collection,
+    ...Photos,
   },
   package: {
     individually: true,

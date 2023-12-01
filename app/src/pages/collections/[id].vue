@@ -5,14 +5,21 @@ const props = defineProps<{
 
 useHead({ title: computed(() => `Keepim - ${props.id}`) })
 
-const { setCollection } = useCollectionStore()
+const { setCollection, $reset } = useCollectionStore()
 
 const { data, isLoading } = useQuery({
   queryKey: [ 'collection', props.id ],
   queryFn: ({ queryKey }) => getCollectionRequest(queryKey[1]),
 })
 
-watch(data, setCollection)
+watch(
+  () => data.value,
+  (newData) => {
+    if (newData !== undefined)
+      setCollection(newData)
+  },
+  { deep: true, immediate: true },
+)
 
 onMounted(() => {
   document.body.style.overflow = 'hidden'

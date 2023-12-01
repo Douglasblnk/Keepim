@@ -5,6 +5,7 @@ import { getErrorMsg } from '@/utils/handle-error'
 
 const { validate } = useForm()
 const { close } = useDialog()
+const { push } = useRouter()
 
 const collection = ref('')
 const creationDate = ref('')
@@ -34,6 +35,10 @@ const {
 
       queryClient.invalidateQueries({ queryKey: [ 'collections-count' ] })
       queryClient.invalidateQueries({ queryKey: [ 'collections-list' ] })
+
+      push({
+        path: `/colecoes/${data.id}`,
+      })
     }
   },
 })

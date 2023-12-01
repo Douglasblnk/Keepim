@@ -1,5 +1,5 @@
 import { env } from 'node:process'
-import { getLambdaBody, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
+import { checkLambdaBody, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import { signIn } from '@service/auth'
 import { serialize } from 'cookie'
@@ -8,7 +8,7 @@ import type { SignInSchemaBody } from './schema'
 
 const handler = async (event: CustomAPIGatewayProxyEvent<SignInSchemaBody, any>) => {
   try {
-    const signInSchema = getLambdaBody(event.body, ['username', 'password'])
+    const signInSchema = checkLambdaBody(event.body, ['username', 'password'])
 
     const { accessToken, user } = await signIn(signInSchema)
 
@@ -19,6 +19,7 @@ const handler = async (event: CustomAPIGatewayProxyEvent<SignInSchemaBody, any>)
         httpOnly: true,
         secure: true,
         maxAge: +env.REFRESH_TOKEN_EXPIRATION,
+        ...(env.IS_OFFLINE ? { sameSite: 'none' } : {}),
       })
 
     return lambdaOKResponse(user, { 'Set-Cookie': cookies })

@@ -3,7 +3,7 @@ import { capitalizeFirstLetter, dayjs } from '@utils'
 
 defineProps<{ isLoading: boolean }>()
 
-const { back } = useRouter()
+const { push } = useRouter()
 
 const state = useCollectionStore()
 
@@ -37,7 +37,7 @@ const collectionDate = computed(() => {
         name="i-mdi-arrow-left"
         size="md"
         un-cursor-pointer
-        @click="back"
+        @click="push({ path: '/colecoes' })"
       />
     </div>
 

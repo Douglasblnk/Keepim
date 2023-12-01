@@ -90,6 +90,22 @@ export async function notify(options: QNotifyCreateOptions) {
   })
 }
 
+export function createArrayChunks<T = any>(list: T[], chunks: number = 5): T[][] {
+  let count = 0
+
+  return list.reduce((packs: T[][], obj) => {
+    if (!packs[count])
+      packs[count] = []
+
+    packs[count].push(obj)
+
+    if ((packs[count].length + 1) > chunks)
+      count++
+
+    return packs
+  }, [])
+}
+
 dayjs.locale(ptBR)
 dayjs.extend(objectSupport)
 dayjs.extend(customParseFormat)

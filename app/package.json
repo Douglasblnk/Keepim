@@ -3,7 +3,7 @@
   "repository": "douglasblnk/photokeep",
   "version": "0.1.1",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite --force",
     "refresh": "sudo rm -rf node_modules && pnpm install",
     "build": "vite build",
     "serve": "vite preview"
