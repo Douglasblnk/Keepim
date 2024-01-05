@@ -16,7 +16,7 @@ const {
   fetchNextPage,
 } = useInfiniteQuery({
   queryKey: [ 'collections-list', filters ],
-  queryFn: getCollectionsRequest,
+  queryFn: ({ pageParam }) => getCollectionsRequest(filters.value, pageParam),
   select: ({ pages }) => pages?.flatMap((page: any) => page.data) as any,
   getNextPageParam: value => value?.lastEvaluatedKey,
 }) as CustomInfiniteQueryReturnType<CollectionsResponse[]>
@@ -103,6 +103,7 @@ function navigateToCollection(folder: CollectionsResponse) {
             v-for="(folder, index) in folders"
             :key="`folder-${index}`"
             :name="folder.collectionName"
+            :thumbnail="folder.thumbnail"
             :style="folderSize"
             un-max-w-200px
             un-max-h-200px

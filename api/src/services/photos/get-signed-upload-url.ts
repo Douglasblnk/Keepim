@@ -14,7 +14,7 @@ export default async (data: PhotosBodySchema) => {
     const key = `${username}/${collectionName}/${file.name}`
 
     const params: PutObjectCommandInput = {
-      Bucket: env.BUCKET_NAME,
+      Bucket: env.COLLECTION_BUCKET_NAME,
       Key: key,
     }
 

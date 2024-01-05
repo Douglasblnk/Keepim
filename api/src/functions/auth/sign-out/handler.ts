@@ -1,5 +1,5 @@
 import { env } from 'node:process'
-import { checkLambdaBody, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
+import { checkLambdaEvent, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import { signOut } from '@service/auth'
 import { middyfy } from '@middleware/middyfy'
@@ -8,7 +8,7 @@ import { serialize } from 'cookie'
 
 const handler = async (event: CustomAPIGatewayProxyEvent<{ sessionId?: string }, any>) => {
   try {
-    const body = checkLambdaBody(event.body, ['sessionId'])
+    const body = checkLambdaEvent(event.body, ['sessionId'])
 
     const response = await signOut(body.sessionId)
 

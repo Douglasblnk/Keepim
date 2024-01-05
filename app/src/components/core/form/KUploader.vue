@@ -1,6 +1,14 @@
 <script setup lang="ts">
-const { label = 'Selecione um arquivo' } = defineProps<{
+const {
+  label = 'Selecione um arquivo',
+  icon = 'i-mdi-cloud-upload',
+  iconSize = '4rem',
+  dense,
+} = defineProps<{
   label?: string
+  icon?: string
+  iconSize?: string
+  dense?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -11,6 +19,7 @@ const modelValue = defineModel<File[]>({ default: [] })
 
 const inputRef = ref<HTMLInputElement>()
 const filesUrl = ref<string[]>([])
+const dragEnter = ref(false)
 
 const reducedImagesBlob = computed(() => {
   const copiedImagesBlob = [ ...filesUrl.value ]
@@ -43,6 +52,20 @@ function clear() {
   filesUrl.value = []
 }
 
+function onDropFile(event: DragEvent) {
+  event.preventDefault()
+
+  dragEnter.value = false
+
+  const files = {
+    target: {
+      files: event.dataTransfer?.files,
+    },
+  }
+
+  saveFiles(files)
+}
+
 onMounted(() => {
   if (modelValue.value.length)
     createFilesUrl(modelValue.value)
@@ -52,13 +75,18 @@ onMounted(() => {
 <template>
   <div
     un-relative
-    un-border="~ dashed gray-text"
-    un-p-2xl
+    un-border="~ dashed"
+    :un-p="dense ? 'sm' : '2xl'"
     un-rounded-2xl
     :un-cursor="modelValue.length ? 'auto' : 'pointer'"
     un-flex="~ col"
     un-justify-center
     un-items-center
+    un-transition
+    :class="dragEnter ? 'border-primary bg-primary/20' : 'border-gray-text'"
+    @dragover.prevent="dragEnter = true"
+    @dragleave.prevent="dragEnter = false"
+    @drop.prevent="onDropFile"
     @click="inputRef?.click()"
   >
     <template v-if="!modelValue.length">
@@ -72,13 +100,15 @@ onMounted(() => {
       >
 
       <QIcon
-        name="i-mdi-cloud-upload"
-        size="4rem"
+        :name="icon"
+        :size="iconSize"
+        un-pointer-events-none
       />
 
       <span
         un-mt-md
         un-text-center
+        un-pointer-events-none
       >
         {{ label }}
       </span>
@@ -95,7 +125,7 @@ onMounted(() => {
         v-for="(image, index) in reducedImagesBlob"
         :key="`image-blob-${index}`"
         class="image-blob-preview"
-        un-w-50px
+        :un-w="dense ? '40px' : '50px'"
         ratio="1"
         un-shadow
         un-rounded-full

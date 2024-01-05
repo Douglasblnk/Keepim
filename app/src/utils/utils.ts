@@ -22,7 +22,9 @@ const messageOptions = {
   timeout: 2000,
 }
 
-export const isObjectEmpty = (obj: any) => typeof obj === 'object' && !Object.keys(obj).length
+export const isObject = (value: unknown): value is object => !!value && typeof value === 'object' && !Array.isArray(value)
+
+export const isObjectEmpty = (obj: any) => isObject(obj) && !Object.keys(obj).length
 
 export function checkImgExists(image: string | undefined) {
   if (!image)
@@ -104,6 +106,26 @@ export function createArrayChunks<T = any>(list: T[], chunks: number = 5): T[][]
 
     return packs
   }, [])
+}
+
+export function mergeDeep(...objects: Record<string, any>[]) {
+  return objects.reduce((acc, value) => {
+    Object.keys(value).forEach((key) => {
+      const previous = acc[key]
+      const current = value[key]
+
+      if (Array.isArray(previous) && Array.isArray(current))
+        acc[key] = previous.concat(...current)
+
+      else if (isObject(previous) && isObject(current))
+        acc[key] = mergeDeep(previous, current)
+
+      else
+        acc[key] = current
+    })
+
+    return acc
+  }, {})
 }
 
 dayjs.locale(ptBR)

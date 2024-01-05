@@ -26,10 +26,10 @@ export const lambdaErrorResponse = <THeaders = object>(error: Record<string, unk
   }
 }
 
-export const checkLambdaBody = <T = any>(body: T, properties: (keyof T)[]) => {
+export const checkLambdaEvent = <T = any>(body: T, properties: (keyof T)[]) => {
   for (const property of properties) {
     if (!body[property])
-      throw errMissingParams()
+      throw errMissingParams(property)
   }
 
   return body

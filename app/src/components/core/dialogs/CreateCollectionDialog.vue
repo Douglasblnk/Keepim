@@ -33,8 +33,8 @@ const {
 
       close()
 
-      queryClient.invalidateQueries({ queryKey: [ 'collections-count' ] })
-      queryClient.invalidateQueries({ queryKey: [ 'collections-list' ] })
+      queryClient.invalidateQueries({ queryKey: [ 'collections-count' ], type: 'all' })
+      queryClient.invalidateQueries({ queryKey: [ 'collections-list' ], type: 'all' })
 
       push({
         path: `/colecoes/${data.id}`,

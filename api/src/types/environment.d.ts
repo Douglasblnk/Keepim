@@ -11,7 +11,7 @@ declare global {
       COLLECTION_DB_TABLE: string
       SESSION_DB_TABLE: string
       USER_DB_TABLE: string
-      BUCKET_NAME: string
+      COLLECTION_BUCKET_NAME: string
     }
   }
 }

@@ -1,12 +1,18 @@
 import { defineStore } from 'pinia'
 import type { AxiosProgressEvent, AxiosRequestConfig } from 'axios'
 import type { CollectionResponse, SignedUrlsResponse } from '@type'
+import { mergeDeep } from '@utils'
 
 interface State {
   collection?: CollectionResponse
+  isAddingCover?: boolean
+  isRemoving?: boolean
+  filesToUpload: File[]
   uploading: {
     [key: string]: {
       isUploading: boolean
+      isPersisting: boolean
+      canResetQuery: boolean
       queue: {
         file: File
         fileName: string
@@ -15,32 +21,39 @@ interface State {
       progressPct: Record<string, number>
       abortController?: AbortController
       errors: string[]
+      response: PromiseFulfilledResult<string>[]
     }
   }
 }
 
 const { userStorage } = useLocalStorage()
 
-function makeDefaultValues(currentState: State['uploading'][string], signedUrls: SignedUrlsResponse[]) {
+function makeDefaultValues(currentState: State['uploading'][string], signedUrls: SignedUrlsResponse[]): State['uploading'][string] {
   if (currentState?.errors?.length) {
     const remainingErrors = currentState.errors
       .filter(error => !signedUrls.some(signedUrl => signedUrl.fileName === error))
 
     return {
       isUploading: true,
+      isPersisting: false,
+      canResetQuery: false,
       queue: currentState.queue,
       progressPct: currentState.progressPct,
       abortController: new AbortController(),
       errors: remainingErrors,
+      response: currentState?.response || [],
     }
   }
 
   return {
     isUploading: true,
+    isPersisting: false,
+    canResetQuery: false,
     queue: [],
     progressPct: {},
     abortController: new AbortController(),
     errors: [],
+    response: [],
   }
 }
 
@@ -49,11 +62,13 @@ function generateRequests(currentState: State['uploading'][string], signedUrls: 
     const file = files.find(file => file.name === signedUrl.fileName) as File
 
     if (!currentState.errors.length) {
-      currentState.queue.push({
-        fileName: signedUrl.fileName,
-        file,
-        retryLoading: false,
-      })
+      if (!currentState.queue.some(fileQueue => fileQueue.fileName === signedUrl.fileName)) {
+        currentState.queue.push({
+          fileName: signedUrl.fileName,
+          file,
+          retryLoading: false,
+        })
+      }
     }
 
     const config: AxiosRequestConfig = {
@@ -72,65 +87,98 @@ function generateRequests(currentState: State['uploading'][string], signedUrls: 
 export const useCollectionStore = defineStore('collection-store', {
   state: (): State => ({
     collection: undefined,
+    isAddingCover: false,
+    isRemoving: false,
+    filesToUpload: [],
     uploading: {},
   }),
   getters: {
     inUploading: state => state.uploading?.[state.collection?.collectionName as string],
+    collectionName: state => state.collection?.collectionName as string,
   },
   actions: {
     setCollection(collection: CollectionResponse | undefined) {
       this.collection = collection
     },
-    cancelUpload() {
-      const collectionName = this.collection?.collectionName as string
 
-      if (this.uploading?.[collectionName]?.abortController)
-        this.uploading[collectionName].abortController?.abort()
+    clearUploadingState() {
+      this.uploading[this.collectionName] = {
+        isUploading: false,
+        isPersisting: false,
+        canResetQuery: true,
+        queue: [],
+        progressPct: {},
+        abortController: undefined,
+        errors: [],
+        response: [],
+      }
+
+      this.filesToUpload = []
     },
+
+    cancelUpload() {
+      if (this.uploading?.[this.collectionName]?.abortController)
+        this.uploading[this.collectionName].abortController?.abort()
+
+      this.clearUploadingState()
+    },
+
+    async finishUpload() {
+      this.uploading[this.collectionName].isPersisting = true
+
+      try {
+        await this.persistCollectionPhotos(this.uploading[this.collectionName].response)
+
+        this.clearUploadingState()
+      }
+
+      catch (err) {
+        this.uploading[this.collectionName].isPersisting = false
+
+        this.uploading[this.collectionName].errors = this.uploading[this.collectionName].response
+          .map(({ value }) => value)
+      }
+    },
+
+    async persistCollectionPhotos(photos: PromiseFulfilledResult<string>[]) {
+      const photosKeys = photos.map((photo) => {
+        return `${userStorage.value.username}/${this.collectionName}/${photo.value}`
+      })
+
+      return await persistCollectionPhotosRequest(photosKeys, this.collection?.id)
+    },
+
     async initiatePhotosUploadProcess(signedUrls: SignedUrlsResponse[], files: File[]) {
-      const collectionName = this.collection?.collectionName as string
+      this.uploading[this.collectionName] = makeDefaultValues(this.uploading[this.collectionName], signedUrls)
 
-      this.uploading[collectionName] = makeDefaultValues(this.uploading[collectionName], signedUrls)
-
-      const requests = generateRequests(this.uploading[collectionName], signedUrls, files)
+      const requests = generateRequests(
+        mergeDeep(this.uploading[this.collectionName]) as State['uploading'][string],
+        signedUrls,
+        files,
+      )
 
       const response = await Promise.allSettled(requests)
 
+      this.uploading[this.collectionName].response.push(
+        ...response.filter(result => result.status === 'fulfilled') as PromiseFulfilledResult<string>[],
+      )
+
       if (
         response.some(result => result.status === 'rejected' && result.reason?.code !== 'ERR_CANCELED')
-        || this.uploading[collectionName].errors?.length
+        || this.uploading[this.collectionName].errors?.length
       ) {
-        this.uploading[collectionName].errors = [
+        this.uploading[this.collectionName].errors = [
           ...response
-            .filter((result): result is PromiseRejectedResult => result.status === 'rejected' && result.reason?.code !== 'ERR_CANCELED')
-            .map(({ reason }) => reason.fileName),
-          ...this.uploading[collectionName].errors,
+            .filter(result => result.status === 'rejected' && result.reason?.code !== 'ERR_CANCELED')
+            .map(({ reason }: any) => reason.fileName),
+          ...this.uploading[this.collectionName].errors,
         ]
       }
 
       else {
-        this.uploading[collectionName] = {
-          isUploading: false,
-          queue: [],
-          progressPct: {},
-          abortController: undefined,
-          errors: [],
-        }
-
         if (response.every(result => result.status !== 'rejected'))
-          this.persistCollectionPhotos(response as unknown as PromiseFulfilledResult<string>[])
+          this.finishUpload()
       }
-    },
-    async persistCollectionPhotos(photos: PromiseFulfilledResult<string>[]) {
-      const collectionName = this.collection?.collectionName as string
-
-      const photosKeys = photos.map((photo) => {
-        return `${userStorage.value.username}/${collectionName}/${photo.value}`
-      })
-
-      const response = await persistCollectionPhotosRequest(photosKeys)
-
-      console.log('response :>> ', response)
     },
   },
 })

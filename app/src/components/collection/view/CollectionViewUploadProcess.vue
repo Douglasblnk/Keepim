@@ -2,6 +2,7 @@
 const emit = defineEmits<{
   retryFailedUploads: [failed: string[]]
   retryFailedUpload: [failed: string]
+  removeFailedUpload: [remove: string]
 }>()
 
 const store = useCollectionStore()
@@ -22,12 +23,16 @@ function retryFailedUploads() {
   emit('retryFailedUploads', inUploading.value.errors)
 }
 
-function retryFailedUpload({ fileName }: { fileName: string }) {
-  emit('retryFailedUpload', fileName)
+function removeFailedUpload({ fileName }: { fileName: string }) {
+  emit('removeFailedUpload', fileName)
 }
 
 function cancelUpload() {
   store.cancelUpload()
+}
+
+function cancelFailedAndFinish() {
+  store.finishUpload()
 }
 
 function hasError({ fileName }: { fileName: string }) {
@@ -41,10 +46,18 @@ function hasError({ fileName }: { fileName: string }) {
     un-items-center
   >
     <span
-      v-if="!inUploading.errors.length"
+      v-if="!inUploading.errors.length && !inUploading.isPersisting"
       un-text="xl gray-text center"
     >
       Aguarde enquanto o upload está sendo realizado...
+    </span>
+
+    <span
+      v-else-if="inUploading.isPersisting"
+      un-text="xl gray-text center"
+      un-my-lg
+    >
+      Finalizando o envio das fotos...
     </span>
 
     <span
@@ -54,8 +67,23 @@ function hasError({ fileName }: { fileName: string }) {
       Ocorreu um erro ao enviar os arquivos:
     </span>
 
+    <div
+      v-if="inUploading.isPersisting"
+      un-w-full
+      un-flex
+      un-justify-center
+      un-items-center
+      un-mb-lg
+    >
+      <QLinearProgress
+        color="primary"
+        un-w-col-5
+        indeterminate
+      />
+    </div>
+
     <QBtn
-      v-if="!inUploading.errors.length"
+      v-if="!inUploading.errors.length && !inUploading.isPersisting"
       label="Cancelar envio"
       color="negative"
       un-my-3xl
@@ -63,7 +91,7 @@ function hasError({ fileName }: { fileName: string }) {
     />
 
     <div
-      v-else
+      v-if="inUploading.errors.length && !inUploading.isPersisting"
       un-w-full
       un-flex="~ wrap"
       un-items-center
@@ -80,7 +108,7 @@ function hasError({ fileName }: { fileName: string }) {
       <QBtn
         label="Ignorar arquivos com erro e finalizar"
         color="primary"
-        @click="cancelUpload"
+        @click="cancelFailedAndFinish"
       />
     </div>
 
@@ -91,11 +119,11 @@ function hasError({ fileName }: { fileName: string }) {
       un-gap-md
     >
       <div
-        v-for="(uploading, index) of inUploading.queue"
-        :key="`uploading-${index}`"
+        v-for="(uploadItem, index) of inUploading.queue"
+        :key="`uploading-${index}-${uploadItem.fileName}`"
       >
         <QImg
-          :src="createImgFromFile(uploading)"
+          :src="createImgFromFile(uploadItem)"
           ratio="1"
           :style="folderSize"
           un-max-w-200px
@@ -105,10 +133,10 @@ function hasError({ fileName }: { fileName: string }) {
           un-rounded-2xl
           un-shadow
           class="uploading-img"
-          :class="hasError(uploading) && 'uploading-img--error'"
+          :class="hasError(uploadItem) && 'uploading-img--error'"
         >
           <div
-            v-if="hasError(uploading)"
+            v-if="hasError(uploadItem)"
             un-flex
             un-items-center
             un-justify-center
@@ -117,12 +145,11 @@ function hasError({ fileName }: { fileName: string }) {
             un-mb-md
             un-bg="!negative"
             un-p="!sm"
-            @click="retryFailedUpload(uploading)"
+            @click="removeFailedUpload(uploadItem)"
           >
             <QIcon
               name="i-mdi-delete"
               size="sm"
-              :class="uploading.retryLoading && 'animate-spin'"
             />
           </div>
 
@@ -141,11 +168,21 @@ function hasError({ fileName }: { fileName: string }) {
             style="background: rgba(160, 160, 160, 0.24);"
           >
             <span
+              v-if="!inUploading.isPersisting"
               un-z-1
               un-text-sm
               un-font-bold
             >
-              {{ inUploading.progressPct[uploading.fileName] }}%
+              {{ inUploading.progressPct[uploadItem.fileName] }}%
+            </span>
+
+            <span
+              v-else
+              un-z-1
+              un-text-sm
+              un-font-bold
+            >
+              <QIcon name="i-mdi-check" />
             </span>
 
             <div
@@ -154,7 +191,7 @@ function hasError({ fileName }: { fileName: string }) {
               un-left-0
               un-h-full
               un-bg="positive/60"
-              :style="{ width: `${inUploading.progressPct[uploading.fileName]}%` }"
+              :style="{ width: `${inUploading.progressPct[uploadItem.fileName]}%` }"
             />
           </div>
         </QImg>
@@ -175,5 +212,5 @@ function hasError({ fileName }: { fileName: string }) {
 
   &--error
     :deep(> .q-img__content)
-      background: rgba(245,108,108,0.1) !important
+      background: rgba(245,108,108,0.2) !important
 </style>

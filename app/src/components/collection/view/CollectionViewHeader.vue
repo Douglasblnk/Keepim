@@ -4,11 +4,14 @@ import { capitalizeFirstLetter, dayjs } from '@utils'
 defineProps<{ isLoading: boolean }>()
 
 const { push } = useRouter()
+const { setDialog } = useDialog()
 
-const state = useCollectionStore()
+const store = useCollectionStore()
+
+const { collection } = storeToRefs(store)
 
 const collectionDate = computed(() => {
-  const dayjsDate = dayjs(state.collection?.collectionDate)
+  const dayjsDate = dayjs(collection?.value?.collectionDate)
 
   return `
     ${dayjsDate.format('DD')}
@@ -16,6 +19,20 @@ const collectionDate = computed(() => {
     ${capitalizeFirstLetter(dayjsDate.format('MMMM [de] YYYY'))}
   `.trim()
 })
+
+function openAddImageDialog() {
+  setDialog({ component: 'AddImageDialog' })
+}
+
+function addCoverAction() {
+  store.isRemoving = false
+  store.isAddingCover = true
+}
+
+function removePhotoAction() {
+  store.isAddingCover = false
+  store.isRemoving = true
+}
 </script>
 
 <template>
@@ -33,10 +50,12 @@ const collectionDate = computed(() => {
       un-top-0
       un-pt-lg
     >
-      <QIcon
-        name="i-mdi-arrow-left"
-        size="md"
-        un-cursor-pointer
+      <QBtn
+        icon="i-mdi-arrow-left"
+        un-rounded-full
+        un-p-none
+        round
+        flat
         @click="push({ path: '/colecoes' })"
       />
     </div>
@@ -53,7 +72,7 @@ const collectionDate = computed(() => {
         un-max-w="70%"
         un-truncate
       >
-        {{ state.collection?.collectionName }}
+        {{ collection?.collectionName }}
       </h1>
 
       <QSkeleton
@@ -84,10 +103,22 @@ const collectionDate = computed(() => {
       un-pr-md
       un-pt-lg
     >
-      <QIcon
-        name="i-mdi-dots-vertical"
-        size="md"
-        un-cursor-pointer
+      <QBtn
+        id="menu-actions"
+        icon="i-mdi-dots-vertical"
+        un-rounded-full
+        un-p-none
+        round
+        flat
+      />
+
+      <CollectionViewHeaderOptions
+        target="#menu-actions"
+        anchor="bottom end"
+        cover
+        @openAddImageDialog="openAddImageDialog"
+        @addCoverAction="addCoverAction"
+        @removePhotoAction="removePhotoAction"
       />
     </div>
   </div>
@@ -103,7 +134,7 @@ const collectionDate = computed(() => {
     un-backdrop-blur-5px
     un-rounded-full
   >
-    0 fotos
+    {{ collection?.photos?.length || 0 }} fotos
   </div>
 
   <QSkeleton
@@ -124,7 +155,7 @@ const collectionDate = computed(() => {
       height="270px"
       fit="cover"
       :img-style="{ filter: 'brightness(0.5) blur(3px)' }"
-      src="https://thumbs.dreamstime.com/z/colheita-do-campo-de-trigo-15537614.jpg?w=768"
+      :src="collection?.cover"
     />
   </div>
 </template>

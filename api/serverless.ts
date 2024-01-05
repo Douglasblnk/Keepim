@@ -26,7 +26,7 @@ const serverlessConfiguration: AWS = {
       shouldStartNameWithService: true,
     },
     environment: {
-      BUCKET_NAME: '${env:BUCKET_NAME}',
+      COLLECTION_BUCKET_NAME: '${env:COLLECTION_BUCKET_NAME}',
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
       REFRESH_TOKEN_LENGTH: '${env:REFRESH_TOKEN_LENGTH}',

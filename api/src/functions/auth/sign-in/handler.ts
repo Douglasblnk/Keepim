@@ -1,5 +1,5 @@
 import { env } from 'node:process'
-import { checkLambdaBody, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
+import { checkLambdaEvent, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import { signIn } from '@service/auth'
 import { serialize } from 'cookie'
@@ -8,7 +8,7 @@ import type { SignInSchemaBody } from './schema'
 
 const handler = async (event: CustomAPIGatewayProxyEvent<SignInSchemaBody, any>) => {
   try {
-    const signInSchema = checkLambdaBody(event.body, ['username', 'password'])
+    const signInSchema = checkLambdaEvent(event.body, ['username', 'password'])
 
     const { accessToken, user } = await signIn(signInSchema)
 

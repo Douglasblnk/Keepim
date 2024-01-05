@@ -23,7 +23,7 @@ export default {
     {
       Effect: 'Allow',
       Action: ['s3:PutObject'],
-      Resource: `arn:aws:s3:::${env.BUCKET_NAME}`,
+      Resource: `arn:aws:s3:::${env.COLLECTION_BUCKET_NAME}`,
     },
   ],
 }
