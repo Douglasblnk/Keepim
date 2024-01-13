@@ -1,5 +1,5 @@
 import authenticationMiddleware from '@middleware/authentication'
-import { getLambdaBody, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
+import { checkLambdaEvent, lambdaErrorResponse, lambdaOKResponse } from '@utils/lambda'
 import type { CustomAPIGatewayProxyEvent } from '@type/api-gateway'
 import { middyfy } from '@middleware/middyfy'
 import { getCollection } from '@service/collection'
@@ -7,7 +7,7 @@ import type { CollectionSchemaPathParams } from './schema'
 
 const handler = async (event: CustomAPIGatewayProxyEvent<{ username?: string }, CollectionSchemaPathParams, any>) => {
   try {
-    const body = getLambdaBody(event.body, ['username'])
+    const body = checkLambdaEvent(event.body, ['username'])
     const params = event.pathParameters
 
     const response = await getCollection(body.username, params)

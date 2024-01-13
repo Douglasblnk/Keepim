@@ -17,7 +17,7 @@ export function install(app) {
     },
     config: {
       notify: {
-        position: 'top',
+        position: 'top-right',
         timeout: 5000,
       },
       brand: {

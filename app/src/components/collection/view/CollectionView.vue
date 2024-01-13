@@ -8,16 +8,45 @@ const isMobile = inject<ComputedRef<boolean>>('isMobile')
 const container = ref<HTMLDivElement | null>(null)
 const containerMarginTop = ref(60)
 const tab = ref('photos')
+const isDragging = ref(false)
+
+const store = useCollectionStore()
+
+const isPerformingAction = computed(() => {
+  return store.isRemoving || store.isAddingCover
+})
+
+watch(isPerformingAction, (value) => {
+  if (value)
+    containerMarginTop.value = -75
+
+  else
+    containerMarginTop.value = 60
+})
 
 if (isMobile?.value) {
   useGesture({
+    onDragStart: () => {
+      isDragging.value = true
+    },
+    onDragEnd: () => {
+      isDragging.value = false
+    },
     onDrag: ({ values: [ _, y ] }) => {
+      if (isPerformingAction.value)
+        return
+
       const newValue = y - 190
 
       if (newValue >= -80 && newValue <= 60)
         containerMarginTop.value = newValue
     },
   }, { domTarget: container })
+}
+
+function toggleContainerMargin() {
+  if (!isPerformingAction.value)
+    containerMarginTop.value = containerMarginTop.value === 60 ? -75 : 60
 }
 </script>
 
@@ -29,7 +58,7 @@ if (isMobile?.value) {
     un-z-10
     un-grow
     un-flex="~ col"
-    :un-transition="!isMobile && 'all 0.3s ease'"
+    :un-transition="!isDragging && 'all 0.3s ease'"
     :style="{ marginTop: `${containerMarginTop}px` }"
   >
     <div
@@ -62,13 +91,12 @@ if (isMobile?.value) {
         un-justify-center
         un-rounded-full
         un-bg-dark-secondary
-        un-cursor-pointer
+        :un-cursor="isPerformingAction ? 'not-allowed' : 'pointer'"
         un-mt="-20px"
-        @click="containerMarginTop = containerMarginTop === 60 ? -75 : 60"
+        @click="toggleContainerMargin"
       >
         <QIcon
           :name="containerMarginTop === 60 ? 'i-mdi-arrow-expand-up' : 'i-mdi-arrow-expand-down'"
-          size="sm"
           un-text-gray-text
         />
       </div>

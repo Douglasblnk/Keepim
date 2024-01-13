@@ -14,6 +14,8 @@ export interface CollectionModel {
   description?: string
   equipments?: Equipment[]
   participants?: string[]
+  photos?: string[]
+  cover?: string
   place?: string
   createdAt?: number
   updatedAt?: number

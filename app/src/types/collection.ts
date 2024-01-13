@@ -30,6 +30,6 @@ export interface CollectionResponse {
   equipments?: Equipment[]
   participants?: string[]
   photos?: string[]
-  thumbnail?: string
+  cover?: string
   place?: string
 }

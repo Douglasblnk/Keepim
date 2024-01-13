@@ -33,7 +33,7 @@ export default () => {
     storageState.value[stateKey] = null
   }
 
-  const userStorage = computed(() => getStorageState('user-info') || {})
+  const userStorage = computed(() => getStorageState('user-info')) as ComputedRef<StorageState['user-info']>
 
   return {
     setStorageState,
