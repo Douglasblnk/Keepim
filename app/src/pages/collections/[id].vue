@@ -5,20 +5,38 @@ const props = defineProps<{
 
 useHead({ title: computed(() => `Keepim - ${props.id}`) })
 
-const { setCollection } = useCollectionStore()
+const store = useCollectionStore()
+
+const { inUploading } = storeToRefs(store)
+
+const queryClient = useQueryClient()
 
 const { data, isLoading } = useQuery({
   queryKey: [ 'collection', props.id ],
   queryFn: ({ queryKey }) => getCollectionRequest(queryKey[1]),
 })
 
-watch(data, setCollection)
+watch(
+  () => data.value,
+  (newData) => {
+    if (newData !== undefined)
+      store.setCollection(newData)
+  },
+  { deep: true, immediate: true },
+)
+
+watch(() => inUploading.value?.canResetQuery, (value) => {
+  if (value)
+    queryClient.invalidateQueries({ queryKey: [ 'collection', props.id ] })
+})
 
 onMounted(() => {
   document.body.style.overflow = 'hidden'
 })
 
 onUnmounted(() => {
+  store.$reset()
+
   document.body.style.overflow = 'auto'
 })
 </script>

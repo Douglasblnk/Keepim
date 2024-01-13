@@ -5,6 +5,7 @@ export interface CompactCollectionDTO {
   id: string
   collectionName: string
   collectionDate: string
+  thumbnail?: string
 }
 
 export type CollectionDTO = Omit<CollectionModel, 'createdAt' | 'updatedAt' | 'deleted'>
@@ -14,6 +15,7 @@ export const compactCollectionDTO = (collection: CollectionModel): CompactCollec
     id: collection?.id,
     collectionName: collection?.collectionName,
     collectionDate: collection?.collectionDate,
+    thumbnail: collection?.cover,
   }
 }
 
@@ -22,6 +24,8 @@ export const collectionDTO = (collection: CollectionModel): CollectionDTO => {
     id: collection?.id,
     collectionName: collection?.collectionName,
     collectionDate: collection?.collectionDate,
+    photos: collection?.photos,
+    cover: collection?.cover,
     description: collection?.description,
     equipments: collection?.equipments,
     participants: collection?.participants,
