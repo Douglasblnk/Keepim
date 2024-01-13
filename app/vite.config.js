@@ -13,6 +13,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 export default defineConfig({
   server: {
     open: true,
+    host: 'keepim.localhost',
   },
   resolve: {
     alias: {

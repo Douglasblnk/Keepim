@@ -1,4 +1,4 @@
-export interface EvaluatedKeyPagination<TData> {
+export interface EvaluatedKeyPagination<TData = any> {
   lastEvaluatedKey?: Record<string, unknown>
-  data: TData
+  data: TData[]
 }

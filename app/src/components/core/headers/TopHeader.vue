@@ -61,8 +61,8 @@ const subItemsTranslated = computed(() => ({
       size="xl"
       color="primary"
       un-cursor-pointer
-      :img="userStorage.avatar"
-      :label="userStorage.name"
+      :img="userStorage?.avatar"
+      :label="userStorage?.name"
       @click="push('/perfil')"
     />
   </div>

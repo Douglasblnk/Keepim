@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import { useScreenOrientation } from '@vueuse/core'
 import { capitalizeFirstLetter, dayjs } from '@utils/index'
 import type { CollectionsParams, CollectionsResponse, CustomInfiniteQueryReturnType } from '@type/index'
-
-const miniState = inject<ComputedRef<boolean>>('miniState')
-
-const $q = useQuasar()
 
 const { push } = useRouter()
 
 const { filters } = useFilters<CollectionsParams>('collections')
-const { orientation } = useScreenOrientation()
 
 const foldersWrapper = ref<HTMLDivElement | null>()
+
+const { folderSize } = useListSize(foldersWrapper, 8)
 
 const {
   data,
@@ -20,7 +16,7 @@ const {
   fetchNextPage,
 } = useInfiniteQuery({
   queryKey: [ 'collections-list', filters ],
-  queryFn: getCollectionsRequest,
+  queryFn: ({ pageParam }) => getCollectionsRequest(filters.value, pageParam),
   select: ({ pages }) => pages?.flatMap((page: any) => page.data) as any,
   getNextPageParam: value => value?.lastEvaluatedKey,
 }) as CustomInfiniteQueryReturnType<CollectionsResponse[]>
@@ -43,33 +39,6 @@ const collections = computed(() => {
     }, {})
     : { '': data.value }
 })
-
-const folderSize = reactive({
-  width: '',
-  height: '',
-})
-
-const sizesEnum = {
-  xs: 3,
-  sm: 3,
-  md: 4,
-  lg: 4,
-  xl: 5,
-}
-
-function calcFolderSize() {
-  if (foldersWrapper.value?.clientWidth) {
-    const size = (foldersWrapper.value?.clientWidth / sizesEnum[$q.screen.name]) - 8
-
-    folderSize.width = `${size}px`
-    folderSize.height = `${size}px`
-  }
-}
-
-watch(
-  () => [ $q.screen.width, foldersWrapper.value, miniState?.value, orientation.value ],
-  calcFolderSize,
-)
 
 async function onLoad(_: number, done: (_stop?: boolean | undefined) => void) {
   await fetchNextPage()
@@ -134,6 +103,7 @@ function navigateToCollection(folder: CollectionsResponse) {
             v-for="(folder, index) in folders"
             :key="`folder-${index}`"
             :name="folder.collectionName"
+            :thumbnail="folder.thumbnail"
             :style="folderSize"
             un-max-w-200px
             un-max-h-200px

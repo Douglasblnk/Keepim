@@ -1,12 +1,21 @@
 import { env } from 'node:process'
-import type { AttributeValue, GetItemCommandInput, PutItemCommandInput, QueryCommandInput } from '@aws-sdk/client-dynamodb'
+
+import type {
+  AttributeValue,
+  GetItemCommandInput,
+  PutItemCommandInput,
+  QueryCommandInput,
+  UpdateItemCommandInput,
+} from '@aws-sdk/client-dynamodb'
+
+import dynamoDBClient from '@database/index'
+import { GetItemCommand, PutItemCommand, QueryCommand, UpdateItemCommand } from '@aws-sdk/client-dynamodb'
+import { marshall, unmarshall } from '@aws-sdk/util-dynamodb'
+import { unmarshallArray } from '@utils/dynamodb'
+
 import type { CollectionModel } from '@model/collection'
 import type { EvaluatedKeyPagination } from '@model/pagination'
 import type { CollectionSchemaQueryString } from '@functions/collection/get-collections/schema'
-import dynamoDBClient from '@database/index'
-import { GetItemCommand, PutItemCommand, QueryCommand } from '@aws-sdk/client-dynamodb'
-import { marshall, unmarshall } from '@aws-sdk/util-dynamodb'
-import { unmarshallArray } from '@utils/dynamodb'
 
 const TABLE_NAME = env.COLLECTION_DB_TABLE
 
@@ -19,6 +28,24 @@ export const putCollection = async (collection: CollectionModel) => {
   }
 
   const putItemCommand = new PutItemCommand(putCommandInput)
+
+  return db.send(putItemCommand)
+}
+
+export const updateCollectionCover = async (username: string, id: string, coverKey: string) => {
+  const db = dynamoDBClient()
+
+  const updateItemInput: UpdateItemCommandInput = {
+    TableName: TABLE_NAME,
+    Key: marshall({ id, username }),
+    UpdateExpression: 'SET cover = :cover',
+    ExpressionAttributeValues: marshall({
+      ':cover': coverKey,
+    }),
+    ReturnValues: 'UPDATED_NEW',
+  }
+
+  const putItemCommand = new UpdateItemCommand(updateItemInput)
 
   return db.send(putItemCommand)
 }

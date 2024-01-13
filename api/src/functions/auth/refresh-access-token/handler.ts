@@ -23,6 +23,7 @@ const handler = async (event: CustomAPIGatewayProxyEvent<any, any>) => {
         httpOnly: true,
         secure: true,
         maxAge: +env.REFRESH_TOKEN_EXPIRATION,
+        ...(env.IS_OFFLINE ? { sameSite: 'none' } : {}),
       },
     )
 
@@ -39,6 +40,7 @@ const handler = async (event: CustomAPIGatewayProxyEvent<any, any>) => {
         httpOnly: true,
         secure: true,
         maxAge: 20000,
+        ...(env.IS_OFFLINE ? { sameSite: 'none' } : {}),
       })
 
     return lambdaErrorResponse(error, { 'Set-Cookie': cookies })
