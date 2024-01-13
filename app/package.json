@@ -45,7 +45,7 @@
     "typescript": "5.3.3",
     "unocss": "^0.53.6",
     "unplugin-auto-import": "^0.16.7",
-    "unplugin-icons": "0.18.1",
+    "unplugin-icons": "0.18.1",nvm ls
     "unplugin-vue-components": "^0.25.2",
     "vite": "^4.5.1",
     "vite-plugin-pages": "^0.32.0",
@@ -53,7 +53,7 @@
     "vue-tsc": "1.8.27"
   },
   "engines": {
-    "node": ">=14.17.0",
+    "node": ">=20.11.0",
     "pnpm": ">=6.21.1"
   }
 }
