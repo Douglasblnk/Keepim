@@ -95,7 +95,7 @@ onMounted(() => {
         type="file"
         accept="image/png, image/jpeg"
         multiple
-        un-display-none
+        un-hidden
         @change="saveFiles"
       >
 

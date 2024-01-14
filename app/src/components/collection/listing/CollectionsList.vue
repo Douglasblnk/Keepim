@@ -15,6 +15,7 @@ const {
   isLoading,
   fetchNextPage,
 } = useInfiniteQuery({
+  initialPageParam: {},
   queryKey: [ 'collections-list', filters ],
   queryFn: ({ pageParam }) => getCollectionsRequest(filters.value, pageParam),
   select: ({ pages }) => pages?.flatMap((page: any) => page.data) as any,

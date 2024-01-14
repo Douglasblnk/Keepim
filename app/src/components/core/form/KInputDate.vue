@@ -6,6 +6,10 @@ import { dayjs } from '@utils/index'
 
 const props = defineProps<FieldProps>()
 
+const emit = defineEmits<{
+  'update:modelValue': [value: string]
+}>()
+
 const {
   value: inputValue,
   errorMessage,
@@ -45,8 +49,10 @@ watch(() => internalDate.value, (date) => {
   if (date?.length === 10) {
     const formattedDate = dayjs(date, 'DD/MM/YYYY', true).format('YYYY-MM-DD')
 
-    if (checkIsDateFormat(formattedDate))
+    if (checkIsDateFormat(formattedDate)) {
+      emit('update:modelValue', formattedDate)
       handleChange(formattedDate)
+    }
   }
 })
 
