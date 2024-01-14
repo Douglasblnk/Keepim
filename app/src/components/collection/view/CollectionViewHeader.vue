@@ -11,12 +11,12 @@ const store = useCollectionStore()
 const { collection } = storeToRefs(store)
 
 const collectionDate = computed(() => {
-  const dayjsDate = dayjs(collection?.value?.collectionDate)
+  const date = dayjs(collection?.value?.collectionDate)
 
   return `
-    ${dayjsDate.format('DD')}
+    ${date.format('DD')}
     de
-    ${capitalizeFirstLetter(dayjsDate.format('MMMM [de] YYYY'))}
+    ${capitalizeFirstLetter(date.format('MMMM [de] YYYY'))}
   `.trim()
 })
 
@@ -116,9 +116,9 @@ function removePhotoAction() {
         target="#menu-actions"
         anchor="bottom end"
         cover
-        @openAddImageDialog="openAddImageDialog"
-        @addCoverAction="addCoverAction"
-        @removePhotoAction="removePhotoAction"
+        @open-add-image-dialog="openAddImageDialog"
+        @add-cover-action="addCoverAction"
+        @remove-photo-action="removePhotoAction"
       />
     </div>
   </div>
