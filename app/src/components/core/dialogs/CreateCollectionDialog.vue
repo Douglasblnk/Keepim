@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useForm } from 'vee-validate'
-import { notify } from '@/utils'
-import { getErrorMsg } from '@/utils/handle-error'
+import { getErrorMsg, notify } from '@/utils'
 
 const { validate } = useForm()
 const { close } = useDialog()
@@ -14,7 +13,7 @@ const queryClient = useQueryClient()
 
 const {
   mutate,
-  isLoading,
+  isPending,
 } = useMutation({
   mutationFn: createCollectionRequest,
   onError: (error) => {
@@ -104,7 +103,7 @@ async function createCollection() {
       label="Cancelar"
       color="cancel"
       un-w-full
-      :disable="isLoading"
+      :disable="isPending"
       @click="close"
     />
 
@@ -112,7 +111,7 @@ async function createCollection() {
       label="Criar"
       color="primary"
       un-w-full
-      :loading="isLoading"
+      :loading="isPending"
       @click="createCollection"
     />
   </div>

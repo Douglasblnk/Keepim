@@ -30,7 +30,7 @@ const isUploadBtnDisabled = computed(() => {
   return !filesToUpload.value.length
 })
 
-const { mutate, isLoading } = useMutation({
+const { mutate, isPending } = useMutation({
   mutationFn: getSignedUploadUrlRequest,
   onError: (error) => {
     notify({
@@ -132,7 +132,7 @@ function cancel() {
       label="Cancelar"
       color="cancel"
       un-w-full
-      :disable="isLoading"
+      :disable="isPending"
       @click="cancel"
     />
 
@@ -140,7 +140,7 @@ function cancel() {
       label="Fazer upload"
       color="primary"
       un-w-full
-      :loading="isLoading"
+      :loading="isPending"
       :disable="isUploadBtnDisabled"
       @click="uploadPhotos"
     />

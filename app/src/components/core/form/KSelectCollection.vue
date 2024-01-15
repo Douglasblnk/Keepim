@@ -13,6 +13,7 @@ const {
   isInitialLoading,
   fetchNextPage,
 } = useInfiniteQuery({
+  initialPageParam: {},
   queryKey: [ 'collections-list-select', queryVariables ],
   queryFn: ({ pageParam }) => getCollectionsRequest(queryVariables.value, pageParam),
   select: ({ pages }) => pages?.flatMap((page: any) => page.data) as any,

@@ -8,7 +8,7 @@ interface DialogOptions {
 
 const isOpen = ref(false)
 const componentName = ref('')
-const dialogProps = ref({})
+const dialogProps = ref<Record<string, any>>({})
 const componentProps = ref({})
 
 const onEvent = eventHook()

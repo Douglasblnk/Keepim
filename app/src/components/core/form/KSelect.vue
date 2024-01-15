@@ -26,7 +26,6 @@ const {
   <QSelect
     class="k-select"
     popup-content-class="!max-h-300px bg-dark-primary"
-    behavior="menu"
     :menu-offset="[0, 4]"
     :error-message="errorMessage"
     :error="!!errorMessage"

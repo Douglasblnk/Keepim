@@ -23,7 +23,7 @@ const toBeRemoved = ref<Record<string, string>>({})
 
 const { folderSize } = useListSize(ImgListingRef, 16)
 
-const { mutate, isLoading } = useMutation({
+const { mutate, isPending } = useMutation({
   mutationFn: getSignedUploadUrlRequest,
   onError,
   onSuccess: async (data) => {
@@ -37,14 +37,14 @@ const { mutate, isLoading } = useMutation({
   },
 })
 
-const { mutate: updateCover, isLoading: isLoadingCover } = useMutation({
+const { mutate: updateCover, isPending: isLoadingCover } = useMutation({
   mutationFn: updateCollectionCoverRequest,
   onError,
   onSuccess: data => (data === true) && invalidateQueries(),
   onSettled: cancelAddCover,
 })
 
-const { mutate: deletePhotos, isLoading: isLoadingDeletion } = useMutation({
+const { mutate: deletePhotos, isPending: isLoadingDeletion } = useMutation({
   mutationFn: deleteCollectionPhotoRequest,
   onError,
   onSuccess: data => (data === true) && invalidateQueries(),
@@ -121,10 +121,15 @@ function executePhotoActions(photo: string, index: number) {
   if (store.isAddingCover)
     toBeCover.value = `${photo} ${index}`
 
-  setDialog({
-    component: 'ShowPhotoDialog',
-    props: { photo },
-  })
+  if (!store.isAddingCover && !store.isRemoving) {
+    setDialog({
+      component: 'ShowPhotoDialog',
+      props: { photo, photoName: getPhotoName(photo) },
+      modalProps: {
+        noCard: true,
+      },
+    })
+  }
 }
 
 function cancelAddCover() {
@@ -141,6 +146,12 @@ function getPhotoKey(photo: string) {
   const decodedPhoto = decodeURI(photo)
 
   return decodedPhoto.split('?')[0].split('.com/')[1]
+}
+
+function getPhotoName(photo: string) {
+  const key = getPhotoKey(photo)
+
+  return key.split('/').pop()
 }
 
 function defineAsCover() {
@@ -408,7 +419,7 @@ function removePhotoQuickAction(photo: string) {
               icon="i-mdi-upload"
               un-mt-lg
               un-bg-primary
-              :loading="isLoading"
+              :loading="isPending"
               @click="uploadPhotos"
             />
           </div>
