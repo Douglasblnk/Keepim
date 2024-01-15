@@ -26,3 +26,33 @@ export async function uploadPhotosRequest(url: string, file: File, config: Axios
     throw err
   }
 }
+
+export async function downloadPhoto({ photo, photoName }: { photo: string; photoName: string }) {
+  try {
+    const response = await axios.get(photo, {
+      responseType: 'blob',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+
+    const downloadLink = document.createElement('a')
+
+    downloadLink.href = URL.createObjectURL(response?.data)
+    downloadLink.download = photoName
+
+    document.body.appendChild(downloadLink)
+
+    downloadLink.click()
+
+    document.body.removeChild(downloadLink)
+
+    URL.revokeObjectURL(downloadLink.href)
+  }
+  catch (error: any) {
+    console.error('Error downloading image:', error)
+
+    throw photoName
+  }
+}

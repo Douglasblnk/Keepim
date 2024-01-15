@@ -18,8 +18,15 @@ watch(() => props.isLoadingDeletion, (value) => {
 </script>
 
 <template>
-  <div un-flex="~ col" un-items-center un-justify-center>
-    <div un-title un-text-center>
+  <div
+    un-flex="~ col"
+    un-items-center
+    un-justify-center
+  >
+    <div
+      un-title
+      un-text-center
+    >
       Tem certeza que deseja remover essa foto?
     </div>
 
