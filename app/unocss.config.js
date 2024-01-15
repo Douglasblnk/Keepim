@@ -79,7 +79,7 @@ export default defineConfig({
         secondary: '#23272B',
         card: '#252628',
       },
-
+      download: '#81aa7b',
       positive: '#21BA45',
       negative: '#F56C6C',
       info: '#31CCEC',
