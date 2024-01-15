@@ -124,7 +124,10 @@ function executePhotoActions(photo: string, index: number) {
   if (!store.isAddingCover && !store.isRemoving) {
     setDialog({
       component: 'ShowPhotoDialog',
-      props: { photo },
+      props: { photo, photoName: getPhotoName(photo) },
+      modalProps: {
+        noCard: true,
+      },
     })
   }
 }
@@ -143,6 +146,12 @@ function getPhotoKey(photo: string) {
   const decodedPhoto = decodeURI(photo)
 
   return decodedPhoto.split('?')[0].split('.com/')[1]
+}
+
+function getPhotoName(photo: string) {
+  const key = getPhotoKey(photo)
+
+  return key.split('/').pop()
 }
 
 function defineAsCover() {
