@@ -129,6 +129,7 @@ function toggleContainerMargin() {
         v-model="tab"
         class="collection-tab-panel"
         animated
+        swipeable
         un-bg-transparent
         un-flex
         un-grow
