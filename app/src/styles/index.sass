@@ -16,6 +16,9 @@ body
   padding: 0
   background: var(--color-white)
 
+body.platform-ios .q-dialog__inner--minimized > div, body.platform-android:not(.native-mobile) .q-dialog__inner--minimized > div
+  max-height: calc(100vh - 48px)
+
 button
   cursor: pointer
 
