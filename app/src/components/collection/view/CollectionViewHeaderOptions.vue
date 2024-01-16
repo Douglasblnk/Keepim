@@ -6,7 +6,6 @@ const emit = defineEmits<{
   addCoverAction: []
 }>()
 
-
 const store = useCollectionStore()
 
 const { collection } = storeToRefs(store)
@@ -91,7 +90,7 @@ const menuActions = ref()
         </QItemSection>
 
         <QItemSection un-text-gray>
-          Remover {{contextMenu ? 'foto' : 'fotos' }}
+          Remover {{ contextMenu ? 'foto' : 'fotos' }}
         </QItemSection>
       </QItem>
     </QList>

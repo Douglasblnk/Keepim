@@ -31,7 +31,7 @@ const { mutate, isPending } = useMutation({
 onMounted(() => {
   const img = new Image()
 
-  img.addEventListener('load', (params) => {
+  img.addEventListener('load', (params: { target: any }) => {
     const { width, height } = params.target
 
     let newWidth, newHeight
@@ -40,7 +40,7 @@ onMounted(() => {
     const imageAspectRatio = width / height
 
     if (imageAspectRatio > screenAspectRatio) {
-      newWidth = screen.width * 0.8
+      newWidth = screen.width * ((width > height) ? 0.8 : 0.7)
       newHeight = newWidth / imageAspectRatio
     }
 
@@ -64,17 +64,14 @@ onMounted(() => {
     :un-max-w="isMobile ? '' : '!none'"
     class="show-photo-container"
   >
-    <div un-text-center>
-      <div
-        un-font-black
-        un-text-lg
-      >
-        {{ showCollectionName ? collection?.collectionName : photoName }}
-      </div>
-
-      <div>
-        {{ collection?.collectionDate }}
-      </div>
+    <div
+      un-font-black
+      un-text-center
+      un-mb-md
+      un-line-clamp-1
+      :un-text="isMobile ? 'md' : 'lg'"
+    >
+      {{ showCollectionName ? collection?.collectionName : photoName }}
     </div>
 
     <div
