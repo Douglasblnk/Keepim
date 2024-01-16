@@ -356,6 +356,8 @@ function removePhotoQuickAction(photo: string) {
                 @remove-photo-action="removePhotoQuickAction(photo)"
               />
 
+              <QInnerLoading :showing="isLoadingCover" />
+
               <Transition
                 name="fade"
                 mode="out-in"

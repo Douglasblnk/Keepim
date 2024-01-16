@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import { useGesture } from '@vueuse/gesture'
-
 defineProps<{ isLoading: boolean }>()
 
-const isMobile = inject<ComputedRef<boolean>>('isMobile')
-
-const container = ref<HTMLDivElement | null>(null)
 const containerMarginTop = ref(60)
 const tab = ref('photos')
 const isDragging = ref(false)
@@ -23,26 +18,6 @@ watch(isPerformingAction, (value) => {
   else
     containerMarginTop.value = 60
 })
-
-if (isMobile?.value) {
-  useGesture({
-    onDragStart: () => {
-      isDragging.value = true
-    },
-    onDragEnd: () => {
-      isDragging.value = false
-    },
-    onDrag: ({ values: [ _, y ] }) => {
-      if (isPerformingAction.value)
-        return
-
-      const newValue = y - 190
-
-      if (newValue >= -80 && newValue <= 60)
-        containerMarginTop.value = newValue
-    },
-  }, { domTarget: container })
-}
 
 function toggleContainerMargin() {
   if (!isPerformingAction.value)
@@ -62,24 +37,7 @@ function toggleContainerMargin() {
     :style="{ marginTop: `${containerMarginTop}px` }"
   >
     <div
-      v-if="isMobile"
-      ref="container"
-      un-flex
-      un-justify-center
-      un-cursor-grab
-    >
-      <div
-        un-rounded-full
-        un-bg-dark-primary
-        un-w-14
-        un-h-1
-        un-mt-md
-        un-mb-md
-      />
-    </div>
-
-    <div
-      v-else
+      v-show="!isPerformingAction"
       un-flex
       un-justify-center
     >
@@ -91,7 +49,7 @@ function toggleContainerMargin() {
         un-justify-center
         un-rounded-full
         un-bg-dark-secondary
-        :un-cursor="isPerformingAction ? 'not-allowed' : 'pointer'"
+        un-cursor="pointer"
         un-mt="-20px"
         @click="toggleContainerMargin"
       >
