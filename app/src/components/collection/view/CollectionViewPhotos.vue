@@ -5,6 +5,7 @@ import { getErrorMsg } from '@/utils/handle-error'
 const { setDialog } = useDialog()
 
 const store = useCollectionStore()
+const { userStorage } = useLocalStorage()
 
 const queryClient = useQueryClient()
 
@@ -124,7 +125,7 @@ function executePhotoActions(photo: string, index: number) {
   if (!store.isAddingCover && !store.isRemoving) {
     setDialog({
       component: 'ShowPhotoDialog',
-      props: { photo, photoName: getPhotoName(photo) },
+      props: { photo: collection?.value?.photos?.imgs[index], photoName: getPhotoName(photo) },
       modalProps: {
         noCard: true,
       },
@@ -145,7 +146,14 @@ function cancelDeletion() {
 function getPhotoKey(photo: string) {
   const decodedPhoto = decodeURI(photo)
 
-  return decodedPhoto.split('?')[0].split('.com/')[1]
+  const pattern = new RegExp(`(${userStorage.value.username}\/.+?\\.(jpg|png|jpeg|gif|webp))`)
+
+  const match = decodedPhoto.match(pattern)
+
+  if (!match)
+    throw new Error('No match found')
+
+  return match[0]
 }
 
 function getPhotoName(photo: string) {
@@ -175,7 +183,7 @@ function togglePhotoRemove(photo: string, index: number) {
 const isAllPhotosMarkedToBeRemoved = computed(() => {
   const markedPhotos = Object.values(toBeRemoved.value)
 
-  return collection?.value?.photos?.every((photo) => {
+  return collection?.value?.photos?.thumbnails?.every((photo) => {
     const photoKey = getPhotoKey(photo)
 
     return markedPhotos.includes(photoKey)
@@ -188,7 +196,7 @@ function toggleAllToBeRemoved() {
   }
 
   else {
-    for (const [ index, photo ] of collection?.value?.photos?.entries() || []) {
+    for (const [ index, photo ] of collection?.value?.photos?.thumbnails?.entries() || []) {
       const photoKey = getPhotoKey(photo)
 
       toBeRemoved.value[`${photo} ${index}`] = photoKey
@@ -230,7 +238,7 @@ function removePhotoQuickAction(photo: string) {
       name="fade"
       mode="out-in"
     >
-      <div v-if="collection?.photos?.length && !inUploading?.isUploading">
+      <div v-if="collection?.photos?.thumbnails?.length && !inUploading?.isUploading">
         <div
           ref="ImgListingRef"
           un-w-full
@@ -329,7 +337,7 @@ function removePhotoQuickAction(photo: string) {
           </div>
 
           <div
-            v-for="(photo, index) in collection.photos"
+            v-for="(photo, index) in collection.photos.thumbnails"
             :key="`photo-${index}`"
           >
             <QImg

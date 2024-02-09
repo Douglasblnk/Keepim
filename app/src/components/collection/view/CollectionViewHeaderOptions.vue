@@ -44,7 +44,7 @@ const menuActions = ref()
       </QItem>
 
       <QItem
-        v-if="collection?.photos?.length"
+        v-if="collection?.photos?.imgs?.length"
         clickable
         @click="emit('addCoverAction')"
       >
@@ -78,7 +78,7 @@ const menuActions = ref()
       </QItem>
 
       <QItem
-        v-if="collection?.photos?.length"
+        v-if="collection?.photos?.imgs?.length"
         clickable
         @click="emit('removePhotoAction')"
       >
