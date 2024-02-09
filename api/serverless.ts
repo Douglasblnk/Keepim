@@ -66,8 +66,8 @@ const serverlessConfiguration: AWS = {
       cors: './cors.xml',
       allowMismatchedSignatures: true,
       buckets: [
-        'douglasblnk-keepim-dev-storage',
-        'douglasblnk-keepim-dev-thumbnail-storage',
+        'douglasblnk-keepim-prod-storage',
+        'douglasblnk-keepim-prod-thumbnail-storage',
       ],
     },
     esbuild: {

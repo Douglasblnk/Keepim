@@ -5,7 +5,7 @@ export default {
   events: [
     {
       s3: {
-        bucket: 'douglasblnk-keepim-dev-storage',
+        bucket: 'douglasblnk-keepim-prod-storage',
         event: 's3:ObjectCreated:*',
       },
     },

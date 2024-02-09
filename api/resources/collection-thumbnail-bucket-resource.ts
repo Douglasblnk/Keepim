@@ -2,7 +2,7 @@ export default {
   CollectionThumbnailBucket: {
     Type: 'AWS::S3::Bucket',
     Properties: {
-      BucketName: 'douglasblnk-keepim-dev-thumbnail-storage',
+      BucketName: 'douglasblnk-keepim-prod-thumbnail-storage',
       CorsConfiguration: {
         CorsRules: [
           {
