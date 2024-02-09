@@ -1,10 +1,11 @@
 import { env } from 'node:process'
 
 import type { PutObjectCommandInput } from '@aws-sdk/client-s3'
-import { DeleteObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import { DeleteObjectCommand } from '@aws-sdk/client-s3'
+import s3Client from 'src/storage'
 
 export default async (photos: string[]) => {
-  const client = new S3Client({ region: 'sa-east-1' })
+  const client = s3Client()
 
   return Promise.all(photos.map(async (file) => {
     const params: PutObjectCommandInput = {

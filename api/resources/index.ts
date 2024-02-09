@@ -1,9 +1,13 @@
-import UserResources from './user-resources'
-import SessionResources from './session-resources'
-import CollectionResources from './collection-resources'
+import UserResource from './user-resource'
+import SessionResource from './session-resource'
+import CollectionResource from './collection-resource'
+import CollectionBucketResource from './collection-bucket-resource'
+import CollectionThumbnailBucketResource from './collection-thumbnail-bucket-resource'
 
 export {
-  UserResources,
-  SessionResources,
-  CollectionResources,
+  UserResource,
+  SessionResource,
+  CollectionResource,
+  CollectionBucketResource,
+  CollectionThumbnailBucketResource,
 }
