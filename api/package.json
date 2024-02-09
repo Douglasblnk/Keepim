@@ -1,6 +1,6 @@
 {
   "name": "keepim-serverless-typescript-api",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "main": "serverless.ts",
   "scripts": {
     "api": "nodemon --exec sls offline start",
