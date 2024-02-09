@@ -1,6 +1,6 @@
 import type { CollectionModel } from '@model/collection'
 import { getCollection, putCollection } from '@repository/collection'
-import deletePhotos from '@service/photos/delete-photos'
+import { deletePhotos } from '@service/photos'
 
 export default async (username: string, collectionId: string, photoKeys: string[]) => {
   await deletePhotos(photoKeys)
