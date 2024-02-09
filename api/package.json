@@ -1,6 +1,6 @@
 {
   "name": "keepim-serverless-typescript-api",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "main": "serverless.ts",
   "scripts": {
     "api": "nodemon --exec sls offline start",
@@ -24,6 +24,7 @@
     "dayjs": "^1.11.9",
     "jsonwebtoken": "^9.0.1",
     "seedrandom": "^3.0.5",
+    "sharp": "^0.32.6",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -46,6 +47,7 @@
     "serverless-esbuild": "^1.46.0",
     "serverless-iam-roles-per-function": "^3.2.0-e97ab49",
     "serverless-prune-plugin": "^2.0.2",
+    "serverless-s3-local": "^0.8.1",
     "serverless-offline": "^12.0.4",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",

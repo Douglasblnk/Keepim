@@ -29,7 +29,10 @@ export interface CollectionResponse {
   description?: string
   equipments?: Equipment[]
   participants?: string[]
-  photos?: string[]
+  photos?: {
+    imgs: string[]
+    thumbnails: string[]
+  }
   cover?: string
   place?: string
 }

@@ -12,6 +12,7 @@ declare global {
       SESSION_DB_TABLE: string
       USER_DB_TABLE: string
       COLLECTION_BUCKET_NAME: string
+      COLLECTION_THUMBNAIL_BUCKET_NAME: string
     }
   }
 }

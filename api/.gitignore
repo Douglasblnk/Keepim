@@ -16,3 +16,4 @@ jspm_packages
 
 .env
 migration/*
+volume/*

@@ -126,6 +126,9 @@ export const useCollectionStore = defineStore('collection-store', {
     async finishUpload() {
       this.uploading[this.collectionName].isPersisting = true
 
+      if (!this.uploading[this.collectionName].response.length)
+        return this.clearUploadingState()
+
       try {
         await this.persistCollectionPhotos(this.uploading[this.collectionName].response)
 

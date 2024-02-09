@@ -134,7 +134,7 @@ function removePhotoAction() {
     un-backdrop-blur-5px
     un-rounded-full
   >
-    {{ collection?.photos?.length || 0 }} fotos
+    {{ collection?.photos?.imgs?.length || 0 }} fotos
   </div>
 
   <QSkeleton
@@ -154,7 +154,7 @@ function removePhotoAction() {
     <QImg
       height="270px"
       fit="cover"
-      :img-style="{ filter: 'brightness(0.5) blur(3px)' }"
+      :img-style="{ filter: 'brightness(0.5) blur(6px)' }"
       :src="collection?.cover"
     />
   </div>

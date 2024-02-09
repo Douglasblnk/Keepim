@@ -1,3 +1,4 @@
+import { env } from 'node:process'
 import { collectionsListDTO } from '@dto/collection'
 import { getCollection, queryCollections } from '@repository/collection'
 import type { CollectionSchemaQueryString } from '@functions/collection/get-collections/schema'
@@ -40,7 +41,10 @@ export default async (username: string, params: CollectionSchemaQueryString) => 
   const collectionDTO = collectionsListDTO(collections)
 
   for (const collection of collectionDTO.data) {
-    const [thumbnail] = await getSignedUrls(collection.thumbnail ? [collection.thumbnail] : undefined)
+    const [thumbnail] = await getSignedUrls(
+      collection.thumbnail ? [collection.thumbnail] : undefined,
+      env.COLLECTION_THUMBNAIL_BUCKET_NAME,
+    )
 
     collection.thumbnail = thumbnail
   }

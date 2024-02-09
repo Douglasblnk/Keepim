@@ -1,11 +1,19 @@
 /* eslint-disable no-template-curly-in-string */
 import type { AWS } from '@serverless/typescript'
+
 import Health from '@functions/health'
 import User from '@functions/user'
 import Auth from '@functions/auth'
 import Collection from '@functions/collection'
 import Photos from '@functions/photos'
-import { CollectionResources, SessionResources, UserResources } from './resources'
+
+import {
+  CollectionBucketResource,
+  CollectionResource,
+  CollectionThumbnailBucketResource,
+  SessionResource,
+  UserResource,
+} from './resources'
 
 const serverlessConfiguration: AWS = {
   service: 'keepim-api',
@@ -13,6 +21,7 @@ const serverlessConfiguration: AWS = {
   plugins: [
     'serverless-esbuild',
     'serverless-iam-roles-per-function',
+    'serverless-s3-local',
     'serverless-dynamodb',
     'serverless-offline',
     'serverless-prune-plugin',
@@ -27,6 +36,7 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       COLLECTION_BUCKET_NAME: '${env:COLLECTION_BUCKET_NAME}',
+      COLLECTION_THUMBNAIL_BUCKET_NAME: '${env:COLLECTION_THUMBNAIL_BUCKET_NAME}',
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
       REFRESH_TOKEN_LENGTH: '${env:REFRESH_TOKEN_LENGTH}',
@@ -50,15 +60,29 @@ const serverlessConfiguration: AWS = {
   },
   useDotenv: true,
   custom: {
+    s3: {
+      host: 'localhost',
+      directory: '/tmp',
+      cors: './cors.xml',
+      allowMismatchedSignatures: true,
+      buckets: [
+        'douglasblnk-keepim-dev-storage',
+        'douglasblnk-keepim-dev-thumbnail-storage',
+      ],
+    },
     esbuild: {
       bundle: true,
       minify: false,
       sourcemap: true,
+      external: ['sharp'],
       exclude: ['aws-sdk'],
       target: 'node18',
       define: { 'require.resolve': undefined },
       platform: 'node',
       concurrency: 10,
+      packagerOptions: {
+        scripts: ['npm install --os=linux --cpu=x64 sharp'],
+      },
     },
     prune: {
       automatic: true,
@@ -95,9 +119,11 @@ const serverlessConfiguration: AWS = {
   },
   resources: {
     Resources: {
-      ...SessionResources,
-      ...UserResources,
-      ...CollectionResources,
+      ...UserResource,
+      ...SessionResource,
+      ...CollectionResource,
+      ...CollectionThumbnailBucketResource,
+      ...CollectionBucketResource,
     },
   },
 }
