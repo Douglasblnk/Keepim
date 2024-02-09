@@ -4,7 +4,6 @@
         <AllowedMethod>PUT</AllowedMethod>
         <AllowedMethod>GET</AllowedMethod>
         <AllowedMethod>DELETE</AllowedMethod>
-        <MaxAgeSeconds>3000</MaxAgeSeconds>
         <AllowedHeader>*</AllowedHeader>
     </CORSRule>
 </CORSConfiguration>

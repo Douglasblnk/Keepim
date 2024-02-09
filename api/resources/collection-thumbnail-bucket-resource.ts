@@ -17,7 +17,6 @@ export default {
             AllowedOrigins: [
               '*',
             ],
-            MaxAgeSeconds: 3000,
           },
         ],
       },
