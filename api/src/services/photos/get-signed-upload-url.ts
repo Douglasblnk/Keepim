@@ -22,7 +22,7 @@ export default async (data: PhotosBodySchema) => {
     const command = new PutObjectCommand(params)
 
     return {
-      url: await getSignedUrl(client, command, { expiresIn: 10 }),
+      url: await getSignedUrl(client, command, { expiresIn: 3600 }),
       fileName: file.name,
     }
   }))

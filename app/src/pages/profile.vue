@@ -22,7 +22,7 @@ async function logout() {
 
   if (response) {
     deleteStorageState('user-info')
-    queryClient.invalidateQueries()
+    queryClient.removeQueries()
 
     replace('/login')
   }
