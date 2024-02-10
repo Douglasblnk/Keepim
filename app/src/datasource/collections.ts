@@ -20,7 +20,7 @@ export async function persistCollectionPhotosRequest(photos: string[], collectio
 }
 
 export async function updateCollectionCoverRequest({ coverKey, collectionId }: { coverKey: string; collectionId?: string }) {
-  return authMiddleware(async () => {
+  return authMiddleware<boolean>(async () => {
     const { data } = await axios.patch('/collection-cover', { coverKey, collectionId }, { withCredentials: true })
 
     return data
@@ -28,7 +28,7 @@ export async function updateCollectionCoverRequest({ coverKey, collectionId }: {
 }
 
 export async function deleteCollectionPhotoRequest({ photoKeys, collectionId }: { photoKeys: string[]; collectionId?: string }) {
-  return authMiddleware(async () => {
+  return authMiddleware<boolean>(async () => {
     const { data } = await axios.delete(`/collection-photo/${collectionId}`, { params: photoKeys, withCredentials: true })
 
     return data
