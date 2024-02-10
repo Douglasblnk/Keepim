@@ -25,11 +25,13 @@ function openAddImageDialog() {
 }
 
 function addCoverAction() {
+  store.tab = 'photos'
   store.isRemoving = false
   store.isAddingCover = true
 }
 
 function removePhotoAction() {
+  store.tab = 'photos'
   store.isAddingCover = false
   store.isRemoving = true
 }

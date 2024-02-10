@@ -2,7 +2,6 @@
 defineProps<{ isLoading: boolean }>()
 
 const containerMarginTop = ref(60)
-const tab = ref('photos')
 const isDragging = ref(false)
 
 const store = useCollectionStore()
@@ -62,7 +61,7 @@ function toggleContainerMargin() {
 
     <div un-flex="~ col grow">
       <QTabs
-        v-model="tab"
+        v-model="store.tab"
         inline-label
         align="justify"
         no-caps
@@ -84,7 +83,7 @@ function toggleContainerMargin() {
       </QTabs>
 
       <QTabPanels
-        v-model="tab"
+        v-model="store.tab"
         class="collection-tab-panel"
         animated
         swipeable

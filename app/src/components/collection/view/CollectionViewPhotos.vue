@@ -42,7 +42,7 @@ const { mutate: updateCover, isPending: isLoadingCover } = useMutation({
   mutationFn: updateCollectionCoverRequest,
   onError,
   onSuccess: data => (data === true) && invalidateQueries(),
-  onSettled: cancelAddCover,
+  onSettled: resetAddCover,
 })
 
 const { mutate: deletePhotos, isPending: isLoadingDeletion } = useMutation({
@@ -55,6 +55,9 @@ const { mutate: deletePhotos, isPending: isLoadingDeletion } = useMutation({
 })
 
 function onError(error: unknown) {
+  resetAddCover()
+  resetDeletion()
+
   notify({
     type: 'negative',
     message: getErrorMsg(error) as string,
@@ -133,12 +136,12 @@ function executePhotoActions(photo: string, index: number) {
   }
 }
 
-function cancelAddCover() {
+function resetAddCover() {
   toBeCover.value = undefined
   store.isAddingCover = false
 }
 
-function cancelDeletion() {
+function resetDeletion() {
   toBeRemoved.value = {}
   store.isRemoving = false
 }
@@ -285,7 +288,7 @@ function removePhotoQuickAction(photo: string) {
                     label="Cancelar"
                     color="cancel"
                     :loading="isLoadingCover"
-                    @click="cancelAddCover"
+                    @click="resetAddCover"
                   />
                 </div>
               </div>
@@ -329,7 +332,7 @@ function removePhotoQuickAction(photo: string) {
                     label="Cancelar"
                     color="cancel"
                     :loading="isLoadingDeletion"
-                    @click="cancelDeletion"
+                    @click="resetDeletion"
                   />
                 </div>
               </div>
