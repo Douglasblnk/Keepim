@@ -8,7 +8,7 @@ export function install(app) {
           refetchOnWindowFocus: false,
           refetchOnReconnect: false,
           retry: false,
-          staleTime: Number.POSITIVE_INFINITY,
+          staleTime: 60 * 60 * 1000,
         },
       },
     },
