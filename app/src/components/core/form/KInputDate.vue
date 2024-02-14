@@ -94,7 +94,6 @@ onMounted(() => {
             v-model="internalDate"
             mask="DD/MM/YYYY"
             minimal
-            v-bind="$attrs"
             @update:model-value="qDatePopup.hide()"
           />
         </QPopupProxy>

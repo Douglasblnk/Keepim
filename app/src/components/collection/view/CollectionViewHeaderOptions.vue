@@ -1,6 +1,8 @@
 <script setup lang="ts">
 defineProps<{ contextMenu?: boolean }>()
+
 const emit = defineEmits<{
+  editCollection: []
   openAddImageDialog: []
   removePhotoAction: []
   addCoverAction: []
@@ -40,6 +42,23 @@ const menuActions = ref()
             flat
             @click="menuActions.hide()"
           />
+        </QItemSection>
+      </QItem>
+
+      <QItem
+        v-if="!contextMenu"
+        clickable
+        @click="emit('editCollection')"
+      >
+        <QItemSection
+          avatar
+          un-min-w-auto
+        >
+          <QIcon :name="store.isEditingInfo ? 'i-mdi-pencil-remove-outline' : 'i-mdi-pencil-outline'" />
+        </QItemSection>
+
+        <QItemSection un-text-gray>
+          {{ store.isEditingInfo ? 'Cancelar edição' : 'Editar coleção' }}
         </QItemSection>
       </QItem>
 

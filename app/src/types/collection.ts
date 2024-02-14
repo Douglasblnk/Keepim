@@ -3,6 +3,15 @@ export interface CollectionBody {
   collectionDate: string
 }
 
+export interface CollectionEditionBody {
+  collectionName: string
+  collectionDate: string
+  description?: string
+  equipments?: Equipment[]
+  participants?: string[]
+  place?: string
+}
+
 export interface CollectionsParams {
   search: string
   orderBy: 'ASC' | 'DESC'

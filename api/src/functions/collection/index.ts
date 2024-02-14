@@ -1,4 +1,5 @@
 import CreateCollection from './create-collection'
+import UpdateCollection from './update-collection'
 import GetCollectionsCount from './get-collections-count'
 import GetCollections from './get-collections'
 import GetCollection from './get-collection'
@@ -8,6 +9,7 @@ import DeleteCollectionPhotos from './delete-collection-photos'
 
 export default {
   CreateCollection,
+  UpdateCollection,
   GetCollectionsCount,
   GetCollections,
   GetCollection,
