@@ -1,4 +1,4 @@
-import type { CollectionBody, CollectionResponse, CollectionsParams, CollectionsResponse } from '@type/collection'
+import type { CollectionBody, CollectionEditionBody, CollectionResponse, CollectionsParams, CollectionsResponse } from '@type/collection'
 import type { EvaluatedKeyPagination } from '@type/pagination'
 
 import authMiddleware from '@middleware/auth-middleware'
@@ -6,6 +6,14 @@ import authMiddleware from '@middleware/auth-middleware'
 export async function createCollectionRequest(body: CollectionBody) {
   return authMiddleware<CollectionBody & { id: string }>(async () => {
     const { data } = await axios.post('/collection', body, { withCredentials: true })
+
+    return data
+  })
+}
+
+export async function updateCollectionRequest({ body, collectionId }: { body: Partial<CollectionEditionBody>; collectionId?: string }) {
+  return authMiddleware<CollectionResponse>(async () => {
+    const { data } = await axios.patch(`/collection/${collectionId}`, body, { withCredentials: true })
 
     return data
   })
