@@ -12,7 +12,6 @@ const {
   errorMessage,
   handleBlur,
   handleChange,
-  handleReset,
 } = useField(
   () => props.name || uuid(),
   props.veeRules || {},
@@ -28,7 +27,7 @@ const {
     :model-value="inputValue"
     clearable
     outlined
-    @clear="handleReset"
+    @clear="inputValue = undefined"
     @update:model-value="handleChange"
     @blur="handleBlur"
   >
