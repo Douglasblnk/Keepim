@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import { getCurrentDate } from '@utils/utils'
 
-interface Equipment {
+export interface Equipment {
   type: string
   name: string
 }
