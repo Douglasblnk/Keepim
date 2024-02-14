@@ -12,7 +12,7 @@ export default async (username: string, collectionId: string, photoKeys: string[
   const updatedCollection: CollectionModel = {
     ...collection,
     photos: collection.photos.filter(photo => !photoKeys.includes(photo)),
-    cover: isCoverBeingRemoved ? '' : collection.cover,
+    cover: isCoverBeingRemoved ? '' : (collection.cover || ''),
   }
 
   await putCollection(updatedCollection)

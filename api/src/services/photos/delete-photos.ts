@@ -6,15 +6,26 @@ import s3Client from 'src/storage'
 
 export default async (photos: string[]) => {
   const client = s3Client()
-  // TODO remove from thumbnail bucket too
-  return Promise.all(photos.map(async (file) => {
-    const params: PutObjectCommandInput = {
+
+  const { fullSize, thumbnail } = photos.reduce((acc, file) => {
+    const fullSize: PutObjectCommandInput = {
       Bucket: env.COLLECTION_BUCKET_NAME,
       Key: file,
     }
 
-    const command = new DeleteObjectCommand(params)
+    const thumbail: PutObjectCommandInput = {
+      Bucket: env.COLLECTION_THUMBNAIL_BUCKET_NAME,
+      Key: file,
+    }
 
-    return client.send(command)
-  }))
+    const fullCommand = new DeleteObjectCommand(fullSize)
+    const thumbnailCommand = new DeleteObjectCommand(thumbail)
+
+    acc.fullSize.push(client.send(fullCommand))
+    acc.thumbnail.push(client.send(thumbnailCommand))
+
+    return acc
+  }, { fullSize: [], thumbnail: [] })
+
+  return Promise.all([...fullSize, ...thumbnail])
 }

@@ -22,7 +22,7 @@ const handler = async (event: CustomAPIGatewayProxyEvent<{ username?: string }, 
   }
 
   catch (error) {
-    console.log('error update-collection-cover :>> ', error)
+    console.log('error delete-collection-photos :>> ', error)
     return lambdaErrorResponse(error)
   }
 }
