@@ -9,6 +9,7 @@ interface State {
   isRemoving?: boolean
   filesToUpload: File[]
   tab: 'photos' | 'info'
+  isEditingInfo: boolean
   uploading: {
     [key: string]: {
       isUploading: boolean
@@ -93,6 +94,7 @@ export const useCollectionStore = defineStore('collection-store', {
     filesToUpload: [],
     uploading: {},
     tab: 'photos',
+    isEditingInfo: false,
   }),
   getters: {
     inUploading: state => state.uploading?.[state.collection?.collectionName as string],
