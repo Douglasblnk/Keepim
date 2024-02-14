@@ -7,7 +7,7 @@ const isDragging = ref(false)
 const store = useCollectionStore()
 
 const isPerformingAction = computed(() => {
-  return store.isRemoving || store.isAddingCover
+  return store.isRemoving || store.isAddingCover || store.isEditingInfo
 })
 
 watch(isPerformingAction, (value) => {
@@ -97,7 +97,10 @@ function toggleContainerMargin() {
           un-p-none
         >
           <div un-flex="~ grow">
-            <QScrollArea un-grow>
+            <QScrollArea
+              un-grow
+              un-p-x-sm
+            >
               <CollectionViewPhotosSkeleton v-if="isLoading" />
 
               <CollectionViewPhotos v-else />
@@ -110,7 +113,10 @@ function toggleContainerMargin() {
           un-p-none
           un-flex
         >
-          <QScrollArea un-grow>
+          <QScrollArea
+            un-grow
+            un-p-x-sm
+          >
             <CollectionViewDetailsSkeleton v-if="isLoading" />
 
             <CollectionViewDetails v-else />

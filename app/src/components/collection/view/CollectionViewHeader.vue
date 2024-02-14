@@ -35,6 +35,21 @@ function removePhotoAction() {
   store.isAddingCover = false
   store.isRemoving = true
 }
+
+function editCollection() {
+  if (store.isEditingInfo) {
+    store.$patch({ isEditingInfo: false })
+  }
+
+  else {
+    store.$patch({
+      tab: 'info',
+      isAddingCover: false,
+      isRemoving: false,
+      isEditingInfo: true,
+    })
+  }
+}
 </script>
 
 <template>
@@ -118,6 +133,7 @@ function removePhotoAction() {
         target="#menu-actions"
         anchor="bottom end"
         cover
+        @edit-collection="editCollection"
         @open-add-image-dialog="openAddImageDialog"
         @add-cover-action="addCoverAction"
         @remove-photo-action="removePhotoAction"
