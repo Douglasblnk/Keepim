@@ -6,6 +6,8 @@ const { validate } = useForm()
 const { setStorageState } = useLocalStorage()
 const { replace } = useRouter()
 
+const queryClient = useQueryClient()
+
 const password = ref()
 const username = ref()
 const isLoading = ref(false)
@@ -23,6 +25,8 @@ async function makeLogin() {
       password: password.value,
       username: username.value,
     })
+
+    queryClient.removeQueries()
 
     setStorageState('user-info', response)
 
