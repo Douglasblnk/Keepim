@@ -6,6 +6,7 @@ import GetCollection from './get-collection'
 import PutCollectionPhotos from './put-collection-photos'
 import UpdateCollectionCover from './update-collection-cover'
 import DeleteCollectionPhotos from './delete-collection-photos'
+import DeleteCollection from './delete-collection'
 
 export default {
   CreateCollection,
@@ -16,4 +17,5 @@ export default {
   PutCollectionPhotos,
   UpdateCollectionCover,
   DeleteCollectionPhotos,
+  DeleteCollection,
 }

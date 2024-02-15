@@ -36,6 +36,10 @@ function removePhotoAction() {
   store.isRemoving = true
 }
 
+function deleteCollectionAction() {
+  setDialog({ component: 'DeleteCollectionAlert' })
+}
+
 function editCollection() {
   if (store.isEditingInfo) {
     store.$patch({ isEditingInfo: false })
@@ -137,6 +141,7 @@ function editCollection() {
         @open-add-image-dialog="openAddImageDialog"
         @add-cover-action="addCoverAction"
         @remove-photo-action="removePhotoAction"
+        @delete-collection-action="deleteCollectionAction"
       />
     </div>
   </div>
