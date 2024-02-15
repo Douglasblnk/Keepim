@@ -7,7 +7,7 @@ import type { SessionModel } from '@model/session'
 
 const TABLE_NAME = env.SESSION_DB_TABLE
 
-export const putSession = async (session: SessionModel) => {
+export async function putSession(session: SessionModel) {
   const db = dynamoDBClient()
 
   const putCommandInput: PutItemCommandInput = {
@@ -20,7 +20,7 @@ export const putSession = async (session: SessionModel) => {
   return db.send(putItemCommand)
 }
 
-export const findSessionByRefreshToken = async (refreshToken: string) => {
+export async function findSessionByRefreshToken(refreshToken: string) {
   const db = dynamoDBClient()
 
   const queryCommandInput: QueryCommandInput = {
@@ -39,7 +39,7 @@ export const findSessionByRefreshToken = async (refreshToken: string) => {
   return unmarshall(Items[0] || {}) as SessionModel
 }
 
-export const findSessionByID = async (id: string) => {
+export async function findSessionByID(id: string) {
   const db = dynamoDBClient()
 
   const getItemInput: GetItemCommandInput = {
@@ -54,7 +54,7 @@ export const findSessionByID = async (id: string) => {
   return unmarshall(Item || {}) as SessionModel
 }
 
-export const findSessionByUsername = async (username: string) => {
+export async function findSessionByUsername(username: string) {
   const db = dynamoDBClient()
 
   const queryCommandInput: QueryCommandInput = {
@@ -73,7 +73,7 @@ export const findSessionByUsername = async (username: string) => {
   return unmarshall(Items[0] || {}) as SessionModel
 }
 
-export const updateSession = async (id: string, newRefreshToken: string, expiredAt: number) => {
+export async function updateSession(id: string, newRefreshToken: string, expiredAt: number) {
   const db = dynamoDBClient()
 
   const updateCommandInput: UpdateItemInput = {
@@ -91,7 +91,7 @@ export const updateSession = async (id: string, newRefreshToken: string, expired
   return db.send(putItemCommand)
 }
 
-export const deleteSession = async (id: string) => {
+export async function deleteSession(id: string) {
   const db = dynamoDBClient()
 
   const deleteCommandInput: DeleteItemCommandInput = {

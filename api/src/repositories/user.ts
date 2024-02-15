@@ -7,7 +7,7 @@ import type { UserModel } from '@model/user'
 
 const TABLE_NAME = env.USER_DB_TABLE
 
-export const findUserByUsername = async (username: string) => {
+export async function findUserByUsername(username: string) {
   const db = dynamoDBClient()
 
   const getItemCommandInput: GetItemCommandInput = {
@@ -22,7 +22,7 @@ export const findUserByUsername = async (username: string) => {
   return unmarshall(Item || {}) as UserModel
 }
 
-export const findUserByEmail = async (email: string) => {
+export async function findUserByEmail(email: string) {
   const db = dynamoDBClient()
 
   const queryCommandInput: QueryCommandInput = {
