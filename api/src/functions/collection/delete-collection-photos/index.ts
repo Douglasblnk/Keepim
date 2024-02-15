@@ -35,5 +35,10 @@ export default {
       Action: ['s3:DeleteObject'],
       Resource: `arn:aws:s3:::${env.COLLECTION_BUCKET_NAME}/*`,
     },
+    {
+      Effect: 'Allow',
+      Action: ['s3:DeleteObject'],
+      Resource: `arn:aws:s3:::${env.COLLECTION_THUMBNAIL_BUCKET_NAME}/*`,
+    },
   ],
 }
