@@ -2,6 +2,7 @@ import { env } from 'node:process'
 
 import type {
   AttributeValue,
+  DeleteItemCommandInput,
   GetItemCommandInput,
   PutItemCommandInput,
   QueryCommandInput,
@@ -9,7 +10,7 @@ import type {
 } from '@aws-sdk/client-dynamodb'
 
 import dynamoDBClient from '@database/index'
-import { GetItemCommand, PutItemCommand, QueryCommand, UpdateItemCommand } from '@aws-sdk/client-dynamodb'
+import { DeleteItemCommand, GetItemCommand, PutItemCommand, QueryCommand, UpdateItemCommand } from '@aws-sdk/client-dynamodb'
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb'
 import { unmarshallArray } from '@utils/dynamodb'
 
@@ -19,7 +20,7 @@ import type { CollectionSchemaQueryString } from '@functions/collection/get-coll
 
 const TABLE_NAME = env.COLLECTION_DB_TABLE
 
-export const putCollection = async (collection: CollectionModel) => {
+export async function putCollection(collection: CollectionModel) {
   const db = dynamoDBClient()
 
   const putCommandInput: PutItemCommandInput = {
@@ -32,7 +33,7 @@ export const putCollection = async (collection: CollectionModel) => {
   return db.send(putItemCommand)
 }
 
-export const updateCollectionCover = async (username: string, id: string, coverKey: string) => {
+export async function updateCollectionCover(username: string, id: string, coverKey: string) {
   const db = dynamoDBClient()
 
   const updateItemInput: UpdateItemCommandInput = {
@@ -50,7 +51,7 @@ export const updateCollectionCover = async (username: string, id: string, coverK
   return db.send(putItemCommand)
 }
 
-export const queryCollectionsCount = async (username: string) => {
+export async function queryCollectionsCount(username: string) {
   const db = dynamoDBClient()
 
   const queryCommandInput: QueryCommandInput = {
@@ -69,7 +70,7 @@ export const queryCollectionsCount = async (username: string) => {
   return Count
 }
 
-export const getCollection = async (username: string, id: string) => {
+export async function getCollection(username: string, id: string) {
   const db = dynamoDBClient()
 
   const getItemInput: GetItemCommandInput = {
@@ -84,7 +85,20 @@ export const getCollection = async (username: string, id: string) => {
   return unmarshall(Item || {}) as CollectionModel
 }
 
-export const queryCollections = async (username: string, params: CollectionSchemaQueryString, startKey?: Record<string, AttributeValue>) => {
+export async function deleteCollection(username: string, id: string) {
+  const db = dynamoDBClient()
+
+  const deleteItemInput: DeleteItemCommandInput = {
+    TableName: TABLE_NAME,
+    Key: marshall({ id, username }),
+  }
+
+  const queryCommand = new DeleteItemCommand(deleteItemInput)
+
+  return await db.send(queryCommand)
+}
+
+export async function queryCollections(username: string, params: CollectionSchemaQueryString, startKey?: Record<string, AttributeValue>) {
   const db = dynamoDBClient()
 
   const indexNameParams = {
