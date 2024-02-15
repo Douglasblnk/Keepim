@@ -5,6 +5,9 @@ import { DeleteObjectCommand } from '@aws-sdk/client-s3'
 import s3Client from 'src/storage'
 
 export default async (photos: string[]) => {
+  if (!photos || !photos.length)
+    return []
+
   const client = s3Client()
 
   const { fullSize, thumbnail } = photos.reduce((acc, file) => {

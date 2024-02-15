@@ -6,6 +6,7 @@ const emit = defineEmits<{
   openAddImageDialog: []
   removePhotoAction: []
   addCoverAction: []
+  deleteCollectionAction: []
 }>()
 
 const store = useCollectionStore()
@@ -110,6 +111,24 @@ const menuActions = ref()
 
         <QItemSection un-text-gray>
           Remover {{ contextMenu ? 'foto' : 'fotos' }}
+        </QItemSection>
+      </QItem>
+
+      <QItem
+        v-if="!contextMenu"
+        clickable
+        un-color-negative
+        @click="emit('deleteCollectionAction')"
+      >
+        <QItemSection
+          avatar
+          un-min-w-auto
+        >
+          <QIcon name="i-mdi-folder-remove-outline" />
+        </QItemSection>
+
+        <QItemSection>
+          Excluir coleção
         </QItemSection>
       </QItem>
     </QList>
