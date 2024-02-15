@@ -221,7 +221,7 @@ function addCoverQuickAction(photo: string) {
 
 function removePhotoQuickAction(photo: string) {
   setDialog({
-    component: 'RemovePhotoConfirmDialog',
+    component: 'RemovePhotoAlert',
     props: {
       callback: () => {
         const photoKeys = [ getPhotoKey(photo) ]
