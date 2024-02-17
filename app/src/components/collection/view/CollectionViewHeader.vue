@@ -115,6 +115,14 @@ function editCollection() {
         un-mx-auto
         un-mb-sm
       />
+
+      <QIcon
+        v-if="collection?.favorite"
+        name="i-mdi-heart"
+        un-mt-sm
+        un-absolute
+        un-bottom--5
+      />
     </div>
 
     <div
