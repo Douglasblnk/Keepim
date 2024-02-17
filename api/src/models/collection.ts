@@ -17,6 +17,7 @@ export interface CollectionModel {
   photos?: string[]
   cover?: string
   place?: string
+  favorite?: boolean
   createdAt?: number
   updatedAt?: number
   deleted?: boolean

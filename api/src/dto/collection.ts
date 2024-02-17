@@ -5,6 +5,7 @@ export interface CompactCollectionDTO {
   id: string
   collectionName: string
   collectionDate: string
+  favorite?: boolean
   thumbnail?: string
 }
 
@@ -22,6 +23,7 @@ export const compactCollectionDTO = (collection: CollectionModel): CompactCollec
     id: collection?.id,
     collectionName: collection?.collectionName,
     collectionDate: collection?.collectionDate,
+    favorite: collection?.favorite,
     thumbnail: collection?.cover,
   }
 }
@@ -36,6 +38,7 @@ export const collectionDTO = (collection: Omit<CollectionModel, 'photos'> & Phot
     description: collection?.description,
     equipments: collection?.equipments,
     participants: collection?.participants,
+    favorite: collection?.favorite,
     place: collection?.place,
   }
 }
