@@ -22,6 +22,7 @@ export interface CollectionsResponse {
   id: string
   collectionName: string
   collectionDate: string
+  favorite?: boolean
   thumbnail?: string
 }
 
@@ -42,6 +43,7 @@ export interface CollectionResponse {
     imgs: string[]
     thumbnails: string[]
   }
+  favorite?: boolean
   cover?: string
   place?: string
 }

@@ -7,15 +7,17 @@ import persistCollectionPhotos from './persist-collection-photos'
 import updateCollectionCover from './update-collection-cover'
 import deleteCollectionPhotos from './delete-collection-photos'
 import deleteCollection from './delete-collection'
+import updateFavoriteCollection from './update-favorite-collection'
 
 export {
   createCollection,
   updateCollection,
+  updateFavoriteCollection,
+  updateCollectionCover,
   getCollectionsCount,
   getCollections,
   getCollection,
   persistCollectionPhotos,
-  updateCollectionCover,
   deleteCollectionPhotos,
   deleteCollection,
 }
