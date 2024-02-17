@@ -25,6 +25,7 @@ const filteringFor = computed(() => {
 })
 
 function clearSort() {
+  console.log('poxa')
   filters.value.sortBy = 'collectionDate'
   filters.value.orderBy = 'DESC'
 }

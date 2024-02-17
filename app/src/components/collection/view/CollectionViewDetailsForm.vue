@@ -272,7 +272,7 @@ function removeEquipment(equipment: { name: string; type: string }) {
             option-label="name"
             option-value="type"
             name="tipo equipamento"
-            class="w-col-12 lg:w-col-5 pb-none"
+            class="w-col-12 lg:w-col-5 lg:pb-none"
             :options="equipmentsType"
             hide-bottom-space
             emit-value

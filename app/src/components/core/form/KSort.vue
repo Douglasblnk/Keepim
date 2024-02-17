@@ -83,13 +83,14 @@ watch(() => [ sortBy.value, orderBy.value ], ([ sort, order ]) => {
 
       <QPopupProxy
         ref="menuRef"
-        fit
+        self="top right"
+        anchor="bottom right"
+        :offset="[0, 10]"
         transition-show="jump-down"
         transition-hide="jump-up"
         un-border-none
       >
         <QList
-          un-mt-sm
           un-p-md
           un-space-y-lg
         >
