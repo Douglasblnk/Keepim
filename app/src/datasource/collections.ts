@@ -19,6 +19,14 @@ export async function updateCollectionRequest({ body, collectionId }: { body: Pa
   })
 }
 
+export async function makeCollectionFavoriteRequest(collectionId: string) {
+  return authMiddleware<boolean>(async () => {
+    const { data } = await axios.patch(`/favorite-collection/${collectionId}`, {}, { withCredentials: true })
+
+    return data
+  })
+}
+
 export async function deleteCollectionRequest(collectionId: string) {
   return authMiddleware(async () => {
     const { data } = await axios.delete(`/collection/${collectionId}`, { withCredentials: true })
