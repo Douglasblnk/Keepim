@@ -16,6 +16,10 @@ const sortOptions = [
     label: 'Nome',
     value: 'collectionName',
   },
+  {
+    label: 'Favoritadas',
+    value: 'favorite',
+  },
 ]
 
 const filteringFor = computed(() => {
@@ -25,7 +29,6 @@ const filteringFor = computed(() => {
 })
 
 function clearSort() {
-  console.log('poxa')
   filters.value.sortBy = 'collectionDate'
   filters.value.orderBy = 'DESC'
 }

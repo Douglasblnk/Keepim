@@ -23,7 +23,8 @@ const {
 }) as CustomInfiniteQueryReturnType<CollectionsResponse[]>
 
 const showDateLabel = computed(() => {
-  return filters.value.sortBy === 'collectionDate' && !filters.value.search
+  return (filters.value.sortBy === 'collectionDate' || filters.value.sortBy === 'favorite')
+    && !filters.value.search
 })
 
 const collections = computed(() => {
@@ -105,6 +106,7 @@ function navigateToCollection(folder: CollectionsResponse) {
             :key="`folder-${index}`"
             :name="folder.collectionName"
             :thumbnail="folder.thumbnail"
+            :favorite="folder.favorite"
             :style="folderSize"
             un-max-w-200px
             un-max-h-200px

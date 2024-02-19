@@ -6,7 +6,10 @@ export default async (username: string, collectionId: string) => {
 
   const updatedCollection: CollectionModel = {
     ...collection,
-    favorite: !collection.favorite,
+    favorite: !collection.favorite ? 1 : 0,
+    favoriteCollectionDate: !collection.favorite
+      ? `1#${collection.collectionDate}`
+      : `0#${collection.collectionDate}`,
   }
 
   await putCollection(updatedCollection)
