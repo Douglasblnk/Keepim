@@ -80,6 +80,7 @@ async function createCollection() {
       vee-rules="required"
       name="coleção"
       placeholder="Coleção..."
+      autofocus
     />
   </div>
 

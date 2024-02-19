@@ -15,14 +15,14 @@ export interface CollectionEditionBody {
 export interface CollectionsParams {
   search: string
   orderBy: 'ASC' | 'DESC'
-  sortBy: 'collectionName' | 'collectionDate'
+  sortBy: 'collectionName' | 'collectionDate' | 'favorite'
 }
 
 export interface CollectionsResponse {
   id: string
   collectionName: string
   collectionDate: string
-  favorite?: boolean
+  favorite?: number
   thumbnail?: string
 }
 
@@ -43,7 +43,8 @@ export interface CollectionResponse {
     imgs: string[]
     thumbnails: string[]
   }
-  favorite?: boolean
+  favorite?: number
+  favoriteCollectionDate?: string
   cover?: string
   place?: string
 }

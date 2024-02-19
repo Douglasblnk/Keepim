@@ -6,7 +6,7 @@ import type { AttributeValue } from '@aws-sdk/client-dynamodb'
 import { marshall } from '@aws-sdk/util-dynamodb'
 import { getSignedUrls } from '@service/photos'
 
-async function getLastEvaluatedCollection(username: string, params: CollectionSchemaQueryString): Promise<Record<string, AttributeValue>> {
+export async function getLastEvaluatedCollection(username: string, params: CollectionSchemaQueryString): Promise<Record<string, AttributeValue>> {
   const collection = await getCollection(username, params.startKey)
 
   if (params.search) {
@@ -20,7 +20,15 @@ async function getLastEvaluatedCollection(username: string, params: CollectionSc
     return marshall({
       id: collection.id,
       username: collection.username,
-      collectionName: collection.collectionName,
+      searchName: collection.searchName,
+    })
+  }
+
+  else if (params.sortBy === 'favorite') {
+    return marshall({
+      id: collection.id,
+      username: collection.username,
+      favoriteCollectionDate: collection.favoriteCollectionDate,
     })
   }
 

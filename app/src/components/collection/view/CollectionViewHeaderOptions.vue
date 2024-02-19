@@ -42,7 +42,7 @@ const {
       menuActions.value.hide()
 
       queryClient.invalidateQueries({ queryKey: [ 'collection' ] })
-      queryClient.invalidateQueries({ queryKey: [ 'collections-list' ] })
+      queryClient.removeQueries({ queryKey: [ 'collections-list' ] })
     }
   },
 })

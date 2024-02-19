@@ -17,7 +17,11 @@ export default {
           AttributeType: 'S',
         },
         {
-          AttributeName: 'collectionName',
+          AttributeName: 'searchName',
+          AttributeType: 'S',
+        },
+        {
+          AttributeName: 'favoriteCollectionDate',
           AttributeType: 'S',
         },
       ],
@@ -64,7 +68,27 @@ export default {
               KeyType: 'HASH',
             },
             {
-              AttributeName: 'collectionName',
+              AttributeName: 'searchName',
+              KeyType: 'RANGE',
+            },
+          ],
+          Projection: {
+            ProjectionType: 'ALL',
+          },
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          },
+        },
+        {
+          IndexName: 'collection-favorite-index',
+          KeySchema: [
+            {
+              AttributeName: 'username',
+              KeyType: 'HASH',
+            },
+            {
+              AttributeName: 'favoriteCollectionDate',
               KeyType: 'RANGE',
             },
           ],

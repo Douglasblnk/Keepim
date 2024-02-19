@@ -2,6 +2,7 @@
 defineProps<{
   name: string
   thumbnail?: string
+  favorite?: number
 }>()
 
 const hover = ref(false)
@@ -45,6 +46,24 @@ const hover = ref(false)
         ratio="1"
         :src="thumbnail"
       />
+    </div>
+
+    <div
+      v-if="favorite"
+      un-absolute
+      un-top-0
+      un-right-0
+      un-w-6
+      un-h-6
+      un-flex
+      un-justify-center
+      un-items-center
+      un-m-xs
+      un-rounded-full
+      un-backdrop-blur-8px
+      class="bg-dark-primary/10"
+    >
+      <QIcon name="i-mdi-heart" />
     </div>
 
     <div
