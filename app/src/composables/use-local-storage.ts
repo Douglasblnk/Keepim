@@ -8,6 +8,13 @@ interface StorageState {
     avatar: string
   }
   'drawer-mini-state': boolean
+  'user-config': {
+    collectionConfig: {
+      fixedCollection: number
+    }
+    id: string
+    username: string
+  }
 }
 
 const storageState = ref<Partial<Record<keyof StorageState, any>>>({})
