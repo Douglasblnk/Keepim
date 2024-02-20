@@ -10,7 +10,7 @@ const handler = async (event: CustomAPIGatewayProxyEvent<SignInSchemaBody, any>)
   try {
     const signInSchema = checkLambdaEvent(event.body, ['username', 'password'])
 
-    const { accessToken, user } = await signIn(signInSchema)
+    const { accessToken, user, userConfig } = await signIn(signInSchema)
 
     const cookies = serialize(
       'access_token',
@@ -22,7 +22,7 @@ const handler = async (event: CustomAPIGatewayProxyEvent<SignInSchemaBody, any>)
         ...(env.IS_OFFLINE ? { sameSite: 'none' } : {}),
       })
 
-    return lambdaOKResponse(user, { 'Set-Cookie': cookies })
+    return lambdaOKResponse({ user, userConfig }, { 'Set-Cookie': cookies })
   }
 
   catch (error) {
