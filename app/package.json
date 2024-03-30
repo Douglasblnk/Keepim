@@ -1,7 +1,7 @@
 {
   "name": "@douglasblnk/photokeep",
   "repository": "douglasblnk/photokeep",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "scripts": {
     "dev": "vite --force",
     "refresh": "sudo rm -rf node_modules && pnpm install",
