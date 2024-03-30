@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { capitalizeFirstLetter, dayjs } from '@utils/index'
 import type { CollectionsParams, CollectionsResponse } from '@type/index'
-import { gsap } from 'gsap'
 
 const { push } = useRouter()
 
@@ -80,36 +79,6 @@ async function onLoad(_: number, done: (_stop?: boolean | undefined) => void) {
 function navigateToCollection(folder: CollectionsResponse) {
   push(`/colecoes/${folder.id}`)
 }
-
-function onBeforeEnter(el: any) {
-  el.style.opacity = '0'
-
-  gsap.set(el, { y: '-20%' })
-}
-
-function onEnter(el: any, done: () => void) {
-  const index = +(el.dataset.index || 0)
-
-  gsap.to(el, {
-    opacity: 1,
-    y: '0%',
-    delay: index * 0.03,
-    onComplete: done,
-  })
-}
-
-function onLeave(el: any, done: () => void) {
-  const index = +(el.dataset.index || 0)
-
-  const reverseIndex = fixedCollections.value.hidden.length - index - 1
-
-  gsap.to(el, {
-    opacity: 0,
-    y: '-20%',
-    delay: reverseIndex * 0.03,
-    onComplete: done,
-  })
-}
 </script>
 
 <template>
@@ -168,6 +137,7 @@ function onLeave(el: any, done: () => void) {
         <div
           un-flex="~ wrap"
           un-gap-sm
+          un-mb-sm
         >
           <CollectionFolder
             v-for="folder in fixedCollections.shown"
@@ -185,17 +155,12 @@ function onLeave(el: any, done: () => void) {
           />
         </div>
 
-        <TransitionGroup
-          tag="div"
-          un-flex="~ wrap"
-          un-gap-sm
-          un-mt-sm
-          :css="false"
-          @before-enter="onBeforeEnter"
-          @enter="onEnter"
-          @leave="onLeave"
-        >
-          <template v-if="showFixedCollection">
+        <QSlideTransition>
+          <div
+            v-show="showFixedCollection"
+            un-flex="~ wrap"
+            un-gap-sm
+          >
             <CollectionFolder
               v-for="(folder, index) in fixedCollections.hidden"
               :key="folder.id"
@@ -211,8 +176,8 @@ function onLeave(el: any, done: () => void) {
               un-min-h-85px
               @click="navigateToCollection(folder)"
             />
-          </template>
-        </TransitionGroup>
+          </div>
+        </QSlideTransition>
       </div>
     </div>
 
