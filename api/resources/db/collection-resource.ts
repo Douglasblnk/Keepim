@@ -24,10 +24,6 @@ export default {
           AttributeName: 'favoriteCollectionDate',
           AttributeType: 'S',
         },
-        {
-          AttributeName: 'fixed',
-          AttributeType: 'N',
-        },
       ],
       KeySchema: [
         {
@@ -93,26 +89,6 @@ export default {
             },
             {
               AttributeName: 'favoriteCollectionDate',
-              KeyType: 'RANGE',
-            },
-          ],
-          Projection: {
-            ProjectionType: 'ALL',
-          },
-          ProvisionedThroughput: {
-            ReadCapacityUnits: 1,
-            WriteCapacityUnits: 1,
-          },
-        },
-        {
-          IndexName: 'collection-fixed-index',
-          KeySchema: [
-            {
-              AttributeName: 'username',
-              KeyType: 'HASH',
-            },
-            {
-              AttributeName: 'fixed',
               KeyType: 'RANGE',
             },
           ],
