@@ -22,8 +22,18 @@ export default {
     },
     {
       Effect: 'Allow',
+      Action: ['dynamodb:GetItem'],
+      Resource: `arn:aws:dynamodb:sa-east-1:531760387770:table/${env.CONFIG_DB_TABLE}`,
+    },
+    {
+      Effect: 'Allow',
       Action: ['dynamodb:PutItem'],
       Resource: `arn:aws:dynamodb:sa-east-1:531760387770:table/${env.COLLECTION_DB_TABLE}`,
+    },
+    {
+      Effect: 'Allow',
+      Action: ['dynamodb:PutItem'],
+      Resource: `arn:aws:dynamodb:sa-east-1:531760387770:table/${env.CONFIG_DB_TABLE}`,
     },
     {
       Effect: 'Allow',

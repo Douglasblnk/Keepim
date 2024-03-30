@@ -32,6 +32,11 @@ export default {
     },
     {
       Effect: 'Allow',
+      Action: ['dynamodb:Query'],
+      Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Collection/index/collection-fixed-index',
+    },
+    {
+      Effect: 'Allow',
       Action: ['dynamodb:GetItem'],
       Resource: 'arn:aws:dynamodb:sa-east-1:531760387770:table/Keepim.Collection',
     },
