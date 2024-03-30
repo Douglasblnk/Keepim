@@ -63,6 +63,7 @@ jobs:
           COLLECTION_DB_TABLE: ${{ secrets.COLLECTION_DB_TABLE }}
           SESSION_DB_TABLE: ${{ secrets.SESSION_DB_TABLE }}
           USER_DB_TABLE: ${{ secrets.USER_DB_TABLE }}
+          CONFIG_DB_TABLE: ${{ secrets.CONFIG_DB_TABLE }}
           COLLECTION_BUCKET_NAME: ${{ secrets.COLLECTION_BUCKET_NAME }}
           COLLECTION_THUMBNAIL_BUCKET_NAME: ${{ secrets.COLLECTION_THUMBNAIL_BUCKET_NAME }}
 

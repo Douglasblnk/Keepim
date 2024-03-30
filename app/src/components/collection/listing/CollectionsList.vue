@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { capitalizeFirstLetter, dayjs } from '@utils/index'
 import type { CollectionsParams, CollectionsResponse } from '@type/index'
-import gsap from 'gsap'
+import { gsap } from 'gsap'
 
 const { push } = useRouter()
 
