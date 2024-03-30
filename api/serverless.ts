@@ -12,7 +12,6 @@ import {
   CollectionResource,
   CollectionThumbnailBucketResource,
   ConfigResource,
-  FixedCollectionResource,
   SessionResource,
   UserResource,
 } from './resources'
@@ -131,7 +130,6 @@ const serverlessConfiguration: AWS = {
       ...ConfigResource,
       ...SessionResource,
       ...CollectionResource,
-      ...FixedCollectionResource,
       ...CollectionBucketResource,
       ...CollectionThumbnailBucketResource,
     },

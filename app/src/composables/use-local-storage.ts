@@ -10,7 +10,7 @@ interface StorageState {
   'drawer-mini-state': boolean
   'user-config': {
     collectionConfig: {
-      fixedCollection: number
+      fixedCollections: number
     }
     id: string
     username: string

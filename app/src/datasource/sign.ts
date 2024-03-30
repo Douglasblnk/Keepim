@@ -13,7 +13,7 @@ interface SignInResponse {
   }
   userConfig: {
     collectionConfig: {
-      fixedCollection: number
+      fixedCollections: number
     }
     id: string
     username: string

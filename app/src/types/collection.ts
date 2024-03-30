@@ -23,6 +23,8 @@ export interface CollectionsResponse {
   collectionName: string
   collectionDate: string
   favorite?: number
+  fixed?: number
+  order?: number
   thumbnail?: string
 }
 
@@ -44,6 +46,7 @@ export interface CollectionResponse {
     thumbnails: string[]
   }
   favorite?: number
+  fixed?: number
   favoriteCollectionDate?: string
   cover?: string
   place?: string

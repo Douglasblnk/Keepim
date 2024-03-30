@@ -27,6 +27,14 @@ export async function makeCollectionFavoriteRequest(collectionId: string) {
   })
 }
 
+export async function makeCollectionFixedRequest(collectionId: string) {
+  return authMiddleware<string>(async () => {
+    const { data } = await axios.patch(`/fixed-collection/${collectionId}`, {}, { withCredentials: true })
+
+    return data
+  })
+}
+
 export async function deleteCollectionRequest(collectionId: string) {
   return authMiddleware(async () => {
     const { data } = await axios.delete(`/collection/${collectionId}`, { withCredentials: true })
@@ -70,7 +78,7 @@ export async function getCollectionsCountRequest() {
 export async function getCollectionsRequest(params: CollectionsParams, pageParam: any) {
   const startKey = pageParam?.id
 
-  return authMiddleware<EvaluatedKeyPagination<CollectionsResponse>>(async () => {
+  return authMiddleware<EvaluatedKeyPagination<CollectionsResponse> & { fixedCollections: CollectionsResponse[] }>(async () => {
     const { data } = await axios.get('/collections', { withCredentials: true, params: { ...params, startKey } })
 
     return data
