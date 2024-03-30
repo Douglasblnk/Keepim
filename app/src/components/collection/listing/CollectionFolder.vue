@@ -75,14 +75,13 @@ const hover = ref(false)
       un-backdrop-blur-8px
       class="bg-dark-primary/30"
     >
-      <span
-        un-line-clamp-1
-        un-truncate-1
+      <div
+        un-truncate
         un-select-none
         un-text="xs center"
       >
         {{ name }}
-      </span>
+      </div>
     </div>
   </div>
 </template>

@@ -26,8 +26,10 @@ watch(
 )
 
 watch(() => inUploading.value?.canResetQuery, (value) => {
-  if (value)
+  if (value) {
     queryClient.invalidateQueries({ queryKey: [ 'collection', props.id ] })
+    queryClient.invalidateQueries({ queryKey: [ 'collections-list' ] })
+  }
 })
 
 onMounted(() => {
