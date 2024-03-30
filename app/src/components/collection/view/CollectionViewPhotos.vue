@@ -66,7 +66,7 @@ function onError(error: unknown) {
 
 function invalidateQueries() {
   queryClient.invalidateQueries({ queryKey: [ 'collection', collection?.value?.id ] })
-  queryClient.resetQueries({ queryKey: [ 'collections-list' ] })
+  queryClient.invalidateQueries({ queryKey: [ 'collections-list' ] })
 }
 
 const uploaderLabel = computed(() => {

@@ -25,7 +25,7 @@ export async function putCollection(collection: CollectionModel) {
 
   const putCommandInput: PutItemCommandInput = {
     TableName: TABLE_NAME,
-    Item: marshall(collection),
+    Item: marshall(collection, { removeUndefinedValues: true }),
   }
 
   const putItemCommand = new PutItemCommand(putCommandInput)
@@ -98,9 +98,31 @@ export async function deleteCollection(username: string, id: string) {
   return await db.send(queryCommand)
 }
 
-export async function queryCollections(username: string, params: CollectionSchemaQueryString, startKey?: Record<string, AttributeValue>) {
+export async function queryFixedCollections(username: string) {
   const db = dynamoDBClient()
 
+  const queryCommandInput: QueryCommandInput = {
+    TableName: TABLE_NAME,
+    IndexName: 'collection-fixed-index',
+    ScanIndexForward: true,
+    KeyConditionExpression: 'username = :username AND #fixed = :fixedStatus',
+    ExpressionAttributeValues: marshall({
+      ':username': username,
+      ':fixedStatus': 1,
+    }),
+    ExpressionAttributeNames: {
+      '#fixed': 'fixed',
+    },
+  }
+
+  const queryCommand = new QueryCommand(queryCommandInput)
+
+  const { Items } = await db.send(queryCommand)
+
+  return unmarshallArray(Items) as CollectionModel[]
+}
+
+function getCollectionsQueryCommand(username: string, params: CollectionSchemaQueryString, startKey?: Record<string, AttributeValue>) {
   const indexNameParams = {
     collectionDate: 'collection-date-index',
     collectionName: 'collection-name-index',
@@ -113,18 +135,32 @@ export async function queryCollections(username: string, params: CollectionSchem
     ExclusiveStartKey: startKey,
   }
 
-  const searchQueryCommandInput: QueryCommandInput = {
-    ...commonQueryCommandInput,
-    FilterExpression: 'contains(#collectionName, :collectionName)',
-    ExpressionAttributeNames: { '#collectionName': 'collectionName' },
-    KeyConditionExpression: 'username = :username',
-    ExpressionAttributeValues: marshall({
-      ':username': username,
-      ':collectionName': params?.search,
-    }),
+  if (params.search) {
+    return {
+      ...commonQueryCommandInput,
+      FilterExpression: 'contains(#searchName, :searchName)',
+      ExpressionAttributeNames: { '#searchName': 'searchName' },
+      KeyConditionExpression: 'username = :username',
+      ExpressionAttributeValues: marshall({
+        ':username': username,
+        ':searchName': params?.search.toLowerCase(),
+      }),
+    }
   }
 
-  const queryCommandInput: QueryCommandInput = {
+  if (params?.sortBy === 'favorite') {
+    return {
+      ...commonQueryCommandInput,
+      IndexName: 'collection-favorite-index',
+      KeyConditionExpression: 'username = :username AND begins_with(favoriteCollectionDate, :favStatus)',
+      ExpressionAttributeValues: marshall({
+        ':username': username,
+        ':favStatus': '1#',
+      }),
+    }
+  }
+
+  return {
     ...commonQueryCommandInput,
     IndexName: indexNameParams[params?.sortBy],
     KeyConditionExpression: 'username = :username',
@@ -132,8 +168,14 @@ export async function queryCollections(username: string, params: CollectionSchem
       ':username': username,
     }),
   }
+}
 
-  const queryCommand = new QueryCommand(params.search ? searchQueryCommandInput : queryCommandInput)
+export async function queryCollections(username: string, params: CollectionSchemaQueryString, startKey?: Record<string, AttributeValue>) {
+  const db = dynamoDBClient()
+
+  const queryCommandInput = getCollectionsQueryCommand(username, params, startKey)
+
+  const queryCommand = new QueryCommand(queryCommandInput)
 
   const { Items, LastEvaluatedKey } = await db.send(queryCommand)
 

@@ -16,6 +16,10 @@ const sortOptions = [
     label: 'Nome',
     value: 'collectionName',
   },
+  {
+    label: 'Favoritadas',
+    value: 'favorite',
+  },
 ]
 
 const filteringFor = computed(() => {

@@ -7,15 +7,19 @@ import PutCollectionPhotos from './put-collection-photos'
 import UpdateCollectionCover from './update-collection-cover'
 import DeleteCollectionPhotos from './delete-collection-photos'
 import DeleteCollection from './delete-collection'
+import UpdateFavoriteCollection from './update-favorite-collection'
+import UpdateFixedCollection from './update-fixed-collection'
 
 export default {
   CreateCollection,
   UpdateCollection,
+  UpdateFavoriteCollection,
+  UpdateFixedCollection,
+  UpdateCollectionCover,
   GetCollectionsCount,
   GetCollections,
   GetCollection,
   PutCollectionPhotos,
-  UpdateCollectionCover,
   DeleteCollectionPhotos,
   DeleteCollection,
 }

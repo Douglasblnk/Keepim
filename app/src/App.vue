@@ -24,6 +24,10 @@ const isBottomNavHidden = computed(() => {
   return route.name !== undefined && !bottomNavHiddenPattern.includes(route.name as string) && isMobile.value
 })
 
+const isBackBtnShown = computed(() => {
+  return route.name === 'collections'
+})
+
 const title = ref()
 
 const navDrawer = ref()
@@ -81,6 +85,21 @@ provide('miniState', computed(() => navDrawer.value?.miniStateTransition))
           >
             <BottomNav v-if="isBottomNavHidden" />
           </Transition>
+
+          <QPageScroller
+            v-if="isBackBtnShown"
+            position="bottom-right"
+            :scroll-offset="250"
+            :offset="isMobile ? [18, 90] : [18, 18]"
+          >
+            <QBtn
+              icon="i-mdi-arrow-up"
+              un-bg="accent/60"
+              un-rounded-full
+              un-p-none
+              round
+            />
+          </QPageScroller>
         </QPage>
       </QPageContainer>
     </RouterView>

@@ -17,8 +17,16 @@ export default {
           AttributeType: 'S',
         },
         {
-          AttributeName: 'collectionName',
+          AttributeName: 'searchName',
           AttributeType: 'S',
+        },
+        {
+          AttributeName: 'favoriteCollectionDate',
+          AttributeType: 'S',
+        },
+        {
+          AttributeName: 'fixed',
+          AttributeType: 'N',
         },
       ],
       KeySchema: [
@@ -64,7 +72,47 @@ export default {
               KeyType: 'HASH',
             },
             {
-              AttributeName: 'collectionName',
+              AttributeName: 'searchName',
+              KeyType: 'RANGE',
+            },
+          ],
+          Projection: {
+            ProjectionType: 'ALL',
+          },
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          },
+        },
+        {
+          IndexName: 'collection-favorite-index',
+          KeySchema: [
+            {
+              AttributeName: 'username',
+              KeyType: 'HASH',
+            },
+            {
+              AttributeName: 'favoriteCollectionDate',
+              KeyType: 'RANGE',
+            },
+          ],
+          Projection: {
+            ProjectionType: 'ALL',
+          },
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          },
+        },
+        {
+          IndexName: 'collection-fixed-index',
+          KeySchema: [
+            {
+              AttributeName: 'username',
+              KeyType: 'HASH',
+            },
+            {
+              AttributeName: 'fixed',
               KeyType: 'RANGE',
             },
           ],
