@@ -20,6 +20,10 @@ export default {
           AttributeName: 'searchName',
           AttributeType: 'S',
         },
+        {
+          AttributeName: 'favoriteCollectionDate',
+          AttributeType: 'S',
+        },
       ],
       KeySchema: [
         {
@@ -65,6 +69,26 @@ export default {
             },
             {
               AttributeName: 'searchName',
+              KeyType: 'RANGE',
+            },
+          ],
+          Projection: {
+            ProjectionType: 'ALL',
+          },
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          },
+        },
+        {
+          IndexName: 'collection-favorite-index',
+          KeySchema: [
+            {
+              AttributeName: 'username',
+              KeyType: 'HASH',
+            },
+            {
+              AttributeName: 'favoriteCollectionDate',
               KeyType: 'RANGE',
             },
           ],
