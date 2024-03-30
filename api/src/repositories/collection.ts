@@ -25,7 +25,7 @@ export async function putCollection(collection: CollectionModel) {
 
   const putCommandInput: PutItemCommandInput = {
     TableName: TABLE_NAME,
-    Item: marshall(collection),
+    Item: marshall(collection, { removeUndefinedValues: true }),
   }
 
   const putItemCommand = new PutItemCommand(putCommandInput)
@@ -98,20 +98,21 @@ export async function deleteCollection(username: string, id: string) {
   return await db.send(queryCommand)
 }
 
-export async function queryFavoriteCollections(username: string, params: CollectionSchemaQueryString, startKey?: Record<string, AttributeValue>) {
+export async function queryFixedCollections(username: string) {
   const db = dynamoDBClient()
 
   const queryCommandInput: QueryCommandInput = {
     TableName: TABLE_NAME,
-    Limit: 25,
-    ScanIndexForward: params?.orderBy === 'ASC',
-    ExclusiveStartKey: startKey,
-    IndexName: 'collection-favorite-index',
-    KeyConditionExpression: 'username = :username AND favorite = :favorite',
+    IndexName: 'collection-fixed-index',
+    ScanIndexForward: true,
+    KeyConditionExpression: 'username = :username AND #fixed = :fixedStatus',
     ExpressionAttributeValues: marshall({
       ':username': username,
-      ':favorite': 1,
+      ':fixedStatus': 1,
     }),
+    ExpressionAttributeNames: {
+      '#fixed': 'fixed',
+    },
   }
 
   const queryCommand = new QueryCommand(queryCommandInput)

@@ -11,6 +11,7 @@ import {
   CollectionBucketResource,
   CollectionResource,
   CollectionThumbnailBucketResource,
+  ConfigResource,
   SessionResource,
   UserResource,
 } from './resources'
@@ -43,6 +44,7 @@ const serverlessConfiguration: AWS = {
       SESSION_DB_TABLE: '${env:SESSION_DB_TABLE}',
       COLLECTION_DB_TABLE: '${env:COLLECTION_DB_TABLE}',
       USER_DB_TABLE: '${env:USER_DB_TABLE}',
+      CONFIG_DB_TABLE: '${env:CONFIG_DB_TABLE}',
       JWT_EXPIRATION_TIME: '${env:JWT_EXPIRATION_TIME}',
       REFRESH_TOKEN_EXPIRATION: '${env:REFRESH_TOKEN_EXPIRATION}',
       JWT_SECRET: '${env:JWT_SECRET}',
@@ -112,6 +114,10 @@ const serverlessConfiguration: AWS = {
               table: 'Keepim.Collection',
               sources: ['./migration/collection-seed.json'],
             },
+            {
+              table: 'Keepim.Config',
+              sources: ['./migration/config-seed.json'],
+            },
           ],
         },
       },
@@ -120,10 +126,11 @@ const serverlessConfiguration: AWS = {
   resources: {
     Resources: {
       ...UserResource,
+      ...ConfigResource,
       ...SessionResource,
       ...CollectionResource,
-      ...CollectionThumbnailBucketResource,
       ...CollectionBucketResource,
+      ...CollectionThumbnailBucketResource,
     },
   },
 }

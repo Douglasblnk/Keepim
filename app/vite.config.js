@@ -37,6 +37,7 @@ export default defineConfig({
       '@vueuse/head',
       '@vueuse/gesture',
       'uuid',
+      'gsap',
     ],
   },
   plugins: [

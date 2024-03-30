@@ -8,7 +8,7 @@ export interface Equipment {
 
 export interface CollectionModel {
   id: string
-  username?: string
+  username: string
   collectionDate: string
   collectionName: string
   searchName: string
@@ -19,6 +19,8 @@ export interface CollectionModel {
   cover?: string
   place?: string
   favorite?: number
+  fixed?: number
+  fixedOrder?: string
   favoriteCollectionDate?: string
   createdAt?: number
   updatedAt?: number
@@ -30,7 +32,7 @@ export const createCollectionModel = (collection: Omit<CollectionModel, 'id' | '
 
   return {
     id: uuid(),
-    username: collection?.username,
+    username: collection.username,
     collectionName: collection.collectionName,
     searchName: collection.collectionName.toLowerCase(),
     collectionDate: collection.collectionDate,

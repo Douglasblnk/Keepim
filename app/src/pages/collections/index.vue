@@ -15,7 +15,7 @@ const collectionCount = useQuery({
       />
 
       <CollectionFilter
-        un-mt-xl
+        un-mt="lg sm:xl"
         un-mb-md
       />
     </template>

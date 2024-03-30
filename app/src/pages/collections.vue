@@ -8,10 +8,12 @@ const { routeTransition } = useRouteTransition()
       :name="routeTransition"
       mode="out-in"
     >
-      <component
-        :is="Component"
-        un-mx-auto
-      />
+      <KeepAlive exclude="[id]">
+        <component
+          :is="Component"
+          un-mx-auto
+        />
+      </KeepAlive>
     </transition>
   </RouterView>
 </template>

@@ -9,7 +9,7 @@ export default async (username: string, collectionId: string) => {
     favorite: !collection.favorite ? 1 : 0,
     favoriteCollectionDate: !collection.favorite
       ? `1#${collection.collectionDate}`
-      : `0#${collection.collectionDate}`,
+      : undefined,
   }
 
   await putCollection(updatedCollection)

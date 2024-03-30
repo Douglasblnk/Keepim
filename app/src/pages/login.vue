@@ -28,7 +28,8 @@ async function makeLogin() {
 
     queryClient.removeQueries()
 
-    setStorageState('user-info', response)
+    setStorageState('user-info', response.user)
+    setStorageState('user-config', response.userConfig)
 
     notify({
       type: 'positive',
