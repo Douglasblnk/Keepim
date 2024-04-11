@@ -59,14 +59,18 @@ async function generateSignedThumbnail(collections: CompactCollectionDTO[]) {
   return collectionsCopy
 }
 
+interface FixedCollectionsWithOrder extends CompactCollectionDTO {
+  order?: number
+}
+
 function orderFixedCollection(fixedCollections: CompactCollectionDTO[], userConfig: ConfigModel) {
   return fixedCollections
-    .map((fixedCollection) => {
+    .map<FixedCollectionsWithOrder>((fixedCollection) => {
       const config = userConfig.collectionConfig.fixedCollections.find(collectionConfig => collectionConfig.id === fixedCollection.id)
 
       return config ? { ...fixedCollection, order: config.order } : { ...fixedCollection }
     })
-    .sort((a, b) => a.order - b.order)
+    .sort((a, b) => a?.order - b?.order)
 }
 
 export default async (username: string, params: CollectionSchemaQueryString) => {
