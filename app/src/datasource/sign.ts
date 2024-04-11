@@ -11,13 +11,6 @@ interface SignInResponse {
     name: string
     username: string
   }
-  userConfig: {
-    collectionConfig: {
-      fixedCollections: number
-    }
-    id: string
-    username: string
-  }
 }
 
 export async function signInRequest(body: SignInBody) {
